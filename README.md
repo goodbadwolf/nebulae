@@ -2,6 +2,10 @@
 
 A monorepo serving as a universe of tools built by Manish.
 
-## Getting Started
+## Initial Setup
 
-Instructions for individual tools can be found in their respective directories.
+Run the bootstrap script to prepare the repository:
+
+```bash
+./scripts/bootstrap.sh
+```
