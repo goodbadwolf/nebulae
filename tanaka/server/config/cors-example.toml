@@ -1,0 +1,46 @@
+# Example Tanaka Server Configuration with CORS Security
+# This demonstrates the secure CORS configuration that replaces
+# the previous permissive settings
+
+[server]
+bind_addr = "127.0.0.1:8443"
+request_timeout_secs = 30
+
+# CORS Configuration - replaces CorsLayer::permissive()
+[server.cors]
+# Allowed origins for cross-origin requests
+# Default: only Firefox WebExtensions are allowed
+allowed_origins = [
+    "moz-extension://*",        # Firefox WebExtensions (recommended)
+    # "https://example.com",    # Specific domain for development
+    # "https://app.example.com" # Additional domains as needed
+]
+# Cache preflight responses for 1 hour
+max_age_secs = 3600
+
+[database]
+url = "sqlite://tabs.db"
+max_connections = 5
+connection_timeout_secs = 10
+
+[auth]
+shared_token = "your-secure-token-here"
+token_header = "Authorization"
+rate_limiting = true
+max_requests_per_minute = 60
+
+[sync]
+poll_secs = 5
+flush_secs = 5
+max_payload_size = 1048576  # 1MB
+compression = false
+
+[logging]
+level = "info"
+format = "pretty"
+request_logging = true
+
+# TLS configuration (optional but recommended for production)
+# [tls]
+# cert_path = "/path/to/cert.pem"
+# key_path = "/path/to/key.pem"
