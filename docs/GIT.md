@@ -157,6 +157,48 @@ The hooks are configured in `.pre-commit-config.yaml`. Each hook can:
 - Validate files (YAML, JSON, TOML)
 - Run custom checks (documentation reminders)
 
+## Pull Request Workflow
+
+### Creating Pull Requests
+
+- **Always create a PR when a branch is ready for review**
+- Update relevant documentation as part of each PR
+- Include in PR description:
+  - Which tasks are addressed
+  - Testing performed (automated + manual)
+  - Performance impact analysis (if applicable)
+  - Screenshots for UI changes
+
+### GitHub CLI with Backticks
+
+When using `gh pr edit` or `gh pr create` with bodies containing backticks, always use a heredoc to prevent shell interpretation:
+
+```bash
+gh pr edit <number> --body "$(cat <<'EOF'
+## Summary
+Text with `backticks` works fine here
+EOF
+)"
+```
+
+The single quotes around 'EOF' prevent variable and command substitution.
+
+### Quality Gates
+
+Before creating a PR, ensure:
+
+- All tests pass
+- Pre-commit hooks pass (`pre-commit run --all-files`)
+- No memory leaks or performance regressions introduced
+- Documentation is updated for new features or breaking changes
+
+### Branch Protection
+
+- **NEVER push directly to main branch**
+- All changes must go through PR review process
+- Squash commits for clean history when merging
+- Delete feature branches after merge
+
 ## Tool-Specific Guidelines
 
 Individual tools within this monorepo may have additional Git conventions or workflows. If present, these can be found in `docs/GIT.md` of each tool.
