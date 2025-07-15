@@ -1,21 +1,26 @@
 # See https://pre-commit.com for more information
 
 default_install_hook_types: [pre-commit, commit-msg]
-default_stages: [pre-commit]
+default_stages: [pre-commit, pre-push]
 fail_fast: false
 minimum_pre_commit_version: "4.2.0"
 
+# Define directories that have their own pre-commit configs.
+# These will be handled by sub-pre-commit.
+# All of the hooks here will be skipped for these directories.
+exclude: "^(tanaka)/.*"
+
 repos:
-  # TODO: Add sub-pre-commit configuration when first tool is added
-  # Example:
-  # - repo: https://github.com/ddanier/sub-pre-commit.git
-  #   rev: v4.2.0
-  #   hooks:
-  #     - id: sub-pre-commit
-  #       alias: tool-name
-  #       name: "pre-commit for tool-name/"
-  #       args: ["-p", "tool-name"]
-  #       files: "^tool-name/.*"
+  # Sub-pre-commit for tools with their own configs
+  - repo: https://github.com/ddanier/sub-pre-commit.git
+    rev: v4.2.0
+    hooks:
+      - id: sub-pre-commit
+        alias: tanaka
+        name: "pre-commit for tanaka/"
+        args: ["-p", "tanaka"]
+        files: "^tanaka/.*"
+        always_run: false
 
   # General fixes
   - repo: https://github.com/pre-commit/pre-commit-hooks
