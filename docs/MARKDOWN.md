@@ -161,7 +161,9 @@ Use GitHub's callout syntax for important information:
 #### Extended Features
 
 GitHub supports additional formats like Mermaid diagrams, LaTeX math, and other specialized content types.
-See [GitHub's documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting) for details.
+See [GitHub's documentation][github-formatting] for details.
+
+[github-formatting]: https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting
 
 #### Auto-generated Features
 

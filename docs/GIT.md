@@ -84,7 +84,7 @@ Use `git add -p` (patch mode) to:
 
 ## Pre-commit Hooks
 
-This repository uses the [pre-commit](https://pre-commit.com/) framework to ensure code quality. The hooks run various linters and formatters before each commit.
+This repository uses the [pre-commit](https://pre-commit.com/) framework to ensure code quality.
 
 ### Features
 
@@ -107,7 +107,7 @@ git commit --no-verify
 SKIP=hook-id git commit
 ```
 
-**⚠️ Important**: Avoid using `--no-verify` unless absolutely necessary. Pre-commit hooks catch issues that CI will enforce anyway. Bypassing them locally just delays the inevitable CI failures and wastes time.
+**⚠️ Important**: Avoid using `--no-verify` unless absolutely necessary.
 
 ### Installation
 
@@ -225,4 +225,5 @@ Before creating a PR, ensure:
 
 ## Tool-Specific Guidelines
 
-Individual tools within this monorepo may have additional Git conventions or workflows. If present, these can be found in `docs/GIT.md` of each tool.
+Individual tools within this monorepo may have additional Git conventions or workflows.
+If present, these can be found in `docs/GIT.md` of each tool.
