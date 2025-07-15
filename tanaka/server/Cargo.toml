@@ -1,0 +1,72 @@
+[package]
+name = "tanaka-server"
+version = "0.5.0"
+edition = "2021"
+description = "CRDT-based tab synchronization server for Firefox"
+license = "MIT"
+repository = "https://github.com/goodbadwolf/tanaka"
+readme = "../README.md"
+keywords = ["sync", "tabs", "crdt", "firefox"]
+categories = ["web-programming::http-server"]
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+# Allow some common patterns
+# module_name_repetitions = "allow"
+# must_use_candidate = "allow"
+
+[dependencies]
+async-trait = "0.1"
+axum = { version = "0.7", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sqlx = { version = "0.8", features = ["runtime-tokio", "sqlite", "migrate"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = [
+  "env-filter",
+  "fmt",
+  "json",
+] }
+tower = { version = "0.5", features = ["timeout", "limit"] }
+tower-http = { version = "0.6", features = [
+  "trace",
+  "cors",
+  "limit",
+  "timeout",
+] }
+ts-rs = { version = "10.1", features = ["no-serde-warnings"] }
+thiserror = "2.0"
+uuid = { version = "1.8", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+toml = "0.8"
+dotenvy = "0.15"
+clap = { version = "4.5", features = ["derive", "env"] }
+
+# CRDT dependencies
+yrs = "0.23.5"
+dashmap = "6.1"
+
+# Dependency injection
+shaku = "0.6"
+
+[features]
+default = []
+generate-api-models = []
+
+[dev-dependencies]
+tempfile = "3"
+tower = { version = "0.5", features = ["util"] }
+hyper = { version = "1.5", features = ["full"] }
+http-body-util = "0.1"
+futures = "0.3"                                  # For concurrent testing
+
+# Testing improvements
+pretty_assertions = "1.4"                                    # Colorful diffs for better test debugging
+rstest = "0.18"                                              # Parameterized testing for CRDT operations
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "sync_benchmark"
+harness = false
