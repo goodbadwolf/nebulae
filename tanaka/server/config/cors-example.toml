@@ -11,9 +11,9 @@ request_timeout_secs = 30
 # Allowed origins for cross-origin requests
 # Default: only Firefox WebExtensions are allowed
 allowed_origins = [
-    "moz-extension://*",        # Firefox WebExtensions (recommended)
-    # "https://example.com",    # Specific domain for development
-    # "https://app.example.com" # Additional domains as needed
+  "moz-extension://*", # Firefox WebExtensions (recommended)
+  # "https://example.com",    # Specific domain for development
+  # "https://app.example.com" # Additional domains as needed
 ]
 # Cache preflight responses for 1 hour
 max_age_secs = 3600
@@ -32,7 +32,7 @@ max_requests_per_minute = 60
 [sync]
 poll_secs = 5
 flush_secs = 5
-max_payload_size = 1048576  # 1MB
+max_payload_size = 1048576 # 1MB
 compression = false
 
 [logging]

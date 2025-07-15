@@ -95,6 +95,15 @@ nebulae/
 
 ## Repository Guidelines
 
+### Pre-commit Configuration
+
+When adding a new tool that has its own `.pre-commit-config.yaml`:
+1. Add the tool directory to the `exclude` pattern in the root `.pre-commit-config.yaml`
+2. Update the pattern from `exclude: "^(tanaka)/.*"` to `exclude: "^(tanaka|newtool)/.*"`
+3. Add a corresponding sub-pre-commit hook entry for the new tool
+
+This prevents duplicate checks between root and tool-specific pre-commit configurations.
+
 ### Code Style
 
 - Prefer higher-level languages (Python, Go, etc.) over bash for complex logic
