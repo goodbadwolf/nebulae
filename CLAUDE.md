@@ -139,9 +139,8 @@ These provide streamlined, practical standards suitable for both personal and pr
 - NEVER push directly to main branch
 - All changes must go through PR review process
 - Include in PR description:
-  - What changes are made
-  - Testing performed
-  - Any relevant context
+  - Brief summary of changes
+  - Concise list of files modified
 
 ### Commit Messages
 
