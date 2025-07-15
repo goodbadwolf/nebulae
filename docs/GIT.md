@@ -164,19 +164,43 @@ The hooks are configured in `.pre-commit-config.yaml`. Each hook can:
 - **Always create a PR when a branch is ready for review**
 - Update relevant documentation as part of each PR
 - Include in PR description:
-  - Which tasks are addressed
-  - Testing performed (automated + manual)
-  - Performance impact analysis (if applicable)
-  - Screenshots for UI changes
+  - Brief summary of changes
+  - Concise list of what was modified (file - description format)
+  - For 10+ files: Group by category or component instead of listing each file
 
 ### GitHub CLI with Backticks
 
 When using `gh pr edit` or `gh pr create` with bodies containing backticks, always use a heredoc to prevent shell interpretation:
 
 ```bash
-gh pr edit <number> --body "$(cat <<'EOF'
+gh pr create --title "type: brief description" --body "$(cat <<'EOF'
 ## Summary
-Text with `backticks` works fine here
+
+Brief overview of what was done
+
+## Changes
+
+- `path/to/file.md` - What was changed
+- `another/file.ts` - Brief description
+
+EOF
+)"
+```
+
+For large PRs with many files:
+
+```bash
+gh pr create --title "refactor: reorganize component structure" --body "$(cat <<'EOF'
+## Summary
+
+Reorganized component structure for better maintainability
+
+## Changes
+
+- **Components** (15 files) - Split large components into smaller ones
+- **Tests** (12 files) - Updated test imports and added new test cases
+- **Documentation** (5 files) - Updated component usage examples
+
 EOF
 )"
 ```
