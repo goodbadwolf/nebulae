@@ -226,7 +226,7 @@ repos:
         name: Lint TypeScript with ESLint (tanaka)
         entry: bash -c 'cd tanaka/extension && pnpm run lint'
         language: system
-        files: ^tanaka/extension/.*\.(ts|tsx|js|jsx|vue)$
+        files: ^tanaka/extension/.*\.(ts|tsx|js|jsx)$
         pass_filenames: false
         require_serial: true
 
@@ -234,7 +234,7 @@ repos:
         name: Type check TypeScript (tanaka)
         entry: bash -c 'cd tanaka/extension && pnpm run typecheck'
         language: system
-        files: ^tanaka/extension/.*\.(ts|tsx|vue)$
+        files: ^tanaka/extension/.*\.(ts|tsx)$
         pass_filenames: false
         require_serial: true
 
