@@ -97,12 +97,11 @@ nebulae/
 
 ### Pre-commit Configuration
 
-When adding a new tool that has its own `.pre-commit-config.yaml`:
-1. Add the tool directory to the `exclude` pattern in the root `.pre-commit-config.yaml`
-2. Update the pattern from `exclude: "^(tanaka)/.*"` to `exclude: "^(tanaka|newtool)/.*"`
-3. Add a corresponding sub-pre-commit hook entry for the new tool
+All pre-commit hooks are managed in the root `.pre-commit-config.yaml` file. When adding a new tool:
 
-This prevents duplicate checks between root and tool-specific pre-commit configurations.
+1. Add tool-specific hooks with appropriate file patterns (e.g., `^newtool/.*\.py$`)
+2. Prefix hook IDs with the tool name (e.g., `tanaka-rustfmt`)
+3. Add "(toolname)" to hook names for clarity
 
 ### Code Style
 

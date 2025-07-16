@@ -5,22 +5,9 @@ default_stages: [pre-commit, pre-push]
 fail_fast: false
 minimum_pre_commit_version: "4.2.0"
 
-# Define directories that have their own pre-commit configs.
-# These will be handled by sub-pre-commit.
-# All of the hooks here will be skipped for these directories.
-exclude: "^(tanaka)/.*"
-
+exclude: "(.*/repomix-output\\.(md|xml)|.*/pnpm-lock\\.yaml)$"
 repos:
-  # Sub-pre-commit for tools with their own configs
-  - repo: https://github.com/ddanier/sub-pre-commit.git
-    rev: v4.2.0
-    hooks:
-      - id: sub-pre-commit
-        alias: tanaka
-        name: "pre-commit for tanaka/"
-        args: ["-p", "tanaka"]
-        files: "^tanaka/.*"
-        always_run: false
+  # ========== TOP-LEVEL HOOKS ==========
 
   # General fixes
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -78,9 +65,201 @@ repos:
         name: Check branch name format
         stages: [manual]
 
+  # ========== TANAKA-SPECIFIC HOOKS ==========
+
+  # Python formatting and linting (tanaka)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.1
+    hooks:
+      - id: ruff-check
+        name: Lint Python code with ruff (tanaka)
+        args: [--fix, --exit-non-zero-on-fix]
+        files: ^tanaka/server/.*\.py$
+      - id: ruff-format
+        name: Format Python code with ruff (tanaka)
+        files: ^tanaka/server/.*\.py$
+
+  # General fixes (tanaka-specific configurations)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: trailing-whitespace (tanaka)
+        args: [--markdown-linebreak-ext=md]
+        files: ^tanaka/
+      - id: end-of-file-fixer
+        name: end-of-file-fixer (tanaka)
+        files: ^tanaka/
+      - id: check-yaml
+        name: check-yaml (tanaka)
+        files: ^tanaka/.*\.(yml|yaml)$
+      - id: check-json
+        name: check-json (tanaka)
+        files: ^tanaka/.*\.json$
+        exclude: ^tanaka/extension/tsconfig\.json # tsconfig has comments
+      - id: check-toml
+        name: check-toml (tanaka)
+        files: ^tanaka/.*\.toml$
+      - id: check-added-large-files
+        name: check-added-large-files (tanaka)
+        args: [--maxkb=1000]
+        files: ^tanaka/
+      - id: check-merge-conflict
+        name: check-merge-conflict (tanaka)
+        files: ^tanaka/
+
+  # TOML formatting (tanaka)
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+        name: Format TOML files (tanaka)
+        args: [--option, "indent_string=  "] # 2-space indentation
+        files: ^tanaka/.*\.toml$
+
+  # YAML formatting and linting (tanaka)
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        name: Format YAML files (tanaka)
+        types: [yaml]
+        args: [--write, --parser=yaml]
+        files: ^tanaka/.*\.(yml|yaml)$
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
+    hooks:
+      - id: yamllint
+        name: Lint YAML files (tanaka)
+        args: [--format, parsable, --strict]
+        files: ^tanaka/.*\.(yml|yaml)$
+
+  # Markdown (tanaka)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint-fix
+        name: Fix markdown files (tanaka)
+        args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
+        files: ^tanaka/.*\.md$
+        exclude: ^tanaka/(node_modules|coverage)/
+
+  # Shell scripts (tanaka)
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+        name: Check shell scripts with shellcheck (tanaka)
+        args: [-x, -e, SC1091] # Follow source statements, exclude source file not found
+        files: ^tanaka/.*\.sh$
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.11.0-1
+    hooks:
+      - id: shfmt
+        name: Format shell scripts with shfmt (tanaka)
+        args: [-i, "2", -w] # 2 space indent, write in place
+        files: ^tanaka/.*\.sh$
+
+  # Commit message validation (tanaka)
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.8.3
+    hooks:
+      - id: commitizen
+        name: Check commit message format (tanaka)
+        stages: [commit-msg]
+        files: ^tanaka/
+
+  # Tanaka local hooks
+  - repo: local
+    hooks:
+      # HTML/CSS formatting
+      - id: tanaka-prettier-html-css
+        name: Format HTML/CSS files (tanaka)
+        entry: |
+          bash -c 'for file in "$@"; do
+            if [[ -f "$file" ]]; then
+              cd tanaka/extension && pnpm prettier --write "../$file"
+            fi
+          done' --
+        language: system
+        types_or: [html, css]
+        files: ^tanaka/extension/.*\.(html|css)$
+        pass_filenames: true
+        require_serial: true
+
+      # Rust checks
+      - id: tanaka-rustfmt
+        name: Format Rust code (tanaka)
+        entry: bash -c 'cd tanaka/server && cargo fmt'
+        language: system
+        files: ^tanaka/server/.*\.rs$
+        pass_filenames: false
+
+      - id: tanaka-clippy
+        name: Lint Rust code with clippy (tanaka)
+        entry: bash -c 'cd tanaka/server && cargo clippy --all-targets -- -D warnings'
+        language: system
+        files: ^tanaka/server/.*\.rs$
+        pass_filenames: false
+        require_serial: true
+
+      - id: tanaka-rust-tests
+        name: Run Rust tests (tanaka)
+        entry: bash -c 'cd tanaka/server && (command -v cargo-nextest >/dev/null 2>&1 && cargo nextest run) || cargo test'
+        language: system
+        files: ^tanaka/server/.*\.rs$
+        pass_filenames: false
+        require_serial: true
+
+      # TypeScript/JavaScript checks
+      - id: tanaka-format-generated-typescript
+        name: Format generated TypeScript files (tanaka)
+        entry: bash -c 'cd tanaka/extension && pnpm run lint:generated || true'
+        language: system
+        files: ^tanaka/extension/src/api/(errors|models|sync)/.*\.ts$
+        pass_filenames: false
+        always_run: false
+
+      - id: tanaka-eslint
+        name: Lint TypeScript with ESLint (tanaka)
+        entry: bash -c 'cd tanaka/extension && pnpm run lint'
+        language: system
+        files: ^tanaka/extension/.*\.(ts|tsx|js|jsx|vue)$
+        pass_filenames: false
+        require_serial: true
+
+      - id: tanaka-typescript
+        name: Type check TypeScript (tanaka)
+        entry: bash -c 'cd tanaka/extension && pnpm run typecheck'
+        language: system
+        files: ^tanaka/extension/.*\.(ts|tsx|vue)$
+        pass_filenames: false
+        require_serial: true
+
+      - id: tanaka-extension-tests
+        name: Run TypeScript tests (tanaka)
+        entry: bash -c 'cd tanaka/extension && pnpm tests'
+        language: system
+        files: ^tanaka/extension/.*\.(ts|tsx|test\.ts|test\.tsx)$
+        pass_filenames: false
+        require_serial: true
+
+      # Miscellaneous checks
+      - id: tanaka-test-github-actions
+        name: Test GitHub Actions workflows locally (tanaka)
+        entry: python tanaka/scripts/tanaka.py test-ci --check
+        language: python
+        files: ^\.github/workflows/.*\.(yml|yaml)$
+        pass_filenames: false
+        additional_dependencies: []
+        stages: [manual] # Only run manually
+
 # Configuration for specific hooks
 # Skip all: git commit --no-verify
 # Skip specific: SKIP=hook-id git commit
+# Skip tests: SKIP=tanaka-extension-tests,tanaka-rust-tests git commit
 
 # CI configuration
 ci:
