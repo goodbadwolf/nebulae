@@ -180,7 +180,7 @@ repos:
         entry: |
           bash -c 'for file in "$@"; do
             if [[ -f "$file" ]]; then
-              cd tanaka/extension && pnpm prettier --write "../$file"
+              cd tanaka/extension && pnpm prettier --write "../../$file"
             fi
           done' --
         language: system
