@@ -1,0 +1,114 @@
+.app {
+  width: 350px;
+  min-height: 400px;
+  padding: 16px;
+}
+
+h1 {
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.status-indicator {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.status-ready {
+  background: #f0f9ff;
+  color: #0369a1;
+}
+
+.status-syncing {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.status-error {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.sync-button {
+  width: 100%;
+  padding: 12px;
+  background: #0060df;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sync-button:hover:not(:disabled) {
+  background: #003eaa;
+}
+
+.sync-button:active:not(:disabled) {
+  background: #002275;
+}
+
+.sync-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 20px 0;
+}
+
+.tab-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tab-list h3 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.tab-list ul {
+  list-style: none;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.1s ease;
+}
+
+.tab-item:hover {
+  background: #f5f5f5;
+}
+
+.tab-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.tab-title {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Tanaka Tab Sync",
+  "version": "0.0.1",
+  "description": "Synchronize tabs across Firefox devices",
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity"
+  ],
+  "action": {
+    "default_title": "Tanaka Tab Sync",
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tanaka@sync.extension",
+      "strict_min_version": "109.0"
+    }
+  }
+}

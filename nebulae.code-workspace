@@ -14,10 +14,8 @@
         "url": "https://json.schemastore.org/chrome-manifest.json"
       }
     ],
-    "typescript.preferences.autoImportFileExcludePatterns": ["vue-router"],
     "i18n-ally.localesPaths": ["src/locales"],
-    "i18n-ally.keystyle": "nested",
-    "vetur.experimental.templateInterpolationService": true
+    "i18n-ally.keystyle": "nested"
   },
   "extensions": {
     "recommendations": [
@@ -34,10 +32,7 @@
       "mikestead.dotenv",
       "mrmlnc.vscode-scss",
       "mrniamster.daisyui-snippets",
-      "mubaidr.vuejs-extension-pack",
-      "sdras.vue-vscode-snippets",
       "usernamehw.errorlens",
-      "vue.volar"
     ]
   }
 }
