@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface SyncButtonProps {
   onSync: () => void;
@@ -7,12 +7,8 @@ interface SyncButtonProps {
 
 const SyncButton: React.FC<SyncButtonProps> = ({ onSync, disabled }) => {
   return (
-    <button
-      className="sync-button"
-      onClick={onSync}
-      disabled={disabled}
-    >
-      {disabled ? 'Syncing...' : 'Sync Now'}
+    <button className="sync-button" onClick={onSync} disabled={disabled}>
+      {disabled ? "Syncing..." : "Sync Now"}
     </button>
   );
 };

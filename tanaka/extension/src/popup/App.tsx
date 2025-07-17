@@ -6,7 +6,6 @@ import "./styles/App.css";
 function App() {
   const [status, setStatus] = useState<"ready" | "syncing" | "error">("ready");
   const [tabCount, setTabCount] = useState<number>(0);
-
   const handleSync = async () => {
     setStatus("syncing");
     setTabCount(tabCount);
@@ -20,7 +19,6 @@ function App() {
     <div className="app">
       <h1>Tanaka Tab Sync</h1>
       <p className="subtitle">Sync your tabs across devices</p>
-
       <StatusIndicator status={status} tabCount={tabCount} />
       <SyncButton onSync={handleSync} disabled={status === "syncing"} />
     </div>
