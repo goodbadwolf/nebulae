@@ -35,7 +35,7 @@ describe("isPlainObject", () => {
 
   it("should return false for functions", () => {
     expect(isPlainObject(() => {})).toBe(false);
-    expect(isPlainObject(function() {})).toBe(false);
+    expect(isPlainObject(function () {})).toBe(false);
   });
 
   it("should return true for Date objects", () => {
