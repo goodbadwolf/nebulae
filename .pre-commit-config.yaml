@@ -14,14 +14,22 @@ repos:
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
+        name: "[ROOT] Trim trailing whitespace"
         args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
+        name: "[ROOT] Fix end of files"
       - id: check-yaml
+        name: "[ROOT] Check YAML"
       - id: check-json
+        name: "[ROOT] Check JSON"
       - id: check-toml
+        name: "[ROOT] Check TOML"
       - id: check-added-large-files
+        name: "[ROOT] Check for added large files"
       - id: check-merge-conflict
+        name: "[ROOT] Check for merge conflicts"
       - id: mixed-line-ending
+        name: "[ROOT] Fix mixed line endings"
         args: [--fix=lf]
 
   # YAML linting
@@ -29,7 +37,7 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
-        name: Lint YAML files
+        name: "[ROOT] Lint YAML files"
         args: [--format, parsable, -c, config/yamllint.yml]
 
   # Markdown
@@ -37,6 +45,7 @@ repos:
     rev: v0.45.0
     hooks:
       - id: markdownlint
+        name: "[ROOT] Lint and fix markdown"
         args: [--fix, --config, config/.markdownlint.json]
         exclude: ".*CLAUDE.md$"
 
@@ -45,13 +54,14 @@ repos:
     rev: v0.10.0.1
     hooks:
       - id: shellcheck
+        name: "[ROOT] Check shell scripts"
 
   # Shell script formatting
   - repo: https://github.com/scop/pre-commit-shfmt
     rev: v3.11.0-1
     hooks:
       - id: shfmt
-        name: Format shell scripts with shfmt
+        name: "[ROOT] Format shell scripts"
         args: [-i, "2", -w] # 2 space indent, write in place
 
   # Commit message validation
@@ -59,10 +69,10 @@ repos:
     rev: v4.8.3
     hooks:
       - id: commitizen
-        name: Check commit message format
+        name: "[ROOT] Check commit message format"
         stages: [commit-msg, pre-push]
       - id: commitizen-branch
-        name: Check branch name format
+        name: "[ROOT] Check branch name format"
         stages: [manual]
 
   # ========== TANAKA-SPECIFIC HOOKS ==========
@@ -72,11 +82,11 @@ repos:
     rev: v0.12.1
     hooks:
       - id: ruff-check
-        name: Lint Python code with ruff (tanaka)
+        name: "[TANAKA] Lint Python code with ruff"
         args: [--fix, --exit-non-zero-on-fix]
         files: ^tanaka/server/.*\.py$
       - id: ruff-format
-        name: Format Python code with ruff (tanaka)
+        name: "[TANAKA] Format Python code with ruff"
         files: ^tanaka/server/.*\.py$
 
   # General fixes (tanaka-specific configurations)
@@ -84,28 +94,28 @@ repos:
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
-        name: trailing-whitespace (tanaka)
+        name: "[TANAKA] Trim trailing whitespace"
         args: [--markdown-linebreak-ext=md]
         files: ^tanaka/
       - id: end-of-file-fixer
-        name: end-of-file-fixer (tanaka)
+        name: "[TANAKA] Fix end of files"
         files: ^tanaka/
       - id: check-yaml
-        name: check-yaml (tanaka)
+        name: "[TANAKA] Check YAML"
         files: ^tanaka/.*\.(yml|yaml)$
       - id: check-json
-        name: check-json (tanaka)
+        name: "[TANAKA] Check JSON"
         files: ^tanaka/.*\.json$
         exclude: ^tanaka/extension/tsconfig\.json # tsconfig has comments
       - id: check-toml
-        name: check-toml (tanaka)
+        name: "[TANAKA] Check TOML"
         files: ^tanaka/.*\.toml$
       - id: check-added-large-files
-        name: check-added-large-files (tanaka)
+        name: "[TANAKA] Check for added large files"
         args: [--maxkb=1000]
         files: ^tanaka/
       - id: check-merge-conflict
-        name: check-merge-conflict (tanaka)
+        name: "[TANAKA] Check for merge conflicts"
         files: ^tanaka/
 
   # TOML formatting (tanaka)
@@ -113,7 +123,7 @@ repos:
     rev: v0.9.3
     hooks:
       - id: taplo-format
-        name: Format TOML files (tanaka)
+        name: "[TANAKA] Format TOML files"
         args: [--option, "indent_string=  "] # 2-space indentation
         files: ^tanaka/.*\.toml$
 
@@ -122,7 +132,7 @@ repos:
     rev: v3.1.0
     hooks:
       - id: prettier
-        name: Format YAML files (tanaka)
+        name: "[TANAKA] Format YAML files"
         types: [yaml]
         args: [--write, --parser=yaml]
         files: ^tanaka/.*\.(yml|yaml)$
@@ -131,7 +141,7 @@ repos:
     rev: v1.35.1
     hooks:
       - id: yamllint
-        name: Lint YAML files (tanaka)
+        name: "[TANAKA] Lint YAML files"
         args: [--format, parsable, --strict, -c, config/yamllint.yml]
         files: ^tanaka/.*\.(yml|yaml)$
 
@@ -140,7 +150,7 @@ repos:
     rev: v0.45.0
     hooks:
       - id: markdownlint-fix
-        name: Fix markdown files (tanaka)
+        name: "[TANAKA] Fix markdown files"
         args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
         files: ^tanaka/.*\.md$
         exclude: ^tanaka/(node_modules|coverage)/
@@ -150,7 +160,7 @@ repos:
     rev: v0.10.0.1
     hooks:
       - id: shellcheck
-        name: Check shell scripts with shellcheck (tanaka)
+        name: "[TANAKA] Check shell scripts"
         args: [-x, -e, SC1091] # Follow source statements, exclude source file not found
         files: ^tanaka/.*\.sh$
 
@@ -158,7 +168,7 @@ repos:
     rev: v3.11.0-1
     hooks:
       - id: shfmt
-        name: Format shell scripts with shfmt (tanaka)
+        name: "[TANAKA] Format shell scripts"
         args: [-i, "2", -w] # 2 space indent, write in place
         files: ^tanaka/.*\.sh$
 
@@ -167,7 +177,7 @@ repos:
     rev: v4.8.3
     hooks:
       - id: commitizen
-        name: Check commit message format (tanaka)
+        name: "[TANAKA] Check commit message format"
         stages: [commit-msg]
         files: ^tanaka/
 
@@ -176,7 +186,7 @@ repos:
     hooks:
       # HTML/CSS formatting
       - id: tanaka-prettier-html-css
-        name: Format HTML/CSS files (tanaka)
+        name: "[TANAKA] Format HTML/CSS files"
         entry: |
           bash -c 'for file in "$@"; do
             if [[ -f "$file" ]]; then
@@ -191,14 +201,14 @@ repos:
 
       # Rust checks
       - id: tanaka-rustfmt
-        name: Format Rust code (tanaka)
+        name: "[TANAKA] Format Rust code"
         entry: bash -c 'cd tanaka/server && cargo fmt'
         language: system
         files: ^tanaka/server/.*\.rs$
         pass_filenames: false
 
       - id: tanaka-clippy
-        name: Lint Rust code with clippy (tanaka)
+        name: "[TANAKA] Lint Rust code with clippy"
         entry: bash -c 'cd tanaka/server && cargo clippy --all-targets -- -D warnings'
         language: system
         files: ^tanaka/server/.*\.rs$
@@ -206,7 +216,7 @@ repos:
         require_serial: true
 
       - id: tanaka-rust-tests
-        name: Run Rust tests (tanaka)
+        name: "[TANAKA] Run Rust tests"
         entry: bash -c 'cd tanaka/server && (command -v cargo-nextest >/dev/null 2>&1 && cargo nextest run) || cargo test'
         language: system
         files: ^tanaka/server/.*\.rs$
@@ -215,7 +225,7 @@ repos:
 
       # TypeScript/JavaScript checks
       - id: tanaka-format-generated-typescript
-        name: Format generated TypeScript files (tanaka)
+        name: "[TANAKA] Format generated TypeScript files"
         entry: bash -c 'cd tanaka/extension && pnpm run lint:generated || true'
         language: system
         files: ^tanaka/extension/src/api/(errors|models|sync)/.*\.ts$
@@ -223,7 +233,7 @@ repos:
         always_run: false
 
       - id: tanaka-eslint
-        name: Lint TypeScript with ESLint (tanaka)
+        name: "[TANAKA] Lint TypeScript with ESLint"
         entry: bash -c 'cd tanaka/extension && pnpm run lint'
         language: system
         files: ^tanaka/extension/.*\.(ts|tsx|js|jsx)$
@@ -231,7 +241,7 @@ repos:
         require_serial: true
 
       - id: tanaka-typescript
-        name: Type check TypeScript (tanaka)
+        name: "[TANAKA] Type check TypeScript"
         entry: bash -c 'cd tanaka/extension && pnpm run typecheck'
         language: system
         files: ^tanaka/extension/.*\.(ts|tsx)$
@@ -239,7 +249,7 @@ repos:
         require_serial: true
 
       - id: tanaka-extension-tests
-        name: Run TypeScript tests (tanaka)
+        name: "[TANAKA] Run TypeScript tests"
         entry: bash -c 'cd tanaka/extension && pnpm tests'
         language: system
         files: ^tanaka/extension/.*\.(ts|tsx|test\.ts|test\.tsx)$
@@ -248,7 +258,7 @@ repos:
 
       # Miscellaneous checks
       - id: tanaka-test-github-actions
-        name: Test GitHub Actions workflows locally (tanaka)
+        name: "[TANAKA] Test GitHub Actions workflows"
         entry: python tanaka/scripts/tanaka.py test-ci --check
         language: python
         files: ^\.github/workflows/.*\.(yml|yaml)$
@@ -263,28 +273,28 @@ repos:
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
-        name: trailing-whitespace (kiku)
+        name: "[KIKU] Trim trailing whitespace"
         args: [--markdown-linebreak-ext=md]
         files: ^kiku/
       - id: end-of-file-fixer
-        name: end-of-file-fixer (kiku)
+        name: "[KIKU] Fix end of files"
         files: ^kiku/
       - id: check-yaml
-        name: check-yaml (kiku)
+        name: "[KIKU] Check YAML"
         files: ^kiku/.*\.(yml|yaml)$
       - id: check-json
-        name: check-json (kiku)
+        name: "[KIKU] Check JSON"
         files: ^kiku/.*\.json$
         exclude: ^kiku/core/tsconfig\.json # tsconfig might have comments
       - id: check-toml
-        name: check-toml (kiku)
+        name: "[KIKU] Check TOML"
         files: ^kiku/.*\.toml$
       - id: check-added-large-files
-        name: check-added-large-files (kiku)
+        name: "[KIKU] Check for added large files"
         args: [--maxkb=1000]
         files: ^kiku/
       - id: check-merge-conflict
-        name: check-merge-conflict (kiku)
+        name: "[KIKU] Check for merge conflicts"
         files: ^kiku/
 
   # Markdown (kiku)
@@ -292,7 +302,7 @@ repos:
     rev: v0.45.0
     hooks:
       - id: markdownlint-fix
-        name: Fix markdown files (kiku)
+        name: "[KIKU] Fix markdown files"
         args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
         files: ^kiku/.*\.md$
         exclude: ^kiku/(node_modules|coverage|dist)/
@@ -302,7 +312,7 @@ repos:
     hooks:
       # TypeScript linting and formatting (ESLint with Prettier)
       - id: kiku-eslint
-        name: Lint and format TypeScript with ESLint (kiku)
+        name: "[KIKU] Lint and format TypeScript with ESLint"
         entry: bash -c 'cd kiku/core && pnpm lint'
         language: system
         files: ^kiku/.*\.ts$
@@ -310,7 +320,7 @@ repos:
 
       # TypeScript type checking
       - id: kiku-typecheck
-        name: Type check TypeScript (kiku)
+        name: "[KIKU] Type check TypeScript"
         entry: bash -c 'cd kiku/core && pnpm typecheck'
         language: system
         files: ^kiku/.*\.ts$
@@ -319,7 +329,7 @@ repos:
 
       # Run tests
       - id: kiku-tests
-        name: Run TypeScript tests (kiku)
+        name: "[KIKU] Run TypeScript tests"
         entry: bash -c 'cd kiku/core && pnpm tests'
         language: system
         files: ^kiku/.*\.(ts|test\.ts)$

@@ -1,36 +1,58 @@
-# Configuration Files
+# Shared Configuration Directory
 
-This directory contains shared configuration files for the Nebulae monorepo.
+This directory contains shared configuration files for the Nebulae monorepo. The approach is simple and effective for a
+hobby project.
 
 ## Files
 
-### markdownlint.json
+### .markdownlint.json
 
-Markdown linting rules used by pre-commit hooks and CI/CD pipelines.
+Markdown linting rules used across the monorepo. Referenced by pre-commit hooks to ensure consistent markdown formatting.
 
 ### prettierrc.json
 
-Code formatting rules for Prettier. Used by:
-
-- Root `.prettierrc.json` (references this file)
-- Individual tools can reference this shared config
-- Pre-commit hooks for consistent formatting
+Shared Prettier formatting rules. This is the single source of truth for code formatting across all tools.
 
 ### yamllint.yml
 
-YAML linting configuration for validating YAML files across the monorepo.
+YAML linting configuration for consistent YAML file formatting.
 
-## Usage
+### eslint.common.ts
 
-These configuration files are referenced by:
+Shared ESLint configuration for TypeScript projects. Includes:
 
-- `.pre-commit-config.yaml` - Pre-commit hooks use these configs
-- Individual tool configurations can extend or reference these shared configs
+- TypeScript recommended rules
+- Prettier integration for formatting
+- Import sorting with simple-import-sort
+- Consistent error handling patterns
 
-## Why Centralized?
+## How It Works
 
-Having configuration files in one place:
+The configuration approach is intentionally simple:
 
-- Ensures consistency across all tools in the monorepo
-- Makes it easier to update rules that affect the entire codebase
-- Reduces duplication and maintenance overhead
+1. **Shared configs live here** - All common configuration rules are stored in this directory
+2. **Tools reference via strings** - Each tool has a `.prettierrc.json` file containing just a string path like `"../../config/prettierrc.json"`
+3. **No complex inheritance** - Simple string references work perfectly and are easier to understand
+
+## Example Usage
+
+### Prettier Config
+
+```json
+// In kiku/core/.prettierrc.json
+"../../config/prettierrc.json"
+```
+
+```json
+// In root .prettierrc.json
+"./config/prettierrc.json"
+```
+
+### ESLint Config
+
+```javascript
+// In kiku/core/eslint.config.js or tanaka/extension/eslint.config.ts
+import baseConfig from "../../config/eslint.common.ts";
+
+export default baseConfig;
+```

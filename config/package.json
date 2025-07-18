@@ -1,0 +1,22 @@
+{
+  "name": "@nebulae/config",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shared configuration for Nebulae monorepo",
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.common.ts",
+    "./prettier": "./prettierrc.json",
+    "./markdownlint": "./.markdownlint.json",
+    "./yamllint": "./yamllint.yml"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.31.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.7",
+    "eslint-plugin-prettier": "^5.5.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.37.0"
+  }
+}
