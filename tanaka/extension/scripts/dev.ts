@@ -1,17 +1,18 @@
 import { cac } from "cac";
+
 import {
-  rspackBuildConfig,
-  rspackWatchConfig,
-  webExtConfig,
-} from "./build-utils";
-import {
-  BuildMode,
+  type BuildMode,
   exitWithError,
   isValidMode,
   VALID_BUILD_MODES,
 } from "./common";
 import { logger } from "./logger";
 import { ProcessManager, setupProcessHandlers } from "./process-utils";
+import {
+  rsbuildBuildConfig,
+  rsbuildWatchConfig,
+  webExtConfig,
+} from "./rsbuild-utils";
 
 const cli = cac("tanaka");
 
@@ -19,11 +20,11 @@ interface ModeOptions {
   mode: string;
 }
 
-interface BuildOptions extends ModeOptions {}
+type BuildOptions = ModeOptions;
 
-interface WatchOptions extends ModeOptions {}
+type WatchOptions = ModeOptions;
 
-interface AnalyzeOptions extends ModeOptions {}
+type AnalyzeOptions = ModeOptions;
 
 function createCommand(
   name: string,
@@ -55,7 +56,7 @@ createCommand("build", "Build the extension").action(
     logger.info(`Building extension in ${buildMode} mode`);
 
     const startTime = Date.now();
-    const buildConfig = rspackBuildConfig(buildMode);
+    const buildConfig = rsbuildBuildConfig(buildMode);
 
     const pm = new ProcessManager();
     const proc = pm.spawn(buildConfig);
@@ -79,7 +80,7 @@ createCommand("watch", "Build, watch for changes, and run in Firefox").action(
     const pm = new ProcessManager();
     setupProcessHandlers(() => pm.killAll());
 
-    const watchConfig = rspackWatchConfig(buildMode);
+    const watchConfig = rsbuildWatchConfig(buildMode);
     const webExtProcess = webExtConfig();
 
     pm.spawn(watchConfig);

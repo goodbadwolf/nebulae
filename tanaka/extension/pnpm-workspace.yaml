@@ -1,3 +1,7 @@
+packages:
+  - "."
+  - "../../kiku/*"
+
 onlyBuiltDependencies:
   - esbuild
   - sharp

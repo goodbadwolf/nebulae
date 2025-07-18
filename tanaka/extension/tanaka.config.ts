@@ -1,40 +1,23 @@
+import { deepMerge } from "@kiku/core";
+import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export interface TanakaConfig {
-  projectRoot: string;
-  buildDir: string;
-  publicDir: string;
-  srcDir: string;
-  manifestFile: string;
-  iconSizes: number[];
-  entries: {
-    popup: string;
-    background?: string;
-    content?: string;
-  };
-  webExt: {
-    sourceDir: string;
-    firefoxProfile?: string;
-    startUrls?: string[];
-    browserConsole?: boolean;
-    devtools?: boolean;
-  };
-}
+import type { TanakaConfig } from "./tanaka.config.d";
 
 const projectRoot = dirname(fileURLToPath(import.meta.url));
+const staticDir = join(projectRoot, "static");
 const buildDir = join(projectRoot, "dist");
-const publicDir = join(projectRoot, "static");
 
-export const tanakaConfig: TanakaConfig = {
-  projectRoot,
-  buildDir,
-  publicDir,
+const defaultConfig: TanakaConfig = {
   srcDir: join(projectRoot, "src"),
-  manifestFile: join(publicDir, "manifest.json"),
+  staticDir,
+  buildDir,
+  manifestFile: join(staticDir, "manifest.json"),
   iconSizes: [16, 32, 48, 128],
   entries: {
-    popup: "./src/popup/index.tsx",
+    popup: "src/popup/index.tsx",
+    background: "src/background/index.ts",
   },
   webExt: {
     sourceDir: buildDir,
@@ -48,4 +31,16 @@ export const tanakaConfig: TanakaConfig = {
   },
 };
 
-export default tanakaConfig;
+async function loadConfig(): Promise<TanakaConfig> {
+  let config = defaultConfig;
+
+  const localConfigPath = join(projectRoot, "tanaka.local.config.ts");
+  if (existsSync(localConfigPath)) {
+    const { default: localConfig } = await import("./tanaka.local.config");
+    config = deepMerge(config, localConfig);
+  }
+
+  return config;
+}
+
+export default await loadConfig();
