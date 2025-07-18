@@ -5,3 +5,6 @@ GEMINI.md
 
 # Ruff
 **/.ruff_cache
+
+# Claude Code
+.claude/
