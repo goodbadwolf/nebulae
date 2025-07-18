@@ -52,19 +52,14 @@ export class Process {
   }
 
   toString(): string {
-    return `${this.name} (${this.config.command} ${this.config.args.join(
-      " "
-    )})`;
+    return `${this.name} (${this.config.command} ${this.config.args.join(" ")})`;
   }
 }
 
 export class ProcessManager {
   private processes = new Map<string, Process>();
 
-  spawn(
-    config: ProcessConfig,
-    options: SpawnOptions = { stdio: "inherit", shell: false }
-  ): Process {
+  spawn(config: ProcessConfig, options: SpawnOptions = { stdio: "inherit", shell: false }): Process {
     logger.info(`Starting ${config.name}...`);
 
     const spawnOptions = {
@@ -91,19 +86,13 @@ export class ProcessManager {
     this.processes.clear();
   }
 
-  linkExitHandlers(
-    primary: string,
-    secondary: string,
-    condition = { onSuccess: false, onFailure: true }
-  ): void {
+  linkExitHandlers(primary: string, secondary: string, condition = { onSuccess: false, onFailure: true }): void {
     logger.info(`Linking exit handlers for ${primary} and ${secondary}`);
     const primaryProc = this.processes.get(primary);
     const secondaryProc = this.processes.get(secondary);
 
     if (!primaryProc || !secondaryProc) {
-      logger.error(
-        `Failed to link exit handlers for ${primary} and ${secondary}`
-      );
+      logger.error(`Failed to link exit handlers for ${primary} and ${secondary}`);
       return;
     }
 
@@ -138,9 +127,7 @@ export class ProcessManager {
     const secondaryProc = this.processes.get(secondary);
 
     if (!primaryProc || !secondaryProc) {
-      logger.error(
-        `Failed to unlink exit handlers for ${primary} and ${secondary}`
-      );
+      logger.error(`Failed to unlink exit handlers for ${primary} and ${secondary}`);
       return;
     }
 

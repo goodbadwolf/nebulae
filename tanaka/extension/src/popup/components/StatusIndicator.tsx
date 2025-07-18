@@ -5,10 +5,7 @@ interface StatusIndicatorProps {
   tabCount: number | null;
 }
 
-const StatusIndicator: React.FC<StatusIndicatorProps> = ({
-  status,
-  tabCount,
-}) => {
+const StatusIndicator: React.FC<StatusIndicatorProps> = ({ status, tabCount }) => {
   const getStatusText = () => {
     switch (status) {
       case "syncing":
@@ -22,9 +19,7 @@ const StatusIndicator: React.FC<StatusIndicatorProps> = ({
     }
   };
 
-  return (
-    <div className={`status-indicator status-${status}`}>{getStatusText()}</div>
-  );
+  return <div className={`status-indicator status-${status}`}>{getStatusText()}</div>;
 };
 
 export default StatusIndicator;

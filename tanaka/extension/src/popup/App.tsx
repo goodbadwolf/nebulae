@@ -1,9 +1,9 @@
+import "./styles/App.css";
+
 import { useState } from "react";
 
 import StatusIndicator from "./components/StatusIndicator";
 import SyncButton from "./components/SyncButton";
-
-import "./styles/App.css";
 
 function App() {
   const [status, setStatus] = useState<"ready" | "syncing" | "error">("ready");
