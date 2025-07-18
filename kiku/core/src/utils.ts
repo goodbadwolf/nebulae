@@ -1,9 +1,6 @@
 import type { DeepPartial } from "./types";
 
-export function deepMerge<T extends Record<string, any>>(
-  target: T,
-  source: DeepPartial<T>
-): T {
+export function deepMerge<T extends Record<string, any>>(target: T, source: DeepPartial<T>): T {
   const result = { ...target };
 
   for (const key in source) {

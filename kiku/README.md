@@ -19,7 +19,7 @@ import { deepMerge } from '@kiku/core';
 ## Development
 
 ```bash
-pnpm build    # Build the library
-pnpm dev      # Watch mode
-pnpm typecheck # Type checking
+pnpm build       # Build the library
+pnpm dev         # Watch mode
+pnpm typecheck   # Type checking
 ```
