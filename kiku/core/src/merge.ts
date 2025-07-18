@@ -7,7 +7,6 @@ import type { DeepPartial } from "./partial";
  */
 export type Mergeable = Record<string, unknown>;
 
-
 /**
  * Recursively merges properties from source into target, creating a new object.
  *
