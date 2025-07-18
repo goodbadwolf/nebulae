@@ -37,7 +37,7 @@ repos:
     rev: v0.45.0
     hooks:
       - id: markdownlint
-        args: [--fix, --config, config/markdownlint.json]
+        args: [--fix, --config, config/.markdownlint.json]
         exclude: ".*CLAUDE.md$"
 
   # Shell scripts
@@ -300,24 +300,9 @@ repos:
   # Kiku local hooks
   - repo: local
     hooks:
-      # TypeScript formatting
-      - id: kiku-prettier
-        name: Format TypeScript files (kiku)
-        entry: |
-          bash -c 'for file in "$@"; do
-            if [[ -f "$file" ]]; then
-              cd kiku/core && pnpm prettier --write "../../$file"
-            fi
-          done' --
-        language: system
-        types: [ts]
-        files: ^kiku/.*\.ts$
-        pass_filenames: true
-        require_serial: true
-
-      # TypeScript linting
+      # TypeScript linting and formatting (ESLint with Prettier)
       - id: kiku-eslint
-        name: Lint TypeScript with ESLint (kiku)
+        name: Lint and format TypeScript with ESLint (kiku)
         entry: bash -c 'cd kiku/core && pnpm lint'
         language: system
         files: ^kiku/.*\.ts$

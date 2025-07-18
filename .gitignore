@@ -26,6 +26,12 @@ Desktop.ini
 *~
 .*.swp
 
+# ========== Repomix ==========
+.repomix/
+repomix*.md
+repomix*.xml
+repmoix*.txt
+
 # ========== Build Artifacts ==========
 # Common build directories
 dist/

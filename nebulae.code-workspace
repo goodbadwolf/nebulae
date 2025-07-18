@@ -16,8 +16,12 @@
     ],
     "i18n-ally.localesPaths": ["src/locales"],
     "i18n-ally.keystyle": "nested",
-    "markdownlint.config": {},
-    "markdownlint.configFile": ".config/markdownlint.json"
+    "markdownlint.configFile": "config/.markdownlint.json",
+    "repomix.output.filePath": "repomix-output.md",
+    "repomix.output.parsableStyle": true,
+    "repomix.output.includeEmptyDirectories": true,
+    "repomix.output.removeEmptyLines": true,
+    "repomix.output.compress": true
   },
   "extensions": {
     "recommendations": [

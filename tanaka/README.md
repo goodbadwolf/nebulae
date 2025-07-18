@@ -72,7 +72,7 @@ See [Getting Started](docs/GETTING-STARTED.md) for detailed instructions.
 
 ## License
 
-Tanaka is released under the [MIT License](LICENSE).
+Tanaka is released under the [MIT License](../LICENSE).
 
 ## Acknowledgements
 
