@@ -1,2 +1,3 @@
-export * from "./types";
-export * from "./utils";
+export { deepMerge } from "./merge";
+export { isPlainObject } from "./object-utils";
+export type { DeepPartial } from "./partial";

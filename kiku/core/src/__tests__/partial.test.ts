@@ -1,5 +1,6 @@
 import { describe, expectTypeOf, it } from "vitest";
-import type { DeepPartial } from "../types";
+
+import type { DeepPartial } from "../partial";
 
 describe("DeepPartial type", () => {
   it("should make all properties optional", () => {
