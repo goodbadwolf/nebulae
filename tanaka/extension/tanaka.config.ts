@@ -1,7 +1,8 @@
-import { deepMerge } from "@kiku/core";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { deepMerge } from "@kiku/core";
 
 import type { TanakaConfig } from "./tanaka.config.d";
 
@@ -21,11 +22,7 @@ const defaultConfig: TanakaConfig = {
   },
   webExt: {
     sourceDir: buildDir,
-    startUrls: [
-      "https://www.google.com",
-      "https://www.youtube.com",
-      "https://en.wikipedia.org",
-    ],
+    startUrls: ["https://www.google.com", "https://www.youtube.com", "https://en.wikipedia.org"],
     browserConsole: true,
     devtools: true,
   },
