@@ -1,6 +1,3 @@
-node_modules/
-dist/
+# Firefox Extension specific
 web-ext-artifacts/
 .web-extension-id
-*.log
-.DS_Store
