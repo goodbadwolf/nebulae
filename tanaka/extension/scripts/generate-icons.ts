@@ -3,11 +3,12 @@
 import { mkdir, readFile } from "fs/promises";
 import { join } from "path";
 import sharp from "sharp";
+
 import config from "../tanaka.config.js";
 
 async function generateIcons() {
-  const svgPath = join(config.publicDir, "icons/icon.svg");
-  const outputDir = join(config.publicDir, "icons");
+  const svgPath = join(config.staticDir, "icons/icon.svg");
+  const outputDir = join(config.staticDir, "icons");
 
   try {
     await mkdir(outputDir, { recursive: true });

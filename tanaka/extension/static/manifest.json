@@ -8,6 +8,10 @@
     "storage",
     "identity"
   ],
+  "background": {
+    "scripts": ["static/js/background.js"],
+    "type": "module"
+  },
   "action": {
     "default_title": "Tanaka Tab Sync",
     "default_popup": "popup/index.html",

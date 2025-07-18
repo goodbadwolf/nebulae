@@ -1,4 +1,5 @@
-import { ChildProcess, spawn, SpawnOptions } from "node:child_process";
+import { ChildProcess, spawn, type SpawnOptions } from "node:child_process";
+
 import { exitWithError } from "./common";
 import { logger } from "./logger";
 
@@ -21,7 +22,7 @@ export class Process {
     this.wrappedProcess = spawn(config.command, config.args, options);
   }
 
-  on(event: string, listener: (...args: any[]) => void): this {
+  on(event: string, listener: (...args: unknown[]) => void): this {
     this.wrappedProcess.on(event, listener);
     return this;
   }
