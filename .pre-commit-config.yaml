@@ -256,6 +256,91 @@ repos:
         additional_dependencies: []
         stages: [manual] # Only run manually
 
+  # ========== KIKU-SPECIFIC HOOKS ==========
+
+  # General fixes (kiku-specific configurations)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: trailing-whitespace (kiku)
+        args: [--markdown-linebreak-ext=md]
+        files: ^kiku/
+      - id: end-of-file-fixer
+        name: end-of-file-fixer (kiku)
+        files: ^kiku/
+      - id: check-yaml
+        name: check-yaml (kiku)
+        files: ^kiku/.*\.(yml|yaml)$
+      - id: check-json
+        name: check-json (kiku)
+        files: ^kiku/.*\.json$
+        exclude: ^kiku/core/tsconfig\.json # tsconfig might have comments
+      - id: check-toml
+        name: check-toml (kiku)
+        files: ^kiku/.*\.toml$
+      - id: check-added-large-files
+        name: check-added-large-files (kiku)
+        args: [--maxkb=1000]
+        files: ^kiku/
+      - id: check-merge-conflict
+        name: check-merge-conflict (kiku)
+        files: ^kiku/
+
+  # Markdown (kiku)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint-fix
+        name: Fix markdown files (kiku)
+        args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
+        files: ^kiku/.*\.md$
+        exclude: ^kiku/(node_modules|coverage|dist)/
+
+  # Kiku local hooks
+  - repo: local
+    hooks:
+      # TypeScript formatting
+      - id: kiku-prettier
+        name: Format TypeScript files (kiku)
+        entry: |
+          bash -c 'for file in "$@"; do
+            if [[ -f "$file" ]]; then
+              cd kiku/core && pnpm prettier --write "../../$file"
+            fi
+          done' --
+        language: system
+        types: [ts]
+        files: ^kiku/.*\.ts$
+        pass_filenames: true
+        require_serial: true
+
+      # TypeScript linting
+      - id: kiku-eslint
+        name: Lint TypeScript with ESLint (kiku)
+        entry: bash -c 'cd kiku/core && pnpm lint'
+        language: system
+        files: ^kiku/.*\.ts$
+        pass_filenames: false
+
+      # TypeScript type checking
+      - id: kiku-typecheck
+        name: Type check TypeScript (kiku)
+        entry: bash -c 'cd kiku/core && pnpm typecheck'
+        language: system
+        files: ^kiku/.*\.ts$
+        pass_filenames: false
+        stages: [pre-push]
+
+      # Run tests
+      - id: kiku-tests
+        name: Run TypeScript tests (kiku)
+        entry: bash -c 'cd kiku/core && pnpm tests'
+        language: system
+        files: ^kiku/.*\.(ts|test\.ts)$
+        pass_filenames: false
+        stages: [pre-push]
+
 # Configuration for specific hooks
 # Skip all: git commit --no-verify
 # Skip specific: SKIP=hook-id git commit

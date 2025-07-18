@@ -1,4 +1,4 @@
-import type { DeepPartial } from './types';
+import type { DeepPartial } from "./types";
 
 export function deepMerge<T extends Record<string, any>>(
   target: T,
@@ -14,10 +14,10 @@ export function deepMerge<T extends Record<string, any>>(
 
     if (
       sourceValue !== null &&
-      typeof sourceValue === 'object' &&
+      typeof sourceValue === "object" &&
       !Array.isArray(sourceValue) &&
       targetValue !== null &&
-      typeof targetValue === 'object' &&
+      typeof targetValue === "object" &&
       !Array.isArray(targetValue)
     ) {
       result[key] = deepMerge(targetValue, sourceValue as any);
