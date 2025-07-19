@@ -94,7 +94,7 @@ efficiency over broad appeal.
 ### Toolbar Icon Colors
 
 - **Green**: Tracked window, fully synced
-- **Orange**: Tracked window, currently syncing
+- **Orange**: Tracked window, currently syncing (with subtle pulse animation)
 - **Red**: Tracked window, sync error
 - **Gray**: Untracked window (default state)
 
@@ -136,7 +136,7 @@ efficiency over broad appeal.
 
 - **Sync status**: Icon color + subtle background tint
   - Green: #10b981 (success)
-  - Orange: #f59e0b (syncing)
+  - Orange: #f59e0b (syncing - with pulse animation)
   - Red: #ef4444 (error)
 - **Hover state**: Light background highlight
 - **Focus state**: 2px solid outline (theme accent color)
@@ -180,7 +180,7 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 | [magnifying-glass] [_____________________] [x] |
 +------------------------------------------------+
 | MY WORKSPACES                                  |
-+................................................+
++------------------------------------------------+
 | o Work Project                      12 tabs    |
 |   [folder-open]  Last change: 2 mins ago       |
 |                  [Switch to] [Close]           |
@@ -194,7 +194,7 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 |                  [Open]                        |
 +------------------------------------------------+
 | CURRENT WINDOW                                 |
-+................................................+
++------------------------------------------------+
 | [play-circle] Track as Workspace               |
 +------------------------------------------------+
 | [plus-circle] New Workspace                    |
@@ -214,7 +214,7 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 | [magnifying-glass] [_____________________] [x] |
 +------------------------------------------------+
 | MY WORKSPACES                                  |
-+................................................+
++------------------------------------------------+
 | o Work Project                      12 tabs    |
 |   [folder-open]  Connection lost               |
 |                  [Switch to] [Close]           |
@@ -234,12 +234,12 @@ When searching, workspaces show why they matched:
 | [magnifying-glass] [github______________] [x]  |
 +------------------------------------------------+
 | SEARCH RESULTS                                 |
-+................................................+
++------------------------------------------------+
 | o GitHub Projects           3 matching tabs    |
 |   [folder-open]                                |
 |   +- [file-text] GitHub - PR #123              |
 |   +- [file-text] GitHub - Issues               |
-|   +- [caret-down] Show 17 more matches         |
+|   +- [caret-down] Show 17 more .... (20 total) |
 |                                                |
 | o Work Stuff                1 matching tab     |
 |   [folder]                                     |
@@ -278,7 +278,7 @@ When no workspaces exist:
 |                                                |
 +------------------------------------------------+
 | CURRENT WINDOW                                 |
-+................................................+
++------------------------------------------------+
 | [play-circle] Track as Workspace               |
 +------------------------------------------------+
 | [plus-circle] New Workspace                    |
@@ -337,32 +337,32 @@ A dedicated tab for detailed workspace management.
 | Tanaka Workspace Manager                                       |
 +--------------+-------------------------------------------------+
 |              |                                                 |
-| WORKSPACES   |  Work Project                      [pencil]    |
-| ----------   |  12 tabs o Last synced: 2 mins ago              |
-|              +.................................................+
+| WORKSPACES   | Work Project                      [pencil]      |
+| ----------   | 12 tabs o Last synced: 2 mins ago               |
+|              +-------------------------------------------------+
 | v All (3)    |                                                 |
-|   Work...    |  OPEN TABS                                      |
-|   Research   |  ----------                                     |
-|   Shopping   |  [file-text] GitHub - PR #123                   |
-|              |  https://github.com/user/repo/pull/123          |
+|   Work...    | OPEN TABS                                       |
+|   Research   | ----------                                      |
+|   Shopping   | [globe] [file-text] GitHub - PR #123            |
+|              | https://github.com/user/repo/pull/123           |
 |              |                                                 |
-|              |  [file-text] MDN Web Docs - Array.prototype     |
-|              |  https://developer.mozilla.org/en-US/docs/...   |
+|              | [globe] [file-text] MDN Web Docs - Array.proto  |
+|              | https://developer.mozilla.org/en-US/docs/...    |
 |              |                                                 |
-| DEVICES      |  [file-text] Stack Overflow - React hooks       |
-| --------     |  https://stackoverflow.com/questions/...        |
+| DEVICES      | [globe] [file-text] Stack Overflow - React hook |
+| --------     | https://stackoverflow.com/questions/...         |
 | o Desktop    |                                                 |
-| o Laptop     |  Open on 2 devices                              |
+| o Laptop     | Open on 2 devices                               |
 |              |                                                 |
-|              |  RECENTLY CLOSED (last 24h)                     |
-| ACTIONS      |  -----------------                              |
-| --------     |  [file-text] Figma - Design System              |
-| Timeline     |  Closed 1 hour ago from Desktop                 |
-| Trash (2)    |  [arrow-clockwise] Restore                      |
+|              | RECENTLY CLOSED (last 24h)                      |
+| ACTIONS      | -----------------                               |
+| --------     | [globe] [file-text] Figma - Design System       |
+| Timeline     | Closed 1 hour ago from Desktop                  |
+| Trash (2)    | [arrow-clockwise] Restore                       |
 | Settings     |                                                 |
-|              |  [file-text] Slack - #project-discussion        |
-|              |  Closed 3 hours ago from Laptop                 |
-|              |  [arrow-clockwise] Restore                      |
+|              | [globe] [file-text] Slack - #project-discussion |
+|              | Closed 3 hours ago from Laptop                  |
+|              | [arrow-clockwise] Restore                       |
 |              |                                                 |
 +--------------+-------------------------------------------------+
 ```
@@ -426,7 +426,7 @@ Shows chronological activity across all workspaces.
 | [clock] 9:15 AM o Desktop                                      |
 | Created new workspace "Project Planning"                       |
 |                                                                |
-+................................................................+
++----------------------------------------------------------------+
 |                                                                |
 | YESTERDAY                                                      |
 | ----------                                                     |
@@ -479,7 +479,7 @@ Shows deleted workspaces that can be restored or permanently deleted.
 | Deleted by Desktop on Dec 1, 2024 at 3:45 PM                   |
 | [arrow-clockwise] Restore  [trash] Delete Permanently          |
 |                                                                |
-+................................................................+
++----------------------------------------------------------------+
 |                                                                |
 | [folder-dashed] Archived Research                              |
 | 8 tabs o Created Nov 3, 2024                                   |
@@ -553,7 +553,7 @@ When URL is invalid:
 ```text
 |  Server URL                                                    |
 |  +--------------------------------------+                      |
-|  | not-a-valid-url                       |                     |
+|  | not-a-valid-url                      |                      |
 |  +--------------------------------------+                      |
 |  [x] URL must start with http:// or https://                   |
 ```
@@ -630,25 +630,26 @@ A dedicated tab for configuration and preferences.
 | Tanaka Settings                                                 |
 +--------------+--------------------------------------------------+
 |              |                                                  |
-| GENERAL      |  CONNECTION                                      |
-| ----------   |  ----------                                      |
+| GENERAL      | CONNECTION                                       |
+| ----------   | ----------                                       |
 |              |                                                  |
-| Connection   |  Server URL                               /      |
-| Sync         |  +-------------------------------------------+   |
-| Data         |  | https://tanaka.example.com:8443           |   |
-| About        |  +-------------------------------------------+   |
+| Connection   | Server URL                               /       |
+| Sync         | +-------------------------------------------+    |
+| Data         | | https://tanaka.example.com:8443           |    |
+| About        | +-------------------------------------------+    |
 |              |                                                  |
-|              |  Auth Token                               /      |
-|              |  +-------------------------------------------+   |
-|              |  | oooooooooooooooooooooooooooooooooooooo    |   |
-|              |  +-------------------------------------------+   |
+|              | Auth Token                               /       |
+|              | +-------------------------------------------+    |
+|              | | oooooooooooooooooooooooooooooooooooooo    |    |
+|              | +-------------------------------------------+    |
 |              |                                                  |
-|              |  Device Name                                     |
-|              |  +-------------------------------------------+   |
-|              |  | Work Laptop                               |   |
-|              |  +-------------------------------------------+   |
+|              | Device Name                                      |
+|              | +-------------------------------------------+    |
+|              | | Work Laptop                               |    |
+|              | +-------------------------------------------+    |
 |              |                                                  |
-|              |  [check-circle] Connected o Last sync: 2 min ago |
+|              | [check-circle] Connected o Last sync: 2 min ago  |
+|              | [wifi] Test Connection                           |
 |              |                                                  |
 +--------------+--------------------------------------------------+
 ```
