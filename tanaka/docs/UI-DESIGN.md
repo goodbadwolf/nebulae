@@ -104,6 +104,12 @@ efficiency over broad appeal.
 - Only appears on tracked windows
 - No badge on untracked windows
 
+### Multi-Window Behavior
+
+- Icon reflects state of the currently active browser window
+- Badge updates when switching between windows
+- Each window maintains its own tracked/untracked state
+
 ## Visual Design System
 
 ### Typography Hierarchy
@@ -133,7 +139,8 @@ efficiency over broad appeal.
   - Orange: #f59e0b (syncing)
   - Red: #ef4444 (error)
 - **Hover state**: Light background highlight
-- **Active state**: Darker background + border
+- **Focus state**: 2px solid outline (theme accent color)
+- **Active/Pressed state**: Darker background + border
 
 ### Dimensions
 
@@ -148,6 +155,20 @@ efficiency over broad appeal.
 The popup appears when clicking the Tanaka toolbar icon. Shows the same full view regardless of whether the current
 window is tracked or not. Clicking the icon again closes the popup (toggle behavior).
 
+#### Loading State
+
+Initial popup loading:
+
+```text
+\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
+\u2502 Tanaka                                 [gear]  \u2502
+\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
+\u2502                                                \u2502
+\u2502           [spinner] Loading...                 \u2502
+\u2502                                                \u2502
+\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518
+```
+
 #### Layout
 
 Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon names to be rendered.
@@ -156,7 +177,7 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 ┌────────────────────────────────────────────────┐
 │ Tanaka                                 [gear]  │
 ├────────────────────────────────────────────────┤
-│ [magnifying-glass] [_____________________]     │
+│ [magnifying-glass] [_____________________] [x] │
 ├────────────────────────────────────────────────┤
 │ MY WORKSPACES                                  │
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
@@ -190,7 +211,7 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 │ ⚠ Connection lost - working offline            │
 │   [arrow-clockwise] Retry Now                  │
 ├────────────────────────────────────────────────┤
-│ [magnifying-glass] [_____________________]     │
+│ [magnifying-glass] [_____________________] [x] │
 ├────────────────────────────────────────────────┤
 │ MY WORKSPACES                                  │
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
@@ -210,7 +231,7 @@ When searching, workspaces show why they matched:
 
 ```text
 ├────────────────────────────────────────────────┤
-│ [magnifying-glass] [github______________]      │
+│ [magnifying-glass] [github______________] [x]  │
 ├────────────────────────────────────────────────┤
 │ SEARCH RESULTS                                 │
 ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
@@ -223,6 +244,21 @@ When searching, workspaces show why they matched:
 │ ● Work Stuff                1 matching tab     │
 │   [folder]                                     │
 │   └─ [file-text] Slack - #github channel       │
+└────────────────────────────────────────────────┘
+```
+
+#### No Search Results
+
+When search yields no matches:
+
+```text
+├────────────────────────────────────────────────┤
+│ [magnifying-glass] [nonexistent_______] [x]    │
+├────────────────────────────────────────────────┤
+│                                                │
+│           No results found for                 │
+│            "nonexistent"                       │
+│                                                │
 └────────────────────────────────────────────────┘
 ```
 
@@ -254,10 +290,12 @@ When no workspaces exist:
 - **Header**: "Tanaka" title with settings gear icon (clicking opens settings in new tab)
 - **Search Bar**:
   - Magnifying glass icon with rounded input field
-  - Instant filtering as you type
+  - [x] Clear button appears when text is entered
+  - Instant filtering as you type (case-insensitive)
   - Searches across workspace names, tab titles/URLs
   - Shows hierarchical results with indentation
   - Collapses tab results if more than 5 matches
+  - Shows "No results found" when search yields nothing
 - **Workspace List**:
   - Bold section header "MY WORKSPACES"
   - Sorted by last content change (most recent first)
@@ -280,7 +318,12 @@ When no workspaces exist:
 - **Global Actions**:
   - Full-width buttons with icons
   - Clear visual hierarchy
-- **Interaction**: Mouse-driven, no keyboard shortcuts
+- **Interaction**:
+  - Primary: Mouse-driven interface
+  - Basic keyboard support:
+    - Tab: Navigate through interactive elements
+    - Enter/Space: Activate buttons
+    - Escape: Close popup
 - **Toggle behavior**: Clicking toolbar icon closes popup
 
 ### 2. Full Manager Tab
@@ -294,7 +337,7 @@ A dedicated tab for detailed workspace management.
 │ Tanaka Workspace Manager                                       │
 ├──────────────┬─────────────────────────────────────────────────┤
 │              │                                                 │
-│ WORKSPACES   │  Work Project                      [pencil]     │
+│ WORKSPACES   │  Work Project                      [pencil]    │
 │ ──────────   │  12 tabs • Last synced: 2 mins ago              │
 │              ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
 │ ▼ All (3)    │                                                 │
@@ -341,6 +384,12 @@ A dedicated tab for detailed workspace management.
   - Recently closed with timestamps and device info
   - Restore buttons aligned right
   - Subtle dotted dividers between sections
+
+- **Inline Editing**:
+  - Click [pencil] icon to edit workspace name
+  - Title becomes editable text field
+  - Enter to save, Escape to cancel
+  - Validation: Max 50 characters
 
 - **Visual Hierarchy**:
   - 14px bold for section headers
@@ -497,6 +546,39 @@ First-run experience for configuration.
 └────────────────────────────────────────────────────────────────┘
 ```
 
+#### Validation Error State
+
+When URL is invalid:
+
+```text
+│  Server URL                                                    │
+│  ┌──────────────────────────────────────┐                      │
+│  │ not-a-valid-url                       │                      │
+│  └──────────────────────────────────────┘                      │
+│  [x] URL must start with http:// or https://                  │
+```
+
+#### Test Connection States
+
+Testing:
+
+```text
+│               [wifi] Testing...                                │
+```
+
+Success:
+
+```text
+│               [check-circle] Connected!                        │
+```
+
+Failure:
+
+```text
+│               [x-circle] Connection failed                     │
+│               Unable to reach server                           │
+```
+
 #### Features
 
 - **Visual Hierarchy**:
@@ -511,11 +593,16 @@ First-run experience for configuration.
   - Labels positioned above fields
   - Password field shows dots
 
+- **Validation States**:
+  - Real-time URL validation on blur
+  - Error message below invalid fields
+  - Success/error states for "Test Connection"
+
 - **Modal Dialogs**: Small centered modals:
 
 ```text
 ┌────────────────────────────────────────┐
-│        Name Your Workspace             │
+│        Name Your Workspace        [x]  │
 ├────────────────────────────────────────┤
 │                                        │
 │ ┌────────────────────────────────────┐ │
@@ -525,6 +612,12 @@ First-run experience for configuration.
 │      [x] Cancel  [check] Create        │
 └────────────────────────────────────────┘
 ```
+
+- **Modal Features**:
+  - Close button [x] in top-right corner
+  - Semi-transparent overlay behind modal
+  - Escape key also closes modal
+  - Focus trapped within modal
 
 ### 6. Settings Page
 
