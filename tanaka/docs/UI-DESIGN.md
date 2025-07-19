@@ -160,13 +160,13 @@ window is tracked or not. Clicking the icon again closes the popup (toggle behav
 Initial popup loading:
 
 ```text
-\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
-\u2502 Tanaka                                 [gear]  \u2502
-\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524
-\u2502                                                \u2502
-\u2502           [spinner] Loading...                 \u2502
-\u2502                                                \u2502
-\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518
++------------------------------------------------+
+| Tanaka                                 [gear]  |
++------------------------------------------------+
+|                                                |
+|           [spinner] Loading...                 |
+|                                                |
++------------------------------------------------+
 ```
 
 #### Layout
@@ -174,55 +174,55 @@ Initial popup loading:
 Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon names to be rendered.
 
 ```text
-┌────────────────────────────────────────────────┐
-│ Tanaka                                 [gear]  │
-├────────────────────────────────────────────────┤
-│ [magnifying-glass] [_____________________] [x] │
-├────────────────────────────────────────────────┤
-│ MY WORKSPACES                                  │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ ● Work Project                      12 tabs    │
-│   [folder-open]  Last change: 2 mins ago       │
-│                  [Switch to] [Close]           │
-│                                                │
-│ ● Research                          8 tabs     │
-│   [folder]       Fully synced                  │
-│                  [Open]                        │
-│                                                │
-│ ● Shopping                          5 tabs     │
-│   [folder]       Sync error - retry            │
-│                  [Open]                        │
-├────────────────────────────────────────────────┤
-│ CURRENT WINDOW                                 │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ [play-circle] Track as Workspace               │
-├────────────────────────────────────────────────┤
-│ [plus-circle] New Workspace                    │
-│ [list-bullets] Manage Workspaces               │
-└────────────────────────────────────────────────┘
++------------------------------------------------+
+| Tanaka                                 [gear]  |
++------------------------------------------------+
+| [magnifying-glass] [_____________________] [x] |
++------------------------------------------------+
+| MY WORKSPACES                                  |
++................................................+
+| o Work Project                      12 tabs    |
+|   [folder-open]  Last change: 2 mins ago       |
+|                  [Switch to] [Close]           |
+|                                                |
+| o Research                          8 tabs     |
+|   [folder]       Fully synced                  |
+|                  [Open]                        |
+|                                                |
+| o Shopping                          5 tabs     |
+|   [folder]       Sync error - retry            |
+|                  [Open]                        |
++------------------------------------------------+
+| CURRENT WINDOW                                 |
++................................................+
+| [play-circle] Track as Workspace               |
++------------------------------------------------+
+| [plus-circle] New Workspace                    |
+| [list-bullets] Manage Workspaces               |
++------------------------------------------------+
 ```
 
 #### Connection Error State
 
 ```text
-┌────────────────────────────────────────────────┐
-│ Tanaka                                 [gear]  │
-├────────────────────────────────────────────────┤
-│ ⚠ Connection lost - working offline            │
-│   [arrow-clockwise] Retry Now                  │
-├────────────────────────────────────────────────┤
-│ [magnifying-glass] [_____________________] [x] │
-├────────────────────────────────────────────────┤
-│ MY WORKSPACES                                  │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ ● Work Project                      12 tabs    │
-│   [folder-open]  Connection lost               │
-│                  [Switch to] [Close]           │
-│                                                │
-│ ● Research                          8 tabs     │
-│   [folder]       Connection lost               │
-│                  [Open]                        │
-└────────────────────────────────────────────────┘
++------------------------------------------------+
+| Tanaka                                 [gear]  |
++------------------------------------------------+
+| ! Connection lost - working offline            |
+|   [arrow-clockwise] Retry Now                  |
++------------------------------------------------+
+| [magnifying-glass] [_____________________] [x] |
++------------------------------------------------+
+| MY WORKSPACES                                  |
++................................................+
+| o Work Project                      12 tabs    |
+|   [folder-open]  Connection lost               |
+|                  [Switch to] [Close]           |
+|                                                |
+| o Research                          8 tabs     |
+|   [folder]       Connection lost               |
+|                  [Open]                        |
++------------------------------------------------+
 ```
 
 #### Search Results Display
@@ -230,21 +230,21 @@ Note: Icons shown in brackets (e.g., [gear], [folder]) represent Phosphor icon n
 When searching, workspaces show why they matched:
 
 ```text
-├────────────────────────────────────────────────┤
-│ [magnifying-glass] [github______________] [x]  │
-├────────────────────────────────────────────────┤
-│ SEARCH RESULTS                                 │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ ● GitHub Projects           3 matching tabs    │
-│   [folder-open]                                │
-│   └─ [file-text] GitHub - PR #123              │
-│   └─ [file-text] GitHub - Issues               │
-│   └─ [caret-down] Show 17 more matches         │
-│                                                │
-│ ● Work Stuff                1 matching tab     │
-│   [folder]                                     │
-│   └─ [file-text] Slack - #github channel       │
-└────────────────────────────────────────────────┘
++------------------------------------------------+
+| [magnifying-glass] [github______________] [x]  |
++------------------------------------------------+
+| SEARCH RESULTS                                 |
++................................................+
+| o GitHub Projects           3 matching tabs    |
+|   [folder-open]                                |
+|   +- [file-text] GitHub - PR #123              |
+|   +- [file-text] GitHub - Issues               |
+|   +- [caret-down] Show 17 more matches         |
+|                                                |
+| o Work Stuff                1 matching tab     |
+|   [folder]                                     |
+|   +- [file-text] Slack - #github channel       |
++------------------------------------------------+
 ```
 
 #### No Search Results
@@ -252,14 +252,14 @@ When searching, workspaces show why they matched:
 When search yields no matches:
 
 ```text
-├────────────────────────────────────────────────┤
-│ [magnifying-glass] [nonexistent_______] [x]    │
-├────────────────────────────────────────────────┤
-│                                                │
-│           No results found for                 │
-│            "nonexistent"                       │
-│                                                │
-└────────────────────────────────────────────────┘
++------------------------------------------------+
+| [magnifying-glass] [nonexistent_______] [x]    |
++------------------------------------------------+
+|                                                |
+|           No results found for                 |
+|            "nonexistent"                       |
+|                                                |
++------------------------------------------------+
 ```
 
 #### Empty State
@@ -267,22 +267,22 @@ When search yields no matches:
 When no workspaces exist:
 
 ```text
-┌────────────────────────────────────────────────┐
-│ Tanaka                                 [gear]  │
-├────────────────────────────────────────────────┤
-│                                                │
-│              Welcome to Tanaka!                │
-│                                                │
-│         Track browser windows to sync          │
-│           tabs across devices.                 │
-│                                                │
-├────────────────────────────────────────────────┤
-│ CURRENT WINDOW                                 │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ [play-circle] Track as Workspace               │
-├────────────────────────────────────────────────┤
-│ [plus-circle] New Workspace                    │
-└────────────────────────────────────────────────┘
++------------------------------------------------+
+| Tanaka                                 [gear]  |
++------------------------------------------------+
+|                                                |
+|              Welcome to Tanaka!                |
+|                                                |
+|         Track browser windows to sync          |
+|           tabs across devices.                 |
+|                                                |
++------------------------------------------------+
+| CURRENT WINDOW                                 |
++................................................+
+| [play-circle] Track as Workspace               |
++------------------------------------------------+
+| [plus-circle] New Workspace                    |
++------------------------------------------------+
 ```
 
 #### Elements
@@ -303,7 +303,7 @@ When no workspaces exist:
     - Line 1: Status dot, name, tab count
     - Line 2: Icon, status text, action buttons
   - Status indicators:
-    - Color dot (●) shows sync state
+    - Color dot (o) shows sync state
     - Text describes current status
     - Green = synced, Orange = syncing, Red = error
   - Context-appropriate actions (visible on hover):
@@ -333,38 +333,38 @@ A dedicated tab for detailed workspace management.
 #### Layout
 
 ```text
-┌────────────────────────────────────────────────────────────────┐
-│ Tanaka Workspace Manager                                       │
-├──────────────┬─────────────────────────────────────────────────┤
-│              │                                                 │
-│ WORKSPACES   │  Work Project                      [pencil]    │
-│ ──────────   │  12 tabs • Last synced: 2 mins ago              │
-│              ├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│ ▼ All (3)    │                                                 │
-│   Work...    │  OPEN TABS                                      │
-│   Research   │  ──────────                                     │
-│   Shopping   │  [file-text] GitHub - PR #123                   │
-│              │  https://github.com/user/repo/pull/123          │
-│              │                                                 │
-│              │  [file-text] MDN Web Docs - Array.prototype     │
-│              │  https://developer.mozilla.org/en-US/docs/...   │
-│              │                                                 │
-│ DEVICES      │  [file-text] Stack Overflow - React hooks       │
-│ ────────     │  https://stackoverflow.com/questions/...        │
-│ ● Desktop    │                                                 │
-│ ○ Laptop     │  Open on 2 devices                              │
-│              │                                                 │
-│              │  RECENTLY CLOSED (last 24h)                     │
-│ ACTIONS      │  ─────────────────                              │
-│ ────────     │  [file-text] Figma - Design System              │
-│ Timeline     │  Closed 1 hour ago from Desktop                 │
-│ Trash (2)    │  [arrow-clockwise] Restore                      │
-│ Settings     │                                                 │
-│              │  [file-text] Slack - #project-discussion        │
-│              │  Closed 3 hours ago from Laptop                 │
-│              │  [arrow-clockwise] Restore                      │
-│              │                                                 │
-└──────────────┴─────────────────────────────────────────────────┘
++----------------------------------------------------------------+
+| Tanaka Workspace Manager                                       |
++--------------+-------------------------------------------------+
+|              |                                                 |
+| WORKSPACES   |  Work Project                      [pencil]    |
+| ----------   |  12 tabs o Last synced: 2 mins ago              |
+|              +.................................................+
+| v All (3)    |                                                 |
+|   Work...    |  OPEN TABS                                      |
+|   Research   |  ----------                                     |
+|   Shopping   |  [file-text] GitHub - PR #123                   |
+|              |  https://github.com/user/repo/pull/123          |
+|              |                                                 |
+|              |  [file-text] MDN Web Docs - Array.prototype     |
+|              |  https://developer.mozilla.org/en-US/docs/...   |
+|              |                                                 |
+| DEVICES      |  [file-text] Stack Overflow - React hooks       |
+| --------     |  https://stackoverflow.com/questions/...        |
+| o Desktop    |                                                 |
+| o Laptop     |  Open on 2 devices                              |
+|              |                                                 |
+|              |  RECENTLY CLOSED (last 24h)                     |
+| ACTIONS      |  -----------------                              |
+| --------     |  [file-text] Figma - Design System              |
+| Timeline     |  Closed 1 hour ago from Desktop                 |
+| Trash (2)    |  [arrow-clockwise] Restore                      |
+| Settings     |                                                 |
+|              |  [file-text] Slack - #project-discussion        |
+|              |  Closed 3 hours ago from Laptop                 |
+|              |  [arrow-clockwise] Restore                      |
+|              |                                                 |
++--------------+-------------------------------------------------+
 ```
 
 #### Features
@@ -404,39 +404,39 @@ Shows chronological activity across all workspaces.
 #### Layout
 
 ```text
-┌────────────────────────────────────────────────────────────────┐
-│ Activity Timeline                                              │
-├────────────────────────────────────────────────────────────────┤
-│ Filters: [All Workspaces ▼] [All Devices ▼] [7 days ▼]         │
-├────────────────────────────────────────────────────────────────┤
-│                                                                │
-│ TODAY                                                          │
-│ ──────                                                         │
-│                                                                │
-│ [clock] 10:45 AM • Desktop                                     │
-│ Closed "GitHub PR #123" from Work Project                      │
-│ [caret-right] Show details                                     │
-│                                                                │
-│ [clock] 10:30 AM • Laptop                                      │
-│ Opened 3 tabs in Research workspace                            │
-│   • React Hooks Documentation                                  │
-│   • TypeScript Handbook                                        │
-│   • CSS Grid Guide                                             │
-│                                                                │
-│ [clock] 9:15 AM • Desktop                                      │
-│ Created new workspace "Project Planning"                       │
-│                                                                │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│                                                                │
-│ YESTERDAY                                                      │
-│ ──────────                                                     │
-│                                                                │
-│ [clock] 4:15 PM • Laptop                                       │
-│ Moved 3 tabs from Research to Archive                          │
-│                                                                │
-│ [plus] Show more (23 days remaining)                           │
-│                                                                │
-└────────────────────────────────────────────────────────────────┘
++----------------------------------------------------------------+
+| Activity Timeline                                              |
++----------------------------------------------------------------+
+| Filters: [All Workspaces v] [All Devices v] [7 days v]         |
++----------------------------------------------------------------+
+|                                                                |
+| TODAY                                                          |
+| ------                                                         |
+|                                                                |
+| [clock] 10:45 AM o Desktop                                     |
+| Closed "GitHub PR #123" from Work Project                      |
+| [caret-right] Show details                                     |
+|                                                                |
+| [clock] 10:30 AM o Laptop                                      |
+| Opened 3 tabs in Research workspace                            |
+|   o React Hooks Documentation                                  |
+|   o TypeScript Handbook                                        |
+|   o CSS Grid Guide                                             |
+|                                                                |
+| [clock] 9:15 AM o Desktop                                      |
+| Created new workspace "Project Planning"                       |
+|                                                                |
++................................................................+
+|                                                                |
+| YESTERDAY                                                      |
+| ----------                                                     |
+|                                                                |
+| [clock] 4:15 PM o Laptop                                       |
+| Moved 3 tabs from Research to Archive                          |
+|                                                                |
+| [plus] Show more (23 days remaining)                           |
+|                                                                |
++----------------------------------------------------------------+
 ```
 
 #### Features
@@ -467,26 +467,26 @@ Shows deleted workspaces that can be restored or permanently deleted.
 #### Layout
 
 ```text
-┌────────────────────────────────────────────────────────────────┐
-│ Trash                                                          │
-├────────────────────────────────────────────────────────────────┤
-│                                                                │
-│ 2 DELETED WORKSPACES                                           │
-│ ────────────────────                                           │
-│                                                                │
-│ [folder-dashed] Old Project                                    │
-│ 12 tabs • Created Jan 15, 2024                                 │
-│ Deleted by Desktop on Dec 1, 2024 at 3:45 PM                   │
-│ [arrow-clockwise] Restore  [trash] Delete Permanently          │
-│                                                                │
-├╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┤
-│                                                                │
-│ [folder-dashed] Archived Research                              │
-│ 8 tabs • Created Nov 3, 2024                                   │
-│ Deleted by Laptop on Nov 30, 2024 at 10:22 AM                  │
-│ [arrow-clockwise] Restore  [trash] Delete Permanently          │
-│                                                                │
-└────────────────────────────────────────────────────────────────┘
++----------------------------------------------------------------+
+| Trash                                                          |
++----------------------------------------------------------------+
+|                                                                |
+| 2 DELETED WORKSPACES                                           |
+| --------------------                                           |
+|                                                                |
+| [folder-dashed] Old Project                                    |
+| 12 tabs o Created Jan 15, 2024                                 |
+| Deleted by Desktop on Dec 1, 2024 at 3:45 PM                   |
+| [arrow-clockwise] Restore  [trash] Delete Permanently          |
+|                                                                |
++................................................................+
+|                                                                |
+| [folder-dashed] Archived Research                              |
+| 8 tabs o Created Nov 3, 2024                                   |
+| Deleted by Laptop on Nov 30, 2024 at 10:22 AM                  |
+| [arrow-clockwise] Restore  [trash] Delete Permanently          |
+|                                                                |
++----------------------------------------------------------------+
 ```
 
 #### Features
@@ -516,34 +516,34 @@ First-run experience for configuration.
 #### Layout
 
 ```text
-┌────────────────────────────────────────────────────────────────┐
-│                      Welcome to Tanaka                         │
-│                                                                │
-│           Sync your Firefox tabs across devices                │
-├────────────────────────────────────────────────────────────────┤
-│                                                                │
-│  STEP 1: Name this device                                      │
-│  ┌──────────────────────────────────────┐                      │
-│  │ Work Laptop                          │                      │
-│  └──────────────────────────────────────┘                      │
-│                                                                │
-│  STEP 2: Connect to your server                                │
-│                                                                │
-│  Server URL                                                    │
-│  ┌──────────────────────────────────────┐                      │
-│  │ https://tanaka.example.com:8443      │                      │
-│  └──────────────────────────────────────┘                      │
-│                                                                │
-│  Auth Token                                                    │
-│  ┌──────────────────────────────────────┐                      │
-│  │ ••••••••••••••••••••••••••••••••     │                      │
-│  └──────────────────────────────────────┘                      │
-│                                                                │
-│               [wifi] Test Connection                           │
-│                                                                │
-├────────────────────────────────────────────────────────────────┤
-│                    [check-circle] Get Started                  │
-└────────────────────────────────────────────────────────────────┘
++----------------------------------------------------------------+
+|                      Welcome to Tanaka                         |
+|                                                                |
+|           Sync your Firefox tabs across devices                |
++----------------------------------------------------------------+
+|                                                                |
+|  STEP 1: Name this device                                      |
+|  +--------------------------------------+                      |
+|  | Work Laptop                          |                      |
+|  +--------------------------------------+                      |
+|                                                                |
+|  STEP 2: Connect to your server                                |
+|                                                                |
+|  Server URL                                                    |
+|  +--------------------------------------+                      |
+|  | https://tanaka.example.com:8443      |                      |
+|  +--------------------------------------+                      |
+|                                                                |
+|  Auth Token                                                    |
+|  +--------------------------------------+                      |
+|  | oooooooooooooooooooooooooooooooo     |                      |
+|  +--------------------------------------+                      |
+|                                                                |
+|               [wifi] Test Connection                           |
+|                                                                |
++----------------------------------------------------------------+
+|                    [check-circle] Get Started                  |
++----------------------------------------------------------------+
 ```
 
 #### Validation Error State
@@ -551,11 +551,11 @@ First-run experience for configuration.
 When URL is invalid:
 
 ```text
-│  Server URL                                                    │
-│  ┌──────────────────────────────────────┐                      │
-│  │ not-a-valid-url                       │                      │
-│  └──────────────────────────────────────┘                      │
-│  [x] URL must start with http:// or https://                  │
+|  Server URL                                                    |
+|  +--------------------------------------+                      |
+|  | not-a-valid-url                       |                     |
+|  +--------------------------------------+                      |
+|  [x] URL must start with http:// or https://                   |
 ```
 
 #### Test Connection States
@@ -563,20 +563,20 @@ When URL is invalid:
 Testing:
 
 ```text
-│               [wifi] Testing...                                │
+|               [wifi] Testing...                                |
 ```
 
 Success:
 
 ```text
-│               [check-circle] Connected!                        │
+|               [check-circle] Connected!                        |
 ```
 
 Failure:
 
 ```text
-│               [x-circle] Connection failed                     │
-│               Unable to reach server                           │
+|               [x-circle] Connection failed                     |
+|               Unable to reach server                           |
 ```
 
 #### Features
@@ -601,16 +601,16 @@ Failure:
 - **Modal Dialogs**: Small centered modals:
 
 ```text
-┌────────────────────────────────────────┐
-│        Name Your Workspace        [x]  │
-├────────────────────────────────────────┤
-│                                        │
-│ ┌────────────────────────────────────┐ │
-│ │ Enter workspace name...            │ │
-│ └────────────────────────────────────┘ │
-│                                        │
-│      [x] Cancel  [check] Create        │
-└────────────────────────────────────────┘
++----------------------------------------+
+|        Name Your Workspace        [x]  |
++----------------------------------------+
+|                                        |
+| +------------------------------------+ |
+| | Enter workspace name...            | |
+| +------------------------------------+ |
+|                                        |
+|      [x] Cancel  [check] Create        |
++----------------------------------------+
 ```
 
 - **Modal Features**:
@@ -626,31 +626,31 @@ A dedicated tab for configuration and preferences.
 #### Layout
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│ Tanaka Settings                                                 │
-├──────────────┬──────────────────────────────────────────────────┤
-│              │                                                  │
-│ GENERAL      │  CONNECTION                                      │
-│ ──────────   │  ──────────                                      │
-│              │                                                  │
-│ Connection   │  Server URL                               ✓      │
-│ Sync         │  ┌───────────────────────────────────────────┐   │
-│ Data         │  │ https://tanaka.example.com:8443           │   │
-│ About        │  └───────────────────────────────────────────┘   │
-│              │                                                  │
-│              │  Auth Token                               ✓      │
-│              │  ┌───────────────────────────────────────────┐   │
-│              │  │ ••••••••••••••••••••••••••••••••••••••    │   │
-│              │  └───────────────────────────────────────────┘   │
-│              │                                                  │
-│              │  Device Name                                     │
-│              │  ┌───────────────────────────────────────────┐   │
-│              │  │ Work Laptop                               │   │
-│              │  └───────────────────────────────────────────┘   │
-│              │                                                  │
-│              │  [check-circle] Connected • Last sync: 2 min ago │
-│              │                                                  │
-└──────────────┴──────────────────────────────────────────────────┘
++-----------------------------------------------------------------+
+| Tanaka Settings                                                 |
++--------------+--------------------------------------------------+
+|              |                                                  |
+| GENERAL      |  CONNECTION                                      |
+| ----------   |  ----------                                      |
+|              |                                                  |
+| Connection   |  Server URL                               /      |
+| Sync         |  +-------------------------------------------+   |
+| Data         |  | https://tanaka.example.com:8443           |   |
+| About        |  +-------------------------------------------+   |
+|              |                                                  |
+|              |  Auth Token                               /      |
+|              |  +-------------------------------------------+   |
+|              |  | oooooooooooooooooooooooooooooooooooooo    |   |
+|              |  +-------------------------------------------+   |
+|              |                                                  |
+|              |  Device Name                                     |
+|              |  +-------------------------------------------+   |
+|              |  | Work Laptop                               |   |
+|              |  +-------------------------------------------+   |
+|              |                                                  |
+|              |  [check-circle] Connected o Last sync: 2 min ago |
+|              |                                                  |
++--------------+--------------------------------------------------+
 ```
 
 #### Features
@@ -686,13 +686,13 @@ A dedicated tab for configuration and preferences.
 ### Creating a Workspace
 
 1. **From existing window**:
-   - Click Tanaka icon → "Track as Workspace"
+   - Click Tanaka icon -> "Track as Workspace"
    - Modal appears asking for workspace name
    - Enter name and click Create
    - Window becomes tracked, syncs to other devices
 
 2. **New empty workspace**:
-   - Click Tanaka icon → "New Workspace"
+   - Click Tanaka icon -> "New Workspace"
    - Modal appears asking for workspace name
    - Enter name and click Create
    - New window opens, already tracked
@@ -701,24 +701,24 @@ A dedicated tab for configuration and preferences.
 
 1. **Opening on new device**:
    - Workspace appears in popup as "closed"
-   - Click "Open" → New window with all workspace tabs
+   - Click "Open" -> New window with all workspace tabs
 
 2. **Switching between workspaces**:
-   - Click "Switch to" → Browser focuses that window and brings to front
+   - Click "Switch to" -> Browser focuses that window and brings to front
 
 3. **Closing locally**:
-   - Click "Close" → Window closes on current device only
+   - Click "Close" -> Window closes on current device only
    - Workspace remains in list, can reopen later
 
 ### Tab Synchronization
 
-- **Adding tabs**: Open in tracked window → Appears on all devices
-- **Closing tabs**: Close in any device → Closes everywhere
+- **Adding tabs**: Open in tracked window -> Appears on all devices
+- **Closing tabs**: Close in any device -> Closes everywhere
 - **Moving tabs between windows**:
   - If atomic operation possible: Direct move between workspaces
   - Otherwise: Copy to destination, remove from source
 - **Dragging out of window**: Tab closes (goes to "recently closed")
-- **Reordering**: Drag within window → Order syncs to all devices
+- **Reordering**: Drag within window -> Order syncs to all devices
 - **Tab Identity**: Each tab unique to its workspace (same URL can exist in multiple workspaces)
 - **Recently Closed**: Shared across devices, shows most recent timestamp for duplicates
 
