@@ -74,10 +74,30 @@ window is tracked or not.
 │ Current Window                  │
 │ ─────────────────────────────── │
 │ [▶️ Track as Workspace]         │
-│ [🔀 Merge into...]              │
 ├─────────────────────────────────┤
 │ [➕ New Workspace]               │
 │ [📋 Manage Workspaces]          │
+└─────────────────────────────────┘
+```
+
+#### Connection Error State
+
+```text
+┌─────────────────────────────────┐
+│ Tanaka                     [⚙️] │
+├─────────────────────────────────┤
+│ ⚠️ Connection lost - working    │
+│    offline [Retry Now]          │
+├─────────────────────────────────┤
+│ Search: [                    ] │
+│ ─────────────────────────────── │
+│ My Workspaces                   │
+│ ─────────────────────────────── │
+│ 📂 Work Project (12 tabs) 🔴 ● │
+│    [Switch to] [Close]          │
+│                                 │
+│ 📁 Research (8 tabs) 🔴         │
+│    [Open]                       │
 └─────────────────────────────────┘
 ```
 
@@ -142,7 +162,6 @@ When no workspaces exist:
   - Scrollable list with max height for many workspaces
 - **Current Window Section** (only if current window is untracked):
   - `[Track as Workspace]` - Opens modal to name workspace
-  - `[Merge into...]` - Add tabs to existing workspace
 - **Global Actions**:
   - `[New Workspace]` - Create empty workspace (asks for name)
   - `[Manage Workspaces]` - Open full manager tab
@@ -166,7 +185,7 @@ A dedicated tab for detailed workspace management.
 │   Work...  │  📄 GitHub - PR #123                        │
 │   Research │     https://github.com/user/repo/pull/123   │
 │   Shopping │                                             │
-│            │     2 devices tracking                      │
+│            │     Open on 2 devices                       │
 │            │                                             │
 │ Tags Off   │  Recently Closed (last 24h)                 │
 │            │  ─────────────────────────────────────────  │
@@ -181,7 +200,8 @@ A dedicated tab for detailed workspace management.
 │ Actions    │  Recently Closed (last 24h)                 │
 │ ────────── │  ─────────────────────────────────────────  │
 │ Timeline   │  📄 MDN - Array methods      [Restore]      │
-│ Settings   │     Closed 1 hour ago from Desktop           │
+│ Trash (2)  │     Closed 1 hour ago from Desktop           │
+│ Settings   │                                             │
 │            │                                             │
 └────────────┴─────────────────────────────────────────────┘
 ```
@@ -256,7 +276,46 @@ Shows chronological activity across all workspaces.
     - Related actions
   - Permanent storage (never auto-deleted)
 
-### 4. Welcome/Setup Page
+### 4. Trash View
+
+Shows deleted workspaces that can be restored or permanently deleted.
+
+#### Layout
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ Trash                                                    │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│ 2 deleted workspaces                                     │
+│ ──────────────────────                                   │
+│                                                          │
+│ 📁 Old Project                                           │
+│ 12 tabs • Created Jan 15, 2024                           │
+│ Deleted by Desktop on Dec 1, 2024 at 3:45 PM            │
+│ [Restore] [Delete Permanently]                           │
+│                                                          │
+│ 📁 Archived Research                                     │
+│ 8 tabs • Created Nov 3, 2024                             │
+│ Deleted by Laptop on Nov 30, 2024 at 10:22 AM           │
+│ [Restore] [Delete Permanently]                           │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+
+#### Features
+
+- Shows all deleted workspaces
+- Information displayed:
+  - Workspace name and last tab count
+  - Original creation date
+  - Which device deleted it and when
+- Actions:
+  - **Restore**: Returns workspace to active list
+  - **Delete Permanently**: Removes forever (with confirmation)
+- Manual cleanup only (no auto-expiration)
+
+### 5. Welcome/Setup Page
 
 First-run experience for configuration.
 
@@ -310,6 +369,53 @@ First-run experience for configuration.
 └─────────────────────────────────┘
 ```
 
+### 5. Settings Page
+
+A dedicated tab for configuration and preferences.
+
+#### Layout
+
+```text
+┌──────────────────────────────────────────────────────────┐
+│ Tanaka Settings                                          │
+├────────────┬─────────────────────────────────────────────┤
+│            │  Connection                                  │
+│ General    │  ─────────────────────────────────────────  │
+│ ────────   │                                             │
+│ Connection │  Server URL                          ✓      │
+│ Sync       │  ┌─────────────────────────────────────┐   │
+│ Data       │  │ https://tanaka.example.com:8443    │   │
+│ About      │  └─────────────────────────────────────┘   │
+│            │                                             │
+│            │  Auth Token                          ✓      │
+│            │  ┌─────────────────────────────────────┐   │
+│            │  │ ••••••••••••••••••••••••••••••••  │   │
+│            │  └─────────────────────────────────────┘   │
+│            │                                             │
+│            │  Device Name                                │
+│            │  ┌─────────────────────────────────────┐   │
+│            │  │ Work Laptop                        │   │
+│            │  └─────────────────────────────────────┘   │
+│            │                                             │
+│            │  Status: Connected • Last sync: 2 min ago   │
+└────────────┴─────────────────────────────────────────────┘
+```
+
+#### Features
+
+- **Sidebar Navigation**: Organized sections for different setting categories
+- **Immediate Effect**: Changes apply instantly, no save button needed
+- **Inline Validation**:
+  - Status indicators (✓/✗) appear after validation
+  - Validation triggers on blur with 500ms debounce
+  - Fields disabled during connection testing
+- **Sections**:
+  - **General**: Device name, theme preference (system/light/dark)
+  - **Connection**: Server URL, auth token, connection status
+  - **Sync**: Sync interval (adaptive/fixed), retry settings (max attempts, backoff)
+  - **Data**: Storage info (space used, workspace/tab counts), clear local data
+  - **About**: Extension version, server version, build date, compatibility info, links
+
 ## User Flows
 
 ### Creating a Workspace
@@ -325,12 +431,6 @@ First-run experience for configuration.
    - Modal appears asking for workspace name
    - Enter name and click Create
    - New window opens, already tracked
-
-3. **Merge window into workspace**:
-   - Click Tanaka icon → "Merge into..."
-   - Select target workspace
-   - All tabs added to end of workspace
-   - Original window remains untracked
 
 ### Managing Workspaces
 
@@ -405,6 +505,7 @@ Accessible via gear icon in popup or full manager:
 ### Connection Errors
 
 - Red toolbar icon (passive indicator)
+- Inline message in popup: "Connection lost - working offline [Retry Now]"
 - Workspace-specific sync indicators (🟢 🟠 🔴)
 - Automatic retry with exponential backoff
 - Full manager shows last successful sync time
@@ -446,6 +547,22 @@ Accessible via gear icon in popup or full manager:
 - **Search matches**: Icons indicate match type (📝 name, 🔗 tab)
 - **Sync status**: Per-workspace indicators in popup
 - **URL display**: Full URLs stored, truncated in UI for readability
+
+### Icon System
+
+- **Library**: Phosphor Icons for consistency and flexibility
+- **Weight Strategy**:
+  - Bold: Primary actions (Create, Track, Open)
+  - Regular: Secondary actions and UI elements
+  - Light: Subtle indicators and decorative elements
+- **Color Usage**:
+  - Semantic colors for status (green/success, orange/warning, red/error)
+  - Adapt shades to system theme (lighter in dark mode, darker in light mode)
+  - Monochrome for neutral actions
+- **Consistency Principles**:
+  - Same icon for same concept throughout UI
+  - Maintain visual weight balance
+  - Ensure accessibility contrast ratios
 
 ## Future Considerations
 
