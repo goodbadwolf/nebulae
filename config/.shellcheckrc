@@ -1,0 +1,5 @@
+# Follow source statements
+external-sources=true
+
+# Exclude specific checks
+disable=SC1091  # Not following source file (common in shell scripts with dynamic paths)
