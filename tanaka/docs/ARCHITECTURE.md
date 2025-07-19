@@ -146,7 +146,71 @@ This keeps the UI responsive even when syncing lots of tabs by moving heavy oper
 - P2P sync between devices
 - Cross-browser support
 
+## Firefox Extension Architecture
+
+### Browser API Integration
+
+Tanaka integrates deeply with Firefox WebExtension APIs:
+
+```text
+┌─────────────────────────────────────────────────────┐
+│                  Extension Process                   │
+├─────────────────────────────────────────────────────┤
+│  Background Script (Persistent)                      │
+│  - Tab/Window Event Listeners                       │
+│  - Sync Coordination                                │
+│  - Message Broker                                   │
+├─────────────────────────────────────────────────────┤
+│  Content Scripts         │   Extension Pages         │
+│  - Not used currently    │   - Popup UI             │
+│                         │   - Settings Page         │
+│                         │   - Manager Tab           │
+└─────────────────────────────────────────────────────┘
+                    │
+                    ▼
+        Firefox WebExtension APIs
+        - tabs.*
+        - windows.*
+        - storage.*
+        - sessions.*
+        - webNavigation.*
+```
+
+### Storage Strategy
+
+Tanaka uses a hybrid storage approach:
+
+- **storage.local**: Device-specific data, auth tokens, cache
+- **storage.sync**: User preferences (limited use due to rate limits)
+- **Custom sync**: HTTP + CRDT for periodic tab sync
+- **sessions API**: Tab metadata persistence (UUIDs)
+
+### Message Passing Architecture
+
+All UI components communicate through the background script:
+
+```text
+Popup ←──────→ Background ←──────→ Server
+              Script
+Settings ←────→     ↑
+                    │
+Manager Tab ←───────┘
+```
+
+Message types are strongly typed with TypeScript interfaces.
+
+### Periodic Sync Architecture
+
+Due to storage.sync rate limits, Tanaka implements custom periodic sync:
+
+1. **Local Changes**: Captured by background script event listeners
+2. **Operation Queue**: Buffered in memory with deduplication
+3. **Batch Sync**: Operations sent to server every 1s (active) or 10s (idle)
+4. **Polling**: Periodic HTTP requests to check for updates from other devices
+5. **CRDT Merge**: Conflict-free merge of remote operations
+
 ## Related Documentation
 
 - [Development Setup](DEVELOPMENT.md) - Get started with the codebase
+- [Implementation Notes](IMPLEMENTATION-NOTES.md) - Firefox API details
 - [Troubleshooting](TROUBLESHOOTING.md) - Debug common issues

@@ -114,3 +114,124 @@ Operations are stored in SQLite with:
 - Bearer token authentication
 - HTTPS encryption (optional for local use)
 - Input validation on all operations
+
+## Tab Identity Management
+
+Since Firefox tab IDs are ephemeral and device-specific, Tanaka uses persistent UUIDs:
+
+### UUID Generation
+
+```javascript
+// Store UUID using sessions API for persistence
+browser.sessions.setTabValue(tabId, 'tanaka_tab_uuid', uuid);
+
+// Retrieve UUID (survives browser restarts)
+const uuid = await browser.sessions.getTabValue(tabId, 'tanaka_tab_uuid');
+```
+
+### Identity Mapping
+
+Each device maintains a mapping:
+
+- Local tab ID ↔ Persistent UUID
+- UUID is included in all sync operations
+- Server only knows about UUIDs, not local IDs
+
+## Navigation History Sync
+
+Firefox doesn't provide access to tab history, so Tanaka builds its own:
+
+### History Tracking
+
+```javascript
+// Listen to navigation events
+browser.webNavigation.onCommitted.addListener((details) => {
+  if (details.frameId === 0) { // Main frame only
+    const operation = {
+      type: 'add_history_entry',
+      tab_uuid: getTabUuid(details.tabId),
+      url: details.url,
+      timestamp: Date.now(),
+      transition_type: details.transitionType
+    };
+    syncQueue.add(operation);
+  }
+});
+```
+
+### History Structure
+
+```json
+{
+  "tab_uuid": "550e8400-e29b-41d4-a716-446655440000",
+  "history": [
+    {
+      "url": "https://example.com",
+      "title": "Example",
+      "timestamp": 1704067200000,
+      "device_id": "laptop-123"
+    }
+  ],
+  "current_index": 0
+}
+```
+
+## Periodic Sync Strategy
+
+To overcome storage.sync rate limits, Tanaka uses adaptive HTTP polling:
+
+### Sync Intervals
+
+- **Active Mode**: 1 second intervals when user is actively browsing
+- **Idle Mode**: 10 second intervals when user is inactive
+- **Offline Mode**: Operations queued locally until connection restored
+
+### Sync Approach
+
+1. **HTTP Sync**: Periodic sync via `/sync` endpoint
+2. **Operation Queue**: Buffer operations locally with deduplication
+3. **Adaptive Intervals**: Fast sync when active, slower when idle
+4. **Reconciliation**: Merge operations when coming back online
+
+## CRDT Library Integration
+
+Tanaka uses operation-based CRDTs for conflict resolution:
+
+### Operation Ordering
+
+```javascript
+class LamportClock {
+  constructor(deviceId) {
+    this.time = 0;
+    this.deviceId = deviceId;
+  }
+
+  tick() {
+    this.time++;
+    return { time: this.time, device: this.deviceId };
+  }
+
+  update(remoteTime) {
+    this.time = Math.max(this.time, remoteTime) + 1;
+  }
+}
+```
+
+### Conflict Resolution Rules
+
+1. **Tab URL Changes**: Last-write-wins based on Lamport timestamp
+2. **Tab Position**: Operational transformation for concurrent moves
+3. **Tab Close**: Tombstone with timestamp, removes win over updates
+4. **Window Assignment**: Last-write-wins
+
+### Example: Concurrent Tab Move
+
+```javascript
+// Device A: Move tab to position 0
+{ clock: { time: 10, device: "A" }, type: "move_tab", id: "tab1", index: 0 }
+
+// Device B: Move same tab to position 5  
+{ clock: { time: 10, device: "B" }, type: "move_tab", id: "tab1", index: 5 }
+
+// Resolution: Device ID breaks tie, "B" > "A", tab ends at position 5
+```
