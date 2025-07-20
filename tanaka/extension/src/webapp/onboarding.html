@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanaka Onboarding Simulator</title>
+    <link rel="stylesheet" href="styles/design-system.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .simulator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .simulator-header {
+            margin-bottom: 20px;
+        }
+
+        .simulator-header h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+
+        .simulator-header p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .onboarding-viewport {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .onboarding-container {
+            padding: 40px;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-header {
+            margin-bottom: 32px;
+        }
+
+        .app-logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 auto 16px;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 8px 0;
+        }
+
+        .welcome-subtitle {
+            font-size: 16px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .step-container {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .step-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 16px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #ef4444;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .test-connection {
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .test-button {
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            color: #374151;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .test-button:hover {
+            background: #e5e7eb;
+        }
+
+        .test-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .connection-status {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .connection-status.success {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0369a1;
+        }
+
+        .connection-status.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+
+        .connection-status.testing {
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            color: #92400e;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 32px;
+            justify-content: center;
+        }
+
+        .get-started-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .get-started-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .get-started-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #6366f1;
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: #10b981;
+        }
+
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        .nav-button {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            color: #374151;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #e5e7eb;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.primary {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+
+        .nav-button.primary:hover:not(:disabled) {
+            background: #5145e6;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <div class="onboarding-viewport">
+            <div class="onboarding-container" id="onboardingContainer">
+                <!-- Content will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class OnboardingSimulator {
+            constructor() {
+                this.currentStep = 0;
+                this.connectionStatus = null; // null | 'testing' | 'success' | 'error'
+                this.formData = {
+                    deviceName: 'Work Laptop',
+                    serverUrl: 'https://tanaka.example.com:8443',
+                    authToken: ''
+                };
+                this.container = document.getElementById('onboardingContainer');
+                this.render();
+            }
+
+            render() {
+                switch (this.currentStep) {
+                    case 0:
+                        this.renderWelcome();
+                        break;
+                    case 1:
+                        this.renderDeviceName();
+                        break;
+                    case 2:
+                        this.renderServerConfig();
+                        break;
+                    case 3:
+                        this.renderComplete();
+                        break;
+                }
+            }
+
+            renderWelcome() {
+                this.container.innerHTML = `
+                    <div class="welcome-header">
+                        <div class="app-logo">T</div>
+                        <h1 class="welcome-title">Welcome to Tanaka</h1>
+                        <p class="welcome-subtitle">Sync your Firefox tabs across devices</p>
+                    </div>
+
+                    <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+                        <p style="font-size: 14px; color: #6b7280; line-height: 1.6; margin-bottom: 24px;">
+                            Tanaka keeps your browser tabs synchronized across all your devices.
+                            Set up takes just a few minutes.
+                        </p>
+
+                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                            <h3 style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0; color: #1f2937;">What you'll need:</h3>
+                            <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #6b7280; line-height: 1.5;">
+                                <li>A name for this device</li>
+                                <li>Your Tanaka server URL</li>
+                                <li>Authentication token</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="get-started-button" onclick="simulator.nextStep()">
+                            🚀 Get Started
+                        </button>
+                    </div>
+                `;
+            }
+
+            renderDeviceName() {
+                this.container.innerHTML = `
+                    <div class="progress-indicator">
+                        <div class="progress-dot completed"></div>
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+
+                    <div class="step-container">
+                        <h2 class="step-header">Step 1: Name this device</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Device Name</label>
+                            <input type="text" class="form-input" value="${this.formData.deviceName}"
+                                   id="deviceNameInput" placeholder="e.g., Work Laptop, Home Desktop">
+                            <div style="font-size: 12px; color: #6b7280; margin-top: 6px;">
+                                This name will appear in activity history and help identify this device.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-navigation">
+                        <button class="nav-button" onclick="simulator.previousStep()">
+                            ← Back
+                        </button>
+                        <button class="nav-button primary" onclick="simulator.nextStep()" id="deviceNextBtn">
+                            Next →
+                        </button>
+                    </div>
+                `;
+
+                this.setupDeviceNameValidation();
+            }
+
+            renderServerConfig() {
+                this.container.innerHTML = `
+                    <div class="progress-indicator">
+                        <div class="progress-dot completed"></div>
+                        <div class="progress-dot completed"></div>
+                        <div class="progress-dot active"></div>
+                    </div>
+
+                    <div class="step-container">
+                        <h2 class="step-header">Step 2: Connect to your server</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">Server URL</label>
+                            <input type="text" class="form-input" value="${this.formData.serverUrl}"
+                                   id="serverUrlInput" placeholder="https://tanaka.example.com:8443">
+                            ${this.getUrlValidationMessage()}
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Auth Token</label>
+                            <input type="password" class="form-input" value="${this.formData.authToken}"
+                                   id="authTokenInput" placeholder="Enter your authentication token">
+                            <div style="font-size: 12px; color: #6b7280; margin-top: 6px;">
+                                Token configured on your Tanaka server for authentication.
+                            </div>
+                        </div>
+
+                        <div class="test-connection">
+                            <button class="test-button" onclick="simulator.testConnection()"
+                                    id="testConnectionBtn" ${this.connectionStatus === 'testing' ? 'disabled' : ''}>
+                                📡 Test Connection
+                            </button>
+                            ${this.renderConnectionStatus()}
+                        </div>
+                    </div>
+
+                    <div class="step-navigation">
+                        <button class="nav-button" onclick="simulator.previousStep()">
+                            ← Back
+                        </button>
+                        <button class="nav-button primary" onclick="simulator.nextStep()"
+                                id="serverNextBtn" ${this.connectionStatus !== 'success' ? 'disabled' : ''}>
+                            Get Started →
+                        </button>
+                    </div>
+                `;
+
+                this.setupServerValidation();
+            }
+
+            renderComplete() {
+                this.container.innerHTML = `
+                    <div class="progress-indicator">
+                        <div class="progress-dot completed"></div>
+                        <div class="progress-dot completed"></div>
+                        <div class="progress-dot completed"></div>
+                    </div>
+
+                    <div class="welcome-header">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                        <h1 class="welcome-title">You're all set!</h1>
+                        <p class="welcome-subtitle">Tanaka is now configured and ready to use</p>
+                    </div>
+
+                    <div style="max-width: 400px; margin: 0 auto; text-align: left;">
+                        <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                            <h3 style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0; color: #0369a1;">Configuration Summary:</h3>
+                            <div style="font-size: 13px; color: #075985; line-height: 1.5;">
+                                <div><strong>Device:</strong> ${this.formData.deviceName}</div>
+                                <div><strong>Server:</strong> ${this.formData.serverUrl}</div>
+                                <div><strong>Status:</strong> <span style="color: #10b981;">✓ Connected</span></div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                            <h3 style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0; color: #1f2937;">Next steps:</h3>
+                            <ul style="margin: 0; padding-left: 16px; font-size: 13px; color: #6b7280; line-height: 1.5;">
+                                <li>Click the Tanaka icon to access the popup</li>
+                                <li>Use "Track as Workspace" to sync browser windows</li>
+                                <li>Open workspaces on other devices</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="get-started-button" onclick="simulator.complete()">
+                            ✓ Start Using Tanaka
+                        </button>
+                    </div>
+                `;
+            }
+
+            setupDeviceNameValidation() {
+                const input = document.getElementById('deviceNameInput');
+                const nextBtn = document.getElementById('deviceNextBtn');
+
+                input.addEventListener('input', (e) => {
+                    this.formData.deviceName = e.target.value;
+                    nextBtn.disabled = e.target.value.trim().length === 0;
+                });
+            }
+
+            setupServerValidation() {
+                const urlInput = document.getElementById('serverUrlInput');
+                const tokenInput = document.getElementById('authTokenInput');
+
+                urlInput.addEventListener('input', (e) => {
+                    this.formData.serverUrl = e.target.value;
+                    this.connectionStatus = null;
+                    this.updateServerStep();
+                });
+
+                urlInput.addEventListener('blur', () => {
+                    this.validateUrl();
+                });
+
+                tokenInput.addEventListener('input', (e) => {
+                    this.formData.authToken = e.target.value;
+                    this.connectionStatus = null;
+                    this.updateServerStep();
+                });
+            }
+
+            validateUrl() {
+                const url = this.formData.serverUrl;
+                const urlInput = document.getElementById('serverUrlInput');
+
+                if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                    urlInput.classList.add('error');
+                    return false;
+                } else {
+                    urlInput.classList.remove('error');
+                    return true;
+                }
+            }
+
+            getUrlValidationMessage() {
+                const url = this.formData.serverUrl;
+                if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+                    return '<div class="form-error">❌ URL must start with http:// or https://</div>';
+                }
+                return '';
+            }
+
+            renderConnectionStatus() {
+                if (!this.connectionStatus) return '';
+
+                const statusClasses = {
+                    testing: 'testing',
+                    success: 'success',
+                    error: 'error'
+                };
+
+                const statusMessages = {
+                    testing: '⏳ Testing...',
+                    success: '✅ Connected!',
+                    error: '❌ Connection failed - Unable to reach server'
+                };
+
+                return `
+                    <div class="connection-status ${statusClasses[this.connectionStatus]}">
+                        ${statusMessages[this.connectionStatus]}
+                    </div>
+                `;
+            }
+
+            updateServerStep() {
+                // Re-render just the validation and status parts
+                const container = document.querySelector('.step-container');
+                if (container) {
+                    const urlGroup = container.querySelector('.form-group');
+                    const lastChild = urlGroup.lastElementChild;
+                    if (lastChild && lastChild.classList.contains('form-error')) {
+                        lastChild.remove();
+                    }
+                    if (this.getUrlValidationMessage()) {
+                        urlGroup.insertAdjacentHTML('beforeend', this.getUrlValidationMessage());
+                    }
+                }
+
+                const statusContainer = document.querySelector('.test-connection');
+                if (statusContainer) {
+                    const existingStatus = statusContainer.querySelector('.connection-status');
+                    if (existingStatus) {
+                        existingStatus.remove();
+                    }
+                    if (this.renderConnectionStatus()) {
+                        statusContainer.insertAdjacentHTML('beforeend', this.renderConnectionStatus());
+                    }
+                }
+
+                const nextBtn = document.getElementById('serverNextBtn');
+                if (nextBtn) {
+                    nextBtn.disabled = this.connectionStatus !== 'success';
+                }
+            }
+
+            testConnection() {
+                if (!this.validateUrl() || !this.formData.authToken.trim()) {
+                    return;
+                }
+
+                this.connectionStatus = 'testing';
+                this.updateServerStep();
+
+                // Simulate connection test
+                setTimeout(() => {
+                    // Randomly succeed or fail for demo
+                    this.connectionStatus = Math.random() > 0.3 ? 'success' : 'error';
+                    this.updateServerStep();
+                }, 2000);
+            }
+
+            nextStep() {
+                if (this.currentStep < 3) {
+                    this.currentStep++;
+                    this.render();
+                }
+            }
+
+            previousStep() {
+                if (this.currentStep > 0) {
+                    this.currentStep--;
+                    this.render();
+                }
+            }
+
+            complete() {
+                alert('Onboarding complete! In a real extension, this would close the onboarding flow and show the main interface.');
+            }
+        }
+
+        // Initialize simulator and make it globally available
+        const simulator = new OnboardingSimulator();
+    </script>
+</body>
+</html>
