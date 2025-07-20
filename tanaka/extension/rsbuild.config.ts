@@ -26,6 +26,19 @@ export default defineConfig({
         import: defaultConfig.entries.background!,
         html: false,
       },
+      // Playground entries
+      "playground/index": {
+        import: "./src/playground/index.ts",
+        html: true,
+      },
+      "playground/popup": {
+        import: "./src/playground/popup.ts",
+        html: true,
+      },
+      "playground/onboarding": {
+        import: "./src/playground/onboarding.ts",
+        html: true,
+      },
     },
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
@@ -43,10 +56,27 @@ export default defineConfig({
         from: defaultConfig.staticDir,
         to: defaultConfig.buildDir,
       },
+      {
+        from: "./src/playground/styles",
+        to: "./playground/styles",
+      },
+      {
+        from: "./src/playground/mock-data.js",
+        to: "./playground/mock-data.js",
+      },
     ],
   },
   html: {
-    template: "./src/popup/index.html",
+    template({ entryName }) {
+      // Map entry names to their respective HTML templates
+      const templates: Record<string, string> = {
+        popup: "./src/popup/index.html",
+        "playground/index": "./src/playground/index.html",
+        "playground/popup": "./src/playground/popup.html",
+        "playground/onboarding": "./src/playground/onboarding.html",
+      };
+      return templates[entryName] || "./src/popup/index.html";
+    },
   },
   performance: {
     chunkSplit: {
