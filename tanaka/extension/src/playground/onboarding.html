@@ -6,15 +6,6 @@
     <title>Tanaka Onboarding</title>
     <link rel="stylesheet" href="styles/design-system.css" />
     <style>
-      body {
-        margin: 0;
-        padding: var(--space-xl);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
       .onboarding-wrapper {
         width: 100%;
         max-width: 640px;
@@ -38,12 +29,6 @@
         margin-bottom: var(--space-3xl);
       }
 
-      .app-logo {
-        width: 72px;
-        height: 72px;
-        font-size: 32px;
-        margin: 0 auto var(--space-xl);
-      }
 
       .step-content {
         max-width: 480px;
@@ -329,7 +314,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="body--centered">
     <div class="onboarding-wrapper">
       <div class="onboarding-card card">
         <div class="progress-bar">
@@ -384,7 +369,7 @@
         renderWelcome() {
           this.container.innerHTML = `
                     <div class="logo-container">
-                        <div class="app-logo">T</div>
+                        <div class="app-logo app-logo--medium">T</div>
                         <h1 class="title-gradient">Welcome to Tanaka</h1>
                         <p class="text-secondary" style="font-size: var(--text-lg); margin: 0 0 var(--space-3xl) 0;">
                             Your personal tab synchronization service
