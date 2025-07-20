@@ -47,6 +47,7 @@ repos:
       - id: markdownlint
         name: "[ROOT] Lint and fix markdown"
         args: [--fix, --config, config/.markdownlint.json]
+        files: "^(config/.*\\.md|[^/]+\\.md)$"
         exclude: ".*CLAUDE.md$"
 
   # Shell scripts
@@ -62,7 +63,7 @@ repos:
     hooks:
       - id: shfmt
         name: "[ROOT] Format shell scripts"
-        args: [-i, "2", -w] # 2 space indent, write in place
+        args: [-w] # write in place, formatting from .editorconfig
 
   # Commit message validation
   - repo: https://github.com/commitizen-tools/commitizen
@@ -83,10 +84,11 @@ repos:
     hooks:
       - id: ruff-check
         name: "[TANAKA] Lint Python code with ruff"
-        args: [--fix, --exit-non-zero-on-fix]
+        args: [--config, config/ruff.toml, --fix, --exit-non-zero-on-fix]
         files: ^tanaka/server/.*\.py$
       - id: ruff-format
         name: "[TANAKA] Format Python code with ruff"
+        args: [--config, config/ruff.toml]
         files: ^tanaka/server/.*\.py$
 
   # General fixes (tanaka-specific configurations)
@@ -124,7 +126,7 @@ repos:
     hooks:
       - id: taplo-format
         name: "[TANAKA] Format TOML files"
-        args: [--option, "indent_string=  "] # 2-space indentation
+        args: [--config, config/taplo.toml]
         files: ^tanaka/.*\.toml$
 
   # YAML formatting and linting (tanaka)
@@ -151,7 +153,7 @@ repos:
     hooks:
       - id: markdownlint-fix
         name: "[TANAKA] Fix markdown files"
-        args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
+        args: [--fix, --config, config/.markdownlint.json]
         files: ^tanaka/.*\.md$
         exclude: ^tanaka/(node_modules|coverage)/
 
@@ -161,7 +163,7 @@ repos:
     hooks:
       - id: shellcheck
         name: "[TANAKA] Check shell scripts"
-        args: [-x, -e, SC1091] # Follow source statements, exclude source file not found
+        args: [--rcfile, config/.shellcheckrc]
         files: ^tanaka/.*\.sh$
 
   - repo: https://github.com/scop/pre-commit-shfmt
@@ -169,7 +171,7 @@ repos:
     hooks:
       - id: shfmt
         name: "[TANAKA] Format shell scripts"
-        args: [-i, "2", -w] # 2 space indent, write in place
+        args: [-w] # write in place, formatting from .editorconfig
         files: ^tanaka/.*\.sh$
 
   # Commit message validation (tanaka)
@@ -303,7 +305,7 @@ repos:
     hooks:
       - id: markdownlint-fix
         name: "[KIKU] Fix markdown files"
-        args: [--fix, --disable, MD013, --disable, MD040] # Disable line length and code block language checks
+        args: [--fix, --config, config/.markdownlint.json]
         files: ^kiku/.*\.md$
         exclude: ^kiku/(node_modules|coverage|dist)/
 

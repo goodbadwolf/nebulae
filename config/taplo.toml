@@ -1,0 +1,11 @@
+[formatting]
+# Use 2 spaces for indentation
+indent_string = "  "
+# Maximum line length
+column_width = 120
+# Align entries vertically
+align_entries = false
+# Align comments after the last non-comment item
+align_comments = true
+# Reorder keys alphabetically
+reorder_keys = false

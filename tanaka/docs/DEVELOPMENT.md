@@ -154,8 +154,73 @@ cargo nextest run
    cd extension && pnpm run build:prod
    ```
 
+## Firefox Extension Development
+
+### Debugging the Extension
+
+1. **Open Extension Debugger**:
+   - Navigate to `about:debugging`
+   - Click "This Firefox"
+   - Find Tanaka and click "Inspect"
+
+2. **Console Logging**:
+   - Background script logs appear in the extension debugger
+   - Popup logs appear when you inspect the popup
+   - Use `browser.runtime.id` to identify your logs
+
+3. **Storage Inspector**:
+   - In the extension debugger, go to Storage tab
+   - Check Extension Storage for local and sync data
+
+### Firefox Developer Settings
+
+For development, enable these in `about:config`:
+
+```text
+extensions.webextensions.keepStorageOnUninstall = true
+extensions.webextensions.keepUuidOnUninstall = true
+```
+
+This preserves data when reloading the extension.
+
+### Testing Multiple Devices
+
+1. **Create separate Firefox profiles**:
+
+   ```bash
+   firefox -P "Device 1"
+   firefox -P "Device 2"
+   ```
+
+2. **Set different device names** in each profile's Tanaka settings
+
+3. **Use different windows** to simulate multiple devices
+
+### Manifest V3 Considerations
+
+Currently using Manifest V2 for broader compatibility. Key differences for V3:
+
+- `browserAction` → `action`
+- Background pages → Service workers
+- Some API changes in permissions
+
+### Performance Profiling
+
+1. **Memory Usage**:
+   - Check `about:memory` while extension is active
+   - Look for "WebExtensions" section
+
+2. **Network Traffic**:
+   - Use browser DevTools Network tab
+   - Filter by tanaka server domain
+
+3. **CPU Usage**:
+   - Firefox Profiler: <https://profiler.firefox.com>
+   - Record while performing sync operations
+
 ## Next Steps
 
 - [Architecture](ARCHITECTURE.md) - How Tanaka works
+- [Implementation Notes](IMPLEMENTATION-NOTES.md) - API compatibility details
 - [Troubleshooting](TROUBLESHOOTING.md) - Common issues
 - [Git Guidelines](../../docs/GIT.md) - Git workflow
