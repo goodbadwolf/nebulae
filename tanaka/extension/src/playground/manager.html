@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanaka Manager Simulator</title>
+    <title>Tanaka Manager - Playground</title>
     <link rel="stylesheet" href="styles/design-system.css">
     <style>
         body {
             margin: 0;
-            padding: 20px;
-            background: #f5f5f5;
-            font-family: system-ui, -apple-system, sans-serif;
+            padding: var(--space-3xl);
+            min-height: 100vh;
         }
 
         .simulator-container {
@@ -19,27 +18,29 @@
         }
 
         .simulator-header {
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: var(--space-3xl);
         }
 
-        .simulator-header h1 {
-            font-size: 24px;
-            margin: 0 0 8px 0;
-            color: #1f2937;
+        .simulator-title {
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin: 0 0 var(--space-sm) 0;
+            color: var(--text-primary);
         }
 
-        .simulator-header p {
-            font-size: 14px;
-            color: #6b7280;
+        .simulator-subtitle {
+            font-size: var(--text-lg);
+            color: var(--text-secondary);
             margin: 0;
         }
 
         .manager-viewport {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-2xl);
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-xl);
         }
 
         .manager-container {
@@ -48,19 +49,22 @@
         }
 
         .manager-header {
-            background: #f9fafb;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 16px 24px;
-            font-size: 18px;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: var(--text-xl);
             font-weight: 600;
-            color: #1f2937;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
         .manager-sidebar {
-            width: 200px;
-            background: #f9fafb;
-            border-right: 1px solid #e5e7eb;
-            padding: 16px 0;
+            width: 240px;
+            background: var(--bg-subtle);
+            border-right: 1px solid var(--border);
+            padding: var(--space-xl) 0;
         }
 
         .manager-content {
@@ -71,86 +75,97 @@
 
         .manager-main {
             flex: 1;
-            padding: 24px;
+            padding: var(--space-2xl);
         }
 
         .sidebar-section {
-            margin-bottom: 24px;
+            margin-bottom: var(--space-2xl);
         }
 
         .sidebar-title {
-            font-size: 12px;
+            font-size: var(--text-xs);
             font-weight: 600;
-            color: #374151;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.025em;
-            padding: 0 16px 8px;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+            padding: 0 var(--space-xl) var(--space-sm);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: var(--space-sm);
         }
 
         .sidebar-item {
             display: block;
-            padding: 6px 16px;
-            color: #6b7280;
+            padding: var(--space-sm) var(--space-xl);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: var(--text-base);
             border: none;
             background: none;
             width: 100%;
             text-align: left;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all var(--transition-fast);
+            position: relative;
         }
 
         .sidebar-item:hover {
-            background: #f3f4f6;
-            color: #374151;
+            background: var(--bg-primary);
+            color: var(--text-primary);
         }
 
         .sidebar-item.active {
-            background: #e0e7ff;
-            color: #3730a3;
-            font-weight: 500;
+            background: var(--bg-primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .sidebar-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
         }
 
         .workspace-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: var(--space-md);
+            margin-bottom: var(--space-2xl);
         }
 
         .workspace-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1f2937;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--text-primary);
             margin: 0;
         }
 
         .edit-button {
             background: none;
             border: none;
-            color: #6b7280;
+            color: var(--text-muted);
             cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
         }
 
         .edit-button:hover {
-            background: #f3f4f6;
-            color: #374151;
+            background: var(--bg-subtle);
+            color: var(--text-primary);
         }
 
         .workspace-meta {
-            font: var(--font-small);
-            color: var(--color-text-secondary);
-            margin-top: 4px;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            margin-top: var(--space-xs);
         }
 
         .content-section {
-            margin-bottom: 32px;
+            margin-bottom: var(--space-3xl);
         }
 
         .content-section:last-child {
@@ -158,14 +173,14 @@
         }
 
         .section-header {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1f2937;
+            font-size: var(--text-base);
+            font-weight: 700;
+            color: var(--text-primary);
             text-transform: uppercase;
-            letter-spacing: 0.025em;
-            margin: 0 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e5e7eb;
+            letter-spacing: 0.05em;
+            margin: 0 0 var(--space-lg) 0;
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid var(--border);
         }
 
         .tab-list {
@@ -265,13 +280,14 @@
 <body>
     <div class="simulator-container">
         <div class="simulator-header">
-            <h1>Manager Tab Simulator</h1>
-            <p>Full workspace management interface with sidebar navigation and detailed views</p>
+            <h1 class="simulator-title">Manager Tab</h1>
+            <p class="simulator-subtitle">Full workspace management interface with detailed views and device synchronization</p>
         </div>
 
         <div class="manager-viewport">
             <div class="manager-header">
-                Tanaka Workspace Manager
+                <span>📊</span>
+                <span>Tanaka Workspace Manager</span>
             </div>
 
             <div class="manager-container">

@@ -1,8 +1,12 @@
 packages:
-  - "."
-  - "../../kiku/*"
+  - .
+  - ../../kiku/*
 
 onlyBuiltDependencies:
+  - "@pkgr/core"
+  - core-js
   - esbuild
+  - eslint-config-prettier
   - sharp
   - spawn-sync
+  - synckit

@@ -39,6 +39,14 @@ export default defineConfig({
         import: "./src/playground/onboarding.ts",
         html: true,
       },
+      "playground/settings": {
+        import: "./src/playground/settings.ts",
+        html: true,
+      },
+      "playground/manager": {
+        import: "./src/playground/manager.ts",
+        html: true,
+      },
     },
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
@@ -74,6 +82,8 @@ export default defineConfig({
         "playground/index": "./src/playground/index.html",
         "playground/popup": "./src/playground/popup.html",
         "playground/onboarding": "./src/playground/onboarding.html",
+        "playground/settings": "./src/playground/settings.html",
+        "playground/manager": "./src/playground/manager.html",
       };
       return templates[entryName] || "./src/popup/index.html";
     },
@@ -96,7 +106,7 @@ export default defineConfig({
   },
   dev: {
     writeToDisk: true,
-    hmr: false,
-    liveReload: false,
+    hmr: true,
+    liveReload: true,
   },
 });
