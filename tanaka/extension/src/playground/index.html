@@ -6,28 +6,7 @@
     <title>Tanaka Playground</title>
     <link rel="stylesheet" href="styles/design-system.css" />
     <style>
-      body {
-        margin: 0;
-        padding: var(--space-4xl);
-        min-height: 100vh;
-      }
-
-      .playground-container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .playground-header {
-        text-align: center;
-        margin-bottom: var(--space-4xl);
-      }
-
-      .app-logo {
-        width: 80px;
-        height: 80px;
-        font-size: 36px;
-        margin: 0 auto var(--space-2xl);
-      }
+      /* Custom styles only for this page */
 
       .playground-title {
         font-size: var(--text-4xl);
@@ -37,13 +16,6 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-      }
-
-      .playground-subtitle {
-        font-size: var(--text-lg);
-        color: var(--text-secondary);
-        margin: 0;
-        line-height: 1.6;
       }
 
       .playground-grid {
@@ -88,138 +60,15 @@
         transform: scaleX(1);
       }
 
-      .card-icon {
-        width: 48px;
-        height: 48px;
-        background: var(--bg-subtle);
-        border-radius: var(--radius-xl);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        margin-bottom: var(--space-lg);
-      }
+      /* Card styles already in design-system.css */
 
-      .card-title {
-        font-size: var(--text-xl);
-        font-weight: 600;
-        margin: 0 0 var(--space-sm) 0;
-        color: var(--text-primary);
-      }
+      /* Badge styles already in design-system.css */
 
-      .card-description {
-        font-size: var(--text-base);
-        color: var(--text-secondary);
-        margin: 0 0 var(--space-lg) 0;
-        line-height: 1.6;
-      }
+      /* Info panel styles already in design-system.css */
 
-      .card-meta {
-        display: flex;
-        align-items: center;
-        gap: var(--space-sm);
-        font-size: var(--text-sm);
-        color: var(--text-muted);
-      }
-
-      .meta-badge {
-        background: var(--bg-subtle);
-        padding: var(--space-xs) var(--space-sm);
-        border-radius: var(--radius-full);
-        font-family: var(--font-mono);
-        font-size: var(--text-xs);
-        border: 1px solid var(--border);
-      }
-
-      .info-section {
-        background: var(--bg-primary);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-2xl);
-        padding: var(--space-3xl);
-        margin-bottom: var(--space-4xl);
-      }
-
-      .info-header {
-        display: flex;
-        align-items: center;
-        gap: var(--space-md);
-        margin-bottom: var(--space-2xl);
-      }
-
-      .info-icon {
-        width: 40px;
-        height: 40px;
-        background: var(--bg-subtle);
-        border-radius: var(--radius-lg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-      }
-
-      .info-title {
-        font-size: var(--text-2xl);
-        font-weight: 600;
-        margin: 0;
-        color: var(--text-primary);
-      }
-
-      .info-content {
-        font-size: var(--text-base);
-        color: var(--text-secondary);
-        line-height: 1.8;
-      }
-
-      .info-content strong {
-        color: var(--text-primary);
-        font-weight: 600;
-      }
-
-      .quick-links {
-        margin-top: var(--space-2xl);
-        padding-top: var(--space-2xl);
-        border-top: 1px solid var(--border);
-      }
-
-      .quick-links h3 {
-        font-size: var(--text-lg);
-        font-weight: 600;
-        margin: 0 0 var(--space-lg) 0;
-        color: var(--text-primary);
-      }
-
-      .link-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-md);
-      }
-
-      .link-item {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-xs);
-        padding: var(--space-sm) var(--space-lg);
-        background: var(--bg-subtle);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        color: var(--primary);
-        text-decoration: none;
-        font-size: var(--text-sm);
-        font-weight: 500;
-        transition: all var(--transition-fast);
-      }
-
-      .link-item:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-1px);
-      }
+      /* Quick links styles already in design-system.css */
 
       @media (max-width: 768px) {
-        body {
-          padding: var(--space-2xl);
-        }
-
         .playground-grid {
           grid-template-columns: 1fr;
         }
@@ -230,67 +79,67 @@
       }
     </style>
   </head>
-  <body>
-    <div class="playground-container">
-      <div class="playground-header">
-        <div class="app-logo">T</div>
+  <body class="body--large">
+    <div class="simulator-container u-max-width-lg">
+      <div class="simulator-header">
+        <div class="app-logo app-logo--large">T</div>
         <h1 class="playground-title">Tanaka Playground</h1>
-        <p class="playground-subtitle">Interactive UI components and design system showcase</p>
+        <p class="simulator-subtitle">Interactive UI components and design system showcase</p>
       </div>
 
       <div class="playground-grid">
         <a href="popup" class="playground-card">
-          <div class="card-icon">🪟</div>
-          <h3 class="card-title">Popup Interface</h3>
-          <p class="card-description">
+          <div class="card__icon">🪟</div>
+          <h3 class="card__title">Popup Interface</h3>
+          <p class="card__description">
             Main extension popup with workspace management, search functionality, and real-time sync status.
           </p>
-          <div class="card-meta">
+          <div class="card__meta">
             <span class="meta-badge">320×480px</span>
             <span class="meta-badge">Interactive</span>
           </div>
         </a>
 
         <a href="manager" class="playground-card">
-          <div class="card-icon">📊</div>
-          <h3 class="card-title">Manager Tab</h3>
-          <p class="card-description">
+          <div class="card__icon">📊</div>
+          <h3 class="card__title">Manager Tab</h3>
+          <p class="card__description">
             Full workspace manager with detailed tab lists, recently closed items, and device management.
           </p>
-          <div class="card-meta">
+          <div class="card__meta">
             <span class="meta-badge">Full page</span>
             <span class="meta-badge">Multi-state</span>
           </div>
         </a>
 
         <a href="settings" class="playground-card">
-          <div class="card-icon">⚙️</div>
-          <h3 class="card-title">Settings Page</h3>
-          <p class="card-description">
+          <div class="card__icon">⚙️</div>
+          <h3 class="card__title">Settings Page</h3>
+          <p class="card__description">
             Extension configuration including server connection, device naming, and sync preferences.
           </p>
-          <div class="card-meta">
+          <div class="card__meta">
             <span class="meta-badge">Full page</span>
             <span class="meta-badge">Form validation</span>
           </div>
         </a>
 
         <a href="onboarding" class="playground-card">
-          <div class="card-icon">🚀</div>
-          <h3 class="card-title">Onboarding Flow</h3>
-          <p class="card-description">
+          <div class="card__icon">🚀</div>
+          <h3 class="card__title">Onboarding Flow</h3>
+          <p class="card__description">
             First-run setup experience with step-by-step guidance for device and server configuration.
           </p>
-          <div class="card-meta">
+          <div class="card__meta">
             <span class="meta-badge">Multi-step</span>
             <span class="meta-badge">Progressive</span>
           </div>
         </a>
       </div>
 
-      <div class="info-section">
-        <div class="info-header">
-          <div class="info-icon">ℹ️</div>
+      <div class="info-panel">
+        <div class="info-panel__header">
+          <div class="info-panel__icon">ℹ️</div>
           <h2 class="info-title">About This Playground</h2>
         </div>
         <div class="info-content">

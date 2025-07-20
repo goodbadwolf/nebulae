@@ -6,34 +6,7 @@
     <title>Tanaka Manager - Playground</title>
     <link rel="stylesheet" href="styles/design-system.css">
     <style>
-        body {
-            margin: 0;
-            padding: var(--space-3xl);
-            min-height: 100vh;
-        }
-
-        .simulator-container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .simulator-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-        }
-
-        .simulator-title {
-            font-size: var(--text-3xl);
-            font-weight: 700;
-            margin: 0 0 var(--space-sm) 0;
-            color: var(--text-primary);
-        }
-
-        .simulator-subtitle {
-            font-size: var(--text-lg);
-            color: var(--text-secondary);
-            margin: 0;
-        }
+        /* Simulator styles already in design-system.css */
 
         .manager-viewport {
             background: var(--bg-primary);
@@ -60,12 +33,7 @@
             gap: var(--space-sm);
         }
 
-        .manager-sidebar {
-            width: 240px;
-            background: var(--bg-subtle);
-            border-right: 1px solid var(--border);
-            padding: var(--space-xl) 0;
-        }
+        /* Using layout-sidebar from design-system.css */
 
         .manager-content {
             flex: 1;
@@ -284,14 +252,14 @@
             <p class="simulator-subtitle">Full workspace management interface with detailed views and device synchronization</p>
         </div>
 
-        <div class="manager-viewport">
-            <div class="manager-header">
+        <div class="viewport manager-viewport">
+            <div class="viewport-header">
                 <span>📊</span>
                 <span>Tanaka Workspace Manager</span>
             </div>
 
             <div class="manager-container">
-                <div class="manager-sidebar">
+                <div class="layout-sidebar">
                     <div class="sidebar-section">
                         <div class="sidebar-title">Workspaces</div>
                         <button class="sidebar-item active" data-workspace="work-project">▼ All (3)</button>
