@@ -1,0 +1,34 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# All files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Code files (2 spaces)
+[*.{js,jsx,ts,tsx,json,yaml,yml,toml,sh}]
+indent_style = space
+indent_size = 2
+
+# Rust files (4 spaces)
+[*.rs]
+indent_style = space
+indent_size = 4
+
+# Python files (4 spaces)
+[*.py]
+indent_style = space
+indent_size = 4
+
+# Markdown files (preserve trailing spaces for line breaks)
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefile (tabs required)
+[Makefile]
+indent_style = tab

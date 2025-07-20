@@ -36,7 +36,7 @@ Tanaka is a Firefox tab synchronization system built with:
 
 ### Project Structure
 
-```
+```text
 tanaka/
 ├── extension/          # Firefox WebExtension (TypeScript, Yjs)
 ├── server/            # Rust Tanaka server (axum, tokio, yrs, SQLite)
@@ -148,7 +148,6 @@ class SyncManager {
 - AGENTS.md is a symlink to CLAUDE.md (changes affect both)
 - GEMINI.md is a symlink to CLAUDE.md (changes affect both)
 
-#
 ### Project Organization
 
 - Keep language/framework-specific files in their respective directories
@@ -164,7 +163,8 @@ class SyncManager {
 - Fix markdown linting issues
 - **File References**: Use @<path> notation for file references in CLAUDE.md (not Markdown links)
 - **Documentation Updates**: Always check and update relevant documentation when making major changes
-- **Before Pull Requests**: Review all docs for accuracy - feature status, version numbers, commands, and technical details must match the code
+- **Before Pull Requests**: Review all docs for accuracy - feature status, version numbers, commands, and technical
+details must match the code
 
 ### Essential Commands
 
@@ -207,12 +207,15 @@ Track development tasks using appropriate task management tools.
 #### Progress Tracking Rules
 
 ##### Task Management
+
+- ALWAYS use ASCII characters in markdown (checkmarks: `[x]`/`[ ]`, arrows: `->`, bullets: `-`)
 - Use `[ ]` for pending, `[x]` for completed tasks
 - Break large tasks into subtasks when complexity emerges
 - Add discovered work as new tasks rather than expanding existing ones
 - Mark tasks complete only when fully done (not partially)
 
 ##### Pull Request Workflow
+
 - **Always create a PR when a branch is ready for review**
 - Update TODO file as part of each PR that completes tasks
 - Include in PR description:
@@ -222,12 +225,14 @@ Track development tasks using appropriate task management tools.
   - Screenshots for UI changes
 
 ##### Quality Gates
+
 - Run all tests before marking complete (`cargo nextest run` + `pnpm test`)
 - Ensure pre-commit hooks pass (`pre-commit run --all-files`)
 - Verify no memory leaks introduced (test with 200+ tabs)
 - Update relevant documentation (user guides, API docs, comments)
 
 ##### Branch Protection
+
 See @../docs/GIT.md for branch protection and PR workflow guidelines.
 
 ### Misc
@@ -239,6 +244,7 @@ See @../docs/GIT.md for branch protection and PR workflow guidelines.
 ## Quality Checklist
 
 See @../CLAUDE.md for the quality checklist. Additionally for Tanaka:
+
 - Ensure Firefox WebExtension API compatibility
 - Test with 200+ tabs for performance
 - Verify CRDT operations maintain consistency

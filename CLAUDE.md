@@ -122,7 +122,8 @@ All pre-commit hooks are managed in the root `.pre-commit-config.yaml` file. Whe
 - ALWAYS test changes before suggesting commits
 - Prefer editing existing files over creating new ones
 - NEVER proactively create documentation files (*.md) unless explicitly requested
-- Minimize emoji usage in scripts and documentation (exceptions: ✓/✗ checkmarks, progress indicators)
+- ALWAYS use ASCII characters in markdown documents (checkmarks: `[x]`/`[ ]`, arrows: `->`, bullets: `-`)
+- Avoid Unicode symbols like ✓, ✗, →, ▲ for compatibility across terminals and platforms
 
 ### Documentation Standards
 
