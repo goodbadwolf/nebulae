@@ -23,9 +23,6 @@ importers:
       eslint-config-prettier:
         specifier: ^10.1.7
         version: 10.1.7(eslint@9.31.0)
-      eslint-js:
-        specifier: github:eslint/js
-        version: https://codeload.github.com/eslint/js/tar.gz/8474de524d7c18755d399b3c66d9548901ec57d9
       eslint-plugin-prettier:
         specifier: ^5.5.1
         version: 5.5.1(eslint-config-prettier@10.1.7(eslint@9.31.0))(eslint@9.31.0)(prettier@3.6.2)
@@ -667,10 +664,6 @@ packages:
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
-
-  eslint-js@https://codeload.github.com/eslint/js/tar.gz/8474de524d7c18755d399b3c66d9548901ec57d9:
-    resolution: {tarball: https://codeload.github.com/eslint/js/tar.gz/8474de524d7c18755d399b3c66d9548901ec57d9}
-    version: 1.0.0
 
   eslint-plugin-prettier@5.5.1:
     resolution: {integrity: sha512-dobTkHT6XaEVOo8IO90Q4DOSxnm3Y151QxPJlM/vKC0bVy+d6cVWQZLlFiuZPP0wS6vZwSKeJgKkcS+KfMBlRw==}
@@ -1816,8 +1809,6 @@ snapshots:
   eslint-config-prettier@10.1.7(eslint@9.31.0):
     dependencies:
       eslint: 9.31.0
-
-  eslint-js@https://codeload.github.com/eslint/js/tar.gz/8474de524d7c18755d399b3c66d9548901ec57d9: {}
 
   eslint-plugin-prettier@5.5.1(eslint-config-prettier@10.1.7(eslint@9.31.0))(eslint@9.31.0)(prettier@3.6.2):
     dependencies:
