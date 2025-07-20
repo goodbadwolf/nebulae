@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanaka Manager Simulator</title>
+    <link rel="stylesheet" href="styles/design-system.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .simulator-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .simulator-header {
+            margin-bottom: 20px;
+        }
+
+        .simulator-header h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+
+        .simulator-header p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .manager-viewport {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .manager-container {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .manager-header {
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .manager-sidebar {
+            width: 200px;
+            background: #f9fafb;
+            border-right: 1px solid #e5e7eb;
+            padding: 16px 0;
+        }
+
+        .manager-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .manager-main {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            padding: 0 16px 8px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-item {
+            display: block;
+            padding: 6px 16px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .sidebar-item.active {
+            background: #e0e7ff;
+            color: #3730a3;
+            font-weight: 500;
+        }
+
+        .workspace-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .workspace-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .edit-button {
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .edit-button:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .workspace-meta {
+            font: var(--font-small);
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .content-section {
+            margin-bottom: 32px;
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1f2937;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .tab-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #d1d5db;
+        }
+
+        .tab-item:last-child {
+            border-bottom: none;
+        }
+
+        .tab-icon {
+            width: 16px;
+            height: 16px;
+            text-align: center;
+        }
+
+        .tab-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tab-title {
+            font-size: 13px;
+            color: #1f2937;
+            margin: 0 0 2px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tab-url {
+            font: var(--font-mono);
+            font-size: 11px;
+            color: #6b7280;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .recently-closed-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #d1d5db;
+        }
+
+        .recently-closed-item:last-child {
+            border-bottom: none;
+        }
+
+        .restore-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .restore-meta {
+            font: var(--font-small);
+            color: var(--color-text-secondary);
+            margin: 2px 0 0 0;
+        }
+
+        .restore-button {
+            padding: 4px 8px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .restore-button:hover {
+            background: var(--color-surface-hover);
+        }
+
+        .device-count {
+            font: var(--font-small);
+            color: var(--color-text-secondary);
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <div class="simulator-header">
+            <h1>Manager Tab Simulator</h1>
+            <p>Full workspace management interface with sidebar navigation and detailed views</p>
+        </div>
+
+        <div class="manager-viewport">
+            <div class="manager-header">
+                Tanaka Workspace Manager
+            </div>
+
+            <div class="manager-container">
+                <div class="manager-sidebar">
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">Workspaces</div>
+                        <button class="sidebar-item active" data-workspace="work-project">▼ All (3)</button>
+                        <button class="sidebar-item" data-workspace="work-project" style="padding-left: 24px;">Work...</button>
+                        <button class="sidebar-item" data-workspace="research" style="padding-left: 24px;">Research</button>
+                        <button class="sidebar-item" data-workspace="shopping" style="padding-left: 24px;">Shopping</button>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">Devices</div>
+                        <button class="sidebar-item">
+                            <span class="status-dot status-dot--synced"></span>
+                            Desktop
+                        </button>
+                        <button class="sidebar-item">
+                            <span class="status-dot status-dot--synced"></span>
+                            Laptop
+                        </button>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-title">Actions</div>
+                        <button class="sidebar-item" data-view="timeline">Timeline</button>
+                        <button class="sidebar-item" data-view="trash">Trash (2)</button>
+                        <button class="sidebar-item" data-view="settings">Settings</button>
+                    </div>
+                </div>
+
+                <div class="manager-content">
+                    <div class="manager-main" id="managerMain">
+                        <!-- Content will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="mock-data.js"></script>
+    <script>
+
+        class ManagerSimulator {
+            constructor() {
+                this.currentWorkspace = 'work-project';
+                this.currentView = 'workspace';
+                this.container = document.getElementById('managerMain');
+                this.setupNavigation();
+                this.render();
+            }
+
+            setupNavigation() {
+                // Workspace navigation
+                document.querySelectorAll('[data-workspace]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('[data-workspace]').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentWorkspace = btn.dataset.workspace;
+                        this.currentView = 'workspace';
+                        this.render();
+                    });
+                });
+
+                // View navigation
+                document.querySelectorAll('[data-view]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentView = btn.dataset.view;
+                        this.render();
+                    });
+                });
+            }
+
+            render() {
+                switch (this.currentView) {
+                    case 'timeline':
+                        this.renderTimeline();
+                        break;
+                    case 'trash':
+                        this.renderTrash();
+                        break;
+                    case 'settings':
+                        this.renderSettings();
+                        break;
+                    default:
+                        this.renderWorkspace();
+                }
+            }
+
+            renderWorkspace() {
+                const workspace = mockWorkspaces.find(w => w.id === this.currentWorkspace) || mockWorkspaces[0];
+
+                this.container.innerHTML = `
+                    <div class="workspace-header">
+                        <h1 class="workspace-title">${workspace.name}</h1>
+                        <button class="edit-button">✏️</button>
+                    </div>
+                    <div class="workspace-meta">
+                        ${workspace.tabCount} tabs • <span class="status-dot status-dot--${workspace.status}"></span> Last synced: ${workspace.lastChange}
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">Open Tabs</h2>
+                        <ul class="tab-list">
+                            ${this.renderTabList(workspace)}
+                        </ul>
+                        <div class="device-count">Open on 2 devices</div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">Recently Closed (last 24h)</h2>
+                        ${this.renderRecentlyClosed()}
+                    </div>
+                `;
+            }
+
+            renderTabList(workspace) {
+                const allTabs = [
+                    { id: '1', title: 'GitHub - PR #123', url: 'https://github.com/user/repo/pull/123', icon: '🌐' },
+                    { id: '2', title: 'MDN Web Docs - Array.prototype', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array', icon: '📄' },
+                    { id: '3', title: 'Stack Overflow - React hook', url: 'https://stackoverflow.com/questions/react-hooks-explained', icon: '💬' },
+                    { id: '4', title: 'Figma - Design System', url: 'https://figma.com/file/design-system', icon: '🎨' },
+                    { id: '5', title: 'Linear - Task Board', url: 'https://linear.app/workspace/board', icon: '📋' }
+                ];
+
+                return allTabs.slice(0, workspace.tabCount).map(tab => `
+                    <li class="tab-item">
+                        <span class="tab-icon">${tab.icon}</span>
+                        <div class="tab-info">
+                            <h3 class="tab-title">${tab.title}</h3>
+                            <p class="tab-url">${tab.url}</p>
+                        </div>
+                    </li>
+                `).join('');
+            }
+
+            renderRecentlyClosed() {
+                return _mockRecentlyClosed.map(item => `
+                    <div class="recently-closed-item">
+                        <span class="tab-icon">🌐</span>
+                        <div class="restore-info">
+                            <h3 class="tab-title">${item.title}</h3>
+                            <p class="restore-meta">Closed ${item.closedAt} from ${item.device}</p>
+                        </div>
+                        <button class="restore-button">🔄 Restore</button>
+                    </div>
+                `).join('');
+            }
+
+            renderTimeline() {
+                this.container.innerHTML = `
+                    <div class="workspace-header">
+                        <h1 class="workspace-title">Activity Timeline</h1>
+                    </div>
+
+                    <div style="display: flex; gap: 16px; margin-bottom: 24px; font-size: 14px;">
+                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
+                            <option>All Workspaces ▼</option>
+                        </select>
+                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
+                            <option>All Devices ▼</option>
+                        </select>
+                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
+                            <option>7 days ▼</option>
+                        </select>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">Today</h2>
+                        <div class="timeline-items">
+                            ${this.renderTimelineItems()}
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">Yesterday</h2>
+                        <div class="timeline-items">
+                            <div style="padding: 12px 0; border-bottom: 1px dotted #d1d5db;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                    <span>🕐</span>
+                                    <span style="font-size: 13px; color: var(--color-text-secondary);">4:15 PM • Desktop</span>
+                                </div>
+                                <div style="font-size: 14px; color: var(--color-text-primary);">
+                                    Moved 3 tabs from Research to Archive
+                                </div>
+                            </div>
+                        </div>
+                        <button style="margin-top: 16px; padding: 8px 12px; background: none; border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-primary); cursor: pointer;">
+                            ➕ Show more (23 days remaining)
+                        </button>
+                    </div>
+                `;
+            }
+
+            renderTimelineItems() {
+                const items = [
+                    { time: '10:45 AM', device: 'Desktop', action: 'Closed "GitHub PR #123" from Work Project', expandable: true },
+                    { time: '10:30 AM', device: 'Laptop', action: 'Opened 3 tabs in Research workspace', details: ['React Hooks Documentation', 'TypeScript Handbook', 'CSS Grid Guide'] },
+                    { time: '9:15 AM', device: 'Desktop', action: 'Created new workspace "Project Planning"' }
+                ];
+
+                return items.map((item, index) => `
+                    <div style="padding: 12px 0; border-bottom: 1px dotted #d1d5db;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <span>🕐</span>
+                            <span style="font-size: 13px; color: var(--color-text-secondary);">${item.time} • ${item.device}</span>
+                        </div>
+                        <div style="font-size: 14px; color: var(--color-text-primary); margin-bottom: 4px;">
+                            ${item.action}
+                        </div>
+                        ${item.details ? `
+                            <div style="padding-left: 16px; margin-top: 8px;">
+                                ${item.details.map(detail => `
+                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin: 2px 0;">
+                                        • ${detail}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        ${item.expandable ? `
+                            <button style="font-size: 12px; color: var(--color-primary); background: none; border: none; cursor: pointer; margin-top: 4px;">
+                                ▶ Show details
+                            </button>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+
+            renderTrash() {
+                this.container.innerHTML = `
+                    <div class="workspace-header">
+                        <h1 class="workspace-title">Trash</h1>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">2 Deleted Workspaces</h2>
+                        <div class="trash-items">
+                            <div style="padding: 16px 0; border-bottom: 1px dotted #d1d5db;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                    <span style="font-size: 18px;">📁</span>
+                                    <h3 style="font-size: 16px; font-weight: 600; margin: 0; color: var(--color-text-primary);">Old Project</h3>
+                                </div>
+                                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">
+                                    12 tabs • Created Jan 15, 2024
+                                </div>
+                                <div style="font-size: 12px; color: var(--color-text-meta); margin-bottom: 12px;">
+                                    Deleted by Desktop on Dec 1, 2024 at 3:45 PM
+                                </div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="restore-button">🔄 Restore</button>
+                                    <button style="padding: 4px 8px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 4px; font-size: 11px; cursor: pointer; color: #dc2626;">
+                                        🗑️ Delete Permanently
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div style="padding: 16px 0;">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                    <span style="font-size: 18px;">📁</span>
+                                    <h3 style="font-size: 16px; font-weight: 600; margin: 0; color: var(--color-text-primary);">Archived Research</h3>
+                                </div>
+                                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">
+                                    8 tabs • Created Nov 3, 2024
+                                </div>
+                                <div style="font-size: 12px; color: var(--color-text-meta); margin-bottom: 12px;">
+                                    Deleted by Laptop on Nov 30, 2024 at 10:22 AM
+                                </div>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="restore-button">🔄 Restore</button>
+                                    <button style="padding: 4px 8px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 4px; font-size: 11px; cursor: pointer; color: #dc2626;">
+                                        🗑️ Delete Permanently
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderSettings() {
+                this.container.innerHTML = `
+                    <div class="workspace-header">
+                        <h1 class="workspace-title">Settings</h1>
+                    </div>
+
+                    <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 24px;">
+                        Configure your Tanaka extension preferences and server connection.
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-header">Connection</h2>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
+                                Server URL
+                            </label>
+                            <input type="text" value="https://tanaka.example.com:8443"
+                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
+                                Auth Token
+                            </label>
+                            <input type="password" value="••••••••••••••••••••••••••••••••"
+                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
+                        </div>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
+                                Device Name
+                            </label>
+                            <input type="text" value="Work Laptop"
+                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px;">
+                            <span class="status-dot status-dot--synced"></span>
+                            <span style="font-size: 13px; color: var(--color-success);">Connected • Last sync: 2 min ago</span>
+                        </div>
+
+                        <button style="margin-top: 12px; padding: 8px 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-primary); cursor: pointer;">
+                            📡 Test Connection
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize simulator
+        new ManagerSimulator();
+    </script>
+</body>
+</html>

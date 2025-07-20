@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanaka Settings Simulator</title>
+    <link rel="stylesheet" href="styles/design-system.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .simulator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .simulator-header {
+            margin-bottom: 20px;
+        }
+
+        .simulator-header h1 {
+            font-size: 24px;
+            margin: 0 0 8px 0;
+            color: #1f2937;
+        }
+
+        .simulator-header p {
+            font-size: 14px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .settings-viewport {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .settings-container {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .settings-header {
+            background: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .settings-sidebar {
+            width: 200px;
+            background: #f9fafb;
+            border-right: 1px solid #e5e7eb;
+            padding: 16px 0;
+        }
+
+        .settings-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .settings-main {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            padding: 0 16px 8px;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-item {
+            display: block;
+            padding: 8px 16px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .sidebar-item.active {
+            background: #e0e7ff;
+            color: #3730a3;
+            font-weight: 500;
+            border-left: 3px solid #6366f1;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            max-width: 450px;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font: var(--font-body);
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #ef4444;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+        }
+
+        .status-row.error {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        .status-text {
+            font-size: 13px;
+            color: #0369a1;
+        }
+
+        .status-text.error {
+            color: #dc2626;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .test-button {
+            padding: 8px 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            color: var(--color-primary);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .test-button:hover {
+            background: var(--color-surface-hover);
+        }
+
+        .test-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .save-button {
+            padding: 8px 16px;
+            background: var(--color-primary);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .save-button:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--color-primary);
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .select-input {
+            width: 200px;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font: var(--font-body);
+            background: white;
+        }
+
+        .danger-zone {
+            margin-top: 40px;
+            padding: 20px;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            background: #fef2f2;
+        }
+
+        .danger-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #dc2626;
+            margin: 0 0 12px 0;
+        }
+
+        .danger-button {
+            padding: 8px 16px;
+            background: #dc2626;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .danger-button:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulator-container">
+        <div class="simulator-header">
+            <h1>Settings Page Simulator</h1>
+            <p>Extension configuration with tabbed navigation and form validation</p>
+        </div>
+
+        <div class="settings-viewport">
+            <div class="settings-header">
+                Tanaka Settings
+            </div>
+
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <div class="sidebar-title">General</div>
+                    <button class="sidebar-item active" data-section="connection">Connection</button>
+                    <button class="sidebar-item" data-section="sync">Sync</button>
+                    <button class="sidebar-item" data-section="data">Data</button>
+                    <button class="sidebar-item" data-section="about">About</button>
+                </div>
+
+                <div class="settings-content">
+                    <div class="settings-main" id="settingsMain">
+                        <!-- Content will be rendered here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class SettingsSimulator {
+            constructor() {
+                this.currentSection = 'connection';
+                this.container = document.getElementById('settingsMain');
+                this.connectionStatus = 'connected'; // 'connected' | 'testing' | 'error'
+                this.setupNavigation();
+                this.render();
+            }
+
+            setupNavigation() {
+                document.querySelectorAll('[data-section]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('[data-section]').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.currentSection = btn.dataset.section;
+                        this.render();
+                    });
+                });
+            }
+
+            render() {
+                switch (this.currentSection) {
+                    case 'connection':
+                        this.renderConnection();
+                        break;
+                    case 'sync':
+                        this.renderSync();
+                        break;
+                    case 'data':
+                        this.renderData();
+                        break;
+                    case 'about':
+                        this.renderAbout();
+                        break;
+                }
+            }
+
+            renderConnection() {
+                this.container.innerHTML = `
+                    <h2 class="section-title">Connection</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Server URL</label>
+                        <input type="text" class="form-input" value="https://tanaka.example.com:8443" id="serverUrl">
+                        <div class="form-hint">The URL of your Tanaka server including port if needed</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Auth Token</label>
+                        <input type="password" class="form-input" value="your-secret-token-here" id="authToken">
+                        <div class="form-hint">Authentication token configured on your server</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Device Name</label>
+                        <input type="text" class="form-input" value="Work Laptop" id="deviceName">
+                        <div class="form-hint">Name shown in activity history and device lists</div>
+                    </div>
+
+                    <div class="status-row ${this.connectionStatus === 'error' ? 'error' : ''}">
+                        <span class="status-dot status-dot--${this.connectionStatus === 'connected' ? 'synced' : this.connectionStatus === 'testing' ? 'syncing' : 'error'}"></span>
+                        <span class="status-text ${this.connectionStatus === 'error' ? 'error' : ''}">
+                            ${this.getConnectionStatusText()}
+                        </span>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="test-button" id="testConnection" ${this.connectionStatus === 'testing' ? 'disabled' : ''}>
+                            📡 Test Connection
+                        </button>
+                        <button class="save-button">
+                            💾 Save Settings
+                        </button>
+                    </div>
+                `;
+
+                this.setupConnectionHandlers();
+            }
+
+            setupConnectionHandlers() {
+                const testBtn = document.getElementById('testConnection');
+                const urlInput = document.getElementById('serverUrl');
+
+                testBtn.addEventListener('click', () => {
+                    this.testConnection();
+                });
+
+                urlInput.addEventListener('blur', () => {
+                    this.validateUrl(urlInput.value);
+                });
+            }
+
+            testConnection() {
+                this.connectionStatus = 'testing';
+                this.render();
+
+                // Simulate connection test
+                setTimeout(() => {
+                    // Randomly succeed or fail for demo
+                    this.connectionStatus = Math.random() > 0.3 ? 'connected' : 'error';
+                    this.render();
+                }, 2000);
+            }
+
+            validateUrl(url) {
+                const urlInput = document.getElementById('serverUrl');
+                if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                    urlInput.classList.add('error');
+                    const existingError = urlInput.parentNode.querySelector('.form-error');
+                    if (!existingError) {
+                        const error = document.createElement('div');
+                        error.className = 'form-error';
+                        error.innerHTML = '❌ URL must start with http:// or https://';
+                        urlInput.parentNode.appendChild(error);
+                    }
+                } else {
+                    urlInput.classList.remove('error');
+                    const existingError = urlInput.parentNode.querySelector('.form-error');
+                    if (existingError) {
+                        existingError.remove();
+                    }
+                }
+            }
+
+            getConnectionStatusText() {
+                switch (this.connectionStatus) {
+                    case 'connected':
+                        return 'Connected • Last sync: 2 min ago';
+                    case 'testing':
+                        return 'Testing connection...';
+                    case 'error':
+                        return 'Connection failed • Check server URL and token';
+                    default:
+                        return 'Not connected';
+                }
+            }
+
+            renderSync() {
+                this.container.innerHTML = `
+                    <h2 class="section-title">Sync</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Sync Interval</label>
+                        <select class="select-input">
+                            <option>Every 5 seconds</option>
+                            <option selected>Every 10 seconds</option>
+                            <option>Every 30 seconds</option>
+                            <option>Every minute</option>
+                        </select>
+                        <div class="form-hint">How often to check for changes from other devices</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Retry Strategy</label>
+                        <select class="select-input">
+                            <option selected>Exponential backoff</option>
+                            <option>Fixed interval</option>
+                            <option>Immediate retry</option>
+                        </select>
+                        <div class="form-hint">How to handle sync failures and network interruptions</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Offline Behavior</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox" checked>
+                            <label class="checkbox-label">Continue working offline when server unavailable</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox" checked>
+                            <label class="checkbox-label">Auto-sync when connection restored</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox">
+                            <label class="checkbox-label">Show notifications for sync events</label>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="save-button">
+                            💾 Save Settings
+                        </button>
+                    </div>
+                `;
+            }
+
+            renderData() {
+                this.container.innerHTML = `
+                    <h2 class="section-title">Data</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Storage Location</label>
+                        <div class="form-hint" style="margin-bottom: 12px;">Local extension data is stored in browser storage</div>
+                        <div style="font-family: monospace; font-size: 12px; color: #6b7280; background: #f9fafb; padding: 8px; border-radius: 4px;">
+                            ~/.config/google-chrome/Default/Local Extension Settings/...
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Data Usage</label>
+                        <div style="display: flex; gap: 16px; margin-bottom: 16px;">
+                            <div>
+                                <div style="font-size: 24px; font-weight: 600; color: #1f2937;">2.3 MB</div>
+                                <div style="font-size: 12px; color: #6b7280;">Local storage</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 24px; font-weight: 600; color: #1f2937;">847 KB</div>
+                                <div style="font-size: 12px; color: #6b7280;">Server storage</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">History Retention</label>
+                        <select class="select-input">
+                            <option>7 days</option>
+                            <option>30 days</option>
+                            <option selected>90 days</option>
+                            <option>1 year</option>
+                            <option>Forever</option>
+                        </select>
+                        <div class="form-hint">How long to keep sync history and recently closed tabs</div>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="test-button">
+                            📊 Export Data
+                        </button>
+                        <button class="save-button">
+                            💾 Save Settings
+                        </button>
+                    </div>
+
+                    <div class="danger-zone">
+                        <div class="danger-title">Danger Zone</div>
+                        <p style="font-size: 13px; color: #6b7280; margin: 0 0 16px 0;">
+                            These actions cannot be undone. Your data will be permanently deleted.
+                        </p>
+                        <div style="display: flex; gap: 12px;">
+                            <button class="danger-button">
+                                🗑️ Clear Local Data
+                            </button>
+                            <button class="danger-button">
+                                💣 Reset All Settings
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderAbout() {
+                this.container.innerHTML = `
+                    <h2 class="section-title">About</h2>
+
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+                        <div style="width: 48px; height: 48px; background: #6366f1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
+                            T
+                        </div>
+                        <div>
+                            <div style="font-size: 18px; font-weight: 600; color: #1f2937;">Tanaka</div>
+                            <div style="font-size: 14px; color: #6b7280;">Tab synchronization for Firefox</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Version Information</label>
+                        <div style="font-family: monospace; font-size: 13px; color: #374151; line-height: 1.6;">
+                            Extension: 0.5.0<br>
+                            Server API: v1.2<br>
+                            Browser: Firefox 126.0<br>
+                            Build: 2024-07-20 14:30:15
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Device Information</label>
+                        <div style="font-family: monospace; font-size: 13px; color: #374151; line-height: 1.6;">
+                            Device ID: laptop-work-2024<br>
+                            Platform: macOS 14.5<br>
+                            Connected since: 2024-07-15 09:00:00<br>
+                            Total syncs: 1,247
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Support</label>
+                        <div style="font-size: 13px; color: #6b7280; line-height: 1.6;">
+                            For help and documentation, visit the project repository or check the user guide.
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <button class="test-button" style="margin-right: 8px;">
+                                📖 User Guide
+                            </button>
+                            <button class="test-button" style="margin-right: 8px;">
+                                🐛 Report Issue
+                            </button>
+                            <button class="test-button">
+                                📧 Send Feedback
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">License</label>
+                        <div style="font-size: 13px; color: #6b7280;">
+                            Licensed under the MIT License. This software is provided as-is without warranty.
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize simulator
+        new SettingsSimulator();
+    </script>
+</body>
+</html>
