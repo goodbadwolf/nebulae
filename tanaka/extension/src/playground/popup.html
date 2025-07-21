@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="styles/design-system.css" />
     <style>
       /* Page-specific styles only */
+      .playground-title {
+        font-size: var(--text-4xl);
+        font-weight: 700;
+        margin: 0 0 var(--space-md) 0;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
       .popup-simulator {
         display: flex;
         gap: var(--space-3xl);
@@ -20,13 +30,19 @@
           align-items: center;
         }
       }
+
+      @media (max-width: 768px) {
+        .playground-title {
+          font-size: var(--text-3xl);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="simulator-container">
       <div class="simulator-header">
-        <h1 class="simulator-title">Popup Interface</h1>
-        <p class="simulator-subtitle">Interactive extension popup simulator with real-time state management</p>
+        <div class="app-logo app-logo--large">T</div>
+        <h1 class="playground-title">Popup Interface</h1>
       </div>
 
       <div class="simulator-controls">
@@ -114,7 +130,7 @@
           });
 
           // Set many workspaces by default to test scrolling
-          this.setWorkspaceCount(15);
+          this.setWorkspaceCount(2);
 
           // Search control
           const searchControl = document.getElementById("searchControl");
