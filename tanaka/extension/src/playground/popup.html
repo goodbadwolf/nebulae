@@ -31,11 +31,25 @@
         display: flex;
         gap: var(--space-3xl);
         align-items: flex-start;
-        justify-content: center;
       }
 
-      .simulator-controls {
+      .tnk-controls {
         flex-shrink: 0;
+      }
+
+      .tnk-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-lg);
+        margin-bottom: var(--space-2xl);
+      }
+
+      .tnk-header .playground-title {
+        margin: 0;
+      }
+
+      .tnk-header .app-logo {
+        margin: 0;
       }
 
       @media (max-width: var(--breakpoint-lg)) {
@@ -44,7 +58,7 @@
           align-items: center;
         }
 
-        .simulator-controls {
+        .tnk-controls {
           width: 100%;
           max-width: var(--settings-max-width);
         }
@@ -56,9 +70,11 @@
         }
       }
 
+      /* Popup-specific header styling - keep default left alignment */
+
       /* Phosphor icon adjustments for specific contexts */
-      .button .ph,
-      .button--icon .ph {
+      .btn .ph,
+      .btn--icon .ph {
         font-size: var(--icon-sz-2xl);
       }
 
@@ -80,8 +96,8 @@
     </style>
   </head>
   <body>
-    <div class="simulator-container">
-      <div class="simulator-header">
+    <div class="tnk-container">
+      <div class="tnk-header">
         <div class="app-logo app-logo--large">T</div>
         <h1 class="playground-title">Popup Interface</h1>
       </div>
@@ -93,7 +109,7 @@
           </div>
         </div>
 
-        <div class="simulator-controls">
+        <div class="tnk-controls">
           <div class="controls-row">
             <div class="control-group">
               <label class="control-label">State:</label>
@@ -217,9 +233,9 @@
 
         renderHeader() {
           return `
-                    <div class="popup-header">
+                    <div class="card__header">
                         <h1 class="page-title">Tanaka</h1>
-                        <button class="button--icon" aria-label="Settings"><i class="ph ph-gear"></i></button>
+                        <button class="btn btn--icon" aria-label="Settings"><i class="ph ph-gear"></i></button>
                     </div>
                 `;
         }
@@ -267,7 +283,7 @@
         renderLoading() {
           this.container.innerHTML = `
                     ${this.renderHeader()}
-                    <div class="popup-body">
+                    <div class="card__body">
                         <div class="empty-state">
                             <div class="animate-pulse"><i class="ph ph-arrow-clockwise ph-spin"></i></div>
                             <p class="mt-xs">Loading...</p>
@@ -279,20 +295,20 @@
         renderEmpty() {
           this.container.innerHTML = `
                     ${this.renderHeader()}
-                    <div class="popup-body">
+                    <div class="card__body">
                         <div class="empty-state">
                             <h3>Welcome to Tanaka!</h3>
                             <p>Track browser windows to sync<br>tabs across devices.</p>
                         </div>
-                        <div class="popup-section">
+                        <div class="content-section">
                             <h2 class="section-title">Current Window</h2>
-                            <button class="button button--primary w-full">
+                            <button class="btn btn--primary w-full">
                                 <i class="ph ph-play-circle"></i>
                                 Track as Workspace
                             </button>
                         </div>
-                        <div class="popup-section">
-                            <button class="button button--secondary w-full mb-sm">
+                        <div class="content-section">
+                            <button class="btn btn--secondary w-full mb-sm">
                                 <i class="ph ph-plus-circle"></i>
                                 New Workspace
                             </button>
@@ -304,11 +320,11 @@
         renderError() {
           this.container.innerHTML = `
                     ${this.renderHeader()}
-                    <div class="popup-body">
-                        <div class="popup-section bg-error-light border-error">
+                    <div class="card__body">
+                        <div class="content-section bg-error-light border-error">
                             <div class="text-error text-sm flex items-center gap-sm">
                                 <i class="ph ph-warning-circle"></i> Connection lost - working offline
-                                <button class="button button--secondary ml-auto py-xs px-sm text-xs">
+                                <button class="btn btn--secondary ml-auto py-xs px-sm text-xs">
                                     <i class="ph ph-arrow-clockwise"></i> Retry Now
                                 </button>
                             </div>
@@ -324,9 +340,9 @@
 
           this.container.innerHTML = `
                     ${this.renderHeader()}
-                    <div class="popup-body">
+                    <div class="card__body">
                         ${this.renderSearchBar()}
-                        <div class="popup-section">
+                        <div class="content-section">
                             <h2 class="section-title">Search Results</h2>
                             ${results.workspaces.length > 0 ? this.renderSearchResults(results) : this.renderNoResults()}
                         </div>
@@ -337,22 +353,22 @@
         renderNormal() {
           this.container.innerHTML = `
                     ${this.renderHeader()}
-                    <div class="popup-body">
+                    <div class="card__body">
                         ${this.renderSearchBar()}
                         ${this.renderWorkspaceList()}
-                        <div class="popup-section">
+                        <div class="content-section">
                             <h2 class="section-title">Current Window</h2>
-                            <button class="button button--primary w-full">
+                            <button class="btn btn--primary w-full">
                                 <i class="ph ph-play-circle"></i>
                                 Track as Workspace
                             </button>
                         </div>
-                        <div class="popup-section">
-                            <button class="button button--secondary w-full mb-sm">
+                        <div class="content-section">
+                            <button class="btn btn--secondary w-full mb-sm">
                                 <i class="ph ph-plus-circle"></i>
                                 New Workspace
                             </button>
-                            <button class="button button--secondary w-full">
+                            <button class="btn btn--secondary w-full">
                                 <i class="ph ph-list"></i>
                                 Manage Workspaces
                             </button>
@@ -363,7 +379,7 @@
 
         renderSearchBar() {
           return `
-                    <div class="popup-section">
+                    <div class="content-section">
                         <div class="search-container">
                             <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
                             <input type="text" class="search-input" id="popupSearchInput" placeholder="Search workspaces and tabs..." value="${this.searchQuery}" aria-label="Search workspaces and tabs">
@@ -401,8 +417,8 @@
                                 <div class="workspace-actions">
                                     ${
                                       isOpen
-                                        ? '<button class="button button--secondary">Switch to</button><button class="button button--secondary">Close</button>'
-                                        : '<button class="button button--secondary">Open</button>'
+                                        ? '<button class="btn btn--secondary">Switch to</button><button class="btn btn--secondary">Close</button>'
+                                        : '<button class="btn btn--secondary">Open</button>'
                                     }
                                 </div>
                             </div>
@@ -412,7 +428,7 @@
             .join("");
 
           return `
-                    <div class="popup-section">
+                    <div class="content-section">
                         <h2 class="section-title">My Workspaces</h2>
                         <div class="workspace-list">
                             ${workspaceItems}
