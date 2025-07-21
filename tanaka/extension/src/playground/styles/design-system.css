@@ -65,8 +65,10 @@
   --radius-full: 9999px;
 
   /* Dimensions */
-  --popup-width: 400px;
-  --popup-max-height: 600px;
+  --popup-width: 500px;
+  --popup-max-width: var(--popup-width);
+  --popup-height: 600px;
+  --popup-max-height: var(--popup-height);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -405,7 +407,9 @@ h4 {
 
 .extension-frame--popup {
   width: var(--popup-width);
-  height: var(--popup-max-height);
+  max-width: var(--popup-max-width);
+  height: var(--popup-height);
+  max-height: var(--popup-max-height);
   overflow: hidden;
 }
 
