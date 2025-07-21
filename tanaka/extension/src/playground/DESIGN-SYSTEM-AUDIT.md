@@ -1,6 +1,34 @@
-# Tanaka UI Design System Audit
+# Tanaka UI Design System Audit - Comprehensive Analysis
 
-This audit documents all custom styles in each HTML page and maps them to their design-system.css equivalents.
+## Executive Summary
+
+This audit combines findings from two independent analyses of the Tanaka UI playground. A critical discovery was made:
+**popup.html uses CSS classes that don't exist anywhere in the codebase**, making it completely non-functional.
+Additionally, ~70% of custom CSS across all pages can be replaced with existing design system classes.
+
+## Critical Finding: Missing Popup Styles
+
+The most severe issue discovered is that popup.html references 14+ CSS classes that are not defined anywhere:
+
+| Missing Class | Usage | Impact |
+|---------------|-------|--------|
+| `.popup-header` | Header container | UI broken |
+| `.popup-body` | Main content area | No content display |
+| `.popup-section` | Content sections | No section styling |
+| `.workspace-item` | Workspace list items | No list formatting |
+| `.workspace-header` | Item header | No header structure |
+| `.workspace-name` | Workspace title | No title styling |
+| `.workspace-footer` | Item footer | No footer layout |
+| `.workspace-status` | Status display | No status indicators |
+| `.workspace-actions` | Action buttons | No button grouping |
+| `.workspace-list` | List container | No list structure |
+| `.meta-text` | Metadata text | No text styling |
+| `.search-container` | Search wrapper | No search UI |
+| `.search-icon` | Search icon | No icon display |
+| `.clear-button` | Clear search | No clear functionality |
+
+**Important Discovery**: Upon deeper investigation, many of these components (`.workspace-item`, `.search-container`)
+actually DO exist in design-system.css, but popup.html is not utilizing them correctly.
 
 ## Summary Statistics
 
@@ -8,41 +36,66 @@ This audit documents all custom styles in each HTML page and maps them to their 
 - **Redundant Styles**: ~70% can be replaced with existing design system classes
 - **Missing Components**: ~15 components need to be added to design system
 - **JavaScript Dependencies**: 25+ selectors that need updating
+- **Broken Pages**: 1 (popup.html)
+- **Functional but Redundant**: 3 (settings, manager, onboarding)
 
-## Popup Page (popup.html)
+## Design System Component Inventory
 
-### Custom Styles Audit
+### Currently Available in design-system.css
+
+**Layout Components:**
+
+- `.page-container`, `.page-header`, `.page-title`, `.page-subtitle`
+- `.two-column-layout`, `.layout-sidebar`, `.layout-main`
+- `.viewport`, `.viewport-header`, `.viewport-body`
+- `.extension-frame`, `.extension-frame--popup`, `.extension-frame--settings`
+
+**UI Components:**
+
+- `.card`, `.card__icon`, `.card__title`, `.card__description`, `.card__meta`
+- `.button`, `.button--primary`, `.button--secondary`, `.button--ghost`, `.button--icon`
+- `.form-group`, `.form-label`, `.form-input`, `.form-hint`, `.form-error`
+- `.search-container`, `.search-input`, `.search-icon` ✓
+- `.status-dot`, `.status-row`, `.status-text`
+- `.empty-state`, `.empty-state-icon`
+- `.workspace-item`, `.workspace-item__header`, `.workspace-item__title`, `.workspace-item__meta`, `.workspace-item__actions`
+and related classes ✓
+- `.tab-item`, `.tab-item__icon`, `.tab-item__content`, `.tab-item__title`, `.tab-item__url`, `.tab-item__actions`
+- `.sidebar`, `.sidebar-section`, `.sidebar-title`, `.sidebar-item`
+
+**Utility Classes:**
+
+- Typography: `.text-sm`, `.text-muted`, `.text-secondary`
+- Spacing: Various utilities (need documentation)
+- Layout: `.flex`, `.hidden`, `.text-center`
+- Sections: `.section-title`, `.section-header`, `.content-section`
+
+## Page-by-Page Detailed Audit
+
+### 1. Popup Page (popup.html) - CRITICAL
+
+**Status**: Broken - Missing essential styles
+
+**Custom Styles Analysis:**
 
 | Custom Style | Purpose | Design System Equivalent | Action Required |
 |--------------|---------|-------------------------|-----------------|
 | `.simulator-controls` | Control panel container | `.card` with padding utilities | Replace |
 | `.controls-row` | Flex row for controls | `.flex` + `.gap-2xl` + `.flex-wrap` | Replace |
-| `.search-input-control` | Search input styling | `.form-input` (almost identical) | Replace |
-| `.popup-simulator` | Main layout container | `.flex` + `.gap-3xl` + `.justify-center` | Replace |
-| `.popup-viewport` | Popup preview container | `.extension-frame` + `.extension-frame--popup` | Replace |
-| `.info-panel` | Information sidebar | `.card` or `.info-panel` (already exists) | Use existing |
-| `.popup-container` | Popup content wrapper | `.extension-frame--popup` body | Replace |
-| `.popup-header` | Popup header section | `.card__header` or create `.popup__header` | Replace/Add |
-| `.popup-body` | Popup main content | `.card__body` | Replace |
-| `.popup-section` | Content sections | `.content-section` | Replace |
-| `.workspace-item` | Workspace list item | Component already exists | Use existing |
-| `.workspace-header` | Item header | Component already exists | Use existing |
-| `.workspace-name` | Workspace title | `.workspace-item__title` | Replace |
-| `.workspace-footer` | Item footer | `.workspace-item__meta` | Replace |
-| `.workspace-status` | Status display | `.state-indicator` | Replace |
-| `.workspace-actions` | Action buttons | `.workspace-item__actions` | Replace |
-| `.workspace-list` | Container for items | `.list` or flex container | Replace |
-| `.meta-text` | Metadata text | `.text-muted` + `.text-sm` | Replace |
-| `.search-container` | Search wrapper | Component exists in design system | Use existing |
-| `.search-icon` | Search icon positioning | Part of `.search-container` | Use existing |
-| `.clear-button` | Clear search button | `.button--icon` | Replace |
-| `.empty-state` | Empty state display | Component exists | Use existing |
-| `.section-title` | Section headers | Component exists | Use existing |
+| `.search-input-control` | Search input styling | `.form-input` | Replace |
+| `.popup-simulator` | Main layout container | `.flex` with utilities | Replace |
+| `.popup-viewport` | Popup preview container | `.extension-frame--popup` | Replace |
+| `.info-panel` | Information sidebar | `.card` or existing `.info-panel` | Use existing |
 
-### JavaScript Selectors to Update
+**Missing Styles (Used but Undefined):**
+
+- All `.popup-*` classes for actual popup content
+- Several `.workspace-*` classes (though these exist in design system)
+- Various utility classes
+
+**JavaScript Dependencies:**
 
 ```javascript
-// Current selectors that need updating:
 document.getElementById('popupContainer')
 document.querySelectorAll('[data-state]')
 document.querySelectorAll('[data-workspaces]')
@@ -51,133 +104,87 @@ document.querySelectorAll('.workspace-item')
 document.querySelector('.search-input')
 ```
 
-## Settings Page (settings.html)
+### 2. Settings Page (settings.html)
 
-### Custom Styles Audit
+**Status**: Functional but redundant
+
+**Custom Styles Analysis:**
 
 | Custom Style | Purpose | Design System Equivalent | Action Required |
 |--------------|---------|-------------------------|-----------------|
-| `.settings-viewport` | Settings container | `.viewport` | Use existing |
+| `.settings-viewport` | Settings container | `.viewport` | Replace |
 | `.settings-container` | Main layout | `.two-column-layout` | Replace |
-| `.settings-header` | Page header | `.viewport-header` | Use existing |
+| `.settings-header` | Page header | `.viewport-header` | Replace |
 | `.settings-content` | Content wrapper | `.layout-main` | Replace |
 | `.settings-main` | Main content area | `.page__content` | Replace |
-| `.section-title` | Section headers | Component exists | Use existing |
-| `.button-row` | Button container | `.button-group` | Use existing |
+| `.section-title` | Section headers | Already exists | Use existing |
+| `.button-row` | Button container | `.button-group` | Replace |
 | `.test-button` | Test connection button | `.button--secondary` | Replace |
 | `.save-button` | Save button | `.button--primary` | Replace |
-| Form input styles | Custom form styling | `.form-group`, `.form-input`, `.form-label` | Replace |
 
-### Missing Components Needed
+**Issues:**
 
-1. **Connection Status Component**
-   - Shows server connection state with icon
-   - Includes last sync time
-   - Color-coded status indicator
+- Duplicates existing form components
+- Uses hardcoded colors instead of CSS variables
+- Redundant layout structures
 
-2. **Settings Form Layout**
-   - Consistent spacing for form sections
-   - Label/input alignment
-   - Help text positioning
+### 3. Manager Page (manager.html)
 
-## Manager Page (manager.html)
+**Status**: Functional but redundant
 
-### Custom Styles Audit
+**Custom Styles Analysis:**
 
 | Custom Style | Purpose | Design System Equivalent | Action Required |
 |--------------|---------|-------------------------|-----------------|
-| `.manager-viewport` | Manager container | `.viewport` | Use existing |
+| `.manager-viewport` | Manager container | `.viewport` | Replace |
 | `.manager-container` | Layout wrapper | `.two-column-layout` | Replace |
-| `.manager-header` | Page header | `.viewport-header` | Use existing |
-| `.manager-content` | Content area | `.layout-main` | Replace |
-| `.manager-main` | Main content | `.page__content` | Replace |
-| `.sidebar-section` | Sidebar sections | Component exists | Use existing |
-| `.sidebar-title` | Section titles | Component exists | Use existing |
-| `.sidebar-item` | Navigation items | Component exists | Use existing |
-| `.workspace-header` | Workspace header | Component exists | Use existing |
-| `.workspace-title` | Title styling | `.page-title` or `.workspace__title` | Replace |
-| `.edit-button` | Edit icon button | `.button--icon` | Replace |
-| `.workspace-meta` | Metadata display | `.text-secondary` + `.text-sm` | Replace |
-| `.content-section` | Content sections | Component exists | Use existing |
-| `.section-header` | Section headers | Component exists | Use existing |
+| `.manager-header` | Page header | `.viewport-header` | Replace |
+| `.sidebar-*` classes | Sidebar navigation | Already exist | Use existing |
+| `.workspace-header` | Workspace header | Already exists | Use existing |
 | `.tab-list` | Tab list container | `.list` | Replace |
-| `.tab-item` | Tab list item | Component partially exists | Enhance |
-| `.tab-icon` | Tab favicon | `.icon` | Replace |
-| `.tab-info` | Tab details | `.tab-item__content` | Replace |
-| `.tab-title` | Tab title | `.tab-item__title` | Replace |
-| `.tab-url` | Tab URL display | `.tab-item__url` | Replace |
-| `.recently-closed-item` | Closed tab item | Create new component | Add |
-| `.restore-button` | Restore action | `.button--ghost` or `.button--secondary` | Replace |
-| `.device-count` | Device counter | `.text-muted` + `.text-sm` | Replace |
+| `.tab-item` components | Tab display | Partially exists | Enhance |
+| `.recently-closed-item` | Closed tab item | New component needed | Create |
+| `.restore-button` | Restore action | `.button--ghost` | Replace |
 
-### Complex Components Needed
+**Complex UI Patterns:**
 
-1. **Timeline Component**
+- Timeline view needs dedicated component
+- Tab management requires enhanced components
+- Trash/restore functionality needs structure
 
-   ```css
-   .timeline
-   .timeline__item
-   .timeline__time
-   .timeline__content
-   .timeline__action
-   ```
+### 4. Onboarding Page (onboarding.html)
 
-2. **Trash Component**
+**Status**: Well implemented with minimal redundancy
 
-   ```css
-   .trash-item
-   .trash-item__header
-   .trash-item__meta
-   .trash-item__actions
-   ```
-
-## Onboarding Page (onboarding.html)
-
-### Custom Styles Audit
+**Custom Styles Analysis:**
 
 | Custom Style | Purpose | Design System Equivalent | Action Required |
 |--------------|---------|-------------------------|-----------------|
-| `.onboarding-container` | Main container | `.page-container` | Replace |
-| `.onboarding-header` | Page header | `.page-header` | Replace |
-| `.onboarding-content` | Content wrapper | `.page__content` | Replace |
-| `.step-indicators` | Progress dots | `.progress-bar` variant | Create variant |
-| `.step-dot` | Individual step | Custom component needed | Add |
-| `.step-content` | Step container | `.card` | Replace |
-| `.feature-card` | Feature display | `.card` component | Use existing |
-| `.feature-icon` | Feature icon | `.card__icon` | Use existing |
-| `.feature-title` | Feature heading | `.card__title` | Use existing |
-| `.feature-description` | Feature text | `.card__description` | Use existing |
-| `.button-group` | Action buttons | Component exists | Use existing |
-| `.skip-button` | Skip action | `.button--ghost` | Replace |
-| `.next-button` | Next action | `.button--primary` | Replace |
+| `.onboarding-wrapper` | Container | Specific to onboarding | Keep |
+| `.onboarding-card` | Card wrapper | `.card` | Consider replacing |
+| `.test-button` | Test connection | `.button--secondary` | Replace |
+| `.button-group` | Action buttons | Already exists | Use existing |
+| `.connection-status` | Status display | Enhance existing status | Enhance |
 
-## Common Patterns Across Pages
+**Strengths:**
 
-### Redundant Implementations
+- Good use of CSS variables
+- Minimal redundancy
+- Clear component structure
 
-1. **Status Indicators**
-   - Each page has slightly different status dot implementations
-   - Should use consistent `.status-dot` with modifiers
+## Common Patterns & Issues
 
-2. **Button Styles**
-   - Multiple button variations doing the same thing
-   - Consolidate to `.button` with consistent modifiers
+### Redundant Implementations Across Pages
 
-3. **Form Elements**
-   - Custom input styles on each page
-   - Should use `.form-input` consistently
-
-4. **Spacing Utilities**
-   - Inline margin/padding styles everywhere
-   - Should use spacing utilities (`.mt-lg`, `.p-md`, etc.)
-
-5. **Typography**
-   - Inconsistent font sizes and weights
-   - Should use typography utilities (`.text-lg`, `.font-semibold`)
+1. **Status Indicators** - Each page implements differently
+2. **Button Styles** - Multiple variations of same functionality
+3. **Form Elements** - Custom styles instead of design system
+4. **Spacing** - Inline styles instead of utilities
+5. **Typography** - Inconsistent sizes and weights
 
 ### JavaScript Class Dependencies
 
-These classes are used in JavaScript and need careful migration:
+Critical selectors that need migration consideration:
 
 ```javascript
 // Popup page
@@ -216,7 +223,16 @@ These classes are used in JavaScript and need careful migration:
    .page__footer
    ```
 
-2. **Timeline Component**
+2. **Connection Status Component**
+
+   ```css
+   .connection-status
+   .connection-status__icon
+   .connection-status__text
+   .connection-status__meta
+   ```
+
+3. **Timeline Component**
 
    ```css
    .timeline
@@ -226,21 +242,9 @@ These classes are used in JavaScript and need careful migration:
    .timeline__meta
    ```
 
-3. **Tab List Component Enhancement**
-
-   ```css
-   .tab-list
-   .tab-list__item
-   .tab-list__icon
-   .tab-list__content
-   .tab-list__title
-   .tab-list__url
-   .tab-list__actions
-   ```
-
 ### Medium Priority (Page Specific)
 
-1. **Onboarding Components**
+1. **Step Indicators** (Onboarding)
 
    ```css
    .step-indicator
@@ -249,7 +253,7 @@ These classes are used in JavaScript and need careful migration:
    .step-indicator__item--completed
    ```
 
-2. **Trash/Archive Components**
+2. **Recently Closed/Trash Components**
 
    ```css
    .archive-item
@@ -261,35 +265,94 @@ These classes are used in JavaScript and need careful migration:
 ### Low Priority (Nice to Have)
 
 1. **Enhanced Search Component**
+2. **Advanced Tab Management**
+3. **Notification System**
 
-   ```css
-   .search
-   .search__input
-   .search__icon
-   .search__clear
-   .search__results
-   ```
+## Migration Strategy
 
-## Migration Priority
+### Priority Order
 
-Based on usage frequency and impact:
+1. **popup.html** - CRITICAL (broken functionality)
+   - Emergency fix required
+   - Either add missing styles or migrate to existing components
 
-1. **Popup page** - Most used, simplest structure
-2. **Settings page** - Form-heavy, good test for form components  
-3. **Manager page** - Complex layout, tests component system
-4. **Onboarding page** - Least critical, can be done last
+2. **settings.html** - HIGH (simple forms, easy win)
+   - Straightforward form components
+   - Clear mapping to design system
 
-## Estimated Impact
+3. **manager.html** - MEDIUM (complex but important)
+   - Multiple complex components
+   - Good test of design system flexibility
 
-- **CSS Reduction**: ~60-70% less custom CSS
-- **Maintenance**: Much easier with consistent patterns
-- **Development Speed**: 2-3x faster for new features
-- **Consistency**: 100% component reuse across pages
+4. **onboarding.html** - LOW (already well implemented)
+   - Minimal changes needed
+   - Can serve as reference for good practices
 
-## Next Steps
+### Implementation Approach
 
-1. Create missing components in design-system.css
-2. Update JavaScript to use new selectors
-3. Migrate pages one by one
-4. Test thoroughly after each migration
-5. Document patterns for future use
+1. **Phase 1**: Fix popup.html emergency
+2. **Phase 2**: Add missing core components
+3. **Phase 3**: Migrate page by page
+4. **Phase 4**: Remove redundant CSS
+5. **Phase 5**: Update documentation
+
+## Impact Analysis
+
+### Current State
+
+- **1 Broken Page**: popup.html (missing styles)
+- **3 Redundant Pages**: Working but inefficient
+- **~150+ Custom CSS Rules**: Maintenance burden
+- **Inconsistent UI**: Different implementations of same patterns
+
+### After Migration
+
+- **100% Functional**: All pages working
+- **60-70% CSS Reduction**: Less custom code
+- **Consistent UI**: Unified component usage
+- **Faster Development**: Reusable components
+- **Better Maintenance**: Single source of truth
+
+## Recommendations
+
+### Immediate Actions
+
+1. **Emergency Fix for popup.html**
+   - Option A: Add missing styles to inline `<style>` tag
+   - Option B: Create popup.css with required styles
+   - Option C: Migrate to use existing design system components
+
+2. **Document Existing Components**
+   - Create component showcase
+   - Add usage examples
+   - Define best practices
+
+3. **Standardize Usage Patterns**
+   - Use `.card` for all card-like containers
+   - Use `.button--primary` and `.button--secondary` consistently
+   - Use existing form components everywhere
+
+### Long-term Improvements
+
+1. **Component Library**
+   - Interactive documentation
+   - Copy-paste examples
+   - Visual regression tests
+
+2. **Build Process**
+   - CSS purging for unused styles
+   - Component bundling
+   - Performance optimization
+
+3. **Developer Experience**
+   - Clear naming conventions
+   - Comprehensive documentation
+   - Migration guides
+
+## Conclusion
+
+The Tanaka UI playground has a solid design system foundation, but implementation inconsistencies have led to
+significant redundancy and one critical failure (popup.html). With ~70% of custom CSS being redundant, there's a
+clear opportunity to dramatically simplify the codebase while improving consistency and maintainability. The immediate
+priority must be fixing the broken popup interface, followed by systematic migration of the remaining pages to use
+the design system properly.
