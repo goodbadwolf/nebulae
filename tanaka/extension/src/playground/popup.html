@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanaka Playground - Popup</title>
     <link rel="stylesheet" href="styles/design-system.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
     <style>
       /* Page-specific styles only */
       .playground-title {
@@ -28,7 +38,7 @@
         flex-shrink: 0;
       }
 
-      @media (max-width: 1200px) {
+      @media (max-width: var(--breakpoint-lg)) {
         .popup-layout {
           flex-direction: column;
           align-items: center;
@@ -36,14 +46,36 @@
 
         .simulator-controls {
           width: 100%;
-          max-width: 600px;
+          max-width: var(--settings-max-width);
         }
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: var(--breakpoint-md)) {
         .playground-title {
           font-size: var(--text-3xl);
         }
+      }
+
+      /* Phosphor icon adjustments for specific contexts */
+      .button .ph,
+      .button--icon .ph {
+        font-size: var(--icon-sz-2xl);
+      }
+
+      .search-icon .ph {
+        font-size: var(--icon-sz-md);
+      }
+
+      .clear-button .ph {
+        font-size: var(--icon-sz-sm);
+      }
+
+      .empty-state .ph {
+        font-size: var(--icon-sz-3xl);
+      }
+
+      .text-sm .ph {
+        font-size: var(--icon-sz-sm);
       }
     </style>
   </head>
@@ -187,7 +219,7 @@
           return `
                     <div class="popup-header">
                         <h1 class="page-title">Tanaka</h1>
-                        <button class="button--icon" aria-label="Settings"><span class="icon icon--gear"></span></button>
+                        <button class="button--icon" aria-label="Settings"><i class="ph ph-gear"></i></button>
                     </div>
                 `;
         }
@@ -237,7 +269,7 @@
                     ${this.renderHeader()}
                     <div class="popup-body">
                         <div class="empty-state">
-                            <div class="animate-pulse">🔄</div>
+                            <div class="animate-pulse"><i class="ph ph-arrow-clockwise ph-spin"></i></div>
                             <p class="mt-xs">Loading...</p>
                         </div>
                     </div>
@@ -255,13 +287,13 @@
                         <div class="popup-section">
                             <h2 class="section-title">Current Window</h2>
                             <button class="button button--primary w-full">
-                                <span class="icon icon--play-circle"></span>
+                                <i class="ph ph-play-circle"></i>
                                 Track as Workspace
                             </button>
                         </div>
                         <div class="popup-section">
                             <button class="button button--secondary w-full mb-sm">
-                                <span class="icon icon--plus-circle"></span>
+                                <i class="ph ph-plus-circle"></i>
                                 New Workspace
                             </button>
                         </div>
@@ -275,9 +307,9 @@
                     <div class="popup-body">
                         <div class="popup-section bg-error-light border-error">
                             <div class="text-error text-sm flex items-center gap-sm">
-                                ⚠️ Connection lost - working offline
+                                <i class="ph ph-warning-circle"></i> Connection lost - working offline
                                 <button class="button button--secondary ml-auto py-xs px-sm text-xs">
-                                    🔄 Retry Now
+                                    <i class="ph ph-arrow-clockwise"></i> Retry Now
                                 </button>
                             </div>
                         </div>
@@ -311,17 +343,17 @@
                         <div class="popup-section">
                             <h2 class="section-title">Current Window</h2>
                             <button class="button button--primary w-full">
-                                <span class="icon icon--play-circle"></span>
+                                <i class="ph ph-play-circle"></i>
                                 Track as Workspace
                             </button>
                         </div>
                         <div class="popup-section">
                             <button class="button button--secondary w-full mb-sm">
-                                <span class="icon icon--plus-circle"></span>
+                                <i class="ph ph-plus-circle"></i>
                                 New Workspace
                             </button>
                             <button class="button button--secondary w-full">
-                                <span class="icon icon--list-bullets"></span>
+                                <i class="ph ph-list"></i>
                                 Manage Workspaces
                             </button>
                         </div>
@@ -333,9 +365,9 @@
           return `
                     <div class="popup-section">
                         <div class="search-container">
-                            <span class="search-icon">🔍</span>
+                            <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
                             <input type="text" class="search-input" id="popupSearchInput" placeholder="Search workspaces and tabs..." value="${this.searchQuery}" aria-label="Search workspaces and tabs">
-                            ${this.searchQuery ? '<button class="clear-button" id="clearSearchBtn" aria-label="Clear search">✕</button>' : ""}
+                            ${this.searchQuery ? '<button class="clear-button" id="clearSearchBtn" aria-label="Clear search"><i class="ph ph-x"></i></button>' : ""}
                         </div>
                     </div>
                 `;
@@ -363,7 +395,7 @@
                             </div>
                             <div class="workspace-footer">
                                 <div class="workspace-status">
-                                    <span class="icon icon--${isOpen ? "folder-open" : "folder"}"></span>
+                                    <i class="ph ph-${isOpen ? "folder-open" : "folder"}"></i>
                                     <span class="ml-xs">${statusText}</span>
                                 </div>
                                 <div class="workspace-actions">
@@ -405,14 +437,14 @@
                             </div>
                             <div class="pl-lg mt-xs">
                                 <div class="workspace-status">
-                                    <span class="icon icon--${workspace.isOpen ? "folder-open" : "folder"}"></span>
+                                    <i class="ph ph-${workspace.isOpen ? "folder-open" : "folder"}"></i>
                                 </div>
                                 ${result.matchingTabs
                                   .slice(0, 3)
                                   .map(
                                     (tab) => `
                                     <div class="text-sm text-secondary my-2px pl-lg">
-                                        📄 ${this.escapeHtml(tab.title)}
+                                        <i class="ph ph-file-text"></i> ${this.escapeHtml(tab.title)}
                                     </div>
                                 `
                                   )
@@ -421,7 +453,7 @@
                                   totalCount > 3
                                     ? `
                                     <div class="text-sm text-secondary my-2px pl-lg">
-                                        ▼ Show ${totalCount - 3} more ... (${totalCount} total)
+                                        <i class="ph ph-caret-down"></i> Show ${totalCount - 3} more ... (${totalCount} total)
                                     </div>
                                 `
                                     : ""
