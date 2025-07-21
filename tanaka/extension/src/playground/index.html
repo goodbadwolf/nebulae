@@ -4,157 +4,68 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanaka Playground</title>
-    <link rel="stylesheet" href="styles/design-system.css" />
-    <style>
-      .playground-title {
-        font-size: var(--text-4xl);
-        font-weight: 700;
-        margin: 0 0 var(--space-md) 0;
-        background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .playground-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-        gap: var(--space-2xl);
-        margin-bottom: var(--space-4xl);
-      }
-
-      .playground-card {
-        position: relative;
-        text-decoration: none;
-        display: block;
-        background: var(--bg-primary);
-        border: 2px solid var(--border);
-        border-radius: var(--radius-2xl);
-        padding: var(--space-2xl);
-        transition: all var(--transition-base);
-        overflow: hidden;
-      }
-
-      .playground-card:hover {
-        border-color: var(--primary);
-        box-shadow: var(--shadow-lg);
-        transform: translateY(-4px);
-      }
-
-      .playground-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-        transform: scaleX(0);
-        transition: transform var(--transition-base);
-        transform-origin: left;
-      }
-
-      .playground-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      @media (max-width: 768px) {
-        .playground-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .playground-title {
-          font-size: var(--text-3xl);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles/design-system-v2.css" />
+    <link rel="stylesheet" href="styles/index.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
   </head>
-  <body class="body--large">
-    <div class="simulator-container u-max-width-lg">
-      <div class="simulator-header">
-        <div class="app-logo app-logo--large">T</div>
-        <h1 class="playground-title">Tanaka Playground</h1>
-        <p class="simulator-subtitle">Interactive UI components and design system showcase</p>
+  <body>
+    <div class="tnk-playground-container">
+      <div class="tnk-playground-container__header">
+        <div class="tnk-logo tnk-logo--large">T</div>
+        <h1 class="tnk-playground-container__title">Tanaka Playground</h1>
       </div>
 
-      <div class="playground-grid">
-        <a href="popup" class="playground-card">
-          <div class="card__icon">🪟</div>
-          <h3 class="card__title">Popup Interface</h3>
-          <p class="card__description">
-            Main extension popup with workspace management, search functionality, and real-time sync status.
-          </p>
-          <div class="card__meta">
-            <span class="meta-badge">320×480px</span>
-            <span class="meta-badge">Interactive</span>
-          </div>
-        </a>
+      <div class="tnk-playground-pages-section">
+        <h2 class="tnk-playground-pages-section__title">Extension Pages</h2>
+        <div class="tnk-playground-pages-grid">
+          <a href="welcome" class="tnk-playground-card">
+            <div class="tnk-playground-card__header">
+              <div class="tnk-playground-card__icon"><i class="tnk-icon tnk-icon--3xl ph ph-rocket-launch"></i></div>
+              <h3 class="tnk-playground-card__title">Welcome Page</h3>
+            </div>
+            <p class="tnk-playground-card__description">
+              First-run setup experience with step-by-step guidance for device and server configuration.
+            </p>
+          </a>
 
-        <a href="manager" class="playground-card">
-          <div class="card__icon">📊</div>
-          <h3 class="card__title">Manager Tab</h3>
-          <p class="card__description">
-            Full workspace manager with detailed tab lists, recently closed items, and device management.
-          </p>
-          <div class="card__meta">
-            <span class="meta-badge">Full page</span>
-            <span class="meta-badge">Multi-state</span>
-          </div>
-        </a>
+          <a href="settings" class="tnk-playground-card">
+            <div class="tnk-playground-card__header">
+              <div class="tnk-playground-card__icon"><i class="tnk-icon tnk-icon--3xl ph ph-gear"></i></div>
+              <h3 class="tnk-playground-card__title">Settings Page</h3>
+            </div>
+            <p class="tnk-playground-card__description">
+              Extension configuration including server connection, device naming, and sync preferences.
+            </p>
+          </a>
 
-        <a href="settings" class="playground-card">
-          <div class="card__icon">⚙️</div>
-          <h3 class="card__title">Settings Page</h3>
-          <p class="card__description">
-            Extension configuration including server connection, device naming, and sync preferences.
-          </p>
-          <div class="card__meta">
-            <span class="meta-badge">Full page</span>
-            <span class="meta-badge">Form validation</span>
-          </div>
-        </a>
+          <a href="popup" class="tnk-playground-card">
+            <div class="tnk-playground-card__header">
+              <div class="tnk-playground-card__icon"><i class="tnk-icon tnk-icon--3xl ph ph-app-window"></i></div>
+              <h3 class="tnk-playground-card__title">Popup Interface</h3>
+            </div>
+            <p class="tnk-playground-card__description">
+              Main extension popup with workspace management, search functionality, and real-time sync status.
+            </p>
+          </a>
 
-        <a href="onboarding" class="playground-card">
-          <div class="card__icon">🚀</div>
-          <h3 class="card__title">Onboarding Flow</h3>
-          <p class="card__description">
-            First-run setup experience with step-by-step guidance for device and server configuration.
-          </p>
-          <div class="card__meta">
-            <span class="meta-badge">Multi-step</span>
-            <span class="meta-badge">Progressive</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="info-panel">
-        <div class="info-panel__header">
-          <div class="info-panel__icon">ℹ️</div>
-          <h2 class="info-title">About This Playground</h2>
-        </div>
-        <div class="info-content">
-          <p>
-            This playground showcases the <strong>Tanaka design system</strong> and interactive UI components. Each demo
-            includes multiple states (loading, empty, error, populated) with realistic mock data to validate the
-            workspace-centric model and clean aesthetic.
-          </p>
-        </div>
-        <div class="quick-links">
-          <h3>Quick Links</h3>
-          <div class="link-list">
-            <a href="#" class="link-item">
-              <span>📚</span>
-              <span>Design System Docs</span>
-            </a>
-            <a href="#" class="link-item">
-              <span>🎨</span>
-              <span>Color Palette</span>
-            </a>
-            <a href="#" class="link-item">
-              <span>📐</span>
-              <span>Component Guidelines</span>
-            </a>
-          </div>
+          <a href="manager" class="tnk-playground-card">
+            <div class="tnk-playground-card__header">
+              <div class="tnk-playground-card__icon"><i class="tnk-icon tnk-icon--3xl ph ph-kanban"></i></div>
+              <h3 class="tnk-playground-card__title">Manager Tab</h3>
+            </div>
+            <p class="tnk-playground-card__description">
+              Full workspace manager with detailed tab lists, recently closed items, and device management.
+            </p>
+          </a>
         </div>
       </div>
     </div>
