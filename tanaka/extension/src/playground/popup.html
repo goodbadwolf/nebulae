@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanaka Playground - Popup</title>
-    <link rel="stylesheet" href="styles/design-system.css" />
+    <link rel="stylesheet" href="styles/design-system-v2.css" />
+    <link rel="stylesheet" href="styles/popup.css" />
     <link
       rel="stylesheet"
       type="text/css"
@@ -15,129 +16,66 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
     />
-    <style>
-      /* Page-specific styles only */
-      .playground-title {
-        font-size: var(--text-4xl);
-        font-weight: 700;
-        margin: 0 0 var(--space-md) 0;
-        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .popup-layout {
-        display: flex;
-        gap: var(--space-3xl);
-        align-items: flex-start;
-      }
-
-      .tnk-controls {
-        flex-shrink: 0;
-      }
-
-      .tnk-header {
-        display: flex;
-        align-items: center;
-        gap: var(--space-lg);
-        margin-bottom: var(--space-2xl);
-      }
-
-      .tnk-header .playground-title {
-        margin: 0;
-      }
-
-      .tnk-header .app-logo {
-        margin: 0;
-      }
-
-      @media (max-width: var(--breakpoint-lg)) {
-        .popup-layout {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .tnk-controls {
-          width: 100%;
-          max-width: var(--settings-max-width);
-        }
-      }
-
-      @media (max-width: var(--breakpoint-md)) {
-        .playground-title {
-          font-size: var(--text-3xl);
-        }
-      }
-
-      /* Popup-specific header styling - keep default left alignment */
-
-      /* Phosphor icon adjustments for specific contexts */
-      .btn .ph,
-      .btn--icon .ph {
-        font-size: var(--icon-sz-2xl);
-      }
-
-      .search-icon .ph {
-        font-size: var(--icon-sz-md);
-      }
-
-      .clear-button .ph {
-        font-size: var(--icon-sz-sm);
-      }
-
-      .empty-state .ph {
-        font-size: var(--icon-sz-3xl);
-      }
-
-      .text-sm .ph {
-        font-size: var(--icon-sz-sm);
-      }
-    </style>
   </head>
   <body>
-    <div class="tnk-container">
-      <div class="tnk-header">
-        <div class="app-logo app-logo--large">T</div>
-        <h1 class="playground-title">Popup Interface</h1>
+    <div class="tnk-playground-container">
+      <div class="tnk-playground-container__header">
+        <div class="tnk-logo tnk-logo--large">T</div>
+        <h1 class="tnk-playground-container__title">Popup Interface</h1>
       </div>
 
-      <div class="popup-layout">
-        <div class="extension-frame extension-frame--popup">
-          <div class="popup-container" id="popupContainer">
+      <div class="tnk-playground-container__layout">
+        <div class="tnk-playground-page-frame">
+          <div class="tnk-popup-container" id="popupContainer">
             <!-- Popup content will be rendered here -->
           </div>
         </div>
 
-        <div class="tnk-controls">
-          <div class="controls-row">
-            <div class="control-group">
-              <label class="control-label">State:</label>
-              <button class="state-button active" data-state="normal" aria-pressed="true">Normal</button>
-              <button class="state-button" data-state="loading" aria-pressed="false">Loading</button>
-              <button class="state-button" data-state="empty" aria-pressed="false">Empty</button>
-              <button class="state-button" data-state="error" aria-pressed="false">Error</button>
-              <button class="state-button" data-state="searching" aria-pressed="false">Searching</button>
+        <div class="tnk-playground__controls">
+          <div class="tnk-controls">
+            <div class="tnk-controls__row">
+              <div class="tnk-controls__group">
+                <label class="tnk-controls__label">State:</label>
+                <button
+                  class="tnk-controls__button tnk-controls__button--active"
+                  data-state="normal"
+                  aria-pressed="true"
+                >
+                  Normal
+                </button>
+                <button class="tnk-controls__button" data-state="loading" aria-pressed="false">Loading</button>
+                <button class="tnk-controls__button" data-state="empty" aria-pressed="false">Empty</button>
+                <button class="tnk-controls__button" data-state="error" aria-pressed="false">Error</button>
+                <button class="tnk-controls__button" data-state="searching" aria-pressed="false">Searching</button>
+              </div>
             </div>
-          </div>
-          <div class="controls-row">
-            <div class="control-group flex-1">
-              <label class="control-label">Search:</label>
-              <input
-                type="text"
-                class="control-input"
-                id="searchControl"
-                placeholder="Enter search term..."
-                aria-label="Search term"
-              />
+            <div class="tnk-controls__row">
+              <div class="tnk-controls__group tnk-controls__group--full">
+                <label class="tnk-controls__label">Search:</label>
+                <input
+                  type="text"
+                  class="tnk-controls__input"
+                  id="searchControl"
+                  placeholder="Enter search term..."
+                  aria-label="Search term"
+                />
+              </div>
             </div>
-          </div>
-          <div class="controls-row">
-            <div class="control-group">
-              <label class="control-label">Workspaces:</label>
-              <button class="state-button" data-workspaces="3" aria-pressed="false">3 workspaces</button>
-              <button class="state-button" data-workspaces="0" aria-pressed="false">No workspaces</button>
-              <button class="state-button" data-workspaces="15" aria-pressed="true">Many workspaces</button>
+            <div class="tnk-controls__row">
+              <div class="tnk-controls__group">
+                <label class="tnk-controls__label">Workspaces:</label>
+                <button
+                  class="tnk-controls__button tnk-controls__button--active"
+                  data-num-workspaces="3"
+                  aria-pressed="false"
+                >
+                  3 workspaces
+                </button>
+                <button class="tnk-controls__button" data-num-workspaces="0" aria-pressed="false">No workspaces</button>
+                <button class="tnk-controls__button" data-num-workspaces="15" aria-pressed="true">
+                  Many workspaces
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -163,23 +101,23 @@
           document.querySelectorAll("[data-state]").forEach((btn) => {
             btn.addEventListener("click", () => {
               document.querySelectorAll("[data-state]").forEach((b) => {
-                b.classList.remove("active");
+                b.classList.remove("tnk-controls__button--active");
                 b.setAttribute("aria-pressed", "false");
               });
-              btn.classList.add("active");
+              btn.classList.add("tnk-controls__button--active");
               btn.setAttribute("aria-pressed", "true");
               this.setState(btn.dataset.state);
             });
           });
 
           // Workspace count buttons
-          document.querySelectorAll("[data-workspaces]").forEach((btn) => {
+          document.querySelectorAll("[data-num-workspaces]").forEach((btn) => {
             btn.addEventListener("click", () => {
-              document.querySelectorAll("[data-workspaces]").forEach((b) => {
-                b.classList.remove("active");
+              document.querySelectorAll("[data-num-workspaces]").forEach((b) => {
+                b.classList.remove("tnk-controls__button--active");
                 b.setAttribute("aria-pressed", "false");
               });
-              btn.classList.add("active");
+              btn.classList.add("tnk-controls__button--active");
               btn.setAttribute("aria-pressed", "true");
               const count = parseInt(btn.dataset.workspaces);
               this.setWorkspaceCount(count);
@@ -187,7 +125,7 @@
           });
 
           // Set many workspaces by default to test scrolling
-          this.setWorkspaceCount(2);
+          this.setWorkspaceCount(3);
 
           // Search control
           const searchControl = document.getElementById("searchControl");
@@ -233,11 +171,11 @@
 
         renderHeader() {
           return `
-                    <div class="card__header">
-                        <h1 class="page-title">Tanaka</h1>
-                        <button class="btn btn--icon" aria-label="Settings"><i class="ph ph-gear"></i></button>
-                    </div>
-                `;
+            <div class="tnk-popup-container__header">
+              <h1 class="tnk-popup-container__title">Tanaka</h1>
+              <button class="tnk-btn tnk-btn--icon tnk-btn--icon-popup" aria-label="Settings"><i class="tnk-icon ph ph-gear"></i></button>
+            </div>
+          `;
         }
 
         render() {
@@ -282,111 +220,114 @@
 
         renderLoading() {
           this.container.innerHTML = `
-                    ${this.renderHeader()}
-                    <div class="card__body">
-                        <div class="empty-state">
-                            <div class="animate-pulse"><i class="ph ph-arrow-clockwise ph-spin"></i></div>
-                            <p class="mt-xs">Loading...</p>
-                        </div>
-                    </div>
-                `;
+            ${this.renderHeader()}
+            <div class="tnk-popup-container__body">
+              <div class="tnk-empty-state tnk-empty-state--loading">
+                <div class="tnk-empty-state__icon tnk-empty-state__icon--loading">
+                  <i class="tnk-empty-state__icon--spinning tnk-icon tnk-icon--3xl tnk-icon--spinning ph ph-arrow-clockwise"></i>
+                </div>
+                <p class="tnk-empty-state__description">Loading...</p>
+              </div>
+            </div>
+          `;
         }
 
         renderEmpty() {
           this.container.innerHTML = `
-                    ${this.renderHeader()}
-                    <div class="card__body">
-                        <div class="empty-state">
-                            <h3>Welcome to Tanaka!</h3>
-                            <p>Track browser windows to sync<br>tabs across devices.</p>
-                        </div>
-                        <div class="content-section">
-                            <h2 class="section-title">Current Window</h2>
-                            <button class="btn btn--primary w-full">
-                                <i class="ph ph-play-circle"></i>
-                                Track as Workspace
-                            </button>
-                        </div>
-                        <div class="content-section">
-                            <button class="btn btn--secondary w-full mb-sm">
-                                <i class="ph ph-plus-circle"></i>
-                                New Workspace
-                            </button>
-                        </div>
-                    </div>
-                `;
+            ${this.renderHeader()}
+            <div class="tnk-popup-container__body">
+              <div class="tnk-empty-state">
+                <h3 class="tnk-empty-state__title">Welcome to Tanaka!</h3>
+                <p class="tnk-empty-state__description">Track browser windows to sync<br>tabs across devices.</p>
+              </div>
+              <div class="tnk-popup-container__section">
+                <h2 class="tnk-popup-container__section-title">Current Window</h2>
+                <button class="tnk-btn tnk-btn--primary tnk-btn--full-width tnk-btn--popup">
+                  <i class="tnk-icon ph ph-play-circle"></i>
+                  Track as Workspace
+                </button>
+              </div>
+              <div class="tnk-popup-container__section">
+                <button class="tnk-btn tnk-btn--secondary tnk-btn--full-width tnk-btn--popup tnk-popup-container__section-button">
+                  <i class="tnk-icon ph ph-plus-circle"></i>
+                  New Workspace
+                </button>
+              </div>
+            </div>
+          `;
         }
 
         renderError() {
           this.container.innerHTML = `
-                    ${this.renderHeader()}
-                    <div class="card__body">
-                        <div class="content-section bg-error-light border-error">
-                            <div class="text-error text-sm flex items-center gap-sm">
-                                <i class="ph ph-warning-circle"></i> Connection lost - working offline
-                                <button class="btn btn--secondary ml-auto py-xs px-sm text-xs">
-                                    <i class="ph ph-arrow-clockwise"></i> Retry Now
-                                </button>
-                            </div>
-                        </div>
-                        ${this.renderSearchBar()}
-                        ${this.renderWorkspaceList(true)}
-                    </div>
-                `;
+            ${this.renderHeader()}
+            <div class="tnk-popup-container__body">
+              <div class="tnk-popup-container__section tnk-popup-container__section--error">
+                <div class="tnk-error-banner">
+                  <i class="tnk-error-banner__icon tnk-icon ph ph-warning-circle"></i>
+                  <span class="tnk-error-banner__message">Connection lost - working offline</span>
+                  <button class="tnk-btn tnk-btn--secondary tnk-btn--popup tnk-error-banner__action">
+                    <i class="tnk-icon ph ph-arrow-clockwise"></i> Retry Now
+                  </button>
+                </div>
+              </div>
+              ${this.renderSearchBar()}
+              ${this.renderWorkspaceList(true)}
+            </div>
+          `;
         }
 
         renderSearch() {
           const results = _mockSearchResults[this.searchQuery.toLowerCase()] || { workspaces: [] };
 
           this.container.innerHTML = `
-                    ${this.renderHeader()}
-                    <div class="card__body">
-                        ${this.renderSearchBar()}
-                        <div class="content-section">
-                            <h2 class="section-title">Search Results</h2>
-                            ${results.workspaces.length > 0 ? this.renderSearchResults(results) : this.renderNoResults()}
-                        </div>
-                    </div>
-                `;
+            ${this.renderHeader()}
+            <div class="tnk-popup-container__body">
+              ${this.renderSearchBar()}
+              <div class="tnk-popup-container__section">
+                <h2 class="tnk-popup-container__section-title">Search Results</h2>
+                ${results.workspaces.length > 0 ? this.renderSearchResults(results) : this.renderNoResults()}
+              </div>
+            </div>
+          `;
         }
 
         renderNormal() {
           this.container.innerHTML = `
-                    ${this.renderHeader()}
-                    <div class="card__body">
-                        ${this.renderSearchBar()}
-                        ${this.renderWorkspaceList()}
-                        <div class="content-section">
-                            <h2 class="section-title">Current Window</h2>
-                            <button class="btn btn--primary w-full">
-                                <i class="ph ph-play-circle"></i>
-                                Track as Workspace
-                            </button>
-                        </div>
-                        <div class="content-section">
-                            <button class="btn btn--secondary w-full mb-sm">
-                                <i class="ph ph-plus-circle"></i>
-                                New Workspace
-                            </button>
-                            <button class="btn btn--secondary w-full">
-                                <i class="ph ph-list"></i>
-                                Manage Workspaces
-                            </button>
-                        </div>
-                    </div>
-                `;
+            ${this.renderHeader()}
+            <div class="tnk-popup-container__body">
+              ${this.renderSearchBar()}
+              ${this.renderWorkspaceList()}
+              <div class="tnk-popup-container__section">
+                <h2 class="tnk-popup-container__section-title">Current Window</h2>
+                <button class="tnk-btn tnk-btn--primary tnk-btn--full-width tnk-btn--popup">
+                  <i class="tnk-icon ph ph-play-circle"></i>
+                  Track as Workspace
+                </button>
+              </div>
+              <div class="tnk-popup-container__section">
+                <button class="tnk-btn tnk-btn--secondary tnk-btn--full-width tnk-btn--popup tnk-popup-container__section-button">
+                  <i class="tnk-icon ph ph-plus-circle"></i>
+                  New Workspace
+                </button>
+                <button class="tnk-btn tnk-btn--secondary tnk-btn--full-width tnk-btn--popup">
+                  <i class="tnk-icon ph ph-list"></i>
+                  Manage Workspaces
+                </button>
+              </div>
+            </div>
+          `;
         }
 
         renderSearchBar() {
           return `
-                    <div class="content-section">
-                        <div class="search-container">
-                            <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
-                            <input type="text" class="search-input" id="popupSearchInput" placeholder="Search workspaces and tabs..." value="${this.searchQuery}" aria-label="Search workspaces and tabs">
-                            ${this.searchQuery ? '<button class="clear-button" id="clearSearchBtn" aria-label="Clear search"><i class="ph ph-x"></i></button>' : ""}
-                        </div>
-                    </div>
-                `;
+            <div class="tnk-popup-container__section">
+              <div class="tnk-search">
+                <i class="tnk-search__icon tnk-icon ph ph-magnifying-glass"></i>
+                <input type="text" class="tnk-search__input tnk-search__input--popup" id="popupSearchInput" placeholder="Search workspaces and tabs..." value="${this.searchQuery}" aria-label="Search workspaces and tabs">
+                ${this.searchQuery ? '<button class="tnk-btn tnk-search__clear" id="clearSearchBtn" aria-label="Clear search"><i class="tnk-icon ph ph-x"></i></button>' : ""}
+              </div>
+            </div>
+          `;
         }
 
         renderWorkspaceList(isOffline = false) {
@@ -403,38 +344,38 @@
               const isOpen = Boolean(workspace.isOpen);
 
               return `
-                        <div class="workspace-item">
-                            <div class="workspace-header">
-                                <span class="status-dot status-dot--${statusClass}"></span>
-                                <h3 class="workspace-name">${this.escapeHtml(workspace.name)}</h3>
-                                <span class="meta-text">${tabCount} tabs</span>
-                            </div>
-                            <div class="workspace-footer">
-                                <div class="workspace-status">
-                                    <i class="ph ph-${isOpen ? "folder-open" : "folder"}"></i>
-                                    <span class="ml-xs">${statusText}</span>
-                                </div>
-                                <div class="workspace-actions">
-                                    ${
-                                      isOpen
-                                        ? '<button class="btn btn--secondary">Switch to</button><button class="btn btn--secondary">Close</button>'
-                                        : '<button class="btn btn--secondary">Open</button>'
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                <div class="tnk-workspace">
+                  <div class="tnk-workspace__header">
+                    <span class="tnk-status-indicator tnk-status-indicator--${statusClass}"></span>
+                    <div class="tnk-workspace__name">${this.escapeHtml(workspace.name)}</div>
+                    <span class="tnk-workspace__meta">${tabCount} tabs</span>
+                  </div>
+                  <div class="tnk-workspace__footer">
+                    <div class="tnk-workspace__status">
+                      <i class="tnk-icon ph ph-${isOpen ? "folder-open" : "folder"}"></i>
+                      <span class="tnk-workspace__status-text">${statusText}</span>
+                    </div>
+                    <div class="tnk-workspace__actions">
+                      ${
+                        isOpen
+                          ? '<button class="tnk-btn tnk-btn--secondary tnk-btn--popup tnk-workspace__action-btn">Switch to</button><button class="tnk-btn tnk-btn--secondary tnk-btn--popup tnk-workspace__action-btn">Close</button>'
+                          : '<button class="tnk-btn tnk-btn--secondary tnk-btn--popup tnk-workspace__action-btn">Open</button>'
+                      }
+                    </div>
+                  </div>
+                </div>
+              `;
             })
             .join("");
 
           return `
-                    <div class="content-section">
-                        <h2 class="section-title">My Workspaces</h2>
-                        <div class="workspace-list">
-                            ${workspaceItems}
-                        </div>
-                    </div>
-                `;
+            <div class="tnk-popup-container__section">
+              <h2 class="tnk-popup-container__section-title">My Workspaces</h2>
+              <div class="tnk-workspace-list tnk-workspace-list--popup">
+                ${workspaceItems}
+              </div>
+            </div>
+          `;
         }
 
         renderSearchResults(results) {
@@ -445,48 +386,48 @@
               const totalCount = result.totalTabs || matchCount;
 
               return `
-                        <div class="workspace-item">
-                            <div class="workspace-header">
-                                <span class="status-dot status-dot--${workspace.status}"></span>
-                                <h3 class="workspace-name">${this.escapeHtml(workspace.name)}</h3>
-                                <span class="meta-text">${matchCount} matching tab${matchCount !== 1 ? "s" : ""}</span>
-                            </div>
-                            <div class="pl-lg mt-xs">
-                                <div class="workspace-status">
-                                    <i class="ph ph-${workspace.isOpen ? "folder-open" : "folder"}"></i>
-                                </div>
-                                ${result.matchingTabs
-                                  .slice(0, 3)
-                                  .map(
-                                    (tab) => `
-                                    <div class="text-sm text-secondary my-2px pl-lg">
-                                        <i class="ph ph-file-text"></i> ${this.escapeHtml(tab.title)}
-                                    </div>
-                                `
-                                  )
-                                  .join("")}
-                                ${
-                                  totalCount > 3
-                                    ? `
-                                    <div class="text-sm text-secondary my-2px pl-lg">
-                                        <i class="ph ph-caret-down"></i> Show ${totalCount - 3} more ... (${totalCount} total)
-                                    </div>
-                                `
-                                    : ""
-                                }
-                            </div>
+                <div class="tnk-workspace-result">
+                  <div class="tnk-workspace-result__header">
+                    <span class="tnk-status-indicator tnk-status-indicator--${workspace.status}"></span>
+                    <h3 class="tnk-workspace-result__name">${this.escapeHtml(workspace.name)}</h3>
+                    <span class="tnk-workspace-result__meta">${matchCount} matching tab${matchCount !== 1 ? "s" : ""}</span>
+                  </div>
+                  <div class="tnk-workspace-result__details">
+                    <div class="tnk-workspace-result__status">
+                      <i class="tnk-icon ph ph-${workspace.isOpen ? "folder-open" : "folder"}"></i>
+                    </div>
+                    ${result.matchingTabs
+                      .slice(0, 3)
+                      .map(
+                        (tab) => `
+                        <div class="tnk-workspace-result__tab-item">
+                          <i class="tnk-icon ph ph-file-text"></i> ${this.escapeHtml(tab.title)}
                         </div>
-                    `;
+                      `
+                      )
+                      .join("")}
+                    ${
+                      totalCount > 3
+                        ? `
+                        <div class="tnk-workspace-result__more">
+                          <i class="tnk-icon ph ph-caret-down"></i> Show ${totalCount - 3} more ... (${totalCount} total)
+                        </div>
+                      `
+                        : ""
+                    }
+                  </div>
+                </div>
+              `;
             })
             .join("");
         }
 
         renderNoResults() {
           return `
-                    <div class="empty-state">
-                        <h3>No results found for<br>"${this.escapeHtml(this.searchQuery)}"</h3>
-                    </div>
-                `;
+            <div class="tnk-empty-state">
+              <h3 class="tnk-empty-state__title">No results found for<br>"${this.escapeHtml(this.searchQuery)}"</h3>
+            </div>
+          `;
         }
       }
 
