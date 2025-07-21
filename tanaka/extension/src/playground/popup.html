@@ -1,295 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanaka Popup - Playground</title>
-    <link rel="stylesheet" href="styles/design-system.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tanaka Playground - Popup</title>
+    <link rel="stylesheet" href="styles/design-system.css" />
     <style>
-        /* Using shared classes from design-system.css */
+      /* Page-specific styles only */
+      .popup-simulator {
+        display: flex;
+        gap: var(--space-3xl);
+        align-items: flex-start;
+        justify-content: center;
+      }
 
-        .simulator-controls {
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-xl);
-            margin-bottom: var(--space-3xl);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .controls-row {
-            display: flex;
-            gap: var(--space-2xl);
-            align-items: center;
-            margin-bottom: var(--space-lg);
-            flex-wrap: wrap;
-        }
-
-        .controls-row:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Using shared control-group and control-label from design-system.css */
-
-        /* Using shared state-button from design-system.css */
-
-        .search-input-control {
-            padding: var(--space-sm) var(--space-md);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-md);
-            font-size: var(--text-sm);
-            width: 200px;
-            background: var(--bg-primary);
-            transition: border-color var(--transition-fast);
-        }
-
-        .search-input-control:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
+      @media (max-width: 1024px) {
         .popup-simulator {
-            display: flex;
-            gap: var(--space-3xl);
-            align-items: flex-start;
-            justify-content: center;
+          flex-direction: column;
+          align-items: center;
         }
-
-        .popup-viewport {
-            border: 2px solid var(--border);
-            border-radius: var(--radius-2xl);
-            background: var(--bg-primary);
-            box-shadow: var(--shadow-2xl);
-            overflow: hidden;
-        }
-
-        .info-panel {
-            flex: 1;
-            max-width: 400px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
-            font-size: var(--text-base);
-        }
-
-        /* Using shared info-section, info-title, info-content, code-snippet, and state-indicator from design-system.css */
-
-        @media (max-width: 1024px) {
-            .popup-simulator {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .info-panel {
-                max-width: 100%;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="simulator-container">
-        <div class="simulator-header">
-            <h1 class="simulator-title">Popup Interface</h1>
-            <p class="simulator-subtitle">Interactive extension popup simulator with real-time state management</p>
+      <div class="simulator-header">
+        <h1 class="simulator-title">Popup Interface</h1>
+        <p class="simulator-subtitle">Interactive extension popup simulator with real-time state management</p>
+      </div>
+
+      <div class="simulator-controls">
+        <div class="controls-row">
+          <div class="control-group">
+            <label class="control-label">State:</label>
+            <button class="state-button active" data-state="normal">Normal</button>
+            <button class="state-button" data-state="loading">Loading</button>
+            <button class="state-button" data-state="empty">Empty</button>
+            <button class="state-button" data-state="error">Error</button>
+            <button class="state-button" data-state="searching">Searching</button>
+          </div>
         </div>
-
-        <div class="simulator-controls">
-            <div class="controls-row">
-                <div class="control-group">
-                    <label class="control-label">State:</label>
-                    <button class="state-button active" data-state="normal">Normal</button>
-                    <button class="state-button" data-state="loading">Loading</button>
-                    <button class="state-button" data-state="empty">Empty</button>
-                    <button class="state-button" data-state="error">Error</button>
-                    <button class="state-button" data-state="searching">Searching</button>
-                </div>
-            </div>
-            <div class="controls-row">
-                <div class="control-group">
-                    <label class="control-label">Search:</label>
-                    <input type="text" class="search-input-control" id="searchControl" placeholder="Enter search term...">
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Workspaces:</label>
-                    <button class="state-button" data-workspaces="3">3 workspaces</button>
-                    <button class="state-button" data-workspaces="0">No workspaces</button>
-                    <button class="state-button" data-workspaces="15">Many workspaces</button>
-                </div>
-            </div>
+        <div class="controls-row">
+          <div class="control-group flex-1">
+            <label class="control-label">Search:</label>
+            <input type="text" class="control-input" id="searchControl" placeholder="Enter search term..." />
+          </div>
         </div>
-
-        <div class="popup-simulator">
-            <div class="popup-viewport">
-                <div class="popup-container" id="popupContainer">
-                    <!-- Popup content will be rendered here -->
-                </div>
-            </div>
-
-            <div class="info-panel">
-                <div class="info-section">
-                    <h3 class="info-title">
-                        <span>📋</span>
-                        <span>Implementation Details</span>
-                    </h3>
-                    <p class="info-content">
-                        This popup simulator demonstrates the workspace-centric design with real-time state management
-                        and responsive interactions.
-                    </p>
-                    <div class="code-snippet">Viewport: 320×480px (max)</div>
-                </div>
-
-                <div class="info-section">
-                    <h3 class="info-title">
-                        <span>✨</span>
-                        <span>Key Features</span>
-                    </h3>
-                    <ul class="info-content" style="margin: 0; padding-left: var(--space-xl); line-height: 1.8;">
-                        <li>Workspace list with live status indicators</li>
-                        <li>Instant search filtering</li>
-                        <li>Context-aware actions (Open/Switch/Close)</li>
-                        <li>Graceful error handling</li>
-                        <li>Empty state guidance</li>
-                    </ul>
-                </div>
-
-                <div class="info-section">
-                    <h3 class="info-title">
-                        <span>🎨</span>
-                        <span>Status Indicators</span>
-                    </h3>
-                    <div style="display: flex; flex-direction: column; gap: var(--space-sm);">
-                        <div class="state-indicator">
-                            <span class="state-dot" style="background: var(--success);"></span>
-                            <span>Synced - All changes saved</span>
-                        </div>
-                        <div class="state-indicator">
-                            <span class="state-dot" style="background: var(--warning);"></span>
-                            <span>Syncing - Updates in progress</span>
-                        </div>
-                        <div class="state-indicator">
-                            <span class="state-dot" style="background: var(--error);"></span>
-                            <span>Error - Connection issue</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <h3 class="info-title">
-                        <span>🔧</span>
-                        <span>Try These Actions</span>
-                    </h3>
-                    <p class="info-content">
-                        • Change states to see different UI modes<br>
-                        • Type in the search box to filter workspaces<br>
-                        • Hover over workspaces for interactive feedback<br>
-                        • Click workspace actions to see tooltips
-                    </p>
-                </div>
-            </div>
+        <div class="controls-row">
+          <div class="control-group">
+            <label class="control-label">Workspaces:</label>
+            <button class="state-button" data-workspaces="3">3 workspaces</button>
+            <button class="state-button" data-workspaces="0">No workspaces</button>
+            <button class="state-button" data-workspaces="15">Many workspaces</button>
+          </div>
         </div>
+      </div>
+
+      <div class="popup-simulator">
+        <div class="extension-frame extension-frame--popup">
+          <div class="popup-container" id="popupContainer">
+            <!-- Popup content will be rendered here -->
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="mock-data.js"></script>
     <script>
+      class PopupSimulator extends _SimulatorState {
+        constructor() {
+          super();
+          this.container = document.getElementById("popupContainer");
+          this.setupControls();
+          this.render();
+        }
 
-        class PopupSimulator extends _SimulatorState {
-            constructor() {
-                super();
-                this.container = document.getElementById('popupContainer');
-                this.setupControls();
-                this.render();
-            }
+        setupControls() {
+          // State buttons
+          document.querySelectorAll("[data-state]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document.querySelectorAll("[data-state]").forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              this.setState(btn.dataset.state);
+            });
+          });
 
-            setupControls() {
-                // State buttons
-                document.querySelectorAll('[data-state]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('[data-state]').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.setState(btn.dataset.state);
-                    });
-                });
+          // Workspace count buttons
+          document.querySelectorAll("[data-workspaces]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document.querySelectorAll("[data-workspaces]").forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              const count = parseInt(btn.dataset.workspaces);
+              this.setWorkspaceCount(count);
+            });
+          });
 
-                // Workspace count buttons
-                document.querySelectorAll('[data-workspaces]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('[data-workspaces]').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        const count = parseInt(btn.dataset.workspaces);
-                        this.setWorkspaceCount(count);
-                    });
-                });
+          // Set many workspaces by default to test scrolling
+          this.setWorkspaceCount(15);
 
-                // Search control
-                const searchControl = document.getElementById('searchControl');
-                searchControl.addEventListener('input', (e) => {
-                    this.setSearchQuery(e.target.value);
-                });
-            }
+          // Search control
+          const searchControl = document.getElementById("searchControl");
+          searchControl.addEventListener("input", (e) => {
+            this.setSearchQuery(e.target.value);
+          });
+        }
 
-            setWorkspaceCount(count) {
-                if (count === 0) {
-                    this.workspaces = [];
-                    this.setState('empty');
-                } else if (count === 15) {
-                    // Generate many workspaces
-                    this.workspaces = [
-                        ...mockWorkspaces,
-                        ...Array.from({length: 12}, (_, i) => ({
-                            id: `workspace-${i + 4}`,
-                            name: `Project ${i + 4}`,
-                            tabCount: Math.floor(Math.random() * 20) + 1,
-                            status: ['synced', 'syncing', 'error'][Math.floor(Math.random() * 3)],
-                            isOpen: Math.random() > 0.5,
-                            lastChange: `${Math.floor(Math.random() * 60) + 1}m ago`
-                        }))
-                    ];
-                    this.setState('normal');
-                } else {
-                    this.workspaces = mockWorkspaces.slice(0, count);
-                    this.setState('normal');
-                }
-            }
+        setWorkspaceCount(count) {
+          if (count === 0) {
+            this.workspaces = [];
+            this.setState("empty");
+          } else if (count === 15) {
+            // Generate many workspaces
+            this.workspaces = [
+              ...mockWorkspaces,
+              ...Array.from({ length: 12 }, (_, i) => ({
+                id: `workspace-${i + 4}`,
+                name: `Project ${i + 4}`,
+                tabCount: Math.floor(Math.random() * 20) + 1,
+                status: ["synced", "syncing", "error"][Math.floor(Math.random() * 3)],
+                isOpen: Math.random() > 0.5,
+                lastChange: `${Math.floor(Math.random() * 60) + 1}m ago`,
+              })),
+            ];
+            this.setState("normal");
+          } else {
+            this.workspaces = mockWorkspaces.slice(0, count);
+            this.setState("normal");
+          }
+        }
 
-            render() {
-                switch (this.currentState) {
-                    case 'loading':
-                        this.renderLoading();
-                        break;
-                    case 'empty':
-                        this.renderEmpty();
-                        break;
-                    case 'error':
-                        this.renderError();
-                        break;
-                    case 'searching':
-                        this.renderSearch();
-                        break;
-                    default:
-                        this.renderNormal();
-                }
-            }
+        render() {
+          switch (this.currentState) {
+            case "loading":
+              this.renderLoading();
+              break;
+            case "empty":
+              this.renderEmpty();
+              break;
+            case "error":
+              this.renderError();
+              break;
+            case "searching":
+              this.renderSearch();
+              break;
+            default:
+              this.renderNormal();
+          }
+        }
 
-            renderLoading() {
-                this.container.innerHTML = `
+        renderLoading() {
+          this.container.innerHTML = `
                     <div class="popup-header">
-                        <h1 style="font: var(--font-header); margin: 0;">Tanaka</h1>
+                        <h1 class="page-title">Tanaka</h1>
                         <button class="button--icon"><span class="icon icon--gear"></span></button>
                     </div>
                     <div class="popup-body">
                         <div class="empty-state">
-                            <div style="animation: pulse 2s ease-in-out infinite;">🔄</div>
-                            <p style="margin-top: 8px;">Loading...</p>
+                            <div class="animate-pulse">🔄</div>
+                            <p class="mt-xs">Loading...</p>
                         </div>
                     </div>
                 `;
-            }
+        }
 
-            renderEmpty() {
-                this.container.innerHTML = `
+        renderEmpty() {
+          this.container.innerHTML = `
                     <div class="popup-header">
-                        <h1 style="font: var(--font-header); margin: 0;">Tanaka</h1>
+                        <h1 class="page-title">Tanaka</h1>
                         <button class="button--icon"><span class="icon icon--gear"></span></button>
                     </div>
                     <div class="popup-body">
@@ -300,105 +177,112 @@
                     </div>
                     <div class="popup-section">
                         <h2 class="section-title">Current Window</h2>
-                        <button class="button button--primary" style="width: 100%;">
+                        <button class="button button--primary w-full">
                             <span class="icon icon--play-circle"></span>
                             Track as Workspace
                         </button>
                     </div>
                     <div class="popup-section">
-                        <button class="button button--secondary" style="width: 100%; margin-bottom: 8px;">
+                        <button class="button button--secondary w-full mb-sm">
                             <span class="icon icon--plus-circle"></span>
                             New Workspace
                         </button>
                     </div>
                 `;
-            }
+        }
 
-            renderError() {
-                this.container.innerHTML = `
+        renderError() {
+          this.container.innerHTML = `
                     <div class="popup-header">
-                        <h1 style="font: var(--font-header); margin: 0;">Tanaka</h1>
+                        <h1 class="page-title">Tanaka</h1>
                         <button class="button--icon"><span class="icon icon--gear"></span></button>
                     </div>
-                    <div class="popup-section" style="background: #fef2f2; border-color: #fecaca;">
-                        <div style="color: #dc2626; font: var(--font-small); display: flex; align-items: center; gap: 8px;">
-                            ⚠️ Connection lost - working offline
-                            <button class="button button--secondary" style="margin-left: auto; padding: 4px 8px; font-size: 11px;">
-                                🔄 Retry Now
+                    <div class="popup-body">
+                        <div class="popup-section bg-error-light border-error">
+                            <div class="text-error text-sm flex items-center gap-sm">
+                                ⚠️ Connection lost - working offline
+                                <button class="button button--secondary ml-auto py-xs px-sm text-xs">
+                                    🔄 Retry Now
+                                </button>
+                            </div>
+                        </div>
+                        ${this.renderSearchBar()}
+                        ${this.renderWorkspaceList(true)}
+                    </div>
+                `;
+        }
+
+        renderSearch() {
+          const results = _mockSearchResults[this.searchQuery.toLowerCase()] || { workspaces: [] };
+
+          this.container.innerHTML = `
+                    <div class="popup-header">
+                        <h1 class="page-title">Tanaka</h1>
+                        <button class="button--icon"><span class="icon icon--gear"></span></button>
+                    </div>
+                    <div class="popup-body">
+                        ${this.renderSearchBar()}
+                        <div class="popup-section">
+                            <h2 class="section-title">Search Results</h2>
+                            ${results.workspaces.length > 0 ? this.renderSearchResults(results) : this.renderNoResults()}
+                        </div>
+                    </div>
+                `;
+        }
+
+        renderNormal() {
+          this.container.innerHTML = `
+                    <div class="popup-header">
+                        <h1 class="page-title">Tanaka</h1>
+                        <button class="button--icon"><span class="icon icon--gear"></span></button>
+                    </div>
+                    <div class="popup-body">
+                        ${this.renderSearchBar()}
+                        ${this.renderWorkspaceList()}
+                        <div class="popup-section">
+                            <h2 class="section-title">Current Window</h2>
+                            <button class="button button--primary w-full">
+                                <span class="icon icon--play-circle"></span>
+                                Track as Workspace
+                            </button>
+                        </div>
+                        <div class="popup-section">
+                            <button class="button button--secondary w-full mb-sm">
+                                <span class="icon icon--plus-circle"></span>
+                                New Workspace
+                            </button>
+                            <button class="button button--secondary w-full">
+                                <span class="icon icon--list-bullets"></span>
+                                Manage Workspaces
                             </button>
                         </div>
                     </div>
-                    ${this.renderSearchBar()}
-                    ${this.renderWorkspaceList(true)}
                 `;
-            }
+        }
 
-            renderSearch() {
-                const results = _mockSearchResults[this.searchQuery.toLowerCase()] || { workspaces: [] };
-
-                this.container.innerHTML = `
-                    <div class="popup-header">
-                        <h1 style="font: var(--font-header); margin: 0;">Tanaka</h1>
-                        <button class="button--icon"><span class="icon icon--gear"></span></button>
-                    </div>
-                    ${this.renderSearchBar()}
-                    <div class="popup-section">
-                        <h2 class="section-title">Search Results</h2>
-                        ${results.workspaces.length > 0 ? this.renderSearchResults(results) : this.renderNoResults()}
-                    </div>
-                `;
-            }
-
-            renderNormal() {
-                this.container.innerHTML = `
-                    <div class="popup-header">
-                        <h1 style="font: var(--font-header); margin: 0;">Tanaka</h1>
-                        <button class="button--icon"><span class="icon icon--gear"></span></button>
-                    </div>
-                    ${this.renderSearchBar()}
-                    ${this.renderWorkspaceList()}
-                    <div class="popup-section">
-                        <h2 class="section-title">Current Window</h2>
-                        <button class="button button--primary" style="width: 100%;">
-                            <span class="icon icon--play-circle"></span>
-                            Track as Workspace
-                        </button>
-                    </div>
-                    <div class="popup-section">
-                        <button class="button button--secondary" style="width: 100%; margin-bottom: 8px;">
-                            <span class="icon icon--plus-circle"></span>
-                            New Workspace
-                        </button>
-                        <button class="button button--secondary" style="width: 100%;">
-                            <span class="icon icon--list-bullets"></span>
-                            Manage Workspaces
-                        </button>
-                    </div>
-                `;
-            }
-
-            renderSearchBar() {
-                return `
+        renderSearchBar() {
+          return `
                     <div class="popup-section">
                         <div class="search-container">
                             <span class="search-icon">🔍</span>
                             <input type="text" class="search-input" placeholder="Search workspaces and tabs..." value="${this.searchQuery}">
-                            ${this.searchQuery ? '<button class="clear-button">✕</button>' : ''}
+                            ${this.searchQuery ? '<button class="clear-button">✕</button>' : ""}
                         </div>
                     </div>
                 `;
-            }
+        }
 
-            renderWorkspaceList(isOffline = false) {
-                if (this.workspaces.length === 0) {
-                    return this.renderEmpty();
-                }
+        renderWorkspaceList(isOffline = false) {
+          if (this.workspaces.length === 0) {
+            return this.renderEmpty();
+          }
 
-                const workspaceItems = this.workspaces.map(workspace => {
-                    const statusText = isOffline ? 'Connection lost' : workspace.lastChange;
-                    const statusClass = isOffline ? 'error' : workspace.status;
+          const workspaceItems = this.workspaces
+            .map((workspace) => {
+              const statusText = isOffline ? "Connection lost" : workspace.lastChange;
+              const statusClass = isOffline ? "error" : workspace.status;
 
-                    return `
+              return `
                         <div class="workspace-item">
                             <div class="workspace-header">
                                 <span class="status-dot status-dot--${statusClass}"></span>
@@ -407,11 +291,12 @@
                             </div>
                             <div class="workspace-footer">
                                 <div class="workspace-status">
-                                    <span class="icon icon--${workspace.isOpen ? 'folder-open' : 'folder'}"></span>
-                                    <span style="margin-left: 4px;">${statusText}</span>
+                                    <span class="icon icon--${workspace.isOpen ? "folder-open" : "folder"}"></span>
+                                    <span class="ml-xs">${statusText}</span>
                                 </div>
                                 <div class="workspace-actions">
-                                    ${workspace.isOpen
+                                    ${
+                                      workspace.isOpen
                                         ? '<button class="button button--secondary">Switch to</button><button class="button button--secondary">Close</button>'
                                         : '<button class="button button--secondary">Open</button>'
                                     }
@@ -419,9 +304,10 @@
                             </div>
                         </div>
                     `;
-                }).join('');
+            })
+            .join("");
 
-                return `
+          return `
                     <div class="popup-section">
                         <h2 class="section-title">My Workspaces</h2>
                         <div class="workspace-list">
@@ -429,52 +315,63 @@
                         </div>
                     </div>
                 `;
-            }
+        }
 
-            renderSearchResults(results) {
-                return results.workspaces.map(result => {
-                    const workspace = result.workspace;
-                    const matchCount = result.matchingTabs.length;
-                    const totalCount = result.totalTabs || matchCount;
+        renderSearchResults(results) {
+          return results.workspaces
+            .map((result) => {
+              const workspace = result.workspace;
+              const matchCount = result.matchingTabs.length;
+              const totalCount = result.totalTabs || matchCount;
 
-                    return `
+              return `
                         <div class="workspace-item">
                             <div class="workspace-header">
                                 <span class="status-dot status-dot--${workspace.status}"></span>
                                 <h3 class="workspace-name">${workspace.name}</h3>
-                                <span class="meta-text">${matchCount} matching tab${matchCount !== 1 ? 's' : ''}</span>
+                                <span class="meta-text">${matchCount} matching tab${matchCount !== 1 ? "s" : ""}</span>
                             </div>
-                            <div style="padding-left: 16px; margin-top: 4px;">
+                            <div class="pl-lg mt-xs">
                                 <div class="workspace-status">
-                                    <span class="icon icon--${workspace.isOpen ? 'folder-open' : 'folder'}"></span>
+                                    <span class="icon icon--${workspace.isOpen ? "folder-open" : "folder"}"></span>
                                 </div>
-                                ${result.matchingTabs.slice(0, 3).map(tab => `
-                                    <div style="font: var(--font-small); color: var(--color-text-secondary); margin: 2px 0; padding-left: 16px;">
+                                ${result.matchingTabs
+                                  .slice(0, 3)
+                                  .map(
+                                    (tab) => `
+                                    <div class="text-sm text-secondary my-2px pl-lg">
                                         📄 ${tab.title}
                                     </div>
-                                `).join('')}
-                                ${totalCount > 3 ? `
-                                    <div style="font: var(--font-small); color: var(--color-text-secondary); margin: 2px 0; padding-left: 16px;">
+                                `
+                                  )
+                                  .join("")}
+                                ${
+                                  totalCount > 3
+                                    ? `
+                                    <div class="text-sm text-secondary my-2px pl-lg">
                                         ▼ Show ${totalCount - 3} more ... (${totalCount} total)
                                     </div>
-                                ` : ''}
+                                `
+                                    : ""
+                                }
                             </div>
                         </div>
                     `;
-                }).join('');
-            }
+            })
+            .join("");
+        }
 
-            renderNoResults() {
-                return `
+        renderNoResults() {
+          return `
                     <div class="empty-state">
                         <h3>No results found for<br>"${this.searchQuery}"</h3>
                     </div>
                 `;
-            }
         }
+      }
 
-        // Initialize simulator
-        new PopupSimulator();
+      // Initialize simulator
+      new PopupSimulator();
     </script>
-</body>
+  </body>
 </html>
