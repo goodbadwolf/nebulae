@@ -402,7 +402,6 @@ h4 {
   box-shadow: var(--shadow-xl);
   overflow: hidden;
   max-width: 400px;
-  margin: 0 auto;
 }
 
 .extension-frame--popup {
