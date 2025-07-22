@@ -215,7 +215,7 @@ h3 {
 /* ===== Playground Block ===== */
 .tnk-playground-container {
   max-width: var(--tnk-container-max-width);
-  margin: var(--tnk-space-6xl) auto;
+  margin: var(--tnk-space-3xl) auto;
 }
 
 .tnk-playground-container__header {
@@ -247,12 +247,76 @@ h3 {
   align-items: flex-start;
 }
 
-.tnk-playground-page-frame {
-  background: var(--tnk-bg-primary);
-  border: var(--tnk-border-width) solid var(--tnk-border);
-  border-radius: var(--tnk-radius-2xl);
+/* Browser window container */
+.tnk-browser-window {
+  border-radius: var(--tnk-radius-lg);
   box-shadow: var(--tnk-shadow-xl);
   overflow: hidden;
+  background: var(--tnk-bg-secondary);
+  height: 860px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Browser tab bar */
+.tnk-browser-window__tab-bar {
+  height: 40px;
+  background: var(--tnk-bg-secondary);
+  display: flex;
+  align-items: flex-end;
+  padding: 0 0;
+  gap: var(--tnk-space-xs);
+}
+
+.tnk-browser-window__tab {
+  height: 36px;
+  padding: 0 var(--tnk-space-lg);
+  background: var(--tnk-bg-primary);
+  border-radius: var(--tnk-radius-md) var(--tnk-radius-md) 0 0;
+  display: flex;
+  align-items: center;
+  font-size: var(--tnk-text-sm);
+  color: var(--tnk-text-primary);
+  font-weight: var(--tnk-font-weight-medium);
+  position: relative;
+  bottom: -1px;
+}
+
+/* Browser controls bar */
+.tnk-browser-window__controls {
+  height: 40px;
+  background: var(--tnk-bg-primary);
+  border-bottom: var(--tnk-border-width) solid var(--tnk-border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--tnk-space-md);
+  gap: var(--tnk-space-xs);
+}
+
+.tnk-browser-window__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--tnk-radius-full);
+  background: var(--tnk-border);
+}
+
+.tnk-browser-window__dot:nth-child(1) {
+  background: #ff5f57;
+}
+
+.tnk-browser-window__dot:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.tnk-browser-window__dot:nth-child(3) {
+  background: #28ca42;
+}
+
+/* Page content frame */
+.tnk-playground-page-frame {
+  background: var(--tnk-bg-primary);
+  flex: 1;
+  overflow: auto;
 }
 
 .tnk-btn {
@@ -423,6 +487,12 @@ h3 {
 
 .tnk-logo:hover::after {
   animation: shine var(--tnk-animation-duration-fast) ease-in-out;
+}
+
+.tnk-logo--medium {
+  width: var(--tnk-logo-size-md);
+  height: var(--tnk-logo-size-md);
+  font-size: var(--tnk-text-2xl);
 }
 
 .tnk-logo--large {

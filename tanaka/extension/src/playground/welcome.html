@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tanaka Welcome</title>
+    <link rel="stylesheet" href="styles/design-system-v2.css" />
+    <link rel="stylesheet" href="styles/welcome.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
+  </head>
+  <body>
+    <div class="tnk-playground-container">
+      <div class="tnk-playground-container__header">
+        <div class="tnk-logo tnk-logo--large">T</div>
+        <h1 class="tnk-playground-container__title">Welcome</h1>
+      </div>
+
+      <div class="tnk-playground-container__layout">
+        <div class="tnk-browser-window">
+          <div class="tnk-browser-window__tab-bar">
+            <div class="tnk-browser-window__tab">Welcome to Tanaka</div>
+          </div>
+          <div class="tnk-browser-window__controls">
+            <div class="tnk-browser-window__dot"></div>
+            <div class="tnk-browser-window__dot"></div>
+            <div class="tnk-browser-window__dot"></div>
+          </div>
+          <div class="tnk-playground-page-frame">
+            <div class="tnk-welcome-container">
+          <div class="tnk-welcome-card">
+            <div class="tnk-progress">
+              <div class="tnk-progress__bar" id="progressBar"></div>
+            </div>
+            <div class="tnk-welcome-card__content" id="welcomeContent">
+              <!-- Content will be rendered here -->
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class WelcomeSimulator {
+        constructor() {
+          this.currentStep = 0;
+          this.totalSteps = 4;
+          this.connectionStatus = null;
+          this.testResults = null;
+          this.formData = {
+            deviceName: "",
+            serverUrl: "",
+            authToken: "",
+          };
+          this.container = document.getElementById("welcomeContent");
+          this.progressBar = document.getElementById("progressBar");
+          this.isFirstRender = true;
+          this.render();
+        }
+
+        updateProgress() {
+          const progress = (this.currentStep / (this.totalSteps - 1)) * 100;
+          this.progressBar.style.setProperty('width', `${progress}%`);
+        }
+
+        render() {
+          this.updateProgress();
+
+          // Skip animation on first render
+          if (this.isFirstRender) {
+            this.isFirstRender = false;
+            this.renderContent();
+            return;
+          }
+
+          // Add fade out class
+          this.container.classList.add('tnk-welcome-card__content--fade-out');
+
+          // Wait for fade out, then render new content
+          setTimeout(() => {
+            this.renderContent();
+
+            // Remove fade out and add fade in
+            this.container.classList.remove('tnk-welcome-card__content--fade-out');
+            this.container.classList.add('tnk-welcome-card__content--fade-in');
+
+            // Remove fade in class after animation completes
+            setTimeout(() => {
+              this.container.classList.remove('tnk-welcome-card__content--fade-in');
+            }, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tnk-welcome-fadeout-delay')));
+          }, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tnk-welcome-render-delay')));
+        }
+
+        renderContent() {
+          switch (this.currentStep) {
+            case 0:
+              this.renderWelcome();
+              break;
+            case 1:
+              this.renderDeviceName();
+              break;
+            case 2:
+              this.renderServerConfig();
+              break;
+            case 3:
+              this.renderComplete();
+              break;
+          }
+        }
+
+        renderWelcome() {
+          this.container.innerHTML = `
+                    <div class="tnk-welcome-hero">
+                        <div class="tnk-logo tnk-logo--medium">T</div>
+                        <h1 class="tnk-welcome-hero__title">Welcome to Tanaka</h1>
+                        <p class="tnk-welcome-hero__subtitle">
+                            Your personal tab synchronization service
+                        </p>
+                    </div>
+
+                    <div class="tnk-step-content">
+                        <!-- Empty content area for consistent spacing -->
+                    </div>
+
+                    <div class="tnk-button-group">
+                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()">
+                            Get Started <i class="tnk-icon ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+        }
+
+        renderDeviceName() {
+          this.container.innerHTML = `
+                    <div class="tnk-welcome-hero">
+                        <h2 class="tnk-step-header">
+                            <span class="tnk-step-header__number">1</span>
+                            Name Your Device
+                        </h2>
+                    </div>
+
+                    <div class="tnk-step-content">
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Device Name
+                            </label>
+                            <div class="tnk-form-group__input-wrapper">
+                                <input type="text"
+                                       class="tnk-form-group__input"
+                                       id="deviceNameInput"
+                                       placeholder="e.g., Work Laptop, Home Desktop, iPhone"
+                                       value="${this.formData.deviceName}">
+                                <i class="tnk-icon ph ph-check-circle tnk-form-group__indicator" id="deviceNameIndicator"></i>
+                            </div>
+                            <div class="tnk-form-group__hint">
+                                Choose a memorable name to identify this device in your sync history
+                            </div>
+
+                            <div class="tnk-input-preview tnk-input-preview--hidden" id="devicePreview">
+                                <div class="tnk-input-preview__label">This will appear as:</div>
+                                <strong id="devicePreviewText"></strong> synced 2 tabs just now
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tnk-button-group">
+                        <button class="tnk-btn tnk-btn--secondary" onclick="simulator.previousStep()">
+                            <i class="tnk-icon ph ph-arrow-left"></i> Back
+                        </button>
+                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()" id="deviceNextBtn" disabled>
+                            Next <i class="tnk-icon ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+
+          this.setupDeviceNameHandlers();
+        }
+
+        renderServerConfig() {
+          this.container.innerHTML = `
+                    <div class="tnk-welcome-hero">
+                        <h2 class="tnk-step-header">
+                            <span class="tnk-step-header__number">2</span>
+                            Connect to Server
+                        </h2>
+                    </div>
+
+                    <div class="tnk-step-content">
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Server URL
+                            </label>
+                            <div class="tnk-form-group__input-wrapper">
+                                <input type="text"
+                                       class="tnk-form-group__input"
+                                       id="serverUrlInput"
+                                       placeholder="https://tanaka.example.com:8443"
+                                       value="${this.formData.serverUrl}">
+                                <i class="tnk-icon ph ph-check-circle tnk-form-group__indicator" id="serverUrlIndicator"></i>
+                            </div>
+                            <div class="tnk-form-group__hint">
+                                The address of your Tanaka server (must include http:// or https://)
+                            </div>
+                        </div>
+
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Authentication Token
+                            </label>
+                            <div class="tnk-form-group__input-wrapper">
+                                <input type="password"
+                                       class="tnk-form-group__input"
+                                       id="authTokenInput"
+                                       placeholder="Paste your token here"
+                                       value="${this.formData.authToken}">
+                                <i class="tnk-icon ph ph-check-circle tnk-form-group__indicator" id="authTokenIndicator"></i>
+                            </div>
+                        </div>
+
+                        <div class="tnk-connection-test">
+                            <button class="tnk-test-button" onclick="simulator.testConnection()" id="testBtn">
+                                <i class="tnk-icon ph ph-plug"></i> Test Connection
+                            </button>
+                            <div id="connectionStatus"></div>
+                        </div>
+                    </div>
+
+                    <div class="tnk-button-group">
+                        <button class="tnk-btn tnk-btn--secondary" onclick="simulator.previousStep()">
+                            <i class="tnk-icon ph ph-arrow-left"></i> Back
+                        </button>
+                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()" id="serverNextBtn" disabled>
+                            Complete Setup <i class="tnk-icon ph ph-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+
+          this.setupServerHandlers();
+        }
+
+        renderComplete() {
+          this.container.innerHTML = `
+                    <div class="tnk-welcome-hero">
+                        <div class="tnk-welcome-hero__success-header">
+                            <i class="tnk-icon tnk-icon--3xl ph-fill ph-confetti tnk-success-icon"></i>
+                            <h1 class="tnk-welcome-hero__title">Setup Complete!</h1>
+                        </div>
+                        <p class="tnk-welcome-hero__subtitle">
+                            Tanaka is ready to sync your tabs
+                        </p>
+                    </div>
+
+                    <div class="tnk-step-content">
+                        <div class="tnk-completion-summary">
+                            <div class="tnk-completion-summary__item">
+                                <span class="tnk-completion-summary__label">Device Name</span>
+                                <span class="tnk-completion-summary__value">${this.formData.deviceName}</span>
+                            </div>
+                            <div class="tnk-completion-summary__item">
+                                <span class="tnk-completion-summary__label">Server</span>
+                                <span class="tnk-completion-summary__value">${this.formData.serverUrl}</span>
+                            </div>
+                            <div class="tnk-completion-summary__item">
+                                <span class="tnk-completion-summary__label">Connection</span>
+                                <span class="tnk-completion-summary__value tnk-completion-summary__value--success"><i class="tnk-icon ph ph-check"></i> Verified</span>
+                            </div>
+                            <div class="tnk-completion-summary__item">
+                                <span class="tnk-completion-summary__label">Sync Status</span>
+                                <span class="tnk-completion-summary__value tnk-completion-summary__value--success"><i class="tnk-icon ph ph-check"></i> Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tnk-button-group">
+                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.complete()">
+                            Start Using Tanaka <i class="tnk-icon ph ph-check-circle"></i>
+                        </button>
+                    </div>
+                `;
+        }
+
+        setupDeviceNameHandlers() {
+          const input = document.getElementById("deviceNameInput");
+          const nextBtn = document.getElementById("deviceNextBtn");
+          const preview = document.getElementById("devicePreview");
+          const previewText = document.getElementById("devicePreviewText");
+
+          // Auto-suggest device name based on user agent
+          if (!this.formData.deviceName) {
+            const suggested = this.suggestDeviceName();
+            input.value = suggested;
+            this.formData.deviceName = suggested;
+          }
+
+          input.addEventListener("input", (e) => {
+            const value = e.target.value.trim();
+            const indicator = document.getElementById("deviceNameIndicator");
+            this.formData.deviceName = value;
+            nextBtn.disabled = value.length === 0;
+
+            if (value.length > 0) {
+              preview.classList.remove("tnk-input-preview--hidden");
+              previewText.textContent = value;
+              input.classList.add("tnk-form-group__input--success");
+              indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+            } else {
+              preview.classList.add("tnk-input-preview--hidden");
+              input.classList.remove("tnk-form-group__input--success");
+              indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator";
+            }
+          });
+
+          // Initial state
+          input.dispatchEvent(new Event("input"));
+        }
+
+        setupServerHandlers() {
+          const urlInput = document.getElementById("serverUrlInput");
+          const tokenInput = document.getElementById("authTokenInput");
+          const testBtn = document.getElementById("testBtn");
+
+          urlInput.addEventListener("input", (e) => {
+            this.formData.serverUrl = e.target.value;
+            this.validateUrl();
+            this.resetConnectionStatus();
+          });
+
+          tokenInput.addEventListener("input", (e) => {
+            this.formData.authToken = e.target.value;
+            this.validateToken();
+            this.resetConnectionStatus();
+          });
+
+          // Detect paste and show format validation
+          tokenInput.addEventListener("paste", (e) => {
+            setTimeout(() => {
+              this.validateToken();
+            }, 0);
+          });
+        }
+
+        suggestDeviceName() {
+          const ua = navigator.userAgent;
+          const platform = navigator.platform;
+
+          if (/iPhone/.test(ua)) return "iPhone";
+          if (/iPad/.test(ua)) return "iPad";
+          if (/Android/.test(ua)) return "Android Device";
+          if (/Mac/.test(platform)) return "Mac";
+          if (/Win/.test(platform)) return "Windows PC";
+          if (/Linux/.test(platform)) return "Linux Machine";
+
+          return "My Device";
+        }
+
+        validateUrl() {
+          const input = document.getElementById("serverUrlInput");
+          const indicator = document.getElementById("serverUrlIndicator");
+          const url = this.formData.serverUrl;
+
+          if (url && !url.match(/^https?:\/\//)) {
+            input.classList.add("tnk-form-group__input--error");
+            input.classList.remove("tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-x-circle tnk-form-group__indicator tnk-form-group__indicator--error";
+            this.showError(input.parentElement.parentElement, "URL must start with http:// or https://");
+            return false;
+          } else if (url && url.match(/^https?:\/\//)) {
+            input.classList.remove("tnk-form-group__input--error");
+            input.classList.add("tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+            this.clearError(input.parentElement.parentElement);
+            return true;
+          } else {
+            input.classList.remove("tnk-form-group__input--error", "tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator";
+            this.clearError(input.parentElement.parentElement);
+            return true;
+          }
+        }
+
+        validateToken() {
+          const input = document.getElementById("authTokenInput");
+          const indicator = document.getElementById("authTokenIndicator");
+          const token = this.formData.authToken;
+
+          if (token && !token.match(/^[a-zA-Z0-9]{32}$/)) {
+            input.classList.add("tnk-form-group__input--error");
+            input.classList.remove("tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-x-circle tnk-form-group__indicator tnk-form-group__indicator--error";
+            this.showError(input.parentElement.parentElement, "Token must be exactly 32 alphanumeric characters");
+            return false;
+          } else if (token && token.match(/^[a-zA-Z0-9]{32}$/)) {
+            input.classList.remove("tnk-form-group__input--error");
+            input.classList.add("tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+            this.clearError(input.parentElement.parentElement);
+            return true;
+          } else {
+            input.classList.remove("tnk-form-group__input--error", "tnk-form-group__input--success");
+            indicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator";
+            this.clearError(input.parentElement.parentElement);
+            return true;
+          }
+        }
+
+        showError(input, message) {
+          const existing = input.parentElement.querySelector(".tnk-form-group__error");
+          if (existing) existing.remove();
+
+          const error = document.createElement("div");
+          error.className = "tnk-form-group__error";
+          error.innerHTML = `<i class="tnk-icon ph ph-warning-circle"></i> ${message}`;
+          input.parentElement.appendChild(error);
+        }
+
+        clearError(input) {
+          const error = input.parentElement.querySelector(".tnk-form-group__error");
+          if (error) error.remove();
+        }
+
+        resetConnectionStatus() {
+          this.connectionStatus = null;
+          const statusDiv = document.getElementById("connectionStatus");
+          if (statusDiv) statusDiv.innerHTML = "";
+
+          const nextBtn = document.getElementById("serverNextBtn");
+          if (nextBtn) nextBtn.disabled = true;
+        }
+
+        async testConnection() {
+          if (!this.validateUrl() || !this.validateToken()) {
+            return;
+          }
+
+          const testBtn = document.getElementById("testBtn");
+          const statusDiv = document.getElementById("connectionStatus");
+          const nextBtn = document.getElementById("serverNextBtn");
+
+          this.connectionStatus = "testing";
+          testBtn.disabled = true;
+          testBtn.innerHTML = '<i class="tnk-icon ph ph-circle-notch tnk-spinner"></i> Testing...';
+
+          statusDiv.innerHTML = `
+                    <div class="tnk-connection-status--compact">
+                        <i class="tnk-icon ph ph-circle-notch tnk-spinner"></i>
+                        <span class="tnk-connection-status__text">Testing connection to server...</span>
+                    </div>
+                `;
+
+          // Simulate connection test
+          setTimeout(() => {
+            const urlInput = document.getElementById("serverUrlInput");
+            const urlIndicator = document.getElementById("serverUrlIndicator");
+            const tokenInput = document.getElementById("authTokenInput");
+            const tokenIndicator = document.getElementById("authTokenIndicator");
+
+            // Randomly determine success or failure type
+            const random = Math.random();
+            const success = random > 0.3;
+            const failureType = random < 0.15 ? "connectivity" : "auth"; // 15% connectivity, 15% auth failure
+
+            this.connectionStatus = success ? "success" : "error";
+
+            if (success) {
+              this.testResults = {
+                serverReachable: true,
+                authenticated: true,
+                apiVersion: "v2.1.0",
+                responseTime: "125ms",
+              };
+
+              // Show success on both fields
+              urlInput.classList.add("tnk-form-group__input--success");
+              urlInput.classList.remove("tnk-form-group__input--error");
+              urlIndicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+
+              tokenInput.classList.add("tnk-form-group__input--success");
+              tokenInput.classList.remove("tnk-form-group__input--error");
+              tokenIndicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+
+              statusDiv.innerHTML = `
+                            <div class="tnk-connection-status--compact">
+                                <i class="tnk-icon ph ph-check-circle tnk-connection-status__icon--success"></i>
+                                <span class="tnk-connection-status__text--success">Connected successfully! Server v2.1.0 (125ms)</span>
+                            </div>
+                        `;
+
+              nextBtn.disabled = false;
+            } else {
+              if (failureType === "connectivity") {
+                // Server URL failure
+                urlInput.classList.add("tnk-form-group__input--error");
+                urlInput.classList.remove("tnk-form-group__input--success");
+                urlIndicator.className = "tnk-icon ph ph-x-circle tnk-form-group__indicator tnk-form-group__indicator--error";
+
+                // Keep token neutral
+                tokenInput.classList.remove("tnk-form-group__input--error", "tnk-form-group__input--success");
+                tokenIndicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator";
+
+                statusDiv.innerHTML = `
+                              <div class="tnk-connection-status--compact">
+                                  <i class="tnk-icon ph ph-x-circle tnk-connection-status__icon--error"></i>
+                                  <span class="tnk-connection-status__text--error">Connection failed: Cannot reach server</span>
+                              </div>
+                          `;
+              } else {
+                // Auth token failure
+                urlInput.classList.add("tnk-form-group__input--success");
+                urlInput.classList.remove("tnk-form-group__input--error");
+                urlIndicator.className = "tnk-icon ph ph-check-circle tnk-form-group__indicator tnk-form-group__indicator--success";
+
+                tokenInput.classList.add("tnk-form-group__input--error");
+                tokenInput.classList.remove("tnk-form-group__input--success");
+                tokenIndicator.className = "tnk-icon ph ph-x-circle tnk-form-group__indicator tnk-form-group__indicator--error";
+
+                statusDiv.innerHTML = `
+                              <div class="tnk-connection-status--compact">
+                                  <i class="tnk-icon ph ph-x-circle tnk-connection-status__icon--error"></i>
+                                  <span class="tnk-connection-status__text--error">Connection failed: Invalid authentication token</span>
+                              </div>
+                          `;
+              }
+            }
+
+            testBtn.disabled = false;
+            testBtn.innerHTML = '<i class="tnk-icon ph ph-plug"></i> Test Connection';
+          }, parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tnk-welcome-test-delay')));
+        }
+
+
+        nextStep() {
+          if (this.currentStep < this.totalSteps - 1) {
+            this.currentStep++;
+            this.render();
+          }
+        }
+
+        previousStep() {
+          if (this.currentStep > 0) {
+            this.currentStep--;
+            this.render();
+          }
+        }
+
+        complete() {
+          alert("Setup complete! The extension will now open the main interface.");
+          // In real implementation, this would close the welcome and open the popup
+        }
+      }
+
+      // Initialize
+      const simulator = new WelcomeSimulator();
+    </script>
+  </body>
+</html>

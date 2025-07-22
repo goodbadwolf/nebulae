@@ -35,8 +35,8 @@ export default defineConfig({
         import: "./src/playground/popup.ts",
         html: true,
       },
-      "playground/onboarding": {
-        import: "./src/playground/onboarding.ts",
+      "playground/welcome": {
+        import: "./src/playground/welcome.ts",
         html: true,
       },
       "playground/settings": {
@@ -81,7 +81,7 @@ export default defineConfig({
         popup: "./src/popup/index.html",
         "playground/index": "./src/playground/index.html",
         "playground/popup": "./src/playground/popup.html",
-        "playground/onboarding": "./src/playground/onboarding.html",
+        "playground/welcome": "./src/playground/welcome.html",
         "playground/settings": "./src/playground/settings.html",
         "playground/manager": "./src/playground/manager.html",
       };
