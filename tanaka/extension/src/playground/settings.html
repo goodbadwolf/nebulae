@@ -1,463 +1,296 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanaka Settings - Playground</title>
-    <link rel="stylesheet" href="styles/design-system.css">
-    <style>
-        /* Simulator styles already in design-system.css */
+    <link rel="stylesheet" href="styles/design-system-v2.css" />
+    <link rel="stylesheet" href="styles/settings.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
+  </head>
+  <body>
+    <div class="tnk-playground-container">
+      <div class="tnk-playground-container__header">
+        <div class="tnk-logo tnk-logo--large">T</div>
+        <h1 class="tnk-playground-container__title">Settings</h1>
+      </div>
 
-        .settings-viewport {
-            background: var(--bg-primary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-2xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .settings-container {
-            display: flex;
-            min-height: 600px;
-        }
-
-        .settings-header {
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border);
-            padding: var(--space-lg) var(--space-2xl);
-            font-size: var(--text-xl);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        /* Using layout-sidebar from design-system.css */
-
-        .settings-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .settings-main {
-            flex: 1;
-            padding: var(--space-2xl);
-        }
-
-        /* Sidebar styles already in design-system.css */
-
-        .section-title {
-            font-size: var(--text-lg);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 0 0 var(--space-2xl) 0;
-            padding-bottom: var(--space-md);
-            border-bottom: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        /* Form styles already in design-system.css */
-
-        /* Status styles already in design-system.css */
-
-        .button-row {
-            display: flex;
-            gap: var(--space-md);
-            margin-top: var(--space-2xl);
-        }
-
-        .test-button {
-            padding: var(--space-md) var(--space-xl);
-            background: var(--bg-primary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-lg);
-            color: var(--color-primary);
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s ease;
-        }
-
-        .test-button:hover {
-            background: var(--color-surface-hover);
-        }
-
-        .test-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .save-button {
-            padding: 8px 16px;
-            background: var(--color-primary);
-            border: none;
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s ease;
-        }
-
-        .save-button:hover {
-            background: var(--color-primary-hover);
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .checkbox {
-            width: 16px;
-            height: 16px;
-            accent-color: var(--color-primary);
-        }
-
-        .checkbox-label {
-            font-size: 13px;
-            color: #374151;
-        }
-
-        .select-input {
-            width: 200px;
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font: var(--font-body);
-            background: white;
-        }
-
-        .danger-zone {
-            margin-top: 40px;
-            padding: 20px;
-            border: 1px solid #fecaca;
-            border-radius: 8px;
-            background: #fef2f2;
-        }
-
-        .danger-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #dc2626;
-            margin: 0 0 12px 0;
-        }
-
-        .danger-button {
-            padding: 8px 16px;
-            background: #dc2626;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s ease;
-        }
-
-        .danger-button:hover {
-            background: #b91c1c;
-        }
-    </style>
-</head>
-<body>
-    <div class="simulator-container">
-        <div class="simulator-header">
-            <h1 class="simulator-title">Settings Page</h1>
-            <p class="simulator-subtitle">Configuration interface with multi-section navigation and form validation</p>
+      <div class="tnk-browser-window">
+        <div class="tnk-browser-window__tab-bar">
+          <div class="tnk-browser-window__tab">Tanaka Settings</div>
         </div>
-
-        <div class="viewport settings-viewport">
-            <div class="viewport-header">
-                Tanaka Settings
-            </div>
-
-            <div class="settings-container">
-                <div class="layout-sidebar">
-                    <div class="sidebar-title">General</div>
-                    <button class="sidebar-item active" data-section="connection">Connection</button>
-                    <button class="sidebar-item" data-section="sync">Sync</button>
-                    <button class="sidebar-item" data-section="data">Data</button>
-                    <button class="sidebar-item" data-section="about">About</button>
-                </div>
-
-                <div class="settings-content">
-                    <div class="settings-main" id="settingsMain">
-                        <!-- Content will be rendered here -->
-                    </div>
-                </div>
-            </div>
+        <div class="tnk-browser-window__controls">
+          <div class="tnk-browser-window__dot"></div>
+          <div class="tnk-browser-window__dot"></div>
+          <div class="tnk-browser-window__dot"></div>
         </div>
+        <div class="tnk-playground-page-frame tnk-settings">
+          <div class="tnk-settings__container">
+            <div class="tnk-settings__card">
+              <div class="tnk-sidebar">
+                <div class="tnk-sidebar__title">General</div>
+                <button class="tnk-sidebar__item tnk-sidebar__item--active" data-section="connection">
+                  Connection
+                </button>
+                <button class="tnk-sidebar__item" data-section="data-sync">Sync</button>
+                <button class="tnk-sidebar__item" data-section="about">About</button>
+              </div>
+
+              <div class="tnk-settings__content">
+                <div class="tnk-settings__main" id="settingsMain">
+                  <!-- Content will be rendered here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        class SettingsSimulator {
-            constructor() {
-                this.currentSection = 'connection';
-                this.container = document.getElementById('settingsMain');
-                this.connectionStatus = 'connected'; // 'connected' | 'testing' | 'error'
-                this.setupNavigation();
-                this.render();
-            }
+      class SettingsSimulator {
+        constructor() {
+          this.currentSection = "connection";
+          this.container = document.getElementById("settingsMain");
+          this.connectionStatus = "connected"; // 'connected' | 'testing' | 'error'
+          this.isFirstRender = true;
+          // Animation timing constants
+          this.FADE_OUT_DURATION = 200;
+          this.FADE_IN_DURATION = 400;
+          this.CONNECTION_TEST_DURATION = 2000;
+          this.setupNavigation();
+          this.render();
+        }
 
-            setupNavigation() {
-                document.querySelectorAll('[data-section]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('[data-section]').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.currentSection = btn.dataset.section;
-                        this.render();
-                    });
-                });
-            }
+        setupNavigation() {
+          document.querySelectorAll("[data-section]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll("[data-section]")
+                .forEach((b) => b.classList.remove("tnk-sidebar__item--active"));
+              btn.classList.add("tnk-sidebar__item--active");
+              this.currentSection = btn.dataset.section;
+              this.render();
+            });
+          });
+        }
 
-            render() {
-                switch (this.currentSection) {
-                    case 'connection':
-                        this.renderConnection();
-                        break;
-                    case 'sync':
-                        this.renderSync();
-                        break;
-                    case 'data':
-                        this.renderData();
-                        break;
-                    case 'about':
-                        this.renderAbout();
-                        break;
-                }
-            }
+        render() {
+          // Skip animation on first render
+          if (this.isFirstRender) {
+            this.isFirstRender = false;
+            this.renderContent();
+            return;
+          }
 
-            renderConnection() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">Connection</h2>
+          // Add fade out class
+          this.container.classList.add("tnk-settings__main--fade-out");
 
-                    <div class="form-group">
-                        <label class="form-label">Server URL</label>
-                        <input type="text" class="form-input" value="https://tanaka.example.com:8443" id="serverUrl">
-                        <div class="form-hint">The URL of your Tanaka server including port if needed</div>
+          // Wait for fade out, then render new content
+          setTimeout(() => {
+            this.renderContent();
+
+            // Remove fade out and add fade in
+            this.container.classList.remove("tnk-settings__main--fade-out");
+            this.container.classList.add("tnk-settings__main--fade-in");
+
+            // Remove fade in class after animation completes
+            setTimeout(() => {
+              this.container.classList.remove("tnk-settings__main--fade-in");
+            }, this.FADE_IN_DURATION);
+          }, this.FADE_OUT_DURATION);
+        }
+
+        renderContent() {
+          switch (this.currentSection) {
+            case "connection":
+              this.renderConnection();
+              break;
+            case "data-sync":
+              this.renderSync();
+              break;
+            case "about":
+              this.renderAbout();
+              break;
+          }
+        }
+
+        renderConnection() {
+          this.container.innerHTML = `
+                    <h2 class="tnk-settings__section-title">Connection</h2>
+
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Server URL</label>
+                        <input type="text" class="tnk-form-group__input" value="https://tanaka.example.com:8443" id="serverUrl">
+                        <div class="tnk-form-group__hint">The URL of your Tanaka server including port if needed</div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Auth Token</label>
-                        <input type="password" class="form-input" value="your-secret-token-here" id="authToken">
-                        <div class="form-hint">Authentication token configured on your server</div>
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Auth Token</label>
+                        <input type="password" class="tnk-form-group__input" value="your-secret-token-here" id="authToken">
+                        <div class="tnk-form-group__hint">Authentication token configured on your server</div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Device Name</label>
-                        <input type="text" class="form-input" value="Work Laptop" id="deviceName">
-                        <div class="form-hint">Name shown in activity history and device lists</div>
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Device Name</label>
+                        <input type="text" class="tnk-form-group__input" value="Work Laptop" id="deviceName">
+                        <div class="tnk-form-group__hint">Name shown in activity history and device lists</div>
                     </div>
 
-                    <div class="status-row ${this.connectionStatus === 'error' ? 'error' : ''}">
-                        <span class="status-dot status-dot--${this.connectionStatus === 'connected' ? 'synced' : this.connectionStatus === 'testing' ? 'syncing' : 'error'}"></span>
-                        <span class="status-text ${this.connectionStatus === 'error' ? 'error' : ''}">
+                    <div class="tnk-status ${this.connectionStatus === "error" ? "tnk-status--error" : ""}">
+                        <span class="tnk-status__dot tnk-status__dot--${this.connectionStatus === "connected" ? "synced" : this.connectionStatus === "testing" ? "syncing" : "error"}"></span>
+                        <span class="tnk-status__text ${this.connectionStatus === "error" ? "tnk-status__text--error" : ""}">
                             ${this.getConnectionStatusText()}
                         </span>
                     </div>
 
-                    <div class="button-row">
-                        <button class="test-button" id="testConnection" ${this.connectionStatus === 'testing' ? 'disabled' : ''}>
-                            📡 Test Connection
+                    <div class="tnk-settings__button-group">
+                        <button class="tnk-btn tnk-btn--test" id="testConnection" ${this.connectionStatus === "testing" ? "disabled" : ""}>
+                            <i class="tnk-icon ph ph-plug"></i> Test Connection
                         </button>
-                        <button class="save-button">
-                            💾 Save Settings
+                        <button class="tnk-btn tnk-btn--save">
+                            <i class="tnk-icon ph ph-floppy-disk"></i> Save Settings
                         </button>
                     </div>
                 `;
 
-                this.setupConnectionHandlers();
+          this.setupConnectionHandlers();
+        }
+
+        setupConnectionHandlers() {
+          const testBtn = document.getElementById("testConnection");
+          const urlInput = document.getElementById("serverUrl");
+
+          testBtn.addEventListener("click", () => {
+            this.testConnection();
+          });
+
+          urlInput.addEventListener("blur", () => {
+            this.validateUrl(urlInput.value);
+          });
+        }
+
+        testConnection() {
+          this.connectionStatus = "testing";
+          this.updateConnectionUI();
+
+          // Simulate connection test
+          setTimeout(() => {
+            // Randomly succeed or fail for demo
+            this.connectionStatus = Math.random() > 0.3 ? "connected" : "error";
+            this.updateConnectionUI();
+          }, this.CONNECTION_TEST_DURATION);
+        }
+
+        updateConnectionUI() {
+          // Only update the connection-related UI elements without re-rendering the entire page
+          const statusElement = document.querySelector(".tnk-status");
+          const statusDot = statusElement.querySelector(".tnk-status__dot");
+          const statusText = statusElement.querySelector(".tnk-status__text");
+          const testBtn = document.getElementById("testConnection");
+
+          // Update status classes
+          if (this.connectionStatus === "error") {
+            statusElement.classList.add("tnk-status--error");
+            statusText.classList.add("tnk-status__text--error");
+          } else {
+            statusElement.classList.remove("tnk-status--error");
+            statusText.classList.remove("tnk-status__text--error");
+          }
+
+          // Update status dot
+          statusDot.className = `tnk-status__dot tnk-status__dot--${this.connectionStatus === "connected" ? "synced" : this.connectionStatus === "testing" ? "syncing" : "error"}`;
+
+          // Update status text
+          statusText.textContent = this.getConnectionStatusText();
+
+          // Update test button state
+          testBtn.disabled = this.connectionStatus === "testing";
+        }
+
+        validateUrl(url) {
+          const urlInput = document.getElementById("serverUrl");
+          if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            urlInput.classList.add("tnk-form-group__input--error");
+            const existingError = urlInput.parentNode.querySelector(".tnk-form-group__error");
+            if (!existingError) {
+              const error = document.createElement("div");
+              error.className = "tnk-form-group__error";
+              error.innerHTML = '<i class="tnk-icon ph ph-x-circle"></i> URL must start with http:// or https://';
+              urlInput.parentNode.appendChild(error);
             }
-
-            setupConnectionHandlers() {
-                const testBtn = document.getElementById('testConnection');
-                const urlInput = document.getElementById('serverUrl');
-
-                testBtn.addEventListener('click', () => {
-                    this.testConnection();
-                });
-
-                urlInput.addEventListener('blur', () => {
-                    this.validateUrl(urlInput.value);
-                });
+          } else {
+            urlInput.classList.remove("tnk-form-group__input--error");
+            const existingError = urlInput.parentNode.querySelector(".tnk-form-group__error");
+            if (existingError) {
+              existingError.remove();
             }
+          }
+        }
 
-            testConnection() {
-                this.connectionStatus = 'testing';
-                this.render();
+        getConnectionStatusText() {
+          switch (this.connectionStatus) {
+            case "connected":
+              return "Connected • Last sync: 2 min ago";
+            case "testing":
+              return "Testing connection...";
+            case "error":
+              return "Connection failed • Check server URL and token";
+            default:
+              return "Not connected";
+          }
+        }
 
-                // Simulate connection test
-                setTimeout(() => {
-                    // Randomly succeed or fail for demo
-                    this.connectionStatus = Math.random() > 0.3 ? 'connected' : 'error';
-                    this.render();
-                }, 2000);
-            }
+        renderSync() {
+          this.container.innerHTML = `
+                    <h2 class="tnk-settings__section-title">Sync</h2>
 
-            validateUrl(url) {
-                const urlInput = document.getElementById('serverUrl');
-                if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                    urlInput.classList.add('error');
-                    const existingError = urlInput.parentNode.querySelector('.form-error');
-                    if (!existingError) {
-                        const error = document.createElement('div');
-                        error.className = 'form-error';
-                        error.innerHTML = '❌ URL must start with http:// or https://';
-                        urlInput.parentNode.appendChild(error);
-                    }
-                } else {
-                    urlInput.classList.remove('error');
-                    const existingError = urlInput.parentNode.querySelector('.form-error');
-                    if (existingError) {
-                        existingError.remove();
-                    }
-                }
-            }
-
-            getConnectionStatusText() {
-                switch (this.connectionStatus) {
-                    case 'connected':
-                        return 'Connected • Last sync: 2 min ago';
-                    case 'testing':
-                        return 'Testing connection...';
-                    case 'error':
-                        return 'Connection failed • Check server URL and token';
-                    default:
-                        return 'Not connected';
-                }
-            }
-
-            renderSync() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">Sync</h2>
-
-                    <div class="form-group">
-                        <label class="form-label">Sync Interval</label>
-                        <select class="select-input">
+                    <!-- Sync Settings -->
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Sync Interval</label>
+                        <select class="tnk-form-group__select">
                             <option>Every 5 seconds</option>
                             <option selected>Every 10 seconds</option>
                             <option>Every 30 seconds</option>
                             <option>Every minute</option>
                         </select>
-                        <div class="form-hint">How often to check for changes from other devices</div>
+                        <div class="tnk-form-group__hint">How often to check for changes from other devices</div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Retry Strategy</label>
-                        <select class="select-input">
-                            <option selected>Exponential backoff</option>
-                            <option>Fixed interval</option>
-                            <option>Immediate retry</option>
-                        </select>
-                        <div class="form-hint">How to handle sync failures and network interruptions</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Offline Behavior</label>
-                        <div class="checkbox-group">
-                            <input type="checkbox" class="checkbox" checked>
-                            <label class="checkbox-label">Continue working offline when server unavailable</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" class="checkbox" checked>
-                            <label class="checkbox-label">Auto-sync when connection restored</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" class="checkbox">
-                            <label class="checkbox-label">Show notifications for sync events</label>
-                        </div>
-                    </div>
-
-                    <div class="button-row">
-                        <button class="save-button">
-                            💾 Save Settings
+                    <div class="tnk-settings__button-group">
+                        <button class="tnk-btn tnk-btn--save">
+                            <i class="tnk-icon ph ph-floppy-disk"></i> Save Settings
                         </button>
                     </div>
                 `;
-            }
+        }
 
-            renderData() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">Data</h2>
+        renderAbout() {
+          this.container.innerHTML = `
+                    <h2 class="tnk-settings__section-title">About</h2>
 
-                    <div class="form-group">
-                        <label class="form-label">Storage Location</label>
-                        <div class="form-hint" style="margin-bottom: 12px;">Local extension data is stored in browser storage</div>
-                        <div style="font-family: monospace; font-size: 12px; color: #6b7280; background: #f9fafb; padding: 8px; border-radius: 4px;">
-                            ~/.config/google-chrome/Default/Local Extension Settings/...
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Data Usage</label>
-                        <div style="display: flex; gap: 16px; margin-bottom: 16px;">
-                            <div>
-                                <div style="font-size: 24px; font-weight: 600; color: #1f2937;">2.3 MB</div>
-                                <div style="font-size: 12px; color: #6b7280;">Local storage</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 24px; font-weight: 600; color: #1f2937;">847 KB</div>
-                                <div style="font-size: 12px; color: #6b7280;">Server storage</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">History Retention</label>
-                        <select class="select-input">
-                            <option>7 days</option>
-                            <option>30 days</option>
-                            <option selected>90 days</option>
-                            <option>1 year</option>
-                            <option>Forever</option>
-                        </select>
-                        <div class="form-hint">How long to keep sync history and recently closed tabs</div>
-                    </div>
-
-                    <div class="button-row">
-                        <button class="test-button">
-                            📊 Export Data
-                        </button>
-                        <button class="save-button">
-                            💾 Save Settings
-                        </button>
-                    </div>
-
-                    <div class="danger-zone">
-                        <div class="danger-title">Danger Zone</div>
-                        <p style="font-size: 13px; color: #6b7280; margin: 0 0 16px 0;">
-                            These actions cannot be undone. Your data will be permanently deleted.
-                        </p>
-                        <div style="display: flex; gap: 12px;">
-                            <button class="danger-button">
-                                🗑️ Clear Local Data
-                            </button>
-                            <button class="danger-button">
-                                💣 Reset All Settings
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-
-            renderAbout() {
-                this.container.innerHTML = `
-                    <h2 class="section-title">About</h2>
-
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
-                        <div style="width: 48px; height: 48px; background: #6366f1; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">
+                    <div class="tnk-about-header">
+                        <div class="tnk-logo">
                             T
                         </div>
-                        <div>
-                            <div style="font-size: 18px; font-weight: 600; color: #1f2937;">Tanaka</div>
-                            <div style="font-size: 14px; color: #6b7280;">Tab synchronization for Firefox</div>
+                        <div class="tnk-about-header__info">
+                            <div class="tnk-about-header__title">Tanaka</div>
+                            <div class="tnk-about-header__subtitle">Tab synchronization for Firefox</div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Version Information</label>
-                        <div style="font-family: monospace; font-size: 13px; color: #374151; line-height: 1.6;">
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Version Information</label>
+                        <div class="tnk-about__info-block">
                             Extension: 0.5.0<br>
                             Server API: v1.2<br>
                             Browser: Firefox 126.0<br>
@@ -465,9 +298,9 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Device Information</label>
-                        <div style="font-family: monospace; font-size: 13px; color: #374151; line-height: 1.6;">
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">Device Information</label>
+                        <div class="tnk-about__info-block">
                             Device ID: laptop-work-2024<br>
                             Platform: macOS 14.5<br>
                             Connected since: 2024-07-15 09:00:00<br>
@@ -475,36 +308,18 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Support</label>
-                        <div style="font-size: 13px; color: #6b7280; line-height: 1.6;">
-                            For help and documentation, visit the project repository or check the user guide.
-                        </div>
-                        <div style="margin-top: 12px;">
-                            <button class="test-button" style="margin-right: 8px;">
-                                📖 User Guide
-                            </button>
-                            <button class="test-button" style="margin-right: 8px;">
-                                🐛 Report Issue
-                            </button>
-                            <button class="test-button">
-                                📧 Send Feedback
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">License</label>
-                        <div style="font-size: 13px; color: #6b7280;">
+                    <div class="tnk-form-group">
+                        <label class="tnk-form-group__label">License</label>
+                        <div class="tnk-about__license-text">
                             Licensed under the MIT License. This software is provided as-is without warranty.
                         </div>
                     </div>
                 `;
-            }
         }
+      }
 
-        // Initialize simulator
-        new SettingsSimulator();
+      // Initialize simulator
+      new SettingsSimulator();
     </script>
-</body>
+  </body>
 </html>
