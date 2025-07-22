@@ -1,595 +1,479 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tanaka Manager - Playground</title>
-    <link rel="stylesheet" href="styles/design-system.css">
-    <style>
-        /* Simulator styles already in design-system.css */
+    <link rel="stylesheet" href="styles/design-system-v2.css" />
+    <link rel="stylesheet" href="styles/manager.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css"
+    />
+  </head>
+  <body>
+    <div class="tnk-playground-container">
+      <div class="tnk-playground-container__header">
+        <div class="tnk-logo tnk-logo--large">T</div>
+        <h1 class="tnk-playground-container__title">Manager</h1>
+      </div>
 
-        .manager-viewport {
-            background: var(--bg-primary);
-            border: 2px solid var(--border);
-            border-radius: var(--radius-2xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-        }
-
-        .manager-container {
-            display: flex;
-            min-height: 600px;
-        }
-
-        .manager-header {
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border);
-            padding: var(--space-lg) var(--space-2xl);
-            font-size: var(--text-xl);
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        /* Using layout-sidebar from design-system.css */
-
-        .manager-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .manager-main {
-            flex: 1;
-            padding: var(--space-2xl);
-        }
-
-        .sidebar-section {
-            margin-bottom: var(--space-2xl);
-        }
-
-        .sidebar-title {
-            font-size: var(--text-xs);
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 0 var(--space-xl) var(--space-sm);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: var(--space-sm);
-        }
-
-        .sidebar-item {
-            display: block;
-            padding: var(--space-sm) var(--space-xl);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: var(--text-base);
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            position: relative;
-        }
-
-        .sidebar-item:hover {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .sidebar-item.active {
-            background: var(--bg-primary);
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .sidebar-item.active::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--primary);
-        }
-
-        .workspace-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-2xl);
-        }
-
-        .workspace-title {
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        .edit-button {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: var(--space-sm);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
-        }
-
-        .edit-button:hover {
-            background: var(--bg-subtle);
-            color: var(--text-primary);
-        }
-
-        .workspace-meta {
-            font-size: var(--text-sm);
-            color: var(--text-secondary);
-            margin-top: var(--space-xs);
-        }
-
-        .content-section {
-            margin-bottom: var(--space-3xl);
-        }
-
-        .content-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-header {
-            font-size: var(--text-base);
-            font-weight: 700;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin: 0 0 var(--space-lg) 0;
-            padding-bottom: var(--space-sm);
-            border-bottom: 2px solid var(--border);
-        }
-
-        .tab-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .tab-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            border-bottom: 1px dotted #d1d5db;
-        }
-
-        .tab-item:last-child {
-            border-bottom: none;
-        }
-
-        .tab-icon {
-            width: 16px;
-            height: 16px;
-            text-align: center;
-        }
-
-        .tab-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .tab-title {
-            font-size: 13px;
-            color: #1f2937;
-            margin: 0 0 2px 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .tab-url {
-            font: var(--font-mono);
-            font-size: 11px;
-            color: #6b7280;
-            margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .recently-closed-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            border-bottom: 1px dotted #d1d5db;
-        }
-
-        .recently-closed-item:last-child {
-            border-bottom: none;
-        }
-
-        .restore-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .restore-meta {
-            font: var(--font-small);
-            color: var(--color-text-secondary);
-            margin: 2px 0 0 0;
-        }
-
-        .restore-button {
-            padding: 4px 8px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            font-size: 11px;
-            cursor: pointer;
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .restore-button:hover {
-            background: var(--color-surface-hover);
-        }
-
-        .device-count {
-            font: var(--font-small);
-            color: var(--color-text-secondary);
-            margin-top: 16px;
-        }
-    </style>
-</head>
-<body>
-    <div class="simulator-container">
-        <div class="simulator-header">
-            <h1 class="simulator-title">Manager Tab</h1>
-            <p class="simulator-subtitle">Full workspace management interface with detailed views and device synchronization</p>
+      <div class="tnk-browser-window">
+        <div class="tnk-browser-window__tab-bar">
+          <div class="tnk-browser-window__tab">Tanaka Workspace Manager</div>
         </div>
-
-        <div class="viewport manager-viewport">
-            <div class="viewport-header">
-                <span>📊</span>
-                <span>Tanaka Workspace Manager</span>
-            </div>
-
-            <div class="manager-container">
-                <div class="layout-sidebar">
-                    <div class="sidebar-section">
-                        <div class="sidebar-title">Workspaces</div>
-                        <button class="sidebar-item active" data-workspace="work-project">▼ All (3)</button>
-                        <button class="sidebar-item" data-workspace="work-project" style="padding-left: 24px;">Work...</button>
-                        <button class="sidebar-item" data-workspace="research" style="padding-left: 24px;">Research</button>
-                        <button class="sidebar-item" data-workspace="shopping" style="padding-left: 24px;">Shopping</button>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="sidebar-title">Devices</div>
-                        <button class="sidebar-item">
-                            <span class="status-dot status-dot--synced"></span>
-                            Desktop
-                        </button>
-                        <button class="sidebar-item">
-                            <span class="status-dot status-dot--synced"></span>
-                            Laptop
-                        </button>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="sidebar-title">Actions</div>
-                        <button class="sidebar-item" data-view="timeline">Timeline</button>
-                        <button class="sidebar-item" data-view="trash">Trash (2)</button>
-                        <button class="sidebar-item" data-view="settings">Settings</button>
-                    </div>
+        <div class="tnk-browser-window__controls">
+          <div class="tnk-browser-window__dot"></div>
+          <div class="tnk-browser-window__dot"></div>
+          <div class="tnk-browser-window__dot"></div>
+        </div>
+        <div class="tnk-playground-page-frame tnk-manager">
+          <div class="tnk-manager__container">
+            <div class="tnk-manager__card">
+              <div class="tnk-sidebar">
+                <div class="tnk-sidebar__section">
+                  <div class="tnk-sidebar__title">Workspaces</div>
+                  <button class="tnk-sidebar__item tnk-sidebar__item--active" data-workspace="work-project">
+                    <i class="tnk-icon ph ph-caret-down"></i> All (3)
+                  </button>
+                  <button class="tnk-sidebar__item tnk-sidebar__item--indented" data-workspace="work-project">
+                    Work...
+                  </button>
+                  <button class="tnk-sidebar__item tnk-sidebar__item--indented" data-workspace="research">
+                    Research
+                  </button>
+                  <button class="tnk-sidebar__item tnk-sidebar__item--indented" data-workspace="shopping">
+                    Shopping
+                  </button>
                 </div>
 
-                <div class="manager-content">
-                    <div class="manager-main" id="managerMain">
-                        <!-- Content will be rendered here -->
-                    </div>
+                <div class="tnk-sidebar__section">
+                  <div class="tnk-sidebar__title">Devices</div>
+                  <button class="tnk-sidebar__item">
+                    <span class="tnk-status__dot tnk-status__dot--synced"></span>
+                    Desktop
+                  </button>
+                  <button class="tnk-sidebar__item">
+                    <span class="tnk-status__dot tnk-status__dot--synced"></span>
+                    Laptop
+                  </button>
                 </div>
+
+                <div class="tnk-sidebar__section">
+                  <div class="tnk-sidebar__title">Actions</div>
+                  <button class="tnk-sidebar__item" data-view="timeline">Timeline</button>
+                  <button class="tnk-sidebar__item" data-view="trash">Trash (2)</button>
+                  <button class="tnk-sidebar__item" data-view="settings">Settings</button>
+                </div>
+              </div>
+
+              <div class="tnk-manager__content">
+                <div class="tnk-manager__main" id="managerMain">
+                  <!-- Content will be rendered here -->
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <script src="mock-data.js"></script>
     <script>
+      class ManagerSimulator {
+        constructor() {
+          this.currentWorkspace = "work-project";
+          this.currentView = "workspace";
+          this.container = document.getElementById("managerMain");
+          this.isFirstRender = true;
+          // Animation timing constants
+          this.FADE_OUT_DURATION = 200;
+          this.FADE_IN_DURATION = 400;
+          this.setupNavigation();
+          this.render();
+        }
 
-        class ManagerSimulator {
-            constructor() {
-                this.currentWorkspace = 'work-project';
-                this.currentView = 'workspace';
-                this.container = document.getElementById('managerMain');
-                this.setupNavigation();
-                this.render();
-            }
+        setupNavigation() {
+          // Workspace navigation
+          document.querySelectorAll("[data-workspace]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll("[data-workspace]")
+                .forEach((b) => b.classList.remove("tnk-sidebar__item--active"));
+              btn.classList.add("tnk-sidebar__item--active");
+              this.currentWorkspace = btn.dataset.workspace;
+              this.currentView = "workspace";
+              this.render();
+            });
+          });
 
-            setupNavigation() {
-                // Workspace navigation
-                document.querySelectorAll('[data-workspace]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('[data-workspace]').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.currentWorkspace = btn.dataset.workspace;
-                        this.currentView = 'workspace';
-                        this.render();
-                    });
-                });
+          // View navigation
+          document.querySelectorAll("[data-view]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll(".tnk-sidebar__item")
+                .forEach((b) => b.classList.remove("tnk-sidebar__item--active"));
+              btn.classList.add("tnk-sidebar__item--active");
+              this.currentView = btn.dataset.view;
+              this.render();
+            });
+          });
+        }
 
-                // View navigation
-                document.querySelectorAll('[data-view]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        this.currentView = btn.dataset.view;
-                        this.render();
-                    });
-                });
-            }
+        render() {
+          // Skip animation on first render
+          if (this.isFirstRender) {
+            this.isFirstRender = false;
+            this.renderContent();
+            return;
+          }
 
-            render() {
-                switch (this.currentView) {
-                    case 'timeline':
-                        this.renderTimeline();
-                        break;
-                    case 'trash':
-                        this.renderTrash();
-                        break;
-                    case 'settings':
-                        this.renderSettings();
-                        break;
-                    default:
-                        this.renderWorkspace();
-                }
-            }
+          // Add fade out class
+          this.container.classList.add("tnk-manager__main--fade-out");
 
-            renderWorkspace() {
-                const workspace = mockWorkspaces.find(w => w.id === this.currentWorkspace) || mockWorkspaces[0];
+          // Wait for fade out, then render new content
+          setTimeout(() => {
+            this.renderContent();
 
-                this.container.innerHTML = `
-                    <div class="workspace-header">
-                        <h1 class="workspace-title">${workspace.name}</h1>
-                        <button class="edit-button">✏️</button>
+            // Remove fade out and add fade in
+            this.container.classList.remove("tnk-manager__main--fade-out");
+            this.container.classList.add("tnk-manager__main--fade-in");
+
+            // Remove fade in class after animation completes
+            setTimeout(() => {
+              this.container.classList.remove("tnk-manager__main--fade-in");
+            }, this.FADE_IN_DURATION);
+          }, this.FADE_OUT_DURATION);
+        }
+
+        renderContent() {
+          switch (this.currentView) {
+            case "timeline":
+              this.renderTimeline();
+              break;
+            case "trash":
+              this.renderTrash();
+              break;
+            case "settings":
+              this.renderSettings();
+              break;
+            default:
+              this.renderWorkspace();
+          }
+        }
+
+        renderWorkspace() {
+          const workspace = mockWorkspaces.find((w) => w.id === this.currentWorkspace) || mockWorkspaces[0];
+
+          this.container.innerHTML = `
+                    <div class="tnk-workspace__header">
+                        <h1 class="tnk-workspace__title">${workspace.name}</h1>
+                        <button class="tnk-btn tnk-btn--icon" title="Edit workspace">
+                            <i class="tnk-icon ph ph-pencil"></i>
+                        </button>
                     </div>
-                    <div class="workspace-meta">
-                        ${workspace.tabCount} tabs • <span class="status-dot status-dot--${workspace.status}"></span> Last synced: ${workspace.lastChange}
+                    <div class="tnk-workspace__meta">
+                        ${workspace.tabCount} tabs • <span class="tnk-status__dot tnk-status__dot--${workspace.status}"></span> Last synced: ${workspace.lastChange}
                     </div>
 
-                    <div class="content-section">
-                        <h2 class="section-header">Open Tabs</h2>
-                        <ul class="tab-list">
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">Open Tabs</h2>
+                        <ul class="tnk-tab-list">
                             ${this.renderTabList(workspace)}
                         </ul>
-                        <div class="device-count">Open on 2 devices</div>
+                        <div class="tnk-device-count">Open on 2 devices</div>
                     </div>
 
-                    <div class="content-section">
-                        <h2 class="section-header">Recently Closed (last 24h)</h2>
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">Recently Closed (last 24h)</h2>
                         ${this.renderRecentlyClosed()}
                     </div>
                 `;
-            }
+        }
 
-            renderTabList(workspace) {
-                const allTabs = [
-                    { id: '1', title: 'GitHub - PR #123', url: 'https://github.com/user/repo/pull/123', icon: '🌐' },
-                    { id: '2', title: 'MDN Web Docs - Array.prototype', url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array', icon: '📄' },
-                    { id: '3', title: 'Stack Overflow - React hook', url: 'https://stackoverflow.com/questions/react-hooks-explained', icon: '💬' },
-                    { id: '4', title: 'Figma - Design System', url: 'https://figma.com/file/design-system', icon: '🎨' },
-                    { id: '5', title: 'Linear - Task Board', url: 'https://linear.app/workspace/board', icon: '📋' }
-                ];
+        renderTabList(workspace) {
+          const allTabs = [
+            { id: "1", title: "GitHub - PR #123", url: "https://github.com/user/repo/pull/123", icon: "ph-globe" },
+            {
+              id: "2",
+              title: "MDN Web Docs - Array.prototype",
+              url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+              icon: "ph-file-text",
+            },
+            {
+              id: "3",
+              title: "Stack Overflow - React hook",
+              url: "https://stackoverflow.com/questions/react-hooks-explained",
+              icon: "ph-chat-circle",
+            },
+            {
+              id: "4",
+              title: "Figma - Design System",
+              url: "https://figma.com/file/design-system",
+              icon: "ph-palette",
+            },
+            {
+              id: "5",
+              title: "Linear - Task Board",
+              url: "https://linear.app/workspace/board",
+              icon: "ph-clipboard-text",
+            },
+          ];
 
-                return allTabs.slice(0, workspace.tabCount).map(tab => `
-                    <li class="tab-item">
-                        <span class="tab-icon">${tab.icon}</span>
-                        <div class="tab-info">
-                            <h3 class="tab-title">${tab.title}</h3>
-                            <p class="tab-url">${tab.url}</p>
+          return allTabs
+            .slice(0, workspace.tabCount)
+            .map(
+              (tab) => `
+                    <li class="tnk-tab-list__item">
+                        <i class="tnk-icon tnk-tab-list__icon ph ${tab.icon}"></i>
+                        <div class="tnk-tab-list__info">
+                            <h3 class="tnk-tab-list__title">${tab.title}</h3>
+                            <p class="tnk-tab-list__url">${tab.url}</p>
                         </div>
                     </li>
-                `).join('');
-            }
+                `
+            )
+            .join("");
+        }
 
-            renderRecentlyClosed() {
-                return _mockRecentlyClosed.map(item => `
-                    <div class="recently-closed-item">
-                        <span class="tab-icon">🌐</span>
-                        <div class="restore-info">
-                            <h3 class="tab-title">${item.title}</h3>
-                            <p class="restore-meta">Closed ${item.closedAt} from ${item.device}</p>
+        renderRecentlyClosed() {
+          return _mockRecentlyClosed
+            .map(
+              (item) => `
+                    <div class="tnk-recently-closed__item">
+                        <i class="tnk-icon tnk-tab-list__icon ph ph-globe"></i>
+                        <div class="tnk-recently-closed__info">
+                            <h3 class="tnk-tab-list__title">${item.title}</h3>
+                            <p class="tnk-recently-closed__meta">Closed ${item.closedAt} from ${item.device}</p>
                         </div>
-                        <button class="restore-button">🔄 Restore</button>
+                        <button class="tnk-btn tnk-btn--small">
+                            <i class="tnk-icon ph ph-arrow-counter-clockwise"></i> Restore
+                        </button>
                     </div>
-                `).join('');
-            }
+                `
+            )
+            .join("");
+        }
 
-            renderTimeline() {
-                this.container.innerHTML = `
-                    <div class="workspace-header">
-                        <h1 class="workspace-title">Activity Timeline</h1>
-                    </div>
-
-                    <div style="display: flex; gap: 16px; margin-bottom: 24px; font-size: 14px;">
-                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
-                            <option>All Workspaces ▼</option>
-                        </select>
-                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
-                            <option>All Devices ▼</option>
-                        </select>
-                        <select style="padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 4px;">
-                            <option>7 days ▼</option>
-                        </select>
+        renderTimeline() {
+          this.container.innerHTML = `
+                    <div class="tnk-workspace__header">
+                        <h1 class="tnk-workspace__title">Activity Timeline</h1>
                     </div>
 
-                    <div class="content-section">
-                        <h2 class="section-header">Today</h2>
-                        <div class="timeline-items">
+                    <div class="tnk-timeline__filters">
+                        <select class="tnk-timeline__select">
+                            <option>All Workspaces <i class="tnk-icon ph ph-caret-down"></i></option>
+                        </select>
+                        <select class="tnk-timeline__select">
+                            <option>All Devices <i class="tnk-icon ph ph-caret-down"></i></option>
+                        </select>
+                        <select class="tnk-timeline__select">
+                            <option>7 days <i class="tnk-icon ph ph-caret-down"></i></option>
+                        </select>
+                    </div>
+
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">Today</h2>
+                        <div class="tnk-timeline__items">
                             ${this.renderTimelineItems()}
                         </div>
                     </div>
 
-                    <div class="content-section">
-                        <h2 class="section-header">Yesterday</h2>
-                        <div class="timeline-items">
-                            <div style="padding: 12px 0; border-bottom: 1px dotted #d1d5db;">
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                                    <span>🕐</span>
-                                    <span style="font-size: 13px; color: var(--color-text-secondary);">4:15 PM • Desktop</span>
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">Yesterday</h2>
+                        <div class="tnk-timeline__items">
+                            <div class="tnk-timeline__item">
+                                <div class="tnk-timeline__header">
+                                    <i class="tnk-icon ph ph-clock"></i>
+                                    <span class="tnk-timeline__time">4:15 PM • Desktop</span>
                                 </div>
-                                <div style="font-size: 14px; color: var(--color-text-primary);">
+                                <div class="tnk-timeline__action">
                                     Moved 3 tabs from Research to Archive
                                 </div>
                             </div>
                         </div>
-                        <button style="margin-top: 16px; padding: 8px 12px; background: none; border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-primary); cursor: pointer;">
-                            ➕ Show more (23 days remaining)
+                        <button class="tnk-btn tnk-btn--secondary">
+                            <i class="tnk-icon ph ph-plus"></i> Show more (23 days remaining)
                         </button>
                     </div>
                 `;
-            }
-
-            renderTimelineItems() {
-                const items = [
-                    { time: '10:45 AM', device: 'Desktop', action: 'Closed "GitHub PR #123" from Work Project', expandable: true },
-                    { time: '10:30 AM', device: 'Laptop', action: 'Opened 3 tabs in Research workspace', details: ['React Hooks Documentation', 'TypeScript Handbook', 'CSS Grid Guide'] },
-                    { time: '9:15 AM', device: 'Desktop', action: 'Created new workspace "Project Planning"' }
-                ];
-
-                return items.map((item, index) => `
-                    <div style="padding: 12px 0; border-bottom: 1px dotted #d1d5db;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                            <span>🕐</span>
-                            <span style="font-size: 13px; color: var(--color-text-secondary);">${item.time} • ${item.device}</span>
-                        </div>
-                        <div style="font-size: 14px; color: var(--color-text-primary); margin-bottom: 4px;">
-                            ${item.action}
-                        </div>
-                        ${item.details ? `
-                            <div style="padding-left: 16px; margin-top: 8px;">
-                                ${item.details.map(detail => `
-                                    <div style="font-size: 12px; color: var(--color-text-secondary); margin: 2px 0;">
-                                        • ${detail}
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                        ${item.expandable ? `
-                            <button style="font-size: 12px; color: var(--color-primary); background: none; border: none; cursor: pointer; margin-top: 4px;">
-                                ▶ Show details
-                            </button>
-                        ` : ''}
-                    </div>
-                `).join('');
-            }
-
-            renderTrash() {
-                this.container.innerHTML = `
-                    <div class="workspace-header">
-                        <h1 class="workspace-title">Trash</h1>
-                    </div>
-
-                    <div class="content-section">
-                        <h2 class="section-header">2 Deleted Workspaces</h2>
-                        <div class="trash-items">
-                            <div style="padding: 16px 0; border-bottom: 1px dotted #d1d5db;">
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                                    <span style="font-size: 18px;">📁</span>
-                                    <h3 style="font-size: 16px; font-weight: 600; margin: 0; color: var(--color-text-primary);">Old Project</h3>
-                                </div>
-                                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">
-                                    12 tabs • Created Jan 15, 2024
-                                </div>
-                                <div style="font-size: 12px; color: var(--color-text-meta); margin-bottom: 12px;">
-                                    Deleted by Desktop on Dec 1, 2024 at 3:45 PM
-                                </div>
-                                <div style="display: flex; gap: 8px;">
-                                    <button class="restore-button">🔄 Restore</button>
-                                    <button style="padding: 4px 8px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 4px; font-size: 11px; cursor: pointer; color: #dc2626;">
-                                        🗑️ Delete Permanently
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div style="padding: 16px 0;">
-                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                                    <span style="font-size: 18px;">📁</span>
-                                    <h3 style="font-size: 16px; font-weight: 600; margin: 0; color: var(--color-text-primary);">Archived Research</h3>
-                                </div>
-                                <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">
-                                    8 tabs • Created Nov 3, 2024
-                                </div>
-                                <div style="font-size: 12px; color: var(--color-text-meta); margin-bottom: 12px;">
-                                    Deleted by Laptop on Nov 30, 2024 at 10:22 AM
-                                </div>
-                                <div style="display: flex; gap: 8px;">
-                                    <button class="restore-button">🔄 Restore</button>
-                                    <button style="padding: 4px 8px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 4px; font-size: 11px; cursor: pointer; color: #dc2626;">
-                                        🗑️ Delete Permanently
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            renderSettings() {
-                this.container.innerHTML = `
-                    <div class="workspace-header">
-                        <h1 class="workspace-title">Settings</h1>
-                    </div>
-
-                    <div style="font-size: 14px; color: var(--color-text-secondary); margin-bottom: 24px;">
-                        Configure your Tanaka extension preferences and server connection.
-                    </div>
-
-                    <div class="content-section">
-                        <h2 class="section-header">Connection</h2>
-
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
-                                Server URL
-                            </label>
-                            <input type="text" value="https://tanaka.example.com:8443"
-                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
-                        </div>
-
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
-                                Auth Token
-                            </label>
-                            <input type="password" value="••••••••••••••••••••••••••••••••"
-                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
-                        </div>
-
-                        <div style="margin-bottom: 16px;">
-                            <label style="display: block; font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px;">
-                                Device Name
-                            </label>
-                            <input type="text" value="Work Laptop"
-                                   style="width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--color-border); border-radius: 4px; font: var(--font-body);">
-                        </div>
-
-                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 16px;">
-                            <span class="status-dot status-dot--synced"></span>
-                            <span style="font-size: 13px; color: var(--color-success);">Connected • Last sync: 2 min ago</span>
-                        </div>
-
-                        <button style="margin-top: 12px; padding: 8px 16px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 4px; color: var(--color-primary); cursor: pointer;">
-                            📡 Test Connection
-                        </button>
-                    </div>
-                `;
-            }
         }
 
-        // Initialize simulator
-        new ManagerSimulator();
+        renderTimelineItems() {
+          const items = [
+            {
+              time: "10:45 AM",
+              device: "Desktop",
+              action: 'Closed "GitHub PR #123" from Work Project',
+              expandable: true,
+            },
+            {
+              time: "10:30 AM",
+              device: "Laptop",
+              action: "Opened 3 tabs in Research workspace",
+              details: ["React Hooks Documentation", "TypeScript Handbook", "CSS Grid Guide"],
+            },
+            {
+              time: "9:15 AM",
+              device: "Desktop",
+              action: 'Created new workspace "Project Planning"',
+            },
+          ];
+
+          return items
+            .map(
+              (item, index) => `
+                    <div class="tnk-timeline__item">
+                        <div class="tnk-timeline__header">
+                            <i class="tnk-icon ph ph-clock"></i>
+                            <span class="tnk-timeline__time">${item.time} • ${item.device}</span>
+                        </div>
+                        <div class="tnk-timeline__action">
+                            ${item.action}
+                        </div>
+                        ${
+                          item.details
+                            ? `
+                            <div class="tnk-timeline__details">
+                                ${item.details
+                                  .map(
+                                    (detail) => `
+                                    <div class="tnk-timeline__detail">
+                                        • ${detail}
+                                    </div>
+                                `
+                                  )
+                                  .join("")}
+                            </div>
+                        `
+                            : ""
+                        }
+                        ${
+                          item.expandable
+                            ? `
+                            <button class="tnk-btn tnk-btn--text">
+                                <i class="tnk-icon ph ph-caret-right"></i> Show details
+                            </button>
+                        `
+                            : ""
+                        }
+                    </div>
+                `
+            )
+            .join("");
+        }
+
+        renderTrash() {
+          this.container.innerHTML = `
+                    <div class="tnk-workspace__header">
+                        <h1 class="tnk-workspace__title">Trash</h1>
+                    </div>
+
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">2 Deleted Workspaces</h2>
+                        <div class="tnk-trash__items">
+                            <div class="tnk-trash__item">
+                                <div class="tnk-trash__header">
+                                    <i class="tnk-icon tnk-trash__icon ph ph-folder"></i>
+                                    <h3 class="tnk-trash__title">Old Project</h3>
+                                </div>
+                                <div class="tnk-trash__info">
+                                    12 tabs • Created Jan 15, 2024
+                                </div>
+                                <div class="tnk-trash__meta">
+                                    Deleted by Desktop on Dec 1, 2024 at 3:45 PM
+                                </div>
+                                <div class="tnk-trash__actions">
+                                    <button class="tnk-btn tnk-btn--small">
+                                        <i class="tnk-icon ph ph-arrow-counter-clockwise"></i> Restore
+                                    </button>
+                                    <button class="tnk-btn tnk-btn--small tnk-btn--danger">
+                                        <i class="tnk-icon ph ph-trash"></i> Delete Permanently
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="tnk-trash__item">
+                                <div class="tnk-trash__header">
+                                    <i class="tnk-icon tnk-trash__icon ph ph-folder"></i>
+                                    <h3 class="tnk-trash__title">Archived Research</h3>
+                                </div>
+                                <div class="tnk-trash__info">
+                                    8 tabs • Created Nov 3, 2024
+                                </div>
+                                <div class="tnk-trash__meta">
+                                    Deleted by Laptop on Nov 30, 2024 at 10:22 AM
+                                </div>
+                                <div class="tnk-trash__actions">
+                                    <button class="tnk-btn tnk-btn--small">
+                                        <i class="tnk-icon ph ph-arrow-counter-clockwise"></i> Restore
+                                    </button>
+                                    <button class="tnk-btn tnk-btn--small tnk-btn--danger">
+                                        <i class="tnk-icon ph ph-trash"></i> Delete Permanently
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+        }
+
+        renderSettings() {
+          this.container.innerHTML = `
+                    <div class="tnk-workspace__header">
+                        <h1 class="tnk-workspace__title">Settings</h1>
+                    </div>
+
+                    <div class="tnk-form-group">
+                        <p class="tnk-form-group__hint">Configure your Tanaka extension preferences and server connection.</p>
+                    </div>
+
+                    <div class="tnk-manager__section">
+                        <h2 class="tnk-manager__section-header">Connection</h2>
+
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Server URL
+                            </label>
+                            <input type="text" class="tnk-form-group__input" value="https://tanaka.example.com:8443">
+                        </div>
+
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Auth Token
+                            </label>
+                            <input type="password" class="tnk-form-group__input" value="••••••••••••••••••••••••••••••••">
+                        </div>
+
+                        <div class="tnk-form-group">
+                            <label class="tnk-form-group__label">
+                                Device Name
+                            </label>
+                            <input type="text" class="tnk-form-group__input" value="Work Laptop">
+                        </div>
+
+                        <div class="tnk-status">
+                            <span class="tnk-status__dot tnk-status__dot--synced"></span>
+                            <span class="tnk-status__text--success">Connected • Last sync: 2 min ago</span>
+                        </div>
+
+                        <button class="tnk-btn tnk-btn--test">
+                            <i class="tnk-icon ph ph-plug"></i> Test Connection
+                        </button>
+                    </div>
+                `;
+        }
+      }
+
+      // Initialize simulator
+      new ManagerSimulator();
     </script>
-</body>
+  </body>
 </html>
