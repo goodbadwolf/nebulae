@@ -906,6 +906,54 @@ h3 {
   display: inline-block;
 }
 
+/* ===== Status Indicators ===== */
+.tnk-status {
+  display: flex;
+  align-items: center;
+  gap: var(--tnk-space-sm);
+  padding: var(--tnk-space-md) 0;
+}
+
+.tnk-status--error {
+  color: var(--tnk-error);
+}
+
+.tnk-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tnk-text-muted);
+  flex-shrink: 0;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.tnk-status__dot--synced {
+  background: var(--tnk-success);
+}
+
+.tnk-status__dot--syncing {
+  background: var(--tnk-warning);
+  animation: tnk-pulse 1.5s ease-in-out infinite;
+}
+
+.tnk-status__dot--error {
+  background: var(--tnk-error);
+}
+
+.tnk-status__text {
+  font-size: var(--tnk-text-sm);
+  color: var(--tnk-text-secondary);
+}
+
+.tnk-status__text--success {
+  color: var(--tnk-success);
+}
+
+.tnk-status__text--error {
+  color: var(--tnk-error);
+}
+
 /* ===== Animations ===== */
 @keyframes pulse {
   0%,
@@ -914,6 +962,18 @@ h3 {
   }
   50% {
     opacity: var(--tnk-opacity-50);
+  }
+}
+
+@keyframes tnk-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
