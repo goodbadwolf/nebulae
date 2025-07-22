@@ -16,6 +16,10 @@
   --tnk-popup-container-max-height: var(--tnk-popup-container-height);
 }
 
+.tnk-playground-page-frame {
+  flex: unset;
+}
+
 .tnk-popup-container {
   overflow: hidden;
   background: var(--tnk-bg-primary);
@@ -52,7 +56,6 @@
 .tnk-popup-container__section {
   margin-bottom: var(--tnk-popup-container-section-gap);
 }
-
 .tnk-popup-container__section:last-child {
   margin-bottom: 0;
 }
