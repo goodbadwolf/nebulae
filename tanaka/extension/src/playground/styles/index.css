@@ -4,8 +4,8 @@
 
 .tnk-playground-pages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--tnk-playground-card-min-width), 1fr));
   gap: var(--tnk-space-2xl);
+  grid-template-columns: repeat(auto-fill, minmax(var(--tnk-playground-card-min-width), 1fr));
   margin-bottom: var(--tnk-space-4xl);
 }
 
@@ -18,9 +18,9 @@
 }
 
 .tnk-playground-pages-section__title {
+  color: var(--tnk-text-primary);
   font-size: var(--tnk-text-2xl);
   font-weight: var(--tnk-font-weight-semibold);
-  color: var(--tnk-text-primary);
   margin: 0 0 var(--tnk-space-2xl) 0;
 }
 
