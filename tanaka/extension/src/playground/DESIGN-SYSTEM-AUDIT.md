@@ -80,10 +80,10 @@ and related classes ✓
 
 | Custom Style | Purpose | Design System Equivalent | Action Required |
 |--------------|---------|-------------------------|-----------------|
-| `.simulator-controls` | Control panel container | `.card` with padding utilities | Replace |
+| `.prototype-controls` | Control panel container | `.card` with padding utilities | Replace |
 | `.controls-row` | Flex row for controls | `.flex` + `.gap-2xl` + `.flex-wrap` | Replace |
 | `.search-input-control` | Search input styling | `.form-input` | Replace |
-| `.popup-simulator` | Main layout container | `.flex` with utilities | Replace |
+| `.popup-prototype` | Main layout container | `.flex` with utilities | Replace |
 | `.popup-viewport` | Popup preview container | `.extension-frame--popup` | Replace |
 | `.info-panel` | Information sidebar | `.card` or existing `.info-panel` | Use existing |
 
