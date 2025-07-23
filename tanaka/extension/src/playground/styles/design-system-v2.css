@@ -384,6 +384,35 @@ h3 {
   width: 100%;
 }
 
+.tnk-btn--small {
+  padding: var(--tnk-space-xs) var(--tnk-space-sm);
+  font-size: var(--tnk-text-xs);
+}
+
+.tnk-btn--text {
+  background: transparent;
+  border: none;
+  color: var(--tnk-primary);
+  padding: var(--tnk-space-2xs) var(--tnk-space-xs);
+  font-size: var(--tnk-text-xs);
+}
+
+.tnk-btn--text:hover {
+  text-decoration: underline;
+}
+
+.tnk-btn--danger {
+  background: var(--tnk-error);
+  border-color: var(--tnk-error);
+  color: white;
+}
+
+.tnk-btn--danger:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+  box-shadow: var(--tnk-shadow-md);
+}
+
 .tnk-search {
   position: relative;
 }
