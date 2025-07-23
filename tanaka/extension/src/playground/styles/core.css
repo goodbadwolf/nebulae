@@ -1201,3 +1201,101 @@ h3 {
   border-top: var(--tnk-border-width) solid var(--tnk-border);
   background: var(--tnk-bg-subtle);
 }
+
+.tnk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tnk-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--tnk-space-md);
+  padding: var(--tnk-space-sm) 0;
+  border-bottom: 1px dotted var(--tnk-border);
+}
+
+.tnk-list__item:last-child {
+  border-bottom: none;
+}
+
+.tnk-list__icon {
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.tnk-list__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tnk-list__title {
+  font-size: var(--tnk-text-sm);
+  color: var(--tnk-text-primary);
+  margin: 0 0 var(--tnk-space-2xs) 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tnk-list__subtitle {
+  font-size: var(--tnk-text-xs);
+  color: var(--tnk-text-muted);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tnk-list__meta {
+  font-size: var(--tnk-text-xs);
+  color: var(--tnk-text-secondary);
+  margin: var(--tnk-space-2xs) 0 0 0;
+}
+
+.tnk-list__actions {
+  display: flex;
+  gap: var(--tnk-space-sm);
+}
+
+.tnk-section {
+  margin-bottom: var(--tnk-space-3xl);
+}
+
+.tnk-section:last-child {
+  margin-bottom: 0;
+}
+
+.tnk-section__header {
+  font-size: var(--tnk-text-base);
+  font-weight: var(--tnk-font-weight-bold);
+  color: var(--tnk-text-primary);
+  text-transform: uppercase;
+  letter-spacing: var(--tnk-letter-spacing-wide);
+  margin: 0 0 var(--tnk-space-lg) 0;
+  padding-bottom: var(--tnk-space-sm);
+  border-bottom: 2px solid var(--tnk-border);
+}
+
+.tnk-page-header {
+  display: flex;
+  align-items: center;
+  gap: var(--tnk-space-md);
+  margin-bottom: var(--tnk-space-2xl);
+}
+
+.tnk-page-header__title {
+  font-size: var(--tnk-text-2xl);
+  font-weight: var(--tnk-font-weight-bold);
+  color: var(--tnk-text-primary);
+  margin: 0;
+}
+
+.tnk-page-header__meta {
+  font-size: var(--tnk-text-sm);
+  color: var(--tnk-text-secondary);
+  margin-top: var(--tnk-space-xs);
+}

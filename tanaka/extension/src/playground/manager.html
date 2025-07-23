@@ -35,7 +35,7 @@
         </div>
         <div class="tnk-playground-page-frame tnk-manager">
           <div class="tnk-manager__container">
-            <div class="tnk-manager__card">
+            <div class="tnk-card tnk-manager__card">
               <div class="tnk-sidebar">
                 <div class="tnk-sidebar__section">
                   <div class="tnk-sidebar__title">Workspaces</div>
@@ -168,26 +168,26 @@
           const workspace = mockWorkspaces.find((w) => w.id === this.currentWorkspace) || mockWorkspaces[0];
 
           this.container.innerHTML = `
-                    <div class="tnk-manager__workspace-header">
-                        <h1 class="tnk-manager__workspace-title">${workspace.name}</h1>
+                    <div class="tnk-page-header">
+                        <h1 class="tnk-page-header__title">${workspace.name}</h1>
                         <button class="tnk-btn tnk-btn--icon" title="Edit workspace">
                             <i class="tnk-icon ph ph-pencil"></i>
                         </button>
                     </div>
-                    <div class="tnk-manager__workspace-meta">
+                    <div class="tnk-page-header__meta">
                         ${workspace.tabCount} tabs • <span class="tnk-status__dot tnk-status__dot--${workspace.status}"></span> Last synced: ${workspace.lastChange}
                     </div>
 
-                    <div class="tnk-manager__section">
-                        <h2 class="tnk-manager__section-header">Open Tabs</h2>
-                        <ul class="tnk-manager__tab-list">
+                    <div class="tnk-section">
+                        <h2 class="tnk-section__header">Open Tabs</h2>
+                        <ul class="tnk-list">
                             ${this.renderTabList(workspace)}
                         </ul>
                         <div class="tnk-manager__device-count">Open on 2 devices</div>
                     </div>
 
-                    <div class="tnk-manager__section">
-                        <h2 class="tnk-manager__section-header">Recently Closed (last 24h)</h2>
+                    <div class="tnk-section">
+                        <h2 class="tnk-section__header">Recently Closed (last 24h)</h2>
                         ${this.renderRecentlyClosed()}
                     </div>
                 `;
@@ -226,11 +226,11 @@
             .slice(0, workspace.tabCount)
             .map(
               (tab) => `
-                    <li class="tnk-manager__tab-item">
-                        <i class="tnk-icon tnk-manager__tab-icon ph ${tab.icon}"></i>
-                        <div class="tnk-manager__tab-info">
-                            <h3 class="tnk-manager__tab-title">${tab.title}</h3>
-                            <p class="tnk-manager__tab-url">${tab.url}</p>
+                    <li class="tnk-list__item">
+                        <i class="tnk-icon tnk-list__icon ph ${tab.icon}"></i>
+                        <div class="tnk-list__content">
+                            <h3 class="tnk-list__title">${tab.title}</h3>
+                            <p class="tnk-list__subtitle">${tab.url}</p>
                         </div>
                     </li>
                 `
@@ -242,15 +242,17 @@
           return _mockRecentlyClosed
             .map(
               (item) => `
-                    <div class="tnk-manager__recently-closed-item">
-                        <i class="tnk-icon tnk-manager__tab-icon ph ph-globe"></i>
-                        <div class="tnk-manager__recently-closed-info">
-                            <h3 class="tnk-manager__tab-title">${item.title}</h3>
-                            <p class="tnk-manager__recently-closed-meta">Closed ${item.closedAt} from ${item.device}</p>
+                    <div class="tnk-list__item">
+                        <i class="tnk-icon tnk-list__icon ph ph-globe"></i>
+                        <div class="tnk-list__content">
+                            <h3 class="tnk-list__title">${item.title}</h3>
+                            <p class="tnk-list__meta">Closed ${item.closedAt} from ${item.device}</p>
                         </div>
-                        <button class="tnk-btn tnk-btn--small">
-                            <i class="tnk-icon ph ph-arrow-counter-clockwise"></i> Restore
-                        </button>
+                        <div class="tnk-list__actions">
+                            <button class="tnk-btn tnk-btn--small">
+                                <i class="tnk-icon ph ph-arrow-counter-clockwise"></i> Restore
+                            </button>
+                        </div>
                     </div>
                 `
             )
@@ -259,31 +261,31 @@
 
         renderTimeline() {
           this.container.innerHTML = `
-                    <div class="tnk-workspace__header">
-                        <h1 class="tnk-workspace__title">Activity Timeline</h1>
+                    <div class="tnk-page-header">
+                        <h1 class="tnk-page-header__title">Activity Timeline</h1>
                     </div>
 
-                    <div class="tnk-timeline__filters">
-                        <select class="tnk-timeline__select">
-                            <option>All Workspaces <i class="tnk-icon ph ph-caret-down"></i></option>
+                    <div class="tnk-manager__timeline-filters">
+                        <select class="tnk-form-group__select tnk-manager__timeline-select">
+                            <option>All Workspaces</option>
                         </select>
-                        <select class="tnk-timeline__select">
-                            <option>All Devices <i class="tnk-icon ph ph-caret-down"></i></option>
+                        <select class="tnk-form-group__select tnk-manager__timeline-select">
+                            <option>All Devices</option>
                         </select>
-                        <select class="tnk-timeline__select">
-                            <option>7 days <i class="tnk-icon ph ph-caret-down"></i></option>
+                        <select class="tnk-form-group__select tnk-manager__timeline-select">
+                            <option>7 days</option>
                         </select>
                     </div>
 
-                    <div class="tnk-manager__section">
-                        <h2 class="tnk-manager__section-header">Today</h2>
+                    <div class="tnk-section">
+                        <h2 class="tnk-section__header">Today</h2>
                         <div class="tnk-timeline__items">
                             ${this.renderTimelineItems()}
                         </div>
                     </div>
 
-                    <div class="tnk-manager__section">
-                        <h2 class="tnk-manager__section-header">Yesterday</h2>
+                    <div class="tnk-section">
+                        <h2 class="tnk-section__header">Yesterday</h2>
                         <div class="tnk-timeline__items">
                             <div class="tnk-timeline__item">
                                 <div class="tnk-timeline__header">
@@ -368,12 +370,12 @@
 
         renderTrash() {
           this.container.innerHTML = `
-                    <div class="tnk-manager__workspace-header">
-                        <h1 class="tnk-manager__workspace-title">Trash</h1>
+                    <div class="tnk-page-header">
+                        <h1 class="tnk-page-header__title">Trash</h1>
                     </div>
 
-                    <div class="tnk-manager__section">
-                        <h2 class="tnk-manager__section-header">2 Deleted Workspaces</h2>
+                    <div class="tnk-section">
+                        <h2 class="tnk-section__header">2 Deleted Workspaces</h2>
                         <div class="tnk-manager__trash-items">
                             <div class="tnk-manager__trash-item">
                                 <div class="tnk-manager__trash-header">
