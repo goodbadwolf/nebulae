@@ -8,6 +8,8 @@
 - [Getting Started](GETTING-STARTED.md)
 - [Development](DEVELOPMENT.md)
 - [Architecture](ARCHITECTURE.md)
+- [Firefox API Guide](FIREFOX-API-GUIDE.md)
+- [UI Design](UI-DESIGN.md)
 - [Sync Protocol](SYNC-PROTOCOL.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
 - [Git Guidelines](../../docs/GIT.md)

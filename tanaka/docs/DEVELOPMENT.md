@@ -9,6 +9,8 @@
 - [Getting Started](GETTING-STARTED.md)
 - [Development](DEVELOPMENT.md)
 - [Architecture](ARCHITECTURE.md)
+- [Firefox API Guide](FIREFOX-API-GUIDE.md)
+- [UI Design](UI-DESIGN.md)
 - [Sync Protocol](SYNC-PROTOCOL.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
 - [Git Guidelines](../../docs/GIT.md)
@@ -221,6 +223,7 @@ Currently using Manifest V2 for broader compatibility. Key differences for V3:
 ## Next Steps
 
 - [Architecture](ARCHITECTURE.md) - How Tanaka works
-- [Implementation Notes](IMPLEMENTATION-NOTES.md) - API compatibility details
+- [Firefox API Guide](FIREFOX-API-GUIDE.md) - API compatibility details
+- [UI Design](UI-DESIGN.md) - User interface specifications
 - [Troubleshooting](TROUBLESHOOTING.md) - Common issues
 - [Git Guidelines](../../docs/GIT.md) - Git workflow

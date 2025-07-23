@@ -9,6 +9,8 @@
 - [Getting Started](GETTING-STARTED.md)
 - [Development](DEVELOPMENT.md)
 - [Architecture](ARCHITECTURE.md)
+- [Firefox API Guide](FIREFOX-API-GUIDE.md)
+- [UI Design](UI-DESIGN.md)
 - [Sync Protocol](SYNC-PROTOCOL.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
 - [Git Guidelines](../../docs/GIT.md)
@@ -212,5 +214,6 @@ Due to storage.sync rate limits, Tanaka implements custom periodic sync:
 ## Related Documentation
 
 - [Development Setup](DEVELOPMENT.md) - Get started with the codebase
-- [Implementation Notes](IMPLEMENTATION-NOTES.md) - Firefox API details
+- [Firefox API Guide](FIREFOX-API-GUIDE.md) - Firefox API details and workarounds
+- [UI Design](UI-DESIGN.md) - User interface specifications
 - [Troubleshooting](TROUBLESHOOTING.md) - Debug common issues
