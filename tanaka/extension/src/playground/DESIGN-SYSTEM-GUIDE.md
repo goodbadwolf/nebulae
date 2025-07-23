@@ -26,6 +26,25 @@ This guide documents the standardized components and patterns in the Tanaka play
 </div>
 ```
 
+#### Page Frame
+
+```html
+<!-- Base page frame -->
+<div class="tnk-playground-page-frame">
+  <!-- Page content -->
+</div>
+
+<!-- Popup variant -->
+<div class="tnk-playground-page-frame tnk-playground-page-frame--popup">
+  <!-- Popup-specific layout -->
+</div>
+
+<!-- Welcome variant -->
+<div class="tnk-playground-page-frame tnk-playground-page-frame--welcome">
+  <!-- Welcome page layout -->
+</div>
+```
+
 #### Card
 
 ```html
@@ -65,6 +84,12 @@ This guide documents the standardized components and patterns in the Tanaka play
 
 ```html
 <select class="tnk-form-group__select">
+  <option>Option 1</option>
+  <option>Option 2</option>
+</select>
+
+<!-- Inline select variant -->
+<select class="tnk-form-group__select tnk-form-group__select--inline">
   <option>Option 1</option>
   <option>Option 2</option>
 </select>
@@ -135,6 +160,11 @@ This guide documents the standardized components and patterns in the Tanaka play
     </button>
   </div>
 </div>
+
+<!-- With page-specific modifiers -->
+<div class="tnk-sidebar tnk-sidebar--manager">
+  <!-- Manager-specific sidebar styling -->
+</div>
 ```
 
 ### Status Components
@@ -172,7 +202,7 @@ This guide documents the standardized components and patterns in the Tanaka play
 ```html
 <div class="tnk-empty-state">
   <div class="tnk-empty-state__icon">
-    <i class="tnk-icon tnk-icon--3xl ph ph-folder"></i>
+    <i class="tnk-icon tnk-icon--xxxl ph ph-folder"></i>
   </div>
   <h3 class="tnk-empty-state__title">No Items</h3>
   <p class="tnk-empty-state__description">Create your first item to get started</p>
@@ -186,14 +216,21 @@ This guide documents the standardized components and patterns in the Tanaka play
 ```html
 <i class="tnk-icon ph ph-gear"></i>
 <i class="tnk-icon tnk-icon--xs ph ph-x"></i>
-<i class="tnk-icon tnk-icon--3xl ph ph-check"></i>
+<i class="tnk-icon tnk-icon--sm ph ph-info"></i>
+<i class="tnk-icon tnk-icon--md ph ph-warning"></i>
+<i class="tnk-icon tnk-icon--lg ph ph-star"></i>
+<i class="tnk-icon tnk-icon--xl ph ph-folder"></i>
+<i class="tnk-icon tnk-icon--xxl ph ph-check"></i>
+<i class="tnk-icon tnk-icon--xxxl ph ph-trophy"></i>
 <i class="tnk-icon tnk-icon--spinning ph ph-arrow-clockwise"></i>
 ```
 
 #### Text
 
 ```html
-<span class="tnk-text-sm">Small text</span>
+<span class="tnk-text">Base text</span>
+<span class="tnk-text tnk-text--sm">Small text</span>
+<span class="tnk-text tnk-text--lg">Large text</span>
 ```
 
 ## Design Tokens
@@ -222,6 +259,34 @@ This guide documents the standardized components and patterns in the Tanaka play
 ### Border Radius
 
 - `var(--tnk-radius-sm)` through `var(--tnk-radius-full)`
+
+## Animations
+
+The design system includes standard animations for consistent motion:
+
+### Available Animations
+
+```css
+/* Slide in from left */
+.element {
+  animation: tnk-slideIn 0.3s ease-out;
+}
+
+/* Fade in */
+.element {
+  animation: tnk-fadeIn 0.4s ease-out;
+}
+
+/* Bounce effect */
+.element {
+  animation: tnk-bounce 0.6s ease;
+}
+
+/* Spin (for loading indicators) */
+.tnk-icon--spinning {
+  animation: spin 1s linear infinite;
+}
+```
 
 ## Migration Guide
 
