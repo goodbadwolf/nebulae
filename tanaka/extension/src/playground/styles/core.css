@@ -156,7 +156,6 @@
   --tnk-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ===== Reset and Base ===== */
 * {
   box-sizing: border-box;
 }
@@ -187,7 +186,6 @@ select {
   outline: none;
 }
 
-/* ===== Typography ===== */
 h1,
 h2,
 h3,
@@ -212,7 +210,6 @@ h3 {
   font-size: var(--tnk-text-xl);
 }
 
-/* ===== Playground Block ===== */
 .tnk-playground-container {
   max-width: var(--tnk-container-max-width);
   margin: var(--tnk-space-3xl) auto;
@@ -247,7 +244,6 @@ h3 {
   align-items: flex-start;
 }
 
-/* Browser window container */
 .tnk-browser-window {
   border-radius: var(--tnk-radius-lg);
   box-shadow: var(--tnk-shadow-xl);
@@ -258,7 +254,6 @@ h3 {
   flex-direction: column;
 }
 
-/* Browser tab bar */
 .tnk-browser-window__tab-bar {
   height: 40px;
   background: var(--tnk-bg-secondary);
@@ -282,7 +277,6 @@ h3 {
   bottom: -1px;
 }
 
-/* Browser controls bar */
 .tnk-browser-window__controls {
   height: 40px;
   background: var(--tnk-bg-primary);
@@ -312,7 +306,6 @@ h3 {
   background: #28ca42;
 }
 
-/* Page content frame */
 .tnk-playground-page-frame {
   background: var(--tnk-bg-primary);
   flex: 1;
@@ -530,7 +523,6 @@ h3 {
   font-size: var(--tnk-text-3xl);
 }
 
-/* ===== Empty State Block ===== */
 .tnk-empty-state {
   text-align: center;
   padding: var(--tnk-space-lg);
@@ -572,7 +564,6 @@ h3 {
   color: var(--tnk-text-secondary);
 }
 
-/* ===== Error Banner Block ===== */
 .tnk-error-banner {
   display: flex;
   align-items: center;
@@ -598,7 +589,6 @@ h3 {
   min-width: auto;
 }
 
-/* ===== Workspace List Block ===== */
 .tnk-workspace-list {
   display: flex;
   flex-direction: column;
@@ -606,7 +596,6 @@ h3 {
   margin-top: var(--tnk-space-md);
 }
 
-/* ===== Workspace Block ===== */
 .tnk-workspace {
   background: var(--tnk-bg-subtle);
   border: var(--tnk-border-width) solid var(--tnk-border);
@@ -677,7 +666,6 @@ h3 {
   min-width: auto;
 }
 
-/* ===== Workspace Result Block ===== */
 .tnk-workspace-result {
   background: var(--tnk-bg-subtle);
   border: var(--tnk-border-width) solid var(--tnk-border);
@@ -753,7 +741,6 @@ h3 {
   font-style: italic;
 }
 
-/* ===== Controls Block ===== */
 .tnk-controls {
   background: var(--tnk-bg-primary);
   border: var(--tnk-border-width) solid var(--tnk-border);
@@ -899,7 +886,6 @@ h3 {
   margin: 0 0 var(--tnk-space-lg) 0;
 }
 
-/* ===== Icon System ===== */
 /* Wrapper classes for third-party Phosphor icons */
 .tnk-icon {
   font-size: var(--tnk-icon-sz-md);
@@ -935,7 +921,6 @@ h3 {
   display: inline-block;
 }
 
-/* ===== Status Indicators ===== */
 .tnk-status {
   display: flex;
   align-items: center;
@@ -983,7 +968,6 @@ h3 {
   color: var(--tnk-error);
 }
 
-/* ===== Animations ===== */
 @keyframes pulse {
   0%,
   100% {
@@ -1024,13 +1008,10 @@ h3 {
   }
 }
 
-/* ===== Utility Classes ===== */
-/* Utilities use simple naming without BEM modifiers */
 .tnk-text-sm {
   font-size: var(--tnk-text-sm);
 }
 
-/* ===== Responsive ===== */
 @media (max-width: var(--tnk-breakpoint-lg)) {
   .tnk-playground__layout {
     flex-direction: column;

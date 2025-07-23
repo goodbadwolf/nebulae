@@ -3,7 +3,7 @@
 ## Overview
 
 This plan details the complete refactoring of the Tanaka UI playground to eliminate redundancy and establish a
-unified design system. The goal is to leverage the existing comprehensive design-system.css while removing
+unified design system. The goal is to leverage the existing comprehensive core.css while removing
 duplicate styles and establishing clear component patterns.
 
 ## Current State Analysis
@@ -11,7 +11,7 @@ duplicate styles and establishing clear component patterns.
 ### Strengths
 
 - Well-structured CSS variables for colors, spacing, typography, and transitions
-- Comprehensive component definitions in design-system.css
+- Comprehensive component definitions in core.css
 - Consistent use of CSS custom properties
 - Good responsive foundations
 
@@ -28,7 +28,7 @@ duplicate styles and establishing clear component patterns.
 ### 1.1 Complete Style Audit
 
 - Create spreadsheet documenting every custom style in each HTML file
-- Map custom styles to their design-system.css equivalents
+- Map custom styles to their core.css equivalents
 - Identify styles that have no equivalent (candidates for design system additions)
 - Document JavaScript dependencies on specific class names
 
@@ -36,7 +36,7 @@ duplicate styles and establishing clear component patterns.
 
 - List all UI components used across all pages
 - Document variations of each component
-- Identify which are already in design-system.css
+- Identify which are already in core.css
 - Mark components that need to be added or consolidated
 
 ### 1.3 Pattern Analysis
@@ -270,9 +270,9 @@ Document common UI patterns:
 - Group related components
 - Add source comments for component sections
 - Consider splitting into multiple files:
-  - `design-system-core.css` (variables, reset)
-  - `design-system-components.css` (components)
-  - `design-system-utilities.css` (utility classes)
+  - `core-core.css` (variables, reset)
+  - `core-components.css` (components)
+  - `core-utilities.css` (utility classes)
 
 ### 6.3 Performance Optimization
 

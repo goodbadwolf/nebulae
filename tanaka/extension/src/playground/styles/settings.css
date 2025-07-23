@@ -1,6 +1,3 @@
-/* Settings Page Specific Styles */
-
-/* ===== Settings Layout ===== */
 .tnk-settings {
   height: 100%;
   display: flex;
@@ -16,7 +13,6 @@
   min-height: 600px;
 }
 
-/* ===== Settings Card ===== */
 .tnk-settings__card {
   background: var(--tnk-bg-primary);
   border: var(--tnk-border-width) solid var(--tnk-border);
@@ -51,7 +47,6 @@
   max-height: 600px;
 }
 
-/* ===== Section Title ===== */
 .tnk-settings__section-title {
   font-size: var(--tnk-text-lg);
   font-weight: var(--tnk-font-weight-bold);
@@ -64,7 +59,6 @@
   gap: var(--tnk-space-sm);
 }
 
-/* ===== Sidebar ===== */
 .tnk-sidebar {
   width: 200px;
   background: var(--tnk-bg-subtle);
@@ -134,7 +128,6 @@
   }
 }
 
-/* ===== Form Elements ===== */
 .tnk-form-group {
   margin-bottom: var(--tnk-space-xl);
 }
@@ -184,7 +177,6 @@
   gap: var(--tnk-space-xs);
 }
 
-/* ===== Form Select ===== */
 .tnk-form-group__select {
   width: 200px;
   padding: var(--tnk-space-sm) var(--tnk-space-md);
@@ -204,7 +196,6 @@
   box-shadow: 0 0 0 var(--tnk-border-width-accent) rgba(99, 102, 241, var(--tnk-opacity-10));
 }
 
-/* ===== Form Checkbox ===== */
 .tnk-form-checkbox {
   display: flex;
   align-items: center;
@@ -225,9 +216,6 @@
   cursor: pointer;
 }
 
-/* Status indicators moved to design-system-v2.css */
-
-/* ===== Button Group ===== */
 .tnk-settings__button-group {
   display: flex;
   gap: var(--tnk-space-md);
@@ -236,7 +224,6 @@
   flex-wrap: wrap;
 }
 
-/* ===== Button Variants ===== */
 .tnk-btn--test {
   background: var(--tnk-bg-primary);
   border-color: var(--tnk-border-strong);
@@ -278,7 +265,6 @@
   box-shadow: var(--tnk-shadow-md);
 }
 
-/* ===== Danger Zone ===== */
 .tnk-danger-zone {
   margin-top: var(--tnk-space-4xl);
   padding: var(--tnk-space-xl);
@@ -294,7 +280,6 @@
   margin: 0 0 var(--tnk-space-md) 0;
 }
 
-/* ===== Data Display Components ===== */
 .tnk-data-stats {
   display: flex;
   gap: var(--tnk-space-lg);
@@ -317,7 +302,6 @@
   color: var(--tnk-text-secondary);
 }
 
-/* ===== Code Block ===== */
 .tnk-data__code-block {
   font-family: var(--tnk-font-mono);
   font-size: var(--tnk-text-xs);
@@ -328,7 +312,6 @@
   overflow-x: auto;
 }
 
-/* ===== Info Block ===== */
 .tnk-about__info-block {
   font-family: var(--tnk-font-mono);
   font-size: var(--tnk-text-sm);
@@ -336,7 +319,6 @@
   line-height: var(--tnk-line-height-loose);
 }
 
-/* ===== About Section ===== */
 .tnk-about-header {
   display: flex;
   align-items: center;
@@ -361,7 +343,6 @@
   margin: 0;
 }
 
-/* ===== Danger Zone Content ===== */
 .tnk-danger-zone__description {
   font-size: var(--tnk-text-sm);
   color: var(--tnk-text-secondary);
@@ -373,22 +354,17 @@
   gap: var(--tnk-space-md);
 }
 
-/* ===== Support Actions ===== */
 .tnk-about__support-actions {
   display: flex;
   gap: var(--tnk-space-sm);
   margin-top: var(--tnk-space-md);
 }
 
-/* ===== License Text ===== */
 .tnk-about__license-text {
   font-size: var(--tnk-text-sm);
   color: var(--tnk-text-secondary);
   line-height: var(--tnk-line-height-relaxed);
 }
-
-/* ===== Animations ===== */
-/* tnk-pulse animation moved to design-system-v2.css */
 
 @keyframes tnk-fadeIn {
   from {
@@ -413,7 +389,6 @@
   animation: tnk-fadeIn 0.4s ease-out forwards;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .tnk-settings__card {
     flex-direction: column;
