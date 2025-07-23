@@ -1,0 +1,62 @@
+.tnkIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  vertical-align: middle;
+  transition: all var(--tnk-transition-fast);
+
+  // Size variants
+  &--xs {
+    width: var(--tnk-icon-sz-xs);
+    height: var(--tnk-icon-sz-xs);
+  }
+
+  &--sm {
+    width: var(--tnk-icon-sz-sm);
+    height: var(--tnk-icon-sz-sm);
+  }
+
+  &--md {
+    width: var(--tnk-icon-sz);
+    height: var(--tnk-icon-sz);
+  }
+
+  &--lg {
+    width: var(--tnk-icon-sz-lg);
+    height: var(--tnk-icon-sz-lg);
+  }
+
+  &--xl {
+    width: var(--tnk-icon-sz-xl);
+    height: var(--tnk-icon-sz-xl);
+  }
+
+  &--2xl {
+    width: var(--tnk-icon-sz-2xl);
+    height: var(--tnk-icon-sz-2xl);
+  }
+
+  &--3xl {
+    width: var(--tnk-icon-sz-3xl);
+    height: var(--tnk-icon-sz-3xl);
+  }
+
+  &--4xl {
+    width: var(--tnk-icon-size-4xl);
+    height: var(--tnk-icon-size-4xl);
+  }
+
+  &--spinning {
+    animation: tnk-spin var(--tnk-icon-spin-duration, var(--tnk-animation-duration-base)) linear infinite;
+  }
+}
+
+@keyframes tnk-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

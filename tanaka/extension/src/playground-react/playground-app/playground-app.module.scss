@@ -1,74 +1,39 @@
-@import "../styles/globals";
-
-.tnkPlaygroundApp {
+.tnkPlaygroundContainer {
+  max-width: var(--tnk-container-max-width);
+  margin: 0 auto;
+  padding: var(--tnk-space-5xl) var(--tnk-space-2xl);
   min-height: 100vh;
   background-color: var(--tnk-bg-primary);
-  color: var(--tnk-text-primary);
 }
 
-.tnkPlaygroundContainer {
-  max-width: var(--mantine-breakpoint-sm);
-  margin: 0 auto;
-  padding: var(--tnk-space-xl) var(--tnk-space-lg);
-}
-
-.tnkPlaygroundContainer__content {
+.tnkPlaygroundContainer__header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--tnk-space-lg);
-}
-
-.tnkPlaygroundContainer__icon {
-  color: var(--tnk-primary);
-  opacity: var(--tnk-opacity-high);
-  width: var(--tnk-icon-size-4xl);
-  height: var(--tnk-icon-size-4xl);
-  transition: transform var(--tnk-duration-normal) ease-in-out;
-
-  &:hover {
-    transform: scale(var(--tnk-scale-hover));
-    opacity: var(--tnk-opacity-full);
-  }
+  justify-content: center;
+  gap: var(--tnk-space-2xl);
+  margin-bottom: var(--tnk-space-5xl);
 }
 
 .tnkPlaygroundContainer__title {
+  font-size: var(--tnk-text-4xl);
+  font-weight: var(--tnk-font-weight-bold);
+  color: var(--tnk-primary);
+  margin: 0;
+}
+
+.tnkPlaygroundPagesSection {
+  margin-bottom: var(--tnk-space-5xl);
+}
+
+.tnkPlaygroundPagesSection__title {
   font-size: var(--tnk-text-2xl);
   font-weight: var(--tnk-font-weight-semibold);
-  text-align: center;
-  margin: var(--tnk-space-none);
   color: var(--tnk-text-primary);
-}
-
-.tnkPlaygroundContainer__subtitle {
-  font-size: var(--tnk-text-lg);
+  margin: 0 0 var(--tnk-space-3xl) 0;
   text-align: center;
-  margin: var(--tnk-space-none);
-  color: var(--tnk-text-secondary);
-  line-height: var(--tnk-line-height-relaxed);
 }
 
-.tnkPlaygroundContainer__button {
-  font-weight: var(--tnk-font-weight-medium);
-  font-size: var(--tnk-text-body);
-  padding: var(--tnk-space-md) var(--tnk-space-xl);
-  border-radius: var(--tnk-radius-lg);
-  border: none;
-  cursor: pointer;
-  transition: all var(--tnk-duration-normal) ease-in-out;
-
-  &--primary {
-    background-color: var(--tnk-primary);
-    color: var(--tnk-text-on-primary);
-
-    &:hover {
-      background-color: var(--tnk-primary-dark);
-      transform: translateY(var(--tnk-translate-hover));
-      box-shadow: var(--tnk-shadow-md);
-    }
-
-    &:active {
-      transform: translateY(var(--tnk-space-none));
-    }
-  }
+.tnkPlaygroundPagesGrid {
+  max-width: calc(var(--tnk-breakpoint-lg) - var(--tnk-space-5xl));
+  margin: 0 auto;
 }
