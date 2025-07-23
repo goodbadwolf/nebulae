@@ -53,72 +53,45 @@ BEM conventions while leveraging Mantine's component library.
    - Environment toggle for vanilla vs React
    - Ensure `.module.scss` files are processed correctly
 
-## Phase 2: Mantine Theme Setup
+## Phase 2: CSS Variable Integration
 
-1. **Theme Configuration**
+1. **CSS Variable Approach**
 
-   Map existing design tokens from core.css to Mantine theme:
+   The migration uses CSS variables exclusively for theming, with two key files:
 
-   ```typescript
-   // theme.ts - Map existing Tanaka design tokens to Mantine
-   import { createTheme } from '@mantine/core';
-   import type { MantineColorsTuple } from '@mantine/core';
+   - `_tanaka_vars.scss`: Defines all Tanaka design system variables
+   - `_mantine_vars.scss`: Maps Tanaka variables to Mantine CSS variables
 
-   const tanakaPrimary: MantineColorsTuple = [
-     // Map --tnk-primary color variations
-     '#f0f0ff', '#e0e2ff', '#c2c6ff', '#a0a6ff', '#8287ff',
-     '#6366f1', // Main --tnk-primary: #6366f1
-     '#4f46e5', // --tnk-primary-dark: #4f46e5
-     '#4338ca', '#3730a3', '#312e81',
-   ];
-
-   const theme = createTheme({
-     primaryColor: 'tanakaPrimary',
-     colors: {
-       tanakaPrimary,
-       tanakaSecondary, // Map --tnk-secondary
-       tanakaSuccess,   // Map --tnk-success: #10b981
-       tanakaWarning,   // Map --tnk-warning: #f59e0b
-       tanakaError,     // Map --tnk-error: #ef4444
-     },
-     fontFamily: 'var(--tnk-font-family)',
-     fontSizes: {
-       xs: 'var(--tnk-text-small)',  // 11px - metadata like "Last synced: 2 mins ago"
-       sm: 'var(--tnk-text-mono)',   // 12px - monospace URLs, technical info
-       md: 'var(--tnk-text-body)',   // 13px - body text (workspace names, tab counts)
-       lg: 'var(--tnk-text-header)', // 14px - section headers like "My Workspaces"
-       xl: 'var(--tnk-text-lg)',     // 16px - large text
-     },
-     spacing: {
-       xs: 'var(--tnk-space-xs)',  // 4px
-       sm: 'var(--tnk-space-sm)',  // 8px
-       md: 'var(--tnk-space-md)',  // 12px
-       lg: 'var(--tnk-space-lg)',  // 16px
-       xl: 'var(--tnk-space-xl)',  // 24px
-     },
-     radius: {
-       xs: 'var(--tnk-radius-sm)', // 2px
-       sm: 'var(--tnk-radius-md)', // 4px
-       md: 'var(--tnk-radius-lg)', // 6px
-       lg: 'var(--tnk-radius-xl)', // 8px
-       xl: 'var(--tnk-radius-2xl)', // 12px
-     },
-     shadows: {
-       xs: 'var(--tnk-shadow-sm)',
-       sm: 'var(--tnk-shadow-md)',
-       md: 'var(--tnk-shadow-lg)',
-       lg: 'var(--tnk-shadow-xl)',
-     },
-   });
+   ```scss
+   // globals.scss - Import order matters
+   @import '@mantine/core/styles.css';
+   @import 'tanaka_vars';      // Define Tanaka variables first
+   @import 'mantine_vars';     // Map to Mantine variables
    ```
 
 2. **Design System Integration Strategy**
-   - **CSS variable mapping**: Core.css has semantic variables (`--tnk-text-small`, `--tnk-text-body`) but some
-   components use unmapped references (`--tnk-text-xs`, `--tnk-text-base`)
-   - **Migration approach**: Fix variable inconsistencies as we migrate each component to React
+   - **Pure CSS approach**: No theme.ts file needed - all theming via CSS variables
+   - **Variable mapping**: `_mantine_vars.scss` maps all Mantine variables to Tanaka equivalents
+   - **Dark mode support**: Media query in `_mantine_vars.scss` handles dark mode
    - **BEM structure maintained**: All existing `.tnk-*` classes preserved in SCSS modules
    - **Component enhancement**: Use Mantine for functionality, design system for styling
-   - **Gradual fixes**: Address CSS variable gaps during component-by-component migration
+   - **Zero runtime overhead**: CSS variables compile to static values
+
+3. **MantineProvider Setup**
+
+   ```tsx
+   // App.tsx - Minimal provider, no theme object needed
+   import { MantineProvider } from '@mantine/core';
+   import '../styles/globals.scss';
+
+   export function App() {
+     return (
+       <MantineProvider>
+         {/* App content */}
+       </MantineProvider>
+     );
+   }
+   ```
 
 ## SCSS Modules & BEM Strategy
 
@@ -171,19 +144,23 @@ export const Button = ({ variant, children, ...props }) => {
 };
 ```
 
-### Accessing Mantine Variables
+### Variable Usage in Components
 
 ```scss
-// Use Mantine CSS variables in SCSS
+// Component.module.scss - Use Tanaka variables directly
 .tnkCard {
-  background: var(--mantine-color-body);
-  border-radius: var(--mantine-radius-md);
-  padding: var(--mantine-spacing-md);
+  background: var(--tnk-bg-primary);
+  border-radius: var(--tnk-radius-lg);
+  padding: var(--tnk-space-md);
+  border: var(--tnk-border-width) solid var(--tnk-border-primary);
 
   &--elevated {
-    box-shadow: var(--mantine-shadow-md);
+    box-shadow: var(--tnk-shadow-lg);
   }
 }
+
+// Mantine components automatically use mapped variables
+// No need to reference --mantine-* variables directly
 ```
 
 ## Phase 3: Component Migration Map
@@ -414,7 +391,7 @@ import styles from './Page.module.scss';
 
 ## Benefits of This Approach
 
-- **No runtime styling overhead** - SCSS modules compile to static CSS
+- **No runtime styling overhead** - Pure CSS variables, no theme object
 - **Type-safe CSS** - CSS modules provide class name autocompletion
 - **BEM structure preserved** - Familiar naming conventions for team
 - **Better performance** - No CSS-in-JS runtime calculations
@@ -422,7 +399,8 @@ import styles from './Page.module.scss';
 - **Responsive by default** - Mantine's breakpoint system
 - **Rich component library** - Modals, notifications, tooltips included
 - **Full TypeScript support** - Type-safe components and props
-- **Theme consistency** - Mantine CSS variables + our SCSS variables
+- **Theme consistency** - Single source of truth in `_tanaka_vars.scss`
+- **Easy dark mode** - Handled via CSS media queries, no JS needed
 
 ## Migration Path
 
