@@ -246,7 +246,7 @@ repos:
 
       - id: tanaka-eslint
         name: "[TANAKA] Lint TypeScript with ESLint"
-        entry: bash -c 'cd tanaka/extension && pnpm run lint'
+        entry: bash -c 'cd tanaka/extension && pnpm run lint:ts'
         language: system
         files: ^tanaka/extension/.*\.(ts|tsx|js|jsx)$
         pass_filenames: false
@@ -325,7 +325,7 @@ repos:
       # TypeScript linting and formatting (ESLint with Prettier)
       - id: kiku-eslint
         name: "[KIKU] Lint and format TypeScript with ESLint"
-        entry: bash -c 'cd kiku/core && pnpm lint'
+        entry: bash -c 'cd kiku/core && pnpm lint:ts'
         language: system
         files: ^kiku/.*\.ts$
         pass_filenames: false
