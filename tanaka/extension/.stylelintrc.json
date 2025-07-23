@@ -6,7 +6,7 @@
   ],
   "rules": {
     "selector-class-pattern": [
-      "^tnk-[a-z]+(-[a-z]+)*(__(([a-z]+(-[a-z]+)*)?))*(--[a-z]+(-[a-z]+)*)?$",
+      "^tnk-[a-z]+(-[a-z]+)*(__(([a-z]+(-[a-z]+)*)?))*(--[a-z0-9]+(-[a-z0-9]+)*)?$",
       {
         "message": "Class names must follow BEM pattern: tnk-block__element--modifier"
       }

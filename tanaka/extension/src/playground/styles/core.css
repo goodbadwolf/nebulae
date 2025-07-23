@@ -981,11 +981,11 @@ h3 {
   font-size: var(--tnk-icon-sz-xl);
 }
 
-.tnk-icon--xxl {
+.tnk-icon--2xl {
   font-size: var(--tnk-icon-sz-2xl);
 }
 
-.tnk-icon--xxxl {
+.tnk-icon--3xl {
   font-size: var(--tnk-icon-sz-3xl);
 }
 
