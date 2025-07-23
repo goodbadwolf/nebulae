@@ -1,5 +1,19 @@
 # Tanaka UI Design Specification
 
+## Navigation
+
+- [Home](../README.md)
+- [Getting Started](GETTING-STARTED.md)
+- [Development](DEVELOPMENT.md)
+- [Architecture](ARCHITECTURE.md)
+- [Firefox API Guide](FIREFOX-API-GUIDE.md)
+- [UI Design](UI-DESIGN.md)
+- [Sync Protocol](SYNC-PROTOCOL.md)
+- [Troubleshooting](TROUBLESHOOTING.md)
+- [Git Guidelines](../../docs/GIT.md)
+
+---
+
 ## Overview
 
 Tanaka is a Firefox extension that synchronizes browser tabs across devices using the concept of
@@ -828,19 +842,42 @@ Accessible via gear icon in popup or full manager:
 
 ### Icon System
 
-- **Library**: Phosphor Icons for consistency and flexibility
-- **Weight Strategy**:
-  - Bold: Primary actions (Create, Track, Open)
-  - Regular: Secondary actions and UI elements
-  - Light: Subtle indicators and decorative elements
-- **Color Usage**:
-  - Semantic colors for status (green/success, orange/warning, red/error)
-  - Adapt shades to system theme (lighter in dark mode, darker in light mode)
-  - Monochrome for neutral actions
-- **Consistency Principles**:
-  - Same icon for same concept throughout UI
-  - Maintain visual weight balance
-  - Ensure accessibility contrast ratios
+Tanaka uses the **Phosphor Icons** library throughout the UI for consistent visual language.
+
+#### Icon Usage
+
+Icons in the UI are shown in bracket notation (e.g., [gear], [folder], [play-circle]) and represent specific Phosphor
+icon names to be rendered.
+
+#### Weight Strategy
+
+- **Bold**: Primary actions (Create, Track, Open)
+- **Regular**: Secondary actions and UI elements  
+- **Light**: Subtle indicators and decorative elements
+
+#### Color Usage
+
+- **Semantic colors** for status indicators:
+  - Green (#10b981): Success/synced state
+  - Orange (#f59e0b): Warning/syncing state (with pulse animation)
+  - Red (#ef4444): Error state
+- **Adapt to theme**: Lighter shades in dark mode, darker in light mode
+- **Monochrome** for neutral actions
+
+#### Common Icons
+
+- **Window/Workspace states**: [folder-open] (open), [folder] (closed), [folder-dashed] (deleted)
+- **Actions**: [play-circle] (track), [plus-circle] (new), [gear] (settings)
+- **Status**: [check-circle] (success), [x-circle] (error), [wifi] (connection)
+- **Navigation**: [magnifying-glass] (search), [x] (clear/close), [caret-right] (expand)
+- **Content**: [file-text] (tab/document), [globe] (web), [clock] (time)
+
+#### Consistency Principles
+
+- Same icon for same concept throughout UI
+- Maintain visual weight balance
+- Ensure accessibility contrast ratios
+- Icons should be self-explanatory or paired with text
 
 ## Future Considerations
 

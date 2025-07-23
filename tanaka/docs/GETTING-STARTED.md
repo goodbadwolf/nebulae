@@ -9,6 +9,8 @@
 - [Getting Started](GETTING-STARTED.md)
 - [Development](DEVELOPMENT.md)
 - [Architecture](ARCHITECTURE.md)
+- [Firefox API Guide](FIREFOX-API-GUIDE.md)
+- [UI Design](UI-DESIGN.md)
 - [Sync Protocol](SYNC-PROTOCOL.md)
 - [Troubleshooting](TROUBLESHOOTING.md)
 - [Git Guidelines](../../docs/GIT.md)
@@ -148,8 +150,8 @@ launchctl load ~/Library/LaunchAgents/com.tanaka.server.plist
 ## Backup
 
 ```bash
-# Database is at ~/.local/share/tanaka/tanaka.db by default
-sqlite3 ~/.local/share/tanaka/tanaka.db ".backup tanaka-backup-$(date +%Y%m%d).db"
+# Database location depends on your configuration (default: ./tanaka.db)
+sqlite3 tanaka.db ".backup tanaka-backup-$(date +%Y%m%d).db"
 ```
 
 ## FAQ
