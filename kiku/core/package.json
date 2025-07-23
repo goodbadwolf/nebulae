@@ -18,7 +18,7 @@
     "tests": "vitest --no-watch",
     "tests:watch": "vitest --watch",
     "tests:coverage": "vitest --coverage --no-watch",
-    "lint": "eslint . --fix"
+    "lint:ts": "eslint . --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
