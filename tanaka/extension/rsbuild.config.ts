@@ -27,24 +27,24 @@ export default defineConfig({
         html: false,
       },
       // Playground entries
-      "playground/index": {
-        import: "./src/playground/index.ts",
+      "playground-js/index": {
+        import: "./src/playground-js/index.ts",
         html: true,
       },
-      "playground/popup": {
-        import: "./src/playground/popup.ts",
+      "playground-js/popup": {
+        import: "./src/playground-js/popup.ts",
         html: true,
       },
-      "playground/welcome": {
-        import: "./src/playground/welcome.ts",
+      "playground-js/welcome": {
+        import: "./src/playground-js/welcome.ts",
         html: true,
       },
-      "playground/settings": {
-        import: "./src/playground/settings.ts",
+      "playground-js/settings": {
+        import: "./src/playground-js/settings.ts",
         html: true,
       },
-      "playground/manager": {
-        import: "./src/playground/manager.ts",
+      "playground-js/manager": {
+        import: "./src/playground-js/manager.ts",
         html: true,
       },
     },
@@ -65,12 +65,12 @@ export default defineConfig({
         to: defaultConfig.buildDir,
       },
       {
-        from: "./src/playground/styles",
-        to: "./playground/styles",
+        from: "./src/playground-js/styles",
+        to: "./playground-js/styles",
       },
       {
-        from: "./src/playground/mock-data.js",
-        to: "./playground/mock-data.js",
+        from: "./src/playground-js/mock-data.js",
+        to: "./playground-js/mock-data.js",
       },
     ],
   },
@@ -79,11 +79,11 @@ export default defineConfig({
       // Map entry names to their respective HTML templates
       const templates: Record<string, string> = {
         popup: "./src/popup/index.html",
-        "playground/index": "./src/playground/index.html",
-        "playground/popup": "./src/playground/popup.html",
-        "playground/welcome": "./src/playground/welcome.html",
-        "playground/settings": "./src/playground/settings.html",
-        "playground/manager": "./src/playground/manager.html",
+        "playground-js/index": "./src/playground-js/index.html",
+        "playground-js/popup": "./src/playground-js/popup.html",
+        "playground-js/welcome": "./src/playground-js/welcome.html",
+        "playground-js/settings": "./src/playground-js/settings.html",
+        "playground-js/manager": "./src/playground-js/manager.html",
       };
       return templates[entryName] || "./src/popup/index.html";
     },
