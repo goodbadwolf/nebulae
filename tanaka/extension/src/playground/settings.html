@@ -35,7 +35,7 @@
         </div>
         <div class="tnk-playground-page-frame tnk-settings">
           <div class="tnk-settings__container">
-            <div class="tnk-settings__card">
+            <div class="tnk-card tnk-settings__card">
               <div class="tnk-sidebar">
                 <div class="tnk-sidebar__title">General</div>
                 <button class="tnk-sidebar__item tnk-sidebar__item--active" data-section="connection">
@@ -154,10 +154,10 @@
                     </div>
 
                     <div class="tnk-settings__button-group">
-                        <button class="tnk-btn tnk-btn--test" id="testConnection" ${this.connectionStatus === "testing" ? "disabled" : ""}>
+                        <button class="tnk-btn tnk-btn--secondary" id="testConnection" ${this.connectionStatus === "testing" ? "disabled" : ""}>
                             <i class="tnk-icon ph ph-plug"></i> Test Connection
                         </button>
-                        <button class="tnk-btn tnk-btn--save">
+                        <button class="tnk-btn tnk-btn--primary">
                             <i class="tnk-icon ph ph-floppy-disk"></i> Save Settings
                         </button>
                     </div>
@@ -267,7 +267,7 @@
                     </div>
 
                     <div class="tnk-settings__button-group">
-                        <button class="tnk-btn tnk-btn--save">
+                        <button class="tnk-btn tnk-btn--primary">
                             <i class="tnk-icon ph ph-floppy-disk"></i> Save Settings
                         </button>
                     </div>
