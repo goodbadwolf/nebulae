@@ -202,7 +202,7 @@ This guide documents the standardized components and patterns in the Tanaka play
 ```html
 <div class="tnk-empty-state">
   <div class="tnk-empty-state__icon">
-    <i class="tnk-icon tnk-icon--xxxl ph ph-folder"></i>
+    <i class="tnk-icon tnk-icon--3xl ph ph-folder"></i>
   </div>
   <h3 class="tnk-empty-state__title">No Items</h3>
   <p class="tnk-empty-state__description">Create your first item to get started</p>
@@ -220,8 +220,8 @@ This guide documents the standardized components and patterns in the Tanaka play
 <i class="tnk-icon tnk-icon--md ph ph-warning"></i>
 <i class="tnk-icon tnk-icon--lg ph ph-star"></i>
 <i class="tnk-icon tnk-icon--xl ph ph-folder"></i>
-<i class="tnk-icon tnk-icon--xxl ph ph-check"></i>
-<i class="tnk-icon tnk-icon--xxxl ph ph-trophy"></i>
+<i class="tnk-icon tnk-icon--2xl ph ph-check"></i>
+<i class="tnk-icon tnk-icon--3xl ph ph-trophy"></i>
 <i class="tnk-icon tnk-icon--spinning ph ph-arrow-clockwise"></i>
 ```
 
