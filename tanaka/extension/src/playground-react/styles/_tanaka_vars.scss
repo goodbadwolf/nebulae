@@ -1,0 +1,224 @@
+:root {
+  /* Colors - Primary */
+  --tnk-primary-lightest: #f3f0ff;
+  --tnk-primary-lighter: #e5dbff;
+  --tnk-primary-light: #8b5cf6;
+  --tnk-primary: #6366f1;
+  --tnk-primary-dark: #4f46e5;
+  --tnk-primary-darker: #4338ca;
+  --tnk-primary-darkest: #3730a3;
+
+  /* Colors - Secondary */
+  --tnk-secondary: #64748b;
+  --tnk-secondary-dark: #475569;
+  --tnk-secondary-light: #94a3b8;
+
+  /* Colors - Status */
+  --tnk-success-light: rgba(16, 185, 129, 0.1);
+  --tnk-success: #10b981;
+  --tnk-success-dark: #059669;
+  --tnk-warning-light: rgba(245, 158, 11, 0.1);
+  --tnk-warning: #f59e0b;
+  --tnk-warning-dark: #d97706;
+  --tnk-error-light: rgba(239, 68, 68, 0.1);
+  --tnk-error: #ef4444;
+  --tnk-error-dark: #dc2626;
+
+  /* Colors - Text */
+  --tnk-text-primary: #1f2937;
+  --tnk-text-secondary: #6b7280;
+  --tnk-text-tertiary: #9ca3af;
+  --tnk-text-muted: #9ca3af;
+  --tnk-text-on-primary: #fff;
+
+  /* Colors - Background */
+  --tnk-bg-primary: #fff;
+  --tnk-bg-secondary: #f5f5f7;
+  --tnk-bg-tertiary: #f9fafb;
+  --tnk-bg-subtle: #f9fafb;
+
+  /* Colors - Borders */
+  --tnk-border-primary: #e5e7eb;
+  --tnk-border-secondary: #f3f4f6;
+  --tnk-border: #e5e7eb;
+  --tnk-border-light: #f3f4f6;
+
+  /* Colors - Gray Scale */
+  --tnk-gray-50: #f8f9fa;
+  --tnk-gray-100: #f1f3f5;
+  --tnk-gray-200: #e9ecef;
+  --tnk-gray-300: #dee2e6;
+  --tnk-gray-400: #ced4da;
+  --tnk-gray-500: #adb5bd;
+  --tnk-gray-600: #868e96;
+  --tnk-gray-700: #495057;
+  --tnk-gray-800: #343a40;
+  --tnk-gray-900: #212529;
+
+  /* Colors - Base */
+  --tnk-white: #fff;
+  --tnk-black: #000;
+
+  /* Colors - Overlays */
+  --tnk-overlay-light: rgba(0, 0, 0, 0.05);
+  --tnk-overlay-dark: rgba(255, 255, 255, 0.05);
+
+  /* Colors - Specific States */
+  --tnk-error-bg-light: #fef2f2;
+  --tnk-error-border-light: #fecaca;
+
+  /* Shadows */
+  --tnk-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  --tnk-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%);
+  --tnk-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%);
+  --tnk-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 10%);
+  --tnk-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 25%);
+
+  /* Typography */
+  --tnk-font-family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+  --tnk-font-mono: "SF Mono", monaco, "Cascadia Code", monospace;
+
+  /* Font Sizes */
+  --tnk-text-xs: 11px;
+  --tnk-text-sm: 12px;
+  --tnk-text-base: 14px;
+  --tnk-text-lg: 16px;
+  --tnk-text-xl: 18px;
+  --tnk-text-2xl: 24px;
+  --tnk-text-3xl: 28px;
+  --tnk-text-4xl: 36px;
+
+  /* Semantic Font Sizes */
+  --tnk-text-small: var(--tnk-text-xs);    /* 11px - metadata */
+  --tnk-text-mono: var(--tnk-text-sm);     /* 12px - monospace URLs */
+  --tnk-text-body: var(--tnk-text-base);   /* 14px - body text */
+  --tnk-text-header: var(--tnk-text-base); /* 14px - section headers */
+
+  /* Font Weights */
+  --tnk-font-weight-normal: 400;
+  --tnk-font-weight-medium: 500;
+  --tnk-font-weight-semibold: 600;
+  --tnk-font-weight-bold: 700;
+
+  /* Icon Sizes */
+  --tnk-icon-sz: 16px;
+  --tnk-icon-sz-xs: calc(var(--tnk-icon-sz) * 0.75); /* 12px */
+  --tnk-icon-sz-sm: calc(var(--tnk-icon-sz) * 0.875); /* 14px */
+  --tnk-icon-sz-md: calc(var(--tnk-icon-sz) * 1.125); /* 18px */
+  --tnk-icon-sz-lg: calc(var(--tnk-icon-sz) * 1.25); /* 20px */
+  --tnk-icon-sz-xl: calc(var(--tnk-icon-sz) * 1.5); /* 24px */
+  --tnk-icon-sz-2xl: calc(var(--tnk-icon-sz) * 2); /* 32px */
+  --tnk-icon-sz-3xl: calc(var(--tnk-icon-sz) * 3); /* 48px */
+  --tnk-icon-size-4xl: calc(var(--tnk-icon-sz) * 4); /* 64px */
+
+  /* Logo Sizes */
+  --tnk-logo-size: 48px;
+  --tnk-logo-size-md: 60px;
+  --tnk-logo-size-lg: 72px;
+
+  /* Spacing */
+  --tnk-space-none: 0;
+  --tnk-space-2xs: 2px;
+  --tnk-space-xs: 4px;
+  --tnk-space-sm: 8px;
+  --tnk-space-md: 12px;
+  --tnk-space-lg: 16px;
+  --tnk-space-xl: 20px;
+  --tnk-space-2xl: 24px;
+  --tnk-space-3xl: 32px;
+  --tnk-space-4xl: 48px;
+  --tnk-space-5xl: 64px;
+  --tnk-space-6xl: 80px;
+  --tnk-space-7xl: 96px;
+  --tnk-space-8xl: 112px;
+  --tnk-space-9xl: 128px;
+  --tnk-space-10xl: 144px;
+
+  /* Border Radius */
+  --tnk-radius-sm: 4px;
+  --tnk-radius-md: 6px;
+  --tnk-radius-lg: 8px;
+  --tnk-radius-xl: 10px;
+  --tnk-radius-2xl: 12px;
+  --tnk-radius-3xl: 16px;
+  --tnk-radius-full: 9999px;
+
+  /* Border Widths */
+  --tnk-border-width-hairline: 0.5px;
+  --tnk-border-width: 1px;
+  --tnk-border-width-thick: 2px;
+  --tnk-border-width-accent: 3px;
+
+  /* Layout Dimensions */
+  --tnk-container-max-width: 1400px;
+  --tnk-button-min-width: 120px;
+  --tnk-control-label-width: 100px;
+  --tnk-search-icon-space: 40px;
+
+  /* Breakpoints */
+  --tnk-breakpoint-sm: 640px;
+  --tnk-breakpoint-md: 768px;
+  --tnk-breakpoint-lg: 1200px;
+
+  /* Transitions */
+  --tnk-transition-fast: 0.2s ease;
+  --tnk-transition-base: 0.3s ease;
+  --tnk-transition-slow: 0.5s ease;
+  --tnk-duration-normal: 0.2s;
+
+  /* Line Heights */
+  --tnk-line-height-tight: 1;
+  --tnk-line-height-normal: 1.4;
+  --tnk-line-height-relaxed: 1.5;
+  --tnk-line-height-loose: 1.6;
+
+  /* Letter Spacing */
+  --tnk-letter-spacing-tight: -0.025em;
+  --tnk-letter-spacing-normal: 0;
+  --tnk-letter-spacing-wide: 0.025em;
+  --tnk-letter-spacing-wider: 0.05em;
+  --tnk-letter-spacing-widest: 0.1em;
+
+  /* Opacity */
+  --tnk-opacity-0: 0;
+  --tnk-opacity-25: 0.25;
+  --tnk-opacity-50: 0.5;
+  --tnk-opacity-75: 0.75;
+  --tnk-opacity-100: 1;
+  --tnk-opacity-high: 0.8;
+  --tnk-opacity-full: 1;
+
+  /* Box Shadow Opacity */
+  --tnk-shadow-opacity-sm: 0.05;
+  --tnk-shadow-opacity-md: 0.1;
+  --tnk-shadow-opacity-lg: 0.25;
+  --tnk-shadow-opacity-xl: 0.35;
+
+  /* Animation Durations */
+  --tnk-animation-duration-fast: 0.6s;
+  --tnk-animation-duration-base: 1s;
+  --tnk-animation-duration-slow: 2s;
+
+  /* Cubic Bezier Easing */
+  --tnk-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Additional utility values */
+  --tnk-scale-hover: 1.05;
+  --tnk-scale-active: 0.95;
+  --tnk-translate-hover: -1px;
+
+  /* Z-index scale */
+  --tnk-z-base: 1;
+  --tnk-z-dropdown: 1000;
+  --tnk-z-sticky: 1100;
+  --tnk-z-overlay: 1150;
+  --tnk-z-modal: 1200;
+  --tnk-z-tooltip: 1300;
+
+  /* Screen Breakpoints */
+  --tnk-screen-sm: 36em;
+  --tnk-screen-md: 48em;
+  --tnk-screen-lg: 62em;
+  --tnk-screen-xl: 75em;
+  --tnk-screen-2xl: 88em;
+}

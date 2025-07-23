@@ -1,5 +1,6 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSass } from "@rsbuild/plugin-sass";
 import { pluginTypeCheck } from "@rsbuild/plugin-type-check";
 
 import defaultConfig from "./tanaka.config";
@@ -7,6 +8,7 @@ import defaultConfig from "./tanaka.config";
 export default defineConfig({
   plugins: [
     pluginReact(),
+    pluginSass(),
     pluginTypeCheck({
       enable: true,
       tsCheckerOptions: {
@@ -26,7 +28,7 @@ export default defineConfig({
         import: defaultConfig.entries.background!,
         html: false,
       },
-      // Playground entries
+      // Playground entries - Vanilla JS
       "playground-js/index": {
         import: "./src/playground-js/index.ts",
         html: true,
@@ -45,6 +47,11 @@ export default defineConfig({
       },
       "playground-js/manager": {
         import: "./src/playground-js/manager.ts",
+        html: true,
+      },
+      // Playground entries - React
+      "playground-rt/index": {
+        import: "./src/playground-react/index.tsx",
         html: true,
       },
     },
@@ -84,6 +91,7 @@ export default defineConfig({
         "playground-js/welcome": "./src/playground-js/welcome.html",
         "playground-js/settings": "./src/playground-js/settings.html",
         "playground-js/manager": "./src/playground-js/manager.html",
+        "playground-rt/index": "./src/playground-react/index.html",
       };
       return templates[entryName] || "./src/popup/index.html";
     },
