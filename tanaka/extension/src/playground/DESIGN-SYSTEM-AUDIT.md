@@ -28,7 +28,7 @@ The most severe issue discovered is that popup.html references 14+ CSS classes t
 | `.clear-button` | Clear search | No clear functionality |
 
 **Important Discovery**: Upon deeper investigation, many of these components (`.workspace-item`, `.search-container`)
-actually DO exist in design-system.css, but popup.html is not utilizing them correctly.
+actually DO exist in core.css, but popup.html is not utilizing them correctly.
 
 ## Summary Statistics
 
@@ -41,7 +41,7 @@ actually DO exist in design-system.css, but popup.html is not utilizing them cor
 
 ## Design System Component Inventory
 
-### Currently Available in design-system.css
+### Currently Available in core.css
 
 **Layout Components:**
 

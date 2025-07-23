@@ -1,5 +1,5 @@
 :root {
-  /* Popup-Specific Spacing (Compact for 500x600px viewport) */
+  /* Compact for 500x600px viewport */
   --tnk-popup-container-padding-header: var(--tnk-space-lg); /* 16px */
   --tnk-popup-container-padding-body: var(--tnk-space-lg); /* 16px */
   --tnk-popup-container-section-gap: var(--tnk-space-xl); /* 20px */

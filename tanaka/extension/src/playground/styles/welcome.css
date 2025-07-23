@@ -30,7 +30,6 @@
   padding: var(--tnk-space-2xl);
 }
 
-/* ===== Card ===== */
 .tnk-welcome-card {
   position: relative;
   background: var(--tnk-bg-primary);
@@ -55,7 +54,6 @@
     height var(--tnk-transition-base);
 }
 
-/* ===== Progress Bar ===== */
 .tnk-progress {
   height: var(--tnk-welcome-progress-height);
   background: var(--tnk-bg-secondary);
@@ -69,7 +67,6 @@
   width: 0%;
 }
 
-/* ===== Logo Section ===== */
 .tnk-welcome-hero {
   text-align: center;
   height: var(--tnk-welcome-hero-height);
@@ -103,7 +100,6 @@
   gap: var(--tnk-space-lg);
 }
 
-/* ===== Step Header ===== */
 .tnk-step-header {
   font-size: var(--tnk-text-sm);
   font-weight: var(--tnk-font-weight-semibold);
@@ -130,7 +126,6 @@
   font-weight: var(--tnk-font-weight-semibold);
 }
 
-/* ===== Step Content ===== */
 .tnk-step-content {
   max-width: var(--tnk-welcome-content-max-width);
   margin: 0 auto;
@@ -142,7 +137,6 @@
   padding-top: var(--tnk-space-xl);
 }
 
-/* ===== Form Elements ===== */
 .tnk-form-group {
   margin-bottom: var(--tnk-space-xl);
 }
@@ -219,7 +213,6 @@
   gap: var(--tnk-space-xs);
 }
 
-/* ===== Input Preview ===== */
 .tnk-input-preview {
   margin-top: var(--tnk-space-md);
   padding: var(--tnk-space-md);
@@ -241,7 +234,6 @@
   display: none;
 }
 
-/* ===== Connection Test ===== */
 .tnk-connection-test {
   margin: var(--tnk-space-lg) 0;
 }
@@ -275,7 +267,6 @@
   cursor: not-allowed;
 }
 
-/* ===== Connection Status ===== */
 .tnk-connection-status--compact {
   display: flex;
   align-items: center;
@@ -304,7 +295,6 @@
   color: var(--tnk-error);
 }
 
-/* ===== Button Group ===== */
 .tnk-button-group {
   display: flex;
   gap: var(--tnk-space-md);
@@ -312,14 +302,12 @@
   flex-shrink: 0;
 }
 
-/* ===== Success Animation ===== */
 .tnk-success-icon {
   font-size: var(--tnk-welcome-success-icon-size);
   color: var(--tnk-primary);
   animation: tnk-bounce 0.6s ease;
 }
 
-/* ===== Completion Summary ===== */
 .tnk-completion-summary {
   background: var(--tnk-bg-secondary);
   border-radius: var(--tnk-radius-2xl);
@@ -349,7 +337,6 @@
   color: var(--tnk-success);
 }
 
-/* ===== Spinner ===== */
 .tnk-spinner {
   display: inline-block;
   width: var(--tnk-welcome-spinner-size);
@@ -360,7 +347,6 @@
   animation: spin var(--tnk-animation-duration-base) linear infinite;
 }
 
-/* ===== Animations ===== */
 @keyframes tnk-bounce {
   0% {
     transform: translateY(0);
@@ -382,7 +368,6 @@
   }
 }
 
-/* Content animation classes */
 .tnk-welcome-card__content--fade-out {
   opacity: 0;
 }
@@ -391,7 +376,6 @@
   animation: tnk-fadeIn var(--tnk-welcome-fadeup-duration) ease forwards;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: var(--tnk-breakpoint-sm)) {
   .tnk-welcome-card__content {
     padding: var(--tnk-space-3xl) var(--tnk-space-2xl);
