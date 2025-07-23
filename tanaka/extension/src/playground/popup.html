@@ -84,12 +84,12 @@
 
     <script src="mock-data.js"></script>
     <script>
-      class PopupSimulator extends _SimulatorState {
+      class PopupPrototype extends _PrototypeState {
         constructor() {
           super();
           this.container = document.getElementById("popupContainer");
           if (!this.container) {
-            console.error("PopupSimulator: Container element 'popupContainer' not found");
+            console.error("PopupPrototype: Container element 'popupContainer' not found");
             return;
           }
           this.setupControls();
@@ -431,8 +431,8 @@
         }
       }
 
-      // Initialize simulator
-      new PopupSimulator();
+      // Initialize prototype
+      new PopupPrototype();
     </script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-// Mock data for Tanaka UI Simulator
+// Mock data for Tanaka UI Prototype
 /* global console */
 
 const mockWorkspaces = [
@@ -90,7 +90,7 @@ const _mockSearchResults = {
 };
 
 // State management utilities
-class _SimulatorState {
+class _PrototypeState {
   constructor() {
     this.currentState = "normal"; // 'loading' | 'empty' | 'normal' | 'searching' | 'error'
     this.searchQuery = "";

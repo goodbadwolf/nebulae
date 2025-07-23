@@ -50,7 +50,7 @@
     </div>
 
     <script>
-      class WelcomeSimulator {
+      class WelcomePrototype {
         constructor() {
           this.currentStep = 0;
           this.totalSteps = 4;
@@ -132,7 +132,7 @@
                     </div>
 
                     <div class="tnk-button-group">
-                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()">
+                        <button class="tnk-btn tnk-btn--primary" onclick="prototype.nextStep()">
                             Get Started <i class="tnk-icon ph ph-arrow-right"></i>
                         </button>
                     </div>
@@ -173,10 +173,10 @@
                     </div>
 
                     <div class="tnk-button-group">
-                        <button class="tnk-btn tnk-btn--secondary" onclick="simulator.previousStep()">
+                        <button class="tnk-btn tnk-btn--secondary" onclick="prototype.previousStep()">
                             <i class="tnk-icon ph ph-arrow-left"></i> Back
                         </button>
-                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()" id="deviceNextBtn" disabled>
+                        <button class="tnk-btn tnk-btn--primary" onclick="prototype.nextStep()" id="deviceNextBtn" disabled>
                             Next <i class="tnk-icon ph ph-arrow-right"></i>
                         </button>
                     </div>
@@ -227,7 +227,7 @@
                         </div>
 
                         <div class="tnk-connection-test">
-                            <button class="tnk-test-button" onclick="simulator.testConnection()" id="testBtn">
+                            <button class="tnk-test-button" onclick="prototype.testConnection()" id="testBtn">
                                 <i class="tnk-icon ph ph-plug"></i> Test Connection
                             </button>
                             <div id="connectionStatus"></div>
@@ -235,10 +235,10 @@
                     </div>
 
                     <div class="tnk-button-group">
-                        <button class="tnk-btn tnk-btn--secondary" onclick="simulator.previousStep()">
+                        <button class="tnk-btn tnk-btn--secondary" onclick="prototype.previousStep()">
                             <i class="tnk-icon ph ph-arrow-left"></i> Back
                         </button>
-                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.nextStep()" id="serverNextBtn" disabled>
+                        <button class="tnk-btn tnk-btn--primary" onclick="prototype.nextStep()" id="serverNextBtn" disabled>
                             Complete Setup <i class="tnk-icon ph ph-arrow-right"></i>
                         </button>
                     </div>
@@ -281,7 +281,7 @@
                     </div>
 
                     <div class="tnk-button-group">
-                        <button class="tnk-btn tnk-btn--primary" onclick="simulator.complete()">
+                        <button class="tnk-btn tnk-btn--primary" onclick="prototype.complete()">
                             Start Using Tanaka <i class="tnk-icon ph ph-check-circle"></i>
                         </button>
                     </div>
@@ -558,7 +558,7 @@
       }
 
       // Initialize
-      const simulator = new WelcomeSimulator();
+      const prototype = new WelcomePrototype();
     </script>
   </body>
 </html>
