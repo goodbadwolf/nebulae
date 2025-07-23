@@ -14,6 +14,7 @@
     "analyze:prod": "tsx scripts/dev.ts analyze --mode prod",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --fix",
+    "lint:css": "stylelint \"src/**/*.css\" --fix",
     "lint:ext": "web-ext lint --source-dir dist",
     "generate-icons": "node scripts/generate-icons.js",
     "tests": "echo 'No tests configured yet'"
@@ -42,6 +43,10 @@
     "pino-pretty": "^13.0.0",
     "prettier": "^3.6.2",
     "sharp": "^0.34.3",
+    "stylelint": "^16.12.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4",
+    "stylelint-selector-bem-pattern": "^4.0.1",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.37.0",

@@ -201,6 +201,16 @@ repos:
         pass_filenames: true
         require_serial: true
 
+      # CSS linting with stylelint
+      - id: tanaka-stylelint
+        name: "[TANAKA] Lint CSS with stylelint"
+        entry: bash -c 'cd tanaka/extension && pnpm run lint:css'
+        language: system
+        types: [css]
+        files: ^tanaka/extension/.*\.css$
+        pass_filenames: false
+        require_serial: true
+
       # Rust checks
       - id: tanaka-rustfmt
         name: "[TANAKA] Format Rust code"

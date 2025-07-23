@@ -1,0 +1,51 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-selector-bem-pattern",
+    "stylelint-order"
+  ],
+  "rules": {
+    "selector-class-pattern": [
+      "^tnk-[a-z]+(-[a-z]+)*(__(([a-z]+(-[a-z]+)*)?))*(--[a-z]+(-[a-z]+)*)?$",
+      {
+        "message": "Class names must follow BEM pattern: tnk-block__element--modifier"
+      }
+    ],
+    "order/properties-alphabetical-order": true,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "selector-pseudo-element-colon-notation": "double",
+    "at-rule-empty-line-before": [
+      "always",
+      {
+        "except": ["blockless-after-same-name-blockless", "first-nested"],
+        "ignore": ["after-comment"]
+      }
+    ],
+    "custom-property-pattern": "^tnk-[a-z0-9]+(-[a-z0-9]+)*$",
+    "selector-max-type": 1,
+    "selector-max-universal": 1,
+    "selector-no-qualifying-type": true,
+    "max-nesting-depth": 3,
+    "declaration-no-important": true,
+    "font-family-no-missing-generic-family-keyword": null,
+    "no-descending-specificity": null,
+    "media-feature-range-notation": "prefix",
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "media-query-no-invalid": null,
+    "no-duplicate-selectors": [
+      true,
+      {
+        "disallowInList": false
+      }
+    ],
+    "keyframes-name-pattern": null
+  },
+  "ignoreFiles": [
+    "**/*.min.css",
+    "**/vendor/**/*.css",
+    "**/node_modules/**/*.css",
+    "src/popup/styles/App.css",
+    "src/assets/styles/global.css"
+  ]
+}
