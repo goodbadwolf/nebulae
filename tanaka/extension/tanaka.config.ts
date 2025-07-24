@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { applyDefaults, createDefaultsApplier, type DeepPartial, type WithDefaults } from "@kiku/core";
+import { applyDefaults, createDefaultsApplier, type DeepPartial, hasProperty, type WithDefaults } from "@kiku/core";
 
 import type { Environment, TanakaConfig } from "./tanaka.config.d";
 
@@ -55,38 +55,97 @@ function getEnvironmentConfig(env: Environment): DeepPartial<TanakaConfig> {
  * @throws {Error} If configuration is invalid
  */
 function validateConfig(config: unknown): config is TanakaConfig {
-  if (!config || typeof config !== "object") {
+  if (!config || typeof config !== "object" || config === null) {
     throw new Error("Invalid configuration: config must be an object");
   }
 
-  const c = config as any;
-
-  if (!existsSync(c.srcDir)) {
-    throw new Error(`Source directory not found: ${c.srcDir}`);
+  // Validate srcDir
+  if (!hasProperty(config, "srcDir")) {
+    throw new Error("Missing required property: srcDir");
+  }
+  if (typeof config.srcDir !== "string") {
+    throw new Error("Invalid srcDir: must be a string");
+  }
+  if (!existsSync(config.srcDir)) {
+    throw new Error(`Source directory not found: ${config.srcDir}`);
   }
 
-  if (!existsSync(c.staticDir)) {
-    throw new Error(`Static directory not found: ${c.staticDir}`);
+  // Validate staticDir
+  if (!hasProperty(config, "staticDir")) {
+    throw new Error("Missing required property: staticDir");
+  }
+  if (typeof config.staticDir !== "string") {
+    throw new Error("Invalid staticDir: must be a string");
+  }
+  if (!existsSync(config.staticDir)) {
+    throw new Error(`Static directory not found: ${config.staticDir}`);
   }
 
-  if (!existsSync(c.manifestFile)) {
-    throw new Error(`Manifest file not found: ${c.manifestFile}`);
+  // Validate buildDir
+  if (!hasProperty(config, "buildDir")) {
+    throw new Error("Missing required property: buildDir");
+  }
+  if (typeof config.buildDir !== "string") {
+    throw new Error("Invalid buildDir: must be a string");
   }
 
-  if (!Array.isArray(c.iconSizes) || c.iconSizes.some((size: any) => typeof size !== "number" || size <= 0)) {
+  // Validate manifestFile
+  if (!hasProperty(config, "manifestFile")) {
+    throw new Error("Missing required property: manifestFile");
+  }
+  if (typeof config.manifestFile !== "string") {
+    throw new Error("Invalid manifestFile: must be a string");
+  }
+  if (!existsSync(config.manifestFile)) {
+    throw new Error(`Manifest file not found: ${config.manifestFile}`);
+  }
+
+  // Validate iconSizes
+  if (!hasProperty(config, "iconSizes")) {
+    throw new Error("Missing required property: iconSizes");
+  }
+  if (!Array.isArray(config.iconSizes)) {
+    throw new Error("Invalid iconSizes: must be an array");
+  }
+  if (config.iconSizes.some((size: unknown) => typeof size !== "number" || size <= 0)) {
     throw new Error("Invalid icon sizes: must be an array of positive numbers");
   }
 
-  if (!c.entries || typeof c.entries !== "object") {
-    throw new Error("Invalid entries configuration");
+  // Validate entries
+  if (!hasProperty(config, "entries")) {
+    throw new Error("Missing required property: entries");
+  }
+  if (!config.entries || typeof config.entries !== "object" || Array.isArray(config.entries)) {
+    throw new Error("Invalid entries: must be an object");
   }
 
-  if (!c.webExt || typeof c.webExt !== "object") {
-    throw new Error("Invalid webExt configuration");
+  // Validate entries properties are strings
+  for (const [key, value] of Object.entries(config.entries)) {
+    if (value !== undefined && typeof value !== "string") {
+      throw new Error(`Invalid entry ${key}: must be a string or undefined`);
+    }
   }
 
-  if (!Array.isArray(c.webExt.startUrls)) {
-    throw new Error("webExt.startUrls must be an array");
+  // Validate webExt
+  if (!hasProperty(config, "webExt")) {
+    throw new Error("Missing required property: webExt");
+  }
+  if (!config.webExt || typeof config.webExt !== "object" || Array.isArray(config.webExt)) {
+    throw new Error("Invalid webExt: must be an object");
+  }
+
+  const webExt = config.webExt;
+  if (!hasProperty(webExt, "sourceDir") || typeof webExt.sourceDir !== "string") {
+    throw new Error("Invalid webExt.sourceDir: must be a string");
+  }
+  if (!hasProperty(webExt, "startUrls") || !Array.isArray(webExt.startUrls)) {
+    throw new Error("Invalid webExt.startUrls: must be an array");
+  }
+  if (!hasProperty(webExt, "browserConsole") || typeof webExt.browserConsole !== "boolean") {
+    throw new Error("Invalid webExt.browserConsole: must be a boolean");
+  }
+  if (!hasProperty(webExt, "devtools") || typeof webExt.devtools !== "boolean") {
+    throw new Error("Invalid webExt.devtools: must be a boolean");
   }
 
   return true;
