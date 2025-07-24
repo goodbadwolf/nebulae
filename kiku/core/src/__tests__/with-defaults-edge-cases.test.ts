@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { WithDefaults } from "../index";
-import { applyDefaults, withDefaults } from "../with-defaults";
+import { applyDefaults, createDefaultsApplier } from "../with-defaults";
 
 describe("WithDefaults edge cases", () => {
   describe("Function types", () => {
@@ -38,7 +38,7 @@ describe("WithDefaults edge cases", () => {
       expect(config.asyncHandler).toBe(defaultAsyncHandler);
 
       // Runtime test
-      const applyConfigDefaults = withDefaults<Config>(defaults);
+      const applyConfigDefaults = createDefaultsApplier<Config>(defaults);
       const result = applyConfigDefaults({
         transformer: (x: number) => `Custom: ${x}`,
       });

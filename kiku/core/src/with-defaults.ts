@@ -95,7 +95,7 @@ type EnsureMergeable<T> = T & Record<string, unknown>;
  *   }
  * };
  *
- * const applyDefaults = withDefaults<PageShellProps>(defaults);
+ * const applyDefaults = createDefaultsApplier<PageShellProps>(defaults);
  *
  * // Usage:
  * const props = applyDefaults({ title: "Custom" });
@@ -103,13 +103,13 @@ type EnsureMergeable<T> = T & Record<string, unknown>;
  */
 // Note: We use Record<string, any> instead of Record<string, unknown> because
 // unknown would be too restrictive and prevent proper type inference in many cases
-export function withDefaults<T extends Record<string, any>>(defaults: DeepPartial<T>) {
+export function createDefaultsApplier<T extends Record<string, any>>(defaults: DeepPartial<T>) {
   return function <P extends DeepPartial<T>>(props?: P): T {
     if (!props) {
       return defaults as T;
     }
     // Merge props into defaults (props override defaults)
-    return deepMerge(defaults as EnsureMergeable<typeof defaults>, props as any) as T;
+    return deepMerge(defaults as EnsureMergeable<typeof defaults>, (props ?? {}) as EnsureMergeable<P>) as T;
   };
 }
 
@@ -138,7 +138,7 @@ export function applyDefaults<T extends Record<string, any>>(defaults: DeepParti
   if (!props) {
     return defaults as T;
   }
-  return deepMerge(defaults as EnsureMergeable<typeof defaults>, props as any) as T;
+  return deepMerge(defaults as EnsureMergeable<typeof defaults>, props ?? {}) as T;
 }
 
 /**

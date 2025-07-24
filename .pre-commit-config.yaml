@@ -71,10 +71,10 @@ repos:
     hooks:
       - id: commitizen
         name: "[ROOT] Check commit message format"
-        stages: [commit-msg, pre-push]
+        stages: [commit-msg]
       - id: commitizen-branch
         name: "[ROOT] Check branch name format"
-        stages: [manual]
+        # stages: [manual]
 
   # ========== TANAKA-SPECIFIC HOOKS ==========
 
@@ -319,6 +319,15 @@ repos:
         files: ^kiku/.*\.md$
         exclude: ^kiku/(node_modules|coverage|dist)/
 
+  # Commit message validation (kiku)
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.8.3
+    hooks:
+      - id: commitizen
+        name: "[KIKU] Check commit message format"
+        stages: [commit-msg]
+        files: ^kiku/
+
   # Kiku local hooks
   - repo: local
     hooks:
@@ -337,7 +346,6 @@ repos:
         language: system
         files: ^kiku/.*\.ts$
         pass_filenames: false
-        stages: [pre-push]
 
       # Run tests
       - id: kiku-tests
@@ -346,7 +354,6 @@ repos:
         language: system
         files: ^kiku/.*\.(ts|test\.ts)$
         pass_filenames: false
-        stages: [pre-push]
 
 # Configuration for specific hooks
 # Skip all: git commit --no-verify

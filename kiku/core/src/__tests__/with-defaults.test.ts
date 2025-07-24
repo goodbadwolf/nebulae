@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { WithDefaults } from "../index";
-import { applyDefaults, withDefaults } from "../with-defaults";
+import { applyDefaults, createDefaultsApplier } from "../with-defaults";
 
 describe("WithDefaults type", () => {
   // Type-level tests using type assertions
@@ -57,7 +57,7 @@ describe("WithDefaults type", () => {
     // This is why we need runtime helpers:
 
     // Test with runtime helper
-    const applyConfigDefaults = withDefaults<ConfigBase>({
+    const applyConfigDefaults = createDefaultsApplier<ConfigBase>({
       theme: "dark",
       debug: false,
       port: 3000,
@@ -127,7 +127,7 @@ describe("WithDefaults type", () => {
     });
 
     // Test runtime behavior with actual values
-    const applySettingsDefaults = withDefaults<SettingsBase>({
+    const applySettingsDefaults = createDefaultsApplier<SettingsBase>({
       ui: {
         theme: "dark",
         fontSize: 14,
@@ -215,7 +215,7 @@ describe("WithDefaults type", () => {
     });
 
     // Test runtime behavior as well
-    const applyDefaults = withDefaults<Options>({
+    const applyDefaults = createDefaultsApplier<Options>({
       mode: "auto",
       size: 100,
       enabled: true,
@@ -387,7 +387,7 @@ describe("withDefaults runtime helper", () => {
       showHeader: true,
     };
 
-    const applyDefaults = withDefaults<PageProps>(defaults);
+    const applyDefaults = createDefaultsApplier<PageProps>(defaults);
 
     const result1 = applyDefaults();
     expect(result1).toEqual({
@@ -441,7 +441,7 @@ describe("withDefaults runtime helper", () => {
       },
     };
 
-    const applyDef = withDefaults<Config>(defaults);
+    const applyDef = createDefaultsApplier<Config>(defaults);
 
     const result = applyDef({
       server: {
@@ -686,7 +686,7 @@ describe("applyDefaults direct function", () => {
       mode: "light" as const,
     };
 
-    const applyThemeDefaults = withDefaults<Theme>(defaults);
+    const applyThemeDefaults = createDefaultsApplier<Theme>(defaults);
 
     // Test multiple applications
     const theme1 = applyThemeDefaults({ primary: "red" });
