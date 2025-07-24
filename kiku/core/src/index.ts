@@ -1,5 +1,5 @@
 export { deepMerge } from "./merge";
-export { isPlainObject } from "./object-utils";
+export { hasProperty, isPlainObject } from "./object-utils";
 export type { DeepPartial } from "./partial";
 export {
   applyDefaults,

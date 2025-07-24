@@ -20,3 +20,10 @@
 export function isPlainObject(value: unknown): boolean {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
+
+/**
+ * Type guard to check if an object has a property
+ */
+export function hasProperty<K extends string>(obj: object, key: K): obj is object & Record<K, unknown> {
+  return key in obj;
+}
