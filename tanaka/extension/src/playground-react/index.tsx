@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 
-import { PlaygroundApp } from "./playground-app";
+import { PlaygroundApp } from "./app";
 
 const container = document.getElementById("playground-root");
 if (!container) {

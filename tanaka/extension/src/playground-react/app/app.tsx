@@ -5,8 +5,8 @@ import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor
 
 import { Card } from "../components/card";
 import { Icon } from "../components/icon";
-import { Logo } from "../components/logo";
-import styles from "./playground-app.module.scss";
+import { PageShell } from "../components/page-shell";
+import styles from "./app.module.scss";
 
 const playgroundPages = [
   {
@@ -36,17 +36,9 @@ const playgroundPages = [
 ];
 
 export function PlaygroundApp() {
-  console.log(styles);
   return (
     <MantineProvider>
-      <div className={styles.tnkPlaygroundContainer}>
-        <div className={styles.tnkPlaygroundContainer__header}>
-          <Logo size="large" />
-          <Title order={1} className={styles.tnkPlaygroundContainer__title}>
-            Tanaka Playground
-          </Title>
-        </div>
-
+      <PageShell header={{ brand: "Playground" }}>
         <div className={styles.tnkPlaygroundPagesSection}>
           <Title order={2} className={styles.tnkPlaygroundPagesSection__title}>
             Extension Pages
@@ -63,7 +55,7 @@ export function PlaygroundApp() {
             ))}
           </SimpleGrid>
         </div>
-      </div>
+      </PageShell>
     </MantineProvider>
   );
 }
