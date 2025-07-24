@@ -3,7 +3,10 @@ import { pluginReact } from "@rsbuild/plugin-react";
 import { pluginSass } from "@rsbuild/plugin-sass";
 import { pluginTypeCheck } from "@rsbuild/plugin-type-check";
 
-import defaultConfig from "./tanaka.config";
+import { getConfig } from "./tanaka.config";
+
+// Load config before use
+const config = await getConfig();
 
 export default defineConfig({
   plugins: [
@@ -21,11 +24,11 @@ export default defineConfig({
   source: {
     entry: {
       popup: {
-        import: defaultConfig.entries.popup,
+        import: config.entries.popup!,
         html: true,
       },
       background: {
-        import: defaultConfig.entries.background!,
+        import: config.entries.background!,
         html: false,
       },
       // Playground entries - Vanilla JS
@@ -61,15 +64,15 @@ export default defineConfig({
   },
   output: {
     distPath: {
-      root: defaultConfig.buildDir,
+      root: config.buildDir,
     },
     filename: {
       html: "[name]/index.html",
     },
     copy: [
       {
-        from: defaultConfig.staticDir,
-        to: defaultConfig.buildDir,
+        from: config.staticDir,
+        to: config.buildDir,
       },
       {
         from: "./src/playground-js/styles",

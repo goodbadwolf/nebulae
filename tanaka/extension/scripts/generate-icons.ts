@@ -4,9 +4,10 @@ import { mkdir, readFile } from "fs/promises";
 import { join } from "path";
 import sharp from "sharp";
 
-import config from "../tanaka.config.js";
+import { getConfig } from "../tanaka.config.js";
 
 async function generateIcons() {
+  const config = await getConfig();
   const svgPath = join(config.staticDir, "icons/icon.svg");
   const outputDir = join(config.staticDir, "icons");
 
