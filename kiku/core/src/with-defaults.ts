@@ -5,6 +5,11 @@ import type { DeepPartial } from "./partial";
  * Deep merges type T with defaults D, making literal default values visible in IntelliSense
  * while preserving the ability to use the full type from T.
  *
+ * This pattern is particularly valuable for configuration objects, component props, or API
+ * client options where defaults improve developer experience but flexibility is still needed.
+ * It solves a common TypeScript limitation where you typically have to choose between
+ * visible defaults OR type flexibility, not both.
+ *
  * @template T - The base type with optional properties
  * @template D - Default values (should be assignable to T)
  *
@@ -28,17 +33,25 @@ import type { DeepPartial } from "./partial";
  *
  * type Config = WithDefaults<ConfigBase, ConfigDefaults>;
  * // Result: {
- * //   theme: "dark" | string;  // Can use any string, but "dark" is the default
- * //   debug: false | boolean;  // Can use any boolean, but false is the default
- * //   settings: {
- * //     timeout: 5000 | number;  // Can use any number, but 5000 is the default
- * //     retries?: number;  // Still optional, no default provided
+ * //   theme: "dark" | string;  // REQUIRED - Can use any string, but "dark" is the default
+ * //   debug: false | boolean;  // REQUIRED - Can use any boolean, but false is the default
+ * //   settings: {              // REQUIRED - Has default value
+ * //     timeout: 5000 | number;  // REQUIRED - Can use any number, but 5000 is the default
+ * //     retries?: number;  // Still OPTIONAL - no default provided
  * //   };
  * // }
  *
  * @note This performs a deep merge, handling nested objects recursively.
+ *
+ * @important Properties with defaults become REQUIRED in the result type.
+ *            Properties without defaults remain optional.
+ *
+ * @arrayBehavior Arrays are REPLACED, not merged. For example:
+ *                deepMerge([1, 2, 3], [4, 5]) results in [4, 5]
+ *
+ * @undefinedBehavior undefined values in defaults are skipped during merging
  */
-export type WithDefaults<T, D> = T extends object
+export type WithDefaults<T, D extends DeepPartial<T>> = T extends object
   ? D extends object
     ? {
         // Required properties: those that have defaults
@@ -88,6 +101,8 @@ type EnsureMergeable<T> = T & Record<string, unknown>;
  * const props = applyDefaults({ title: "Custom" });
  * // Result: { title: "Custom", theme: "dark", settings: { timeout: 5000 } }
  */
+// Note: We use Record<string, any> instead of Record<string, unknown> because
+// unknown would be too restrictive and prevent proper type inference in many cases
 export function withDefaults<T extends Record<string, any>>(defaults: DeepPartial<T>) {
   return function <P extends DeepPartial<T>>(props?: P): T {
     if (!props) {
@@ -125,3 +140,101 @@ export function applyDefaults<T extends Record<string, any>>(defaults: DeepParti
   }
   return deepMerge(defaults as EnsureMergeable<typeof defaults>, props as any) as T;
 }
+
+/**
+ * Like WithDefaults but keeps all properties optional while still showing
+ * default values in IntelliSense. This is useful when you want to show
+ * defaults but not require them.
+ *
+ * @template T - The base type with optional properties
+ * @template D - Default values (should be assignable to T)
+ *
+ * @example
+ * interface ConfigBase {
+ *   theme?: string;
+ *   debug?: boolean;
+ *   port?: number;
+ * }
+ *
+ * type ConfigDefaults = {
+ *   theme: "dark";
+ *   debug: false;
+ * };
+ *
+ * type Config = PartialWithDefaults<ConfigBase, ConfigDefaults>;
+ * // Result: {
+ * //   theme?: "dark" | string;  // Still optional but shows default
+ * //   debug?: false | boolean;  // Still optional but shows default
+ * //   port?: number;           // Still optional, no default
+ * // }
+ */
+export type PartialWithDefaults<T, D extends DeepPartial<T>> = {
+  [K in keyof T]?: K extends keyof D
+    ? T[K] extends object
+      ? D[K] extends object
+        ? PartialWithDefaults<T[K], D[K]>
+        : T[K] | D[K]
+      : T[K] | D[K]
+    : T[K];
+};
+
+/**
+ * Non-recursive version of WithDefaults for better performance with large flat objects.
+ * Still preserves union types for IntelliSense visibility but only at the top level.
+ *
+ * @template T - The base type with optional properties
+ * @template D - Default values (should be assignable to T)
+ *
+ * @example
+ * interface ConfigBase {
+ *   theme?: string;
+ *   debug?: boolean;
+ *   nested?: { value?: number };
+ * }
+ *
+ * type ConfigDefaults = {
+ *   theme: "dark";
+ *   nested: { value: 100 };
+ * };
+ *
+ * type Config = ShallowWithDefaults<ConfigBase, ConfigDefaults>;
+ * // Result: {
+ * //   theme: "dark" | string;    // Shows union
+ * //   debug?: boolean;           // Still optional
+ * //   nested: { value: 100 };    // Replaced entirely, no deep merge
+ * // }
+ */
+export type ShallowWithDefaults<T, D extends DeepPartial<T>> = {
+  [K in keyof T & keyof D]: T[K] | D[K];
+} & {
+  [K in keyof T as K extends keyof D ? never : K]?: T[K];
+};
+
+/**
+ * Requires ALL properties to have defaults. Useful for configuration objects
+ * where no property should be undefined.
+ *
+ * @template T - The base type
+ * @template D - Default values (must provide defaults for ALL properties)
+ *
+ * @example
+ * interface ConfigBase {
+ *   theme?: string;
+ *   debug?: boolean;
+ *   port?: number;
+ * }
+ *
+ * // This would cause a type error - missing 'port' default
+ * // type Config = StrictWithDefaults<ConfigBase, { theme: "dark", debug: false }>;
+ *
+ * // This works - all properties have defaults
+ * type Config = StrictWithDefaults<ConfigBase, {
+ *   theme: "dark";
+ *   debug: false;
+ *   port: 3000;
+ * }>;
+ */
+// Note: StrictWithDefaults uses a type intersection approach
+// This allows us to enforce that D provides all required properties
+// while still being compatible with the WithDefaults constraint
+export type StrictWithDefaults<T, D extends Required<T>> = WithDefaults<T, D & DeepPartial<T>>;

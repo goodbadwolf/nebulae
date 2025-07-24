@@ -651,6 +651,28 @@ describe("applyDefaults direct function", () => {
     expect(result.data).toEqual({});
   });
 
+  it("should skip undefined values in props when merging", () => {
+    interface Config {
+      a?: number;
+      b?: string;
+      c?: boolean;
+    }
+
+    const defaults = {
+      a: 1,
+      b: "default",
+      c: false,
+    };
+
+    const result = applyDefaults<Config>(defaults, {
+      a: 2,
+      b: undefined, // undefined in props should be skipped
+    });
+
+    // b should keep its default value since undefined is skipped
+    expect(result).toEqual({ a: 2, b: "default", c: false });
+  });
+
   it("should work with withDefaults curried function", () => {
     interface Theme {
       primary?: string;

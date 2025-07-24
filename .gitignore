@@ -34,31 +34,31 @@ repmoix*.txt
 
 # ========== Build Artifacts ==========
 # Common build directories
-dist/
-build/
-out/
+**/dist/
+**/build/
+**/out/
 
 # Coverage reports
-coverage/
-*.lcov
-.nyc_output/
+**/coverage/
+**/lcov
+**/nyc_output/
 
 # ========== Dependencies ==========
 # Node.js
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
 
 # Rust
-target/
+**/target/
 
 # Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
+**/__pycache__/
+**/py[cod]
+**/$py.class
+**/so
 .Python
 .venv/
 pip-log.txt
