@@ -218,6 +218,96 @@ config.self = config; // Circular reference
 const result = applyDefaults(defaults, config);
 ```
 
+## React Integration
+
+### Component Props
+
+WithDefaults is particularly useful for React component props with sensible defaults:
+
+```typescript
+// Component props with defaults
+interface ButtonPropsBase {
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "small" | "medium" | "large";
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+const buttonDefaults = {
+  variant: "primary" as const,
+  size: "medium" as const,
+  disabled: false,
+  loading: false,
+};
+
+// Option 1: Required props with defaults (WithDefaults)
+type ButtonProps = WithDefaults<ButtonPropsBase, typeof buttonDefaults>;
+
+export function Button(props: ButtonProps) {
+  // All default properties are required in props
+  const { variant, size, disabled, loading } = props;
+  // ...
+}
+
+// Option 2: Optional props with visible defaults (PartialWithDefaults)
+type ButtonProps = PartialWithDefaults<ButtonPropsBase, typeof buttonDefaults>;
+
+export function Button(props: ButtonProps = {}) {
+  // Use runtime helper to apply defaults
+  const { variant, size, disabled, loading } = applyDefaults(buttonDefaults, props);
+  // ...
+}
+```
+
+### React Hooks
+
+Custom hooks often need configuration with good defaults:
+
+```typescript
+interface UseFetchOptionsBase {
+  method?: "GET" | "POST" | "PUT" | "DELETE";
+  retries?: number;
+  timeout?: number;
+  cache?: boolean;
+}
+
+const fetchDefaults = {
+  method: "GET" as const,
+  retries: 3,
+  timeout: 30000,
+  cache: true,
+};
+
+type UseFetchOptions = WithDefaults<UseFetchOptionsBase, typeof fetchDefaults>;
+
+export function useFetch(url: string, options: Partial<UseFetchOptions> = {}) {
+  const config = applyDefaults(fetchDefaults, options);
+  // config has all defaults applied
+}
+```
+
+### React Context
+
+For context providers with complex default states:
+
+```typescript
+interface AppContextBase {
+  user?: { id?: string; role?: "admin" | "user" | "guest" };
+  settings?: { theme?: "light" | "dark"; language?: string };
+}
+
+const contextDefaults = {
+  user: { role: "guest" as const },
+  settings: { theme: "light" as const, language: "en" },
+};
+
+type AppContextType = WithDefaults<AppContextBase, typeof contextDefaults>;
+
+const AppContext = React.createContext<AppContextType>(
+  applyDefaults(contextDefaults, {})
+);
+```
+
 ## Best Practices
 
 ### 1. Use Type-Safe Defaults
