@@ -59,7 +59,7 @@ createCommand("watch", "Build, watch for changes, and run in Firefox").action(as
   setupProcessHandlers(() => pm.killAll());
 
   const watchConfig = rsbuildWatchConfig(buildMode);
-  const webExtProcess = webExtConfig();
+  const webExtProcess = await webExtConfig();
 
   pm.spawn(watchConfig);
 

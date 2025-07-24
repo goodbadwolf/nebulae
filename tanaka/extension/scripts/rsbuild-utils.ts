@@ -1,4 +1,4 @@
-import defaultConfig from "../tanaka.config";
+import { getConfig } from "../tanaka.config";
 import { type BuildMode } from "./common";
 import { logger } from "./logger";
 import { type ProcessConfig } from "./process-utils";
@@ -27,15 +27,16 @@ export function rsbuildWatchConfig(mode: BuildMode): ProcessConfig {
   };
 }
 
-export function webExtConfig(): ProcessConfig {
-  logger.info("Starting web-ext with config:", defaultConfig.webExt);
-  const args = ["web-ext", "run", "--source-dir", defaultConfig.buildDir];
+export async function webExtConfig(): Promise<ProcessConfig> {
+  const config = await getConfig();
+  logger.info("Starting web-ext with config:", config.webExt);
+  const args = ["web-ext", "run", "--source-dir", config.buildDir];
 
-  if (defaultConfig.webExt.devtools) {
+  if (config.webExt.devtools) {
     args.push("--devtools");
   }
 
-  if (defaultConfig.webExt.browserConsole) {
+  if (config.webExt.browserConsole) {
     args.push("--browser-console");
   }
   return {
