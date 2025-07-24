@@ -101,15 +101,15 @@
   --tnk-font-weight-bold: 700;
 
   /* Icon Sizes */
-  --tnk-icon-sz: 16px;
-  --tnk-icon-sz-xs: calc(var(--tnk-icon-sz) * 0.75); /* 12px */
-  --tnk-icon-sz-sm: calc(var(--tnk-icon-sz) * 0.875); /* 14px */
-  --tnk-icon-sz-md: calc(var(--tnk-icon-sz) * 1.125); /* 18px */
-  --tnk-icon-sz-lg: calc(var(--tnk-icon-sz) * 1.25); /* 20px */
-  --tnk-icon-sz-xl: calc(var(--tnk-icon-sz) * 1.5); /* 24px */
-  --tnk-icon-sz-2xl: calc(var(--tnk-icon-sz) * 2); /* 32px */
-  --tnk-icon-sz-3xl: calc(var(--tnk-icon-sz) * 3); /* 48px */
-  --tnk-icon-size-4xl: calc(var(--tnk-icon-sz) * 4); /* 64px */
+  --tnk-icon-sz-default: 16px;
+  --tnk-icon-sz-xs: calc(var(--tnk-icon-sz-default) * 0.75); /* 12px */
+  --tnk-icon-sz-sm: calc(var(--tnk-icon-sz-default) * 0.875); /* 14px */
+  --tnk-icon-sz-md: calc(var(--tnk-icon-sz-default) * 1.125); /* 18px */
+  --tnk-icon-sz-lg: calc(var(--tnk-icon-sz-default) * 1.25); /* 20px */
+  --tnk-icon-sz-xl: calc(var(--tnk-icon-sz-default) * 1.5); /* 24px */
+  --tnk-icon-sz-2xl: calc(var(--tnk-icon-sz-default) * 2); /* 32px */
+  --tnk-icon-sz-3xl: calc(var(--tnk-icon-sz-default) * 3); /* 48px */
+  --tnk-icon-sz-4xl: calc(var(--tnk-icon-sz-default) * 4); /* 64px */
 
   /* Logo Sizes */
   --tnk-logo-size: 48px;
@@ -159,6 +159,7 @@
   --tnk-breakpoint-sm: 640px;
   --tnk-breakpoint-md: 768px;
   --tnk-breakpoint-lg: 1200px;
+  --tnk-breakpoint-xl: 1400px;
 
   /* Transitions */
   --tnk-transition-fast: 0.2s ease;

@@ -1,11 +1,11 @@
 .tnk-page-shell {
-  background-color: var(--tnk-bg-primary);
+  background-color: var(--tnk-bg-secondary);
   --app-shell-padding: var(--tnk-space-md);
 }
 
 .tnk-page-shell__header {
-  background-color: var(--tnk-bg-primary);
-  border-bottom: var(--tnk-border-width) solid var(--tnk-border-primary);
+  background-color: var(--tnk-bg-secondary);
+  border-bottom: 0px;
   --app-shell-header-height: var(--tnk-space-7xl);
 }
 
@@ -26,6 +26,6 @@
 }
 
 .tnk-page-shell__main {
-  background-color: var(--tnk-bg-primary);
+  /*background-color: var(--tnk-bg-primary);*/
   margin-top: var(--tnk-space-7xl);
 }

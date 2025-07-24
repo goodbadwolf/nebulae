@@ -1,4 +1,4 @@
-.tnkAppLogo {
+.tnk-app-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6,25 +6,25 @@
   color: var(--tnk-white);
   font-weight: var(--tnk-font-weight-bold);
   border-radius: var(--tnk-radius-xl);
-  box-shadow: 0 8px 16px rgb(99 102 241 / var(--tnk-shadow-opacity-lg));
+  box-shadow: 0 var(--tnk-space-sm) var(--tnk-space-lg) rgb(from var(--tnk-primary) r g b / var(--tnk-shadow-opacity-lg));
   font-family: var(--tnk-font-family);
   transition: all var(--tnk-transition-fast);
   overflow: hidden;
   position: relative;
 
-  &--small {
+  &--sm {
     width: var(--tnk-logo-size);
     height: var(--tnk-logo-size);
     font-size: var(--tnk-text-2xl);
   }
 
-  &--medium {
+  &--md {
     width: var(--tnk-logo-size-md);
     height: var(--tnk-logo-size-md);
     font-size: var(--tnk-text-3xl);
   }
 
-  &--large {
+  &--lg {
     width: var(--tnk-logo-size-lg);
     height: var(--tnk-logo-size-lg);
     font-size: var(--tnk-text-4xl);
