@@ -1,4 +1,4 @@
-.tnkPlaygroundCard {
+.tnk-playground-card {
   display: block;
   background: var(--tnk-bg-primary);
   border: var(--tnk-border-width-thick) solid var(--tnk-border-primary);
@@ -21,27 +21,27 @@
   }
 }
 
-.tnkPlaygroundCard__header {
+.tnk-playground-card__header {
   display: flex;
   align-items: center;
   gap: var(--tnk-space-lg);
   margin-bottom: var(--tnk-space-md);
 }
 
-.tnkPlaygroundCard__icon {
+.tnk-playground-card__icon {
   color: var(--tnk-primary);
   opacity: var(--tnk-opacity-high);
   transition: all var(--tnk-transition-fast);
 }
 
-.tnkPlaygroundCard__title {
+.tnk-playground-card__title {
   margin: 0;
   font-size: var(--tnk-text-xl);
   font-weight: var(--tnk-font-weight-semibold);
   color: var(--tnk-text-primary);
 }
 
-.tnkPlaygroundCard__description {
+.tnk-playground-card__description {
   margin: 0;
   font-size: var(--tnk-text-md);
   line-height: var(--tnk-line-height-relaxed);

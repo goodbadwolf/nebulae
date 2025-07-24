@@ -1,0 +1,15 @@
+.tnk-extension-pages-section {
+  max-width: calc(var(--tnk-breakpoint-xl) - var(--tnk-space-xl));
+  margin: var(--tnk-space-xl) auto;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.tnk-extension-pages-section__title {
+  font-size: var(--tnk-text-3xl);
+  font-weight: var(--tnk-font-weight-semibold);
+  color: var(--tnk-text-primary);
+  /* margin-bottom: var(--tnk-space-sm); */
+}

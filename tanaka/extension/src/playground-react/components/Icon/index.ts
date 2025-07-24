@@ -1,2 +1,2 @@
-export type { IconSize, IconWeight } from "./icon";
+export type { IconSize, IconSpinning, IconWeight } from "./icon";
 export { Icon } from "./icon";

@@ -1,12 +1,11 @@
-.tnkIcon {
+.tnk-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: currentColor;
+  color: var(--tnk-primary);
   vertical-align: middle;
   transition: all var(--tnk-transition-fast);
 
-  // Size variants
   &--xs {
     width: var(--tnk-icon-sz-xs);
     height: var(--tnk-icon-sz-xs);
@@ -18,8 +17,8 @@
   }
 
   &--md {
-    width: var(--tnk-icon-sz);
-    height: var(--tnk-icon-sz);
+    width: var(--tnk-icon-sz-md);
+    height: var(--tnk-icon-sz-md);
   }
 
   &--lg {
@@ -43,8 +42,8 @@
   }
 
   &--4xl {
-    width: var(--tnk-icon-size-4xl);
-    height: var(--tnk-icon-size-4xl);
+    width: var(--tnk-icon-sz-4xl);
+    height: var(--tnk-icon-sz-4xl);
   }
 
   &--spinning {

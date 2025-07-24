@@ -11,7 +11,7 @@ type PageShellPropsBase = {
   header?: {
     brand?: string;
     logo?: {
-      size?: "small" | "medium" | "large";
+      size?: "sm" | "md" | "lg";
       icon?: ReactNode;
     };
     align?: "left" | "center" | "right";
@@ -21,7 +21,7 @@ type PageShellPropsBase = {
 const defaultProps = {
   header: {
     brand: "Tanaka",
-    logo: { size: "medium" },
+    logo: { size: "md" },
     align: "center",
   },
 } as const;

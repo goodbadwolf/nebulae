@@ -1,10 +1,22 @@
-import styles from "./app-logo.module.scss";
+import "./app-logo.scss";
 
-interface AppLogoProps {
-  size?: "small" | "medium" | "large";
-}
+import { applyDefaults, type DeepPartial, type WithDefaults } from "@kiku/core";
+import clsx from "clsx";
 
-export function AppLogo(props: AppLogoProps) {
-  const { size = "medium" } = props;
-  return <div className={`${styles.tnkAppLogo} ${styles[`tnkAppLogo--${size}`]}`}>T</div>;
+type AppLogoPropsBase = {
+  size?: "sm" | "md" | "lg";
+};
+
+const defaultProps = {
+  size: "md",
+} as const;
+
+export type AppLogoProps = WithDefaults<AppLogoPropsBase, typeof defaultProps>;
+
+export function AppLogo(props: DeepPartial<AppLogoProps> = {}) {
+  const { size } = applyDefaults(defaultProps, props);
+
+  const classes = clsx("tnk-app-logo", `tnk-app-logo--${size}`);
+
+  return <div className={classes}>T</div>;
 }
