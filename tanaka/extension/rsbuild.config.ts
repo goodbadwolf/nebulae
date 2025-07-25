@@ -54,11 +54,11 @@ export default defineConfig({
       },
       // Playground entries - React
       "playground-rt/index": {
-        import: "./src/playground-react/index.tsx",
+        import: "./src/playground-react/routes/index.tsx",
         html: true,
       },
       "playground-rt/welcome": {
-        import: "./src/playground-react/welcome.tsx",
+        import: "./src/playground-react/routes/welcome.tsx",
         html: true,
       },
     },
