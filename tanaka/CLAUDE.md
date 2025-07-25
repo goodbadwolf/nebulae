@@ -39,10 +39,15 @@ Tanaka is a Firefox tab synchronization system built with:
 ```text
 tanaka/
 ├── extension/          # Firefox WebExtension (TypeScript, Yjs)
+│   ├── src/
+│   │   ├── playground-react/  # React playground using Mantine UI
+│   │   └── playground-js/     # Vanilla JS playground
 ├── server/            # Rust Tanaka server (axum, tokio, yrs, SQLite)
 │   └── config/        # Example configuration files
 └── docs/              # Project documentation
 ```
+
+**Important**: The playground-react directory uses Mantine UI framework. Do not remove Mantine-related files or imports.
 
 ### Development Workflow
 
