@@ -1,0 +1,24 @@
+.tnk-step-welcome {
+  text-align: center;
+  gap: var(--tnk-space-xl);
+
+  &__icon {
+    color: var(--tnk-primary);
+    margin-bottom: var(--tnk-space-lg);
+  }
+
+  &__title {
+    font-size: var(--tnk-h1-font-size);
+    color: var(--tnk-text-primary);
+  }
+
+  &__description {
+    font-size: var(--tnk-text-lg);
+    color: var(--tnk-text-secondary);
+    max-width: var(--tnk-space-20xl);
+  }
+
+  &__button {
+    margin-top: var(--tnk-space-2xl);
+  }
+}

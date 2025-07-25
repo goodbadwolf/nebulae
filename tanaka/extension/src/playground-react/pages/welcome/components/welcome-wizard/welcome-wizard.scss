@@ -1,0 +1,17 @@
+.tnk-welcome-wizard {
+  background: var(--tnk-bg-secondary);
+  border: 2px solid var(--tnk-border-primary);
+  border-radius: var(--tnk-radius-xl);
+  box-shadow: var(--tnk-card-shadow);
+  max-width: var(--tnk-space-21xl);
+  width: 100%;
+  overflow: hidden;
+
+  &__content {
+    padding: var(--tnk-space-6xl);
+    min-height: var(--tnk-space-20xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

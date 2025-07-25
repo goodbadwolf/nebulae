@@ -1,0 +1,7 @@
+.tnk-welcome-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - var(--tnk-space-16xl));
+  padding: var(--tnk-space-4xl);
+}
