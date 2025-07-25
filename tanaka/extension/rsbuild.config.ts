@@ -57,6 +57,10 @@ export default defineConfig({
         import: "./src/playground-react/index.tsx",
         html: true,
       },
+      "playground-rt/welcome": {
+        import: "./src/playground-react/welcome.tsx",
+        html: true,
+      },
     },
     define: {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
@@ -95,6 +99,7 @@ export default defineConfig({
         "playground-js/settings": "./src/playground-js/settings.html",
         "playground-js/manager": "./src/playground-js/manager.html",
         "playground-rt/index": "./src/playground-react/index.html",
+        "playground-rt/welcome": "./src/playground-react/welcome.html",
       };
       return templates[entryName] || "./src/popup/index.html";
     },

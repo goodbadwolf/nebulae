@@ -27,6 +27,18 @@
   --tnk-info: #06b6d4;
   --tnk-info-dark: #0891b2;
 
+  /* Colors - Status Backgrounds */
+  --tnk-bg-success: rgba(16, 185, 129, 0.1);
+  --tnk-bg-warning: rgba(245, 158, 11, 0.1);
+  --tnk-bg-error: rgba(239, 68, 68, 0.1);
+  --tnk-bg-info: rgba(6, 182, 212, 0.1);
+
+  /* Colors - Status Text */
+  --tnk-text-success: #059669;
+  --tnk-text-warning: #d97706;
+  --tnk-text-error: #dc2626;
+  --tnk-text-info: #0891b2;
+
   /* Colors - Text */
   --tnk-text-primary: #1f2937;
   --tnk-text-secondary: #6b7280;
@@ -328,9 +340,28 @@
     --tnk-border-primary: #374151;
     --tnk-border-secondary: #4b5563;
 
+    /* Colors - Status Backgrounds (darker in dark mode) */
+    --tnk-bg-success: rgba(16, 185, 129, 0.15);
+    --tnk-bg-warning: rgba(245, 158, 11, 0.15);
+    --tnk-bg-error: rgba(239, 68, 68, 0.15);
+    --tnk-bg-info: rgba(6, 182, 212, 0.15);
+
+    /* Colors - Status Text (lighter in dark mode) */
+    --tnk-text-success: #10b981;
+    --tnk-text-warning: #f59e0b;
+    --tnk-text-error: #ef4444;
+    --tnk-text-info: #06b6d4;
+
     /* Colors - Interactive States */
     --tnk-focus-ring: var(--tnk-primary);
     --tnk-overlay-light: rgba(255, 255, 255, 0.1);
     --tnk-overlay-dark: rgba(0, 0, 0, 0.2);
+
+    /* Shadows - Light/white shadows for dark mode */
+    --tnk-shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 10%), 0 1px 3px 0 rgb(0 0 0 / 50%);
+    --tnk-shadow-md: 0 4px 6px -1px rgb(255 255 255 / 10%), 0 2px 4px -1px rgb(0 0 0 / 50%);
+    --tnk-shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 10%), 0 4px 6px -2px rgb(0 0 0 / 50%);
+    --tnk-shadow-xl: 0 20px 25px -5px rgb(255 255 255 / 10%), 0 10px 10px -5px rgb(0 0 0 / 50%);
+    --tnk-shadow-2xl: 0 25px 50px -12px rgb(255 255 255 / 15%), 0 25px 50px -12px rgb(0 0 0 / 50%);
   }
 }

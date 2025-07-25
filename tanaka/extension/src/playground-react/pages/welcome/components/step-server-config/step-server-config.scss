@@ -1,0 +1,49 @@
+.tnk-step-server-config {
+  gap: var(--tnk-space-2xl);
+
+  &__title {
+    font-size: var(--tnk-h2-font-size);
+    color: var(--tnk-text-primary);
+    margin-bottom: var(--tnk-space-sm);
+  }
+
+  &__description {
+    font-size: var(--tnk-text-base);
+    color: var(--tnk-text-secondary);
+  }
+
+  &__test-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--tnk-space-md);
+    margin: var(--tnk-space-lg) var(--tnk-space-none);
+  }
+
+  &__test-result {
+    display: flex;
+    align-items: center;
+    gap: var(--tnk-space-sm);
+    padding: var(--tnk-space-md);
+    border-radius: var(--tnk-radius-md);
+    font-size: var(--tnk-text-sm);
+
+    &--testing {
+      background-color: var(--tnk-bg-info);
+      color: var(--tnk-text-info);
+    }
+
+    &--success {
+      background-color: var(--tnk-bg-success);
+      color: var(--tnk-text-success);
+    }
+
+    &--error {
+      background-color: var(--tnk-bg-error);
+      color: var(--tnk-text-error);
+    }
+  }
+
+  &__actions {
+    margin-top: var(--tnk-space-xl);
+  }
+}

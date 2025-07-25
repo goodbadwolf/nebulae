@@ -1,0 +1,40 @@
+.tnk-step-device-name {
+  gap: var(--tnk-space-2xl);
+
+  &__title {
+    font-size: var(--tnk-h2-font-size);
+    color: var(--tnk-text-primary);
+    margin-bottom: var(--tnk-space-sm);
+  }
+
+  &__description {
+    font-size: var(--tnk-text-base);
+    color: var(--tnk-text-secondary);
+  }
+
+  &__preview {
+    display: flex;
+    align-items: center;
+    gap: var(--tnk-space-md);
+    padding: var(--tnk-space-lg);
+    background-color: var(--tnk-bg-primary);
+    border: 1px solid var(--tnk-border);
+    border-radius: var(--tnk-radius-lg);
+    margin: var(--tnk-space-xl) var(--tnk-space-none);
+  }
+
+  &__preview-icon {
+    font-size: var(--tnk-icon-size-2xl);
+    color: var(--tnk-primary);
+  }
+
+  &__preview-text {
+    font-size: var(--tnk-text-lg);
+    font-weight: var(--tnk-font-weight-medium);
+    color: var(--tnk-text-primary);
+  }
+
+  &__actions {
+    margin-top: var(--tnk-space-xl);
+  }
+}
