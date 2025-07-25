@@ -1,12 +1,13 @@
 import "../styles/globals.scss";
 import "./app.scss";
 
-import { MantineProvider, SimpleGrid, Stack, Title } from "@mantine/core";
+import { MantineProvider, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
 import { Card } from "../components/card";
 import { Icon } from "../components/icon";
 import { PageShell } from "../components/page-shell";
+import { ResponsiveGrid } from "../components/responsive-grid";
 
 const ExtensionPages = () => {
   const playgroundPages = [
@@ -41,7 +42,7 @@ const ExtensionPages = () => {
       <Title order={2} className="tnk-extension-pages-section__title">
         Extension Pages
       </Title>
-      <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="xl" className="tnk-extension-pages-section__grid">
+      <ResponsiveGrid gridItemProps={{ minWidth: "var(--tnk-space-16xl)", maxWidth: "var(--tnk-space-21xl)" }}>
         {playgroundPages.map((page) => (
           <Card
             key={page.href}
@@ -51,7 +52,7 @@ const ExtensionPages = () => {
             description={page.description}
           />
         ))}
-      </SimpleGrid>
+      </ResponsiveGrid>
     </Stack>
   );
 };
@@ -60,7 +61,7 @@ export function PlaygroundApp() {
   return (
     <MantineProvider>
       <PageShell header={{ brand: "Tanaka Playground" }}>
-        <Stack>
+        <Stack className="tnk-playground-sections-container">
           <ExtensionPages />
         </Stack>
       </PageShell>
