@@ -119,4 +119,9 @@ export default defineConfig({
     hmr: true,
     liveReload: true,
   },
+  server: {
+    historyApiFallback: {
+      rewrites: [{ from: /^\/playground-rt/, to: "/playground-rt/index.html" }],
+    },
+  },
 });
