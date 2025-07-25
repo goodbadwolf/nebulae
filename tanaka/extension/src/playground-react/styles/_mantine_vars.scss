@@ -144,7 +144,7 @@
   /* Typography */
   --mantine-font-family: var(--tnk-font-family);
   --mantine-font-family-monospace: var(--tnk-font-mono);
-  --mantine-font-family-headings: var(--tnk-font-family);
+  --mantine-font-family-headings: var(--tnk-font-family-headings);
   --mantine-font-weight: var(--tnk-font-weight-normal);
   --mantine-font-weight-bold: var(--tnk-font-weight-bold);
   --mantine-font-size-xs: var(--tnk-text-xs);
@@ -152,31 +152,31 @@
   --mantine-font-size-md: var(--tnk-text-base);
   --mantine-font-size-lg: var(--tnk-text-lg);
   --mantine-font-size-xl: var(--tnk-text-xl);
-  --mantine-h1-font-size: var(--tnk-text-4xl);
-  --mantine-h2-font-size: var(--tnk-text-3xl);
-  --mantine-h3-font-size: var(--tnk-text-2xl);
-  --mantine-h4-font-size: var(--tnk-text-xl);
-  --mantine-h5-font-size: var(--tnk-text-lg);
-  --mantine-h6-font-size: var(--tnk-text-base);
-  --mantine-h1-font-weight: var(--tnk-font-weight-bold);
-  --mantine-h2-font-weight: var(--tnk-font-weight-bold);
-  --mantine-h3-font-weight: var(--tnk-font-weight-bold);
-  --mantine-h4-font-weight: var(--tnk-font-weight-semibold);
-  --mantine-h5-font-weight: var(--tnk-font-weight-semibold);
-  --mantine-h6-font-weight: var(--tnk-font-weight-medium);
+  --mantine-h1-font-size: var(--tnk-h1-font-size);
+  --mantine-h2-font-size: var(--tnk-h2-font-size);
+  --mantine-h3-font-size: var(--tnk-h3-font-size);
+  --mantine-h4-font-size: var(--tnk-h4-font-size);
+  --mantine-h5-font-size: var(--tnk-h5-font-size);
+  --mantine-h6-font-size: var(--tnk-h6-font-size);
+  --mantine-h1-font-weight: var(--tnk-h1-font-weight);
+  --mantine-h2-font-weight: var(--tnk-h2-font-weight);
+  --mantine-h3-font-weight: var(--tnk-h3-font-weight);
+  --mantine-h4-font-weight: var(--tnk-h4-font-weight);
+  --mantine-h5-font-weight: var(--tnk-h5-font-weight);
+  --mantine-h6-font-weight: var(--tnk-h6-font-weight);
 
   /* Line heights */
-  --mantine-line-height: var(--tnk-line-height-normal);
+  --mantine-line-height: var(--tnk-line-height-default);
   --mantine-line-height-xs: var(--tnk-line-height-tight);
   --mantine-line-height-sm: var(--tnk-line-height-normal);
   --mantine-line-height-md: var(--tnk-line-height-relaxed);
   --mantine-line-height-lg: var(--tnk-line-height-loose);
-  --mantine-h1-line-height: var(--tnk-line-height-normal);
-  --mantine-h2-line-height: var(--tnk-line-height-normal);
-  --mantine-h3-line-height: var(--tnk-line-height-normal);
-  --mantine-h4-line-height: var(--tnk-line-height-normal);
-  --mantine-h5-line-height: var(--tnk-line-height-normal);
-  --mantine-h6-line-height: var(--tnk-line-height-normal);
+  --mantine-h1-line-height: var(--tnk-h1-line-height);
+  --mantine-h2-line-height: var(--tnk-h2-line-height);
+  --mantine-h3-line-height: var(--tnk-h3-line-height);
+  --mantine-h4-line-height: var(--tnk-h4-line-height);
+  --mantine-h5-line-height: var(--tnk-h5-line-height);
+  --mantine-h6-line-height: var(--tnk-h6-line-height);
 
   /* Spacing */
   --mantine-spacing-xs: var(--tnk-space-xs);
@@ -186,7 +186,7 @@
   --mantine-spacing-xl: var(--tnk-space-xl);
 
   /* Border radius */
-  --mantine-radius-default: var(--tnk-radius-md);
+  --mantine-radius-default: var(--tnk-radius-default);
   --mantine-radius-xs: var(--tnk-radius-sm);
   --mantine-radius-sm: var(--tnk-radius-md);
   --mantine-radius-md: var(--tnk-radius-lg);
@@ -410,20 +410,20 @@
 /* Dark color scheme specific variables */
 @media (prefers-color-scheme: dark) {
   :root {
-    --mantine-color-bright: var(--mantine-color-white);
-    --mantine-color-text: var(--mantine-color-dark-0);
-    --mantine-color-body: var(--mantine-color-dark-7);
+    --mantine-color-bright: var(--tnk-white);
+    --mantine-color-text: var(--tnk-text-primary);
+    --mantine-color-body: var(--tnk-bg-primary);
     --mantine-color-error: var(--mantine-color-red-8);
-    --mantine-color-placeholder: var(--mantine-color-dark-3);
+    --mantine-color-placeholder: var(--tnk-text-tertiary);
     --mantine-color-anchor: var(--mantine-color-blue-4);
-    --mantine-color-default: var(--mantine-color-dark-6);
-    --mantine-color-default-hover: var(--mantine-color-dark-5);
-    --mantine-color-default-color: var(--mantine-color-white);
-    --mantine-color-default-border: var(--mantine-color-dark-4);
-    --mantine-color-dimmed: var(--mantine-color-dark-2);
-    --mantine-color-disabled: var(--mantine-color-dark-6);
-    --mantine-color-disabled-color: var(--mantine-color-dark-3);
-    --mantine-color-disabled-border: var(--mantine-color-dark-4);
+    --mantine-color-default: var(--tnk-bg-secondary);
+    --mantine-color-default-hover: var(--tnk-bg-tertiary);
+    --mantine-color-default-color: var(--tnk-text-primary);
+    --mantine-color-default-border: var(--tnk-border-primary);
+    --mantine-color-dimmed: var(--tnk-text-secondary);
+    --mantine-color-disabled: var(--tnk-bg-tertiary);
+    --mantine-color-disabled-color: var(--tnk-text-tertiary);
+    --mantine-color-disabled-border: var(--tnk-border-secondary);
 
     /* Dark theme color adjustments */
     --mantine-color-dark-text: var(--mantine-color-dark-4);
