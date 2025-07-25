@@ -1,8 +1,9 @@
 import "./card.scss";
 
 import { applyDefaults, type DeepPartial, type WithDefaults } from "@kiku/core";
-import { Anchor, Text } from "@mantine/core";
+import { Text } from "@mantine/core";
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 type CardPropsBase = {
   href?: string;
@@ -22,8 +23,9 @@ export type CardProps = WithDefaults<CardPropsBase, typeof defaultProps>;
 
 export function Card(props: DeepPartial<CardProps> = {}) {
   const { href, icon, title, description } = applyDefaults(defaultProps, props);
+
   return (
-    <Anchor href={href} className="tnk-playground-card" underline="never">
+    <Link to={href} className="tnk-playground-card">
       <div className="tnk-playground-card__header">
         {icon && <div className="tnk-playground-card__icon">{icon}</div>}
         <Text component="h3" className="tnk-playground-card__title" fw={600}>
@@ -33,6 +35,6 @@ export function Card(props: DeepPartial<CardProps> = {}) {
       <Text component="p" className="tnk-playground-card__description">
         {description}
       </Text>
-    </Anchor>
+    </Link>
   );
 }

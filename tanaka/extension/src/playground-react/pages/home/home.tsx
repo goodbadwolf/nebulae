@@ -47,7 +47,11 @@ const ExtensionPages = () => {
           <Card
             key={page.href}
             href={page.href}
-            icon={<Icon size="3xl">{page.icon}</Icon>}
+            icon={
+              <Icon size="3xl" weight="duotone">
+                {page.icon}
+              </Icon>
+            }
             title={page.title}
             description={page.description}
           />
