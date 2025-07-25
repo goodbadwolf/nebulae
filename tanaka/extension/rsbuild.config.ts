@@ -90,7 +90,11 @@ export default defineConfig({
   },
   html: {
     template({ entryName }) {
-      // Map entry names to their respective HTML templates
+      // Use single template for all playground-react routes
+      if (entryName.startsWith("playground-rt/")) {
+        return "./src/playground-react/template.html";
+      }
+
       const templates: Record<string, string> = {
         popup: "./src/popup/index.html",
         "playground-js/index": "./src/playground-js/index.html",
@@ -98,10 +102,19 @@ export default defineConfig({
         "playground-js/welcome": "./src/playground-js/welcome.html",
         "playground-js/settings": "./src/playground-js/settings.html",
         "playground-js/manager": "./src/playground-js/manager.html",
-        "playground-rt/index": "./src/playground-react/index.html",
-        "playground-rt/welcome": "./src/playground-react/welcome.html",
       };
       return templates[entryName] || "./src/popup/index.html";
+    },
+    templateParameters(_: unknown, { entryName }: { entryName: string }) {
+      const titles: Record<string, string> = {
+        "playground-rt/index": "Tanaka React Playground",
+        "playground-rt/welcome": "Welcome to Tanaka",
+        "playground-rt/settings": "Tanaka Settings", // Future
+        "playground-rt/manager": "Tanaka Manager", // Future
+      };
+      return {
+        title: titles[entryName] || "Tanaka",
+      };
     },
   },
   performance: {
