@@ -20,7 +20,7 @@ type IconPropsBase = {
 };
 
 const defaultProps = {
-  size: "medium",
+  size: "md",
   weight: "regular",
   spinning: false,
   className: "",

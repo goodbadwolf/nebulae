@@ -12,12 +12,12 @@
 
   &:hover {
     border-color: var(--tnk-primary);
-    transform: translateY(-4px);
+    transform: translateY(var(--tnk-translate-hover-y));
     box-shadow: var(--tnk-shadow-lg);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(var(--tnk-space-none));
   }
 }
 

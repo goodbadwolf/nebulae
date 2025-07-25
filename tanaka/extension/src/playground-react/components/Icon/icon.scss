@@ -7,43 +7,43 @@
   transition: all var(--tnk-transition-fast);
 
   &--xs {
-    width: var(--tnk-icon-sz-xs);
-    height: var(--tnk-icon-sz-xs);
+    width: var(--tnk-icon-size-xs);
+    height: var(--tnk-icon-size-xs);
   }
 
   &--sm {
-    width: var(--tnk-icon-sz-sm);
-    height: var(--tnk-icon-sz-sm);
+    width: var(--tnk-icon-size-sm);
+    height: var(--tnk-icon-size-sm);
   }
 
   &--md {
-    width: var(--tnk-icon-sz-md);
-    height: var(--tnk-icon-sz-md);
+    width: var(--tnk-icon-size-md);
+    height: var(--tnk-icon-size-md);
   }
 
   &--lg {
-    width: var(--tnk-icon-sz-lg);
-    height: var(--tnk-icon-sz-lg);
+    width: var(--tnk-icon-size-lg);
+    height: var(--tnk-icon-size-lg);
   }
 
   &--xl {
-    width: var(--tnk-icon-sz-xl);
-    height: var(--tnk-icon-sz-xl);
+    width: var(--tnk-icon-size-xl);
+    height: var(--tnk-icon-size-xl);
   }
 
   &--2xl {
-    width: var(--tnk-icon-sz-2xl);
-    height: var(--tnk-icon-sz-2xl);
+    width: var(--tnk-icon-size-2xl);
+    height: var(--tnk-icon-size-2xl);
   }
 
   &--3xl {
-    width: var(--tnk-icon-sz-3xl);
-    height: var(--tnk-icon-sz-3xl);
+    width: var(--tnk-icon-size-3xl);
+    height: var(--tnk-icon-size-3xl);
   }
 
   &--4xl {
-    width: var(--tnk-icon-sz-4xl);
-    height: var(--tnk-icon-sz-4xl);
+    width: var(--tnk-icon-size-4xl);
+    height: var(--tnk-icon-size-4xl);
   }
 
   &--spinning {

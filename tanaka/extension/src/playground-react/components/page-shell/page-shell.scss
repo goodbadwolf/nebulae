@@ -5,7 +5,7 @@
 
 .tnk-page-shell__header {
   background-color: var(--tnk-bg-secondary);
-  border-bottom: 0px;
+  border-bottom: var(--tnk-space-none);
   --app-shell-header-height: var(--tnk-space-7xl);
 }
 
@@ -26,6 +26,5 @@
 }
 
 .tnk-page-shell__main {
-  /*background-color: var(--tnk-bg-primary);*/
   margin-top: var(--tnk-space-7xl);
 }

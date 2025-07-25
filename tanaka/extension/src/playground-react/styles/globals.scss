@@ -6,8 +6,8 @@
 @import 'mantine_vars';
 
 html, body {
-  margin: 0;
-  padding: 0;
+  margin: var(--tnk-space-none);
+  padding: var(--tnk-space-none);
   background-color: var(--tnk-bg-primary);
   color: var(--tnk-text-primary);
   font-family: var(--tnk-font-family);
