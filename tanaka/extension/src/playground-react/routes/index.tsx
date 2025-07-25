@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 
 import { HomePage } from "../pages/home";
 
-const container = document.getElementById("playground-root");
+const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root element not found");
 }
