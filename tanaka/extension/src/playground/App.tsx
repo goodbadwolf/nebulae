@@ -7,7 +7,7 @@ import { WelcomePage } from "./pages/welcome";
 export function App() {
   return (
     <MantineProvider>
-      <BrowserRouter basename="/playground-rt">
+      <BrowserRouter basename="/playground">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/welcome" element={<WelcomePage />} />

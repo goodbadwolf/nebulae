@@ -53,8 +53,8 @@ export default defineConfig({
         html: true,
       },
       // Playground entry - React (Single SPA entry)
-      "playground-rt": {
-        import: "./src/playground-react/main.tsx",
+      playground: {
+        import: "./src/playground/main.tsx",
         html: true,
       },
     },
@@ -93,7 +93,7 @@ export default defineConfig({
         "playground-js/welcome": "./src/playground-js/welcome.html",
         "playground-js/settings": "./src/playground-js/settings.html",
         "playground-js/manager": "./src/playground-js/manager.html",
-        "playground-rt": "./src/playground-react/index.html",
+        playground: "./src/playground/index.html",
       };
       return templates[entryName] || "./src/popup/index.html";
     },
@@ -121,7 +121,7 @@ export default defineConfig({
   },
   server: {
     historyApiFallback: {
-      rewrites: [{ from: /^\/playground-rt/, to: "/playground-rt/index.html" }],
+      rewrites: [{ from: /^\/playground/, to: "/playground/index.html" }],
     },
   },
 });
