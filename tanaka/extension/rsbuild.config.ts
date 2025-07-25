@@ -54,7 +54,7 @@ export default defineConfig({
       },
       // Playground entry - React (Single SPA entry)
       playground: {
-        import: "./src/playground/main.tsx",
+        import: "./src/playground/index.tsx",
         html: true,
       },
     },
