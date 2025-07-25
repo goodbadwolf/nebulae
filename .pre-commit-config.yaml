@@ -74,7 +74,7 @@ repos:
         stages: [commit-msg]
       - id: commitizen-branch
         name: "[ROOT] Check branch name format"
-        # stages: [manual]
+        stages: [pre-push]
 
   # ========== TANAKA-SPECIFIC HOOKS ==========
 

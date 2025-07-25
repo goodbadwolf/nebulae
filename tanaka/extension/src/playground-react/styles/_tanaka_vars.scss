@@ -189,6 +189,17 @@
   --tnk-space-8xl: 112px;
   --tnk-space-9xl: 128px;
   --tnk-space-10xl: 144px;
+  --tnk-space-11xl: 160px;
+  --tnk-space-12xl: 176px;
+  --tnk-space-13xl: 192px;
+  --tnk-space-14xl: 208px;
+  --tnk-space-15xl: 224px;
+  --tnk-space-16xl: 240px;
+  --tnk-space-17xl: 256px;
+  --tnk-space-18xl: 272px;
+  --tnk-space-19xl: 288px;
+  --tnk-space-20xl: 304px;
+  --tnk-space-21xl: 320px;
 
   /* Border Radius */
   --tnk-radius-sm: 4px;
@@ -226,9 +237,6 @@
   --tnk-button-height-sm: var(--tnk-input-height-sm);
   --tnk-button-height-md: var(--tnk-input-height-md);
   --tnk-button-height-lg: var(--tnk-input-height-lg);
-
-  /* Component Widths */
-  --tnk-card-min-width: 280px;
 
   /* Breakpoints */
   --tnk-breakpoint-sm: 640px;
