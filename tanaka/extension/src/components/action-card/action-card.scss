@@ -3,15 +3,15 @@
   transition: all 0.3s ease;
   cursor: pointer;
 
-  // When Card is rendered as a link
-  &.tnk-action-card__link {
+  // When Card is rendered as a link (modifier)
+  &.tnk-action-card--link {
     text-decoration: none;
     color: inherit;
     display: block;
   }
 
-  // When Card is rendered as a button
-  &.tnk-action-card__button {
+  // When Card is rendered as a button (modifier)
+  &.tnk-action-card--button {
     background: none;
     border: none;
     padding: 0;
@@ -22,8 +22,8 @@
   }
 
   // Hover effects for clickable cards
-  &.tnk-action-card__link:hover,
-  &.tnk-action-card__button:hover {
+  &.tnk-action-card--link:hover,
+  &.tnk-action-card--button:hover {
     transform: translateY(-4px);
     box-shadow: var(--mantine-shadow-xl);
     border-color: var(--mantine-color-indigo-filled);
@@ -38,14 +38,14 @@
   }
 
   // Active state
-  &.tnk-action-card__link:active,
-  &.tnk-action-card__button:active {
+  &.tnk-action-card--link:active,
+  &.tnk-action-card--button:active {
     transform: translateY(0);
   }
 
   // Focus state
-  &.tnk-action-card__link:focus-visible,
-  &.tnk-action-card__button:focus-visible {
+  &.tnk-action-card--link:focus-visible,
+  &.tnk-action-card--button:focus-visible {
     outline: 2px solid var(--mantine-color-indigo-filled);
     outline-offset: 2px;
   }
