@@ -160,6 +160,16 @@ class SyncManager {
 - Run commands from the appropriate directory context
 - Always verify file contents after moving or modifying them
 
+### CSS Architecture Philosophy
+
+**Keep it simple**: Use Mantine's defaults instead of creating custom design systems.
+
+- **NO custom CSS variable systems** - Removed 926 lines of unnecessary CSS variables
+- **Use Mantine props directly** - `size`, `color`, `variant`, `radius`, etc.
+- **Minimal custom CSS** - Only for specific component needs
+- **ThemeProvider HOC** - Centralized minimal theme customization
+- **No over-engineering** - If Mantine provides it, use it
+
 ### Memory Management
 
 - After compacting, read the docs and this guide to refresh your instructions
