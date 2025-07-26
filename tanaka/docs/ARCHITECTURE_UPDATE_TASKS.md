@@ -1,36 +1,55 @@
 # Architecture Documentation Update Tasks
 
-## Critical Pre-Migration Documentation Updates
+## Guidelines for Documentation Updates
+
+### DOs
+
+- **ALWAYS** make destructive changes - replace old content directly
+- **ALWAYS** edit existing documentation files in-place
+- **ALWAYS** remove outdated information completely
+- **ALWAYS** update to reflect current architecture without migration notes
+
+### DON'Ts
+
+- **NEVER** create new documentation files - always edit existing ones
+- **NEVER** mention migration paths or backward compatibility
+- **NEVER** add feature flags or gradual rollout notes
+- **NEVER** preserve old patterns alongside new ones
+
+## Critical Documentation Updates
 
 ### Files to Archive/Remove
 
-- [ ] Archive REACT-MIGRATION-PLAN.md - Obsolete since playground already uses React
-- [ ] Archive DESIGN-SYSTEM-GUIDE.md - References CSS system being removed
+- [ ] Remove references to archive/REACT-MIGRATION-PLAN.md in other docs
+- [ ] Remove references to archive/DESIGN-SYSTEM-GUIDE.md in other docs
 - [ ] Move INTERACTIVE_EXAMPLES.md to archive - Future work, not current priority
 
 ### Files to Rename
 
-- [ ] Rename current EXTENSION_ARCHITECTURE.md to PLAYGROUND_ARCHITECTURE.md
-- [ ] Create new EXTENSION_ARCHITECTURE.md for full extension architecture
+- [ ] Update ARCHITECTURE.md for full extension architecture
 
 ### Immediate Content Updates
 
 - [ ] PLAYGROUND_MIGRATION_PLAN.md - Remove React migration phases (already complete)
 - [ ] PLAYGROUND_MIGRATION_PLAN.md - Update to focus only on remaining phases
-- [ ] ARCHITECTURE.md - Fix CRDT implementation details (mentions Yjs but uses different)
-- [ ] Remove all references to CSS design system across all docs
+- [ ] ARCHITECTURE.md - Fix CRDT implementation details (mentions Yjs but uses different). Confirm with user first before
+making changes
+- [ ] ARCHITECTURE.md - Update description of custom JSON-based CRDT (not Yjs)
+- [ ] Remove all references to extensive CSS design system (keeping minimal BEM classes)
+- [ ] Remove all references to vanilla HTML/CSS/TypeScript playground experiment
+- [ ] Update all playground references to React + Mantine (no migration notes needed)
 
 ### Documentation Consolidation
 
-- [ ] Merge any playground-specific content from UI-DESIGN.md into PLAYGROUND_ARCHITECTURE.md
+- [ ] Merge any playground-specific content from UI-DESIGN.md into ARCHITECTURE.md
 - [ ] Ensure all navigation sections reference correct file names after reorganization
 
 ### Critical Missing Documentation
 
 - [ ] Full extension architecture overview (popup, background, settings, manager)
-- [ ] Current state of playground (React with Mantine, not vanilla JS)
-- [ ] Explanation of playground-js vs playground-react directories
-- [ ] @kiku/core dependency and WithDefaults pattern usage
+- [ ] Current state of playground (React with Mantine)
+- [ ] ServicesProvider/DI system documentation
+- [ ] Multi-entry point build structure
 
 ## Meta Task
 
@@ -40,7 +59,7 @@
 - [x] Identify outdated information that needs updating
 - [x] Find gaps in documentation coverage
 
-## EXTENSION_ARCHITECTURE.md Updates
+## ARCHITECTURE.md Updates
 
 ### Rename and Reframe
 
@@ -129,12 +148,12 @@
 
 ## Additional Documentation Needs
 
-### New Documents to Create
+### Documentation to Add to Existing Files
 
-- [ ] EXTENSION_PATTERNS.md - Common patterns used throughout
-- [ ] MESSAGE_CONTRACTS.md - Message passing specifications
-- [ ] COMPONENT_LIBRARY.md - Shared component documentation
-- [ ] TESTING_STRATEGY.md - How to test across extension contexts
+- [ ] Add extension patterns section to ARCHITECTURE.md
+- [ ] Add message contracts section to ARCHITECTURE.md
+- [ ] Add shared components section to ARCHITECTURE.md
+- [ ] Add testing strategy section to DEVELOPMENT.md
 
 ### Updates to Existing Docs
 
@@ -146,7 +165,6 @@
 
 ### Documentation Organization
 
-- [ ] EXTENSION_ARCHITECTURE.md and PLAYGROUND_MIGRATION_PLAN.md are in root docs/ but should be in tanaka/docs/
 - [ ] DESIGN-SYSTEM-GUIDE.md references old CSS system that's being removed
 - [ ] REACT-MIGRATION-PLAN.md conflicts with new architecture plan (CSS variables vs Mantine defaults)
 
@@ -158,15 +176,13 @@
 
 ### Missing Documentation
 
-- [ ] No documentation for @kiku/core dependency and WithDefaults pattern
 - [ ] No documentation for new ServicesProvider/DI system
 - [ ] No documentation for playground's role in extension development
-- [ ] No documentation for the two playground versions (playground-js vs playground-react)
 
 ### Architecture Conflicts
 
 - [ ] ARCHITECTURE.md focuses on Yjs CRDT but code uses different implementation
-- [ ] Multiple references to CSS design system that's being simplified
+- [ ] Multiple references to extensive CSS design system (should mention minimal BEM classes)
 - [ ] Playground structure differs from what's documented
 
 ### Navigation Updates Needed
