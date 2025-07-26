@@ -20,24 +20,24 @@
 
 ### Files to Archive/Remove
 
-- [ ] Remove references to archive/REACT-MIGRATION-PLAN.md in other docs
-- [ ] Remove references to archive/DESIGN-SYSTEM-GUIDE.md in other docs
-- [ ] Move INTERACTIVE_EXAMPLES.md to archive - Future work, not current priority
+- [x] Remove references to archive/REACT-MIGRATION-PLAN.md in other docs
+- [x] Remove references to archive/DESIGN-SYSTEM-GUIDE.md in other docs
+- [x] Move INTERACTIVE_EXAMPLES.md to archive - Future work, not current priority
 
 ### Files to Rename
 
-- [ ] Update ARCHITECTURE.md for full extension architecture
+- [x] Update ARCHITECTURE.md for full extension architecture
 
 ### Immediate Content Updates
 
-- [ ] PLAYGROUND_MIGRATION_PLAN.md - Remove React migration phases (already complete)
-- [ ] PLAYGROUND_MIGRATION_PLAN.md - Update to focus only on remaining phases
+- [x] PLAYGROUND_MIGRATION_PLAN.md - Remove React migration phases (already complete)
+- [x] PLAYGROUND_MIGRATION_PLAN.md - Update to focus only on remaining phases
 - [ ] ARCHITECTURE.md - Fix CRDT implementation details (mentions Yjs but uses different). Confirm with user first before
 making changes
-- [ ] ARCHITECTURE.md - Update description of custom JSON-based CRDT (not Yjs)
-- [ ] Remove all references to extensive CSS design system (keeping minimal BEM classes)
-- [ ] Remove all references to vanilla HTML/CSS/TypeScript playground experiment
-- [ ] Update all playground references to React + Mantine (no migration notes needed)
+- [x] ARCHITECTURE.md - Update description of custom JSON-based CRDT (not Yjs)
+- [x] Remove all references to extensive CSS design system (keeping minimal BEM classes)
+- [x] Remove all references to vanilla HTML/CSS/TypeScript playground experiment
+- [x] Update all playground references to React + Mantine (no migration notes needed)
 
 ### Documentation Consolidation
 
@@ -63,24 +63,24 @@ making changes
 
 ### Rename and Reframe
 
-- [ ] Update title from "Playground Architecture" to "Extension Architecture"
-- [ ] Rewrite overview to describe entire extension architecture
-- [ ] Position playground as the development/testing environment within the larger system
+- [x] Update title from "Playground Architecture" to "Extension Architecture"
+- [x] Rewrite overview to describe entire extension architecture
+- [x] Position playground as the development/testing environment within the larger system
 
 ### Complete Directory Structure
 
-- [ ] Add background script location and structure
-- [ ] Add popup directory structure
-- [ ] Add content scripts directory (if applicable)
-- [ ] Add settings page structure
-- [ ] Add manager page structure
-- [ ] Show shared services across all parts
+- [x] Add background script location and structure
+- [x] Add popup directory structure
+- [x] Add content scripts directory (if applicable)
+- [x] Add settings page structure
+- [x] Add manager page structure
+- [x] Show shared services across all parts
 
 ### Extension-wide Systems Documentation
 
-- [ ] Document how DI system serves entire extension
-- [ ] Show service provider usage across popup, settings, background, etc.
-- [ ] Document message passing architecture between components
+- [x] Document how DI system serves entire extension
+- [x] Show service provider usage across popup, settings, background, etc.
+- [x] Document message passing architecture between components
 - [ ] Add state management strategy (storage coordination)
 - [ ] Document shared component library usage patterns
 
