@@ -1,17 +1,17 @@
 // Card base styles and hover effects
-.tnk-card {
+.tnk-action-card {
   transition: all 0.3s ease;
   cursor: pointer;
 
   // When Card is rendered as a link
-  &.tnk-card__link {
+  &.tnk-action-card__link {
     text-decoration: none;
     color: inherit;
     display: block;
   }
 
   // When Card is rendered as a button
-  &.tnk-card__button {
+  &.tnk-action-card__button {
     background: none;
     border: none;
     padding: 0;
@@ -22,37 +22,37 @@
   }
 
   // Hover effects for clickable cards
-  &.tnk-card__link:hover,
-  &.tnk-card__button:hover {
+  &.tnk-action-card__link:hover,
+  &.tnk-action-card__button:hover {
     transform: translateY(-4px);
     box-shadow: var(--mantine-shadow-xl);
     border-color: var(--mantine-color-indigo-filled);
 
-    .tnk-card__icon {
+    .tnk-action-card__icon {
       transform: scale(1.05);
     }
 
-    .tnk-card__title {
+    .tnk-action-card__title {
       color: var(--mantine-color-indigo-filled);
     }
   }
 
   // Active state
-  &.tnk-card__link:active,
-  &.tnk-card__button:active {
+  &.tnk-action-card__link:active,
+  &.tnk-action-card__button:active {
     transform: translateY(0);
   }
 
   // Focus state
-  &.tnk-card__link:focus-visible,
-  &.tnk-card__button:focus-visible {
+  &.tnk-action-card__link:focus-visible,
+  &.tnk-action-card__button:focus-visible {
     outline: 2px solid var(--mantine-color-indigo-filled);
     outline-offset: 2px;
   }
 }
 
 // Icon styling
-.tnk-card__icon {
+.tnk-action-card__icon {
   color: var(--mantine-color-indigo-filled);
   opacity: 0.8;
   transition: all 0.2s ease;
@@ -60,17 +60,17 @@
 }
 
 // Title styling
-.tnk-card__title {
+.tnk-action-card__title {
   transition: color 0.2s ease;
 }
 
 // Ensure proper display for subtitle span
-.tnk-card__subtitle {
+.tnk-action-card__subtitle {
   display: block;
   margin-top: 2px;
 }
 
 // Description spacing
-.tnk-card__description {
+.tnk-action-card__description {
   margin-top: var(--mantine-spacing-xs);
 }
