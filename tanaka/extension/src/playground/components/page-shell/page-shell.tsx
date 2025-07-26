@@ -1,26 +1,42 @@
 import "./page-shell.scss";
 
-import { AppShell, Group, type MantineSize, Title } from "@mantine/core";
+import { applyDefaults, type DeepPartial, type WithDefaults } from "@kiku/core";
+import { AppShell, Group, Title } from "@mantine/core";
 import type { ReactNode } from "react";
 
-import { TanakaLogo } from "../tanaka-logo";
+import { TanakaLogo } from "../../../components/tanaka-logo";
 
-export interface PageShellProps {
+type PageShellPropsBase = {
   children?: ReactNode;
   header?: {
     brand?: string;
     logo?: {
-      size?: MantineSize;
+      size?: "sm" | "md" | "lg";
       icon?: ReactNode;
     };
     align?: "left" | "center" | "right";
   };
-}
+};
 
-export function PageShell({ children, header = {} }: PageShellProps = {}) {
-  const { brand = "Tanaka", logo = {}, align = "center" } = header;
+const defaultProps = {
+  header: {
+    brand: "Tanaka",
+    logo: { size: "md" },
+    align: "center",
+  },
+} as const;
 
-  const { size: logoSize = "lg", icon: logoIcon } = logo;
+export type PageShellProps = WithDefaults<PageShellPropsBase, typeof defaultProps>;
+
+export function PageShell(props: DeepPartial<PageShellProps> = {}) {
+  const {
+    children,
+    header: {
+      brand,
+      logo: { size: logoSize, icon: logoIcon },
+      align,
+    },
+  } = applyDefaults(defaultProps, props);
 
   const logoElement = logoIcon ?? <TanakaLogo size={logoSize} />;
 
