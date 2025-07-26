@@ -61,15 +61,15 @@ validation and learning.
 
 #### Full Implementation
 
-- [ ] Audit existing components for removal candidates
-- [ ] Move generic components to src/components/
+- [x] Audit existing components for removal candidates
+- [x] Move generic components to src/components/
   - [ ] page-shell (MVP)
   - [ ] icon (MVP)
-  - [ ] app-logo
+  - [x] app-logo
   - [ ] responsive-grid
-  - [ ] card
-- [ ] Update all import paths
-- [ ] Test build and functionality
+  - [x] card
+- [x] Update all import paths
+- [x] Test build and functionality
 - [ ] Update documentation:
   - [ ] Document new component locations
   - [ ] Update import examples in docs
