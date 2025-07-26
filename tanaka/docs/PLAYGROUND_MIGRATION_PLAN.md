@@ -2,7 +2,8 @@
 
 ## Overview
 
-This document outlines the step-by-step plan to transform the current playground into the architecture described in PLAYGROUND_ARCHITECTURE.md.
+This document outlines the step-by-step plan to establish extension-wide patterns using the playground as the proving
+ground. Each phase benefits the entire extension, not just the playground.
 
 ## Migration Philosophy
 
@@ -20,7 +21,8 @@ This document outlines the step-by-step plan to transform the current playground
 
 ## Target Architecture
 
-See PLAYGROUND_ARCHITECTURE.md for the complete target architecture and feature descriptions.
+The playground serves as a development environment while establishing patterns for the entire extension.
+See ARCHITECTURE.md for the complete extension architecture.
 
 ## Migration Approach: MVP First
 
@@ -38,15 +40,14 @@ validation and learning.
 
 #### Full Implementation
 
-- [ ] Create theme.ts in src/core/ (or location TBD based on core module decision)
-- [ ] Create ThemeProvider component and withTheme HOC in src/components/theme-provider.tsx
-- [ ] Remove _tanaka_vars.scss and _mantine_vars.scss
-- [ ] Update globals.scss to minimal version
-- [ ] Replace custom CSS variables with Mantine props
+- [ ] Create ThemeProvider component in src/components/theme-provider.tsx
+- [ ] Update globals.scss to minimal version with BEM classes (.tnk-*)
+- [ ] Replace extensive CSS variables with Mantine props
 - [ ] Update all components to use Mantine defaults
+- [ ] Keep minimal BEM classes for custom styling needs
 - [ ] Test that everything still looks good
 - [ ] Update documentation:
-  - [ ] Remove CSS variable references from all docs
+  - [ ] Remove extensive CSS design system references
   - [ ] Update CLAUDE.md with new patterns
   - [ ] Update component usage examples
 
@@ -94,7 +95,6 @@ validation and learning.
   - [ ] IAPIProvider interface
   - [ ] ServerAPIProvider
   - [ ] MockAPIProvider
-- [ ] Create core/shared module structure (TBD - see PLAYGROUND_ARCHITECTURE.md)
 - [ ] Test DI system works with mock/real providers
 - [ ] Update documentation:
   - [ ] Document DI patterns
@@ -136,10 +136,9 @@ validation and learning.
 - [ ] Create ComponentsSection component
   - [ ] Implement basic StaticExamplesContainer pattern
   - [ ] Set up examples scanner to load *.examples.tsx files
-  - [ ] InteractiveExamplesContainer with templates (FUTURE WORK - see PLAYGROUND_ARCHITECTURE.md)
 - [ ] Move css-comparison to ComponentsSection
 - [ ] Create debug toolbar with compact/expanded modes
-- [ ] Implement playground page entry points (TBD - see PLAYGROUND_ARCHITECTURE.md)
+- [ ] Implement playground page entry points
 - [ ] Update documentation:
   - [ ] Document navigation patterns
   - [ ] Update playground structure docs
@@ -182,7 +181,7 @@ validation and learning.
 3. **DEVELOPMENT.md** - Development setup
 4. **Component docs** - Usage examples
 5. **This MIGRATION_PLAN.md** - Mark completed items
-6. **PLAYGROUND_ARCHITECTURE.md** - Update with decisions made
+6. **ARCHITECTURE.md** - Update with decisions made
 
 ## Rollback Plan
 
