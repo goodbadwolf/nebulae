@@ -4,7 +4,7 @@ import { Button, Group, PasswordInput, Stack, Text, TextInput, Title } from "@ma
 import { CheckCircle, Warning, WifiHigh } from "@phosphor-icons/react";
 import { useState } from "react";
 
-import { Icon } from "../../../../components/icon";
+import { Icon } from "../../../../../components/icon";
 import type { WizardData } from "../welcome-wizard";
 
 interface StepServerConfigProps {

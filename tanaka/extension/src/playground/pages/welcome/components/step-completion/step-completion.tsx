@@ -3,7 +3,7 @@ import "./step-completion.scss";
 import { Button, Code, Stack, Text, Title } from "@mantine/core";
 import { CheckCircle } from "@phosphor-icons/react";
 
-import { Icon } from "../../../../components/icon";
+import { Icon } from "../../../../../components/icon";
 import type { WizardData } from "../welcome-wizard";
 
 interface StepCompletionProps {

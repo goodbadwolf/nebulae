@@ -3,7 +3,7 @@ import "./step-welcome.scss";
 import { Button, Stack, Text, Title } from "@mantine/core";
 import { RocketLaunchIcon } from "@phosphor-icons/react";
 
-import { Icon } from "../../../../components/icon";
+import { Icon } from "../../../../../components/icon";
 
 interface StepWelcomeProps {
   onNext: () => void;
