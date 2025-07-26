@@ -10,8 +10,8 @@ The following are Tanaka-specific additions and clarifications:
 
 Tanaka is a Firefox tab synchronization system built with:
 
-- **Extension**: TypeScript WebExtension using Yjs CRDT
-- **Server**: Rust server using axum, tokio, yrs, and SQLite
+- **Extension**: TypeScript WebExtension using custom JSON-based CRDT
+- **Server**: Rust server using axum, tokio, and SQLite
 - **Architecture**: Client-server with CRDT-based sync
 
 ### Documentation References
@@ -28,7 +28,7 @@ Tanaka is a Firefox tab synchronization system built with:
 ### Working with this Codebase
 
 - Firefox WebExtension (TypeScript) + Rust backend server
-- Extension uses Yjs for CRDT-based tab synchronization
+- Extension uses custom JSON-based CRDT for tab synchronization
 - Always check existing patterns in neighboring files before implementing
 - Run `cargo fmt` and `pnpm run lint` before suggesting code changes
 - Prefer editing existing files over creating new ones
@@ -38,16 +38,23 @@ Tanaka is a Firefox tab synchronization system built with:
 
 ```text
 tanaka/
-├── extension/          # Firefox WebExtension (TypeScript, Yjs)
+├── extension/          # Firefox WebExtension (TypeScript, custom CRDT)
 │   ├── src/
-│   │   ├── playground-react/  # React playground using Mantine UI
-│   │   └── playground-js/     # Vanilla JS playground
-├── server/            # Rust Tanaka server (axum, tokio, yrs, SQLite)
+│   │   ├── background/      # Background script
+│   │   ├── popup/          # Popup UI
+│   │   ├── settings/       # Settings page
+│   │   ├── manager/        # Manager page
+│   │   ├── playground/     # React playground using Mantine UI
+│   │   ├── components/     # Shared components
+│   │   ├── di/            # Dependency injection
+│   │   ├── storage/       # Storage providers
+│   │   └── api/           # API providers
+├── server/            # Rust Tanaka server (axum, tokio, SQLite)
 │   └── config/        # Example configuration files
 └── docs/              # Project documentation
 ```
 
-**Important**: The playground-react directory uses Mantine UI framework. Do not remove Mantine-related files or imports.
+**Important**: The playground uses React and Mantine UI framework. Keep minimal BEM classes (.tnk-*) for custom styling.
 
 ### Development Workflow
 
