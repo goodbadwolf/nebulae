@@ -16,10 +16,7 @@ const configDefaults: TanakaConfig = {
   buildDir,
   manifestFile: join(staticDir, "manifest.json"),
   iconSizes: [16, 32, 48, 128],
-  entries: {
-    popup: "src/popup/index.tsx",
-    background: "src/background/index.ts",
-  },
+  entries: {},
   webExt: {
     sourceDir: buildDir,
     startUrls: ["https://www.google.com", "https://www.youtube.com", "https://en.wikipedia.org"],

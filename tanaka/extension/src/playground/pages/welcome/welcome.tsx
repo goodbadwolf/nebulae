@@ -1,6 +1,4 @@
-import "./welcome.scss";
-
-import { MantineProvider } from "@mantine/core";
+import { Center, MantineProvider } from "@mantine/core";
 import { useState } from "react";
 
 import { PageShell } from "../../components/page-shell";
@@ -17,12 +15,12 @@ export function WelcomePage() {
   return (
     <MantineProvider>
       <PageShell header={{ brand: "Tanaka Welcome" }}>
-        <div className="tnk-welcome-page">
+        <Center mih="calc(100vh - 240px)" p="xl">
           <WelcomeWizard onComplete={handleComplete} />
           {isComplete && (
             <div style={{ position: "absolute", top: "10px", right: "10px", color: "green" }}>✓ Setup Complete</div>
           )}
-        </div>
+        </Center>
       </PageShell>
     </MantineProvider>
   );

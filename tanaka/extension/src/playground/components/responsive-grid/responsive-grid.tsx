@@ -21,7 +21,7 @@ const defaultProps = {
     minWidth: "1fr",
     maxWidth: "1fr",
   },
-  gap: "var(--tnk-space-lg)",
+  gap: "var(--mantine-spacing-lg)",
 } as const;
 
 export type ResponsiveGridProps = WithDefaults<ResponsiveGridPropsBase, typeof defaultProps>;

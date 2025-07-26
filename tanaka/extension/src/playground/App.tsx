@@ -1,12 +1,12 @@
-import { MantineProvider } from "@mantine/core";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import { ThemeProvider } from "../components/theme-provider";
 import { HomePage } from "./pages/home";
 import { WelcomePage } from "./pages/welcome";
 
 export function App() {
   return (
-    <MantineProvider>
+    <ThemeProvider>
       <BrowserRouter basename="/playground">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -14,6 +14,6 @@ export function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
-    </MantineProvider>
+    </ThemeProvider>
   );
 }

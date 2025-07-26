@@ -23,14 +23,6 @@ export default defineConfig({
   ],
   source: {
     entry: {
-      popup: {
-        import: config.entries.popup!,
-        html: true,
-      },
-      background: {
-        import: config.entries.background!,
-        html: false,
-      },
       // Playground entries - Vanilla JS
       "playground-js/index": {
         import: "./src/playground-js/index.ts",
@@ -87,7 +79,6 @@ export default defineConfig({
   html: {
     template({ entryName }) {
       const templates: Record<string, string> = {
-        popup: "./src/popup/index.html",
         "playground-js/index": "./src/playground-js/index.html",
         "playground-js/popup": "./src/playground-js/popup.html",
         "playground-js/welcome": "./src/playground-js/welcome.html",
@@ -95,7 +86,7 @@ export default defineConfig({
         "playground-js/manager": "./src/playground-js/manager.html",
         playground: "./src/playground/index.html",
       };
-      return templates[entryName] || "./src/popup/index.html";
+      return templates[entryName];
     },
   },
   performance: {

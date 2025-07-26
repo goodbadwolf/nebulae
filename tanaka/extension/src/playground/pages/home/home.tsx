@@ -1,7 +1,6 @@
 import "../../styles/globals.scss";
-import "./home.scss";
 
-import { MantineProvider, Stack, Title } from "@mantine/core";
+import { Container, MantineProvider, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
 import { Card } from "../../components/card";
@@ -11,11 +10,9 @@ import { ResponsiveGrid } from "../../components/responsive-grid";
 
 const ExtensionPages = () => {
   return (
-    <Stack className="tnk-extension-pages-section">
-      <Title order={2} className="tnk-extension-pages-section__title">
-        Extension Pages
-      </Title>
-      <ResponsiveGrid gridItemProps={{ minWidth: "var(--tnk-space-16xl)", maxWidth: "var(--tnk-space-21xl)" }}>
+    <Stack gap="xl">
+      <Title order={2}>Extension Pages</Title>
+      <ResponsiveGrid gridItemProps={{ minWidth: "240px", maxWidth: "320px" }}>
         <Card
           href="welcome"
           icon={
@@ -69,9 +66,9 @@ export function HomePage() {
   return (
     <MantineProvider>
       <PageShell header={{ brand: "Tanaka Playground" }}>
-        <Stack className="tnk-playground-sections-container">
+        <Container size="xl" py="xl">
           <ExtensionPages />
-        </Stack>
+        </Container>
       </PageShell>
     </MantineProvider>
   );

@@ -17,8 +17,13 @@
     "at-rule-empty-line-before": [
       "always",
       {
-        "except": ["blockless-after-same-name-blockless", "first-nested"],
-        "ignore": ["after-comment"]
+        "except": [
+          "blockless-after-same-name-blockless",
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment"
+        ]
       }
     ],
     "custom-property-pattern": "^tnk-[a-z0-9]+(-[a-z0-9]+)*$",
@@ -44,8 +49,6 @@
   "ignoreFiles": [
     "**/*.min.css",
     "**/vendor/**/*.css",
-    "**/node_modules/**/*.css",
-    "src/popup/styles/App.css",
-    "src/assets/styles/global.css"
+    "**/node_modules/**/*.css"
   ]
 }
