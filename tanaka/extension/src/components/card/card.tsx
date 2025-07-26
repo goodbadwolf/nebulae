@@ -24,7 +24,6 @@ export function Card({ href, icon, title = "", subtitle = "", description = "", 
       radius="lg"
       withBorder
       component={isClickable ? "div" : "article"}
-      style={{ cursor: isClickable ? "pointer" : "default" }}
     >
       <Group gap="lg" align="flex-start">
         {icon && <div className="tnk-card__icon">{icon}</div>}
