@@ -4,9 +4,9 @@ import { Container, MantineProvider, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
 import { Card } from "../../../components/card";
+import { ResponsiveGrid } from "../../../components/responsive-grid";
 import { Icon } from "../../components/icon";
 import { PageShell } from "../../components/page-shell";
-import { ResponsiveGrid } from "../../components/responsive-grid";
 
 const ExtensionPages = () => {
   return (
