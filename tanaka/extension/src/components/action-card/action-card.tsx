@@ -20,7 +20,7 @@ export function ActionCard({ href, icon, title = "", subtitle = "", description 
       <MantineCard
         component={Link}
         to={href}
-        className="tnk-action-card tnk-action-card__link"
+        className="tnk-action-card tnk-action-card--link"
         shadow="sm"
         padding="xl"
         radius="lg"
@@ -36,7 +36,7 @@ export function ActionCard({ href, icon, title = "", subtitle = "", description 
       <MantineCard
         component="button"
         onClick={onClick}
-        className="tnk-action-card tnk-action-card__button"
+        className="tnk-action-card tnk-action-card--button"
         shadow="sm"
         padding="xl"
         radius="lg"
