@@ -4,7 +4,7 @@ import { applyDefaults, type DeepPartial, type WithDefaults } from "@kiku/core";
 import { AppShell, Group, Title } from "@mantine/core";
 import type { ReactNode } from "react";
 
-import { AppLogo } from "../app-logo";
+import { AppLogo } from "../../../components/app-logo";
 
 type PageShellPropsBase = {
   children?: ReactNode;

@@ -1,14 +1,11 @@
 @import '@mantine/core/styles.css';
 
-@import 'tanaka_vars';
-
-// Import Mantine CSS variables that use Tanaka variables
-@import 'mantine_vars';
-
 html, body {
-  margin: var(--tnk-space-none);
-  padding: var(--tnk-space-none);
-  background-color: var(--tnk-bg-primary);
-  color: var(--tnk-text-primary);
-  font-family: var(--tnk-font-family);
+  margin: 0;
+  padding: 0;
+}
+
+/* Minimal BEM classes for custom styling needs */
+.tnk-extension {
+  /* Extension-specific styles can go here */
 }

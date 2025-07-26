@@ -1,6 +1,6 @@
 .tnk-responsive-grid {
   display: grid;
-  gap: var(--responsive-grid-gap, var(--tnk-space-lg));
+  gap: var(--responsive-grid-gap, var(--mantine-spacing-lg));
 
   /* Pure CSS Grid responsive layout:
      - auto-fit: Expands items to fill available space
