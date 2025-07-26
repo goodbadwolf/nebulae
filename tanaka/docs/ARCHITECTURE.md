@@ -1,4 +1,4 @@
-# Tanaka Extension Architecture
+# Tanaka Architecture
 
 **Purpose**: How Tanaka works under the hood  
 **Audience**: Future me and anyone interested in the implementation
@@ -212,7 +212,28 @@ extension/
 │   └── api/              # API providers
 ├── manifest.json          # Extension manifest
 └── webpack.config.js      # Multi-entry build config
+
+### Multi-Entry Point Build
+
+The extension uses webpack with multiple entry points for different parts:
+
+```javascript
+entry: {
+  background: './src/background/index.ts',
+  popup: './src/popup/index.tsx',
+  settings: './src/settings/index.tsx',
+  manager: './src/manager/index.tsx',
+  playground: './src/playground/index.tsx',
+  // Each entry creates its own bundle
+}
 ```
+
+This allows:
+
+- Independent bundles for each UI component
+- Shared code splitting for common dependencies
+- Separate HTML files for each page
+- Hot reloading during development
 
 ## Firefox Extension Architecture
 
@@ -281,6 +302,15 @@ interface IServiceProvider {
 }
 ```
 
+### Implementation
+
+The DI system consists of:
+
+- **ServicesContainer**: Holds service instances
+- **ServicesContext**: React context for providing services
+- **withServicesContainer**: HOC that wraps components with providers
+- **useServices**: Hook to access services in components
+
 ### Benefits
 
 - **Testability**: Easy to mock services for testing
@@ -302,6 +332,10 @@ export default withServicesContainer(PopupApp, {
   storage: new MockStorageProvider(),
   api: new MockAPIProvider()
 });
+
+// In components
+const { storage, api } = useServices();
+const data = await storage.get('key');
 ```
 
 ### Periodic Sync Architecture
@@ -324,6 +358,18 @@ The playground is a development environment for building and testing Tanaka comp
 - **Mock Services**: Test with fake data without affecting production
 - **Rapid Prototyping**: Iterate quickly on new features
 - **Pattern Library**: Reference implementation of best practices
+
+#### Current Implementation
+
+The playground is built with:
+
+- **React**: Component framework
+- **Mantine UI**: Component library and design system
+- **TypeScript**: Type safety
+- **Mock Providers**: Fake implementations of storage and API services
+
+The playground establishes patterns that are used throughout the extension, including the dependency injection system
+and component architecture.
 
 ### Playground URL Structure
 
