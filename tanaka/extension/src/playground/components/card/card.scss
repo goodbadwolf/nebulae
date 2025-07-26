@@ -1,0 +1,71 @@
+// Reset styles for Link and button wrappers
+.tnk-card__link,
+.tnk-card__button {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--tnk-primary);
+    outline-offset: 2px;
+    border-radius: var(--tnk-radius-lg);
+  }
+}
+
+// Card styling enhancements
+.tnk-card {
+  transition: all var(--tnk-transition-base);
+
+  // Hover effects for clickable cards
+  .tnk-card__link &:hover,
+  .tnk-card__button &:hover {
+    transform: translateY(var(--tnk-translate-hover-y));
+    box-shadow: var(--tnk-shadow-xl);
+    border-color: var(--tnk-primary);
+
+    .tnk-card__icon {
+      transform: scale(1.05);
+    }
+
+    .tnk-card__title {
+      color: var(--tnk-primary);
+    }
+  }
+
+  // Active state
+  .tnk-card__link &:active,
+  .tnk-card__button &:active {
+    transform: translateY(0);
+  }
+}
+
+// Icon styling
+.tnk-card__icon {
+  color: var(--tnk-primary);
+  opacity: var(--tnk-opacity-high);
+  transition: all var(--tnk-transition-fast);
+  flex-shrink: 0;
+}
+
+// Title styling
+.tnk-card__title {
+  transition: color var(--tnk-transition-fast);
+}
+
+// Ensure proper display for subtitle span
+.tnk-card__subtitle {
+  display: block;
+  margin-top: var(--tnk-space-2xs);
+}
+
+// Description spacing
+.tnk-card__description {
+  margin-top: var(--tnk-space-xs);
+}
