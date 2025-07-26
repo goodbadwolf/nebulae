@@ -5,6 +5,13 @@ html, body {
   padding: 0;
 }
 
+/* Animation variables for Icon component */
+:root {
+  --tnk-animation-duration-fast: 0.3s;
+  --tnk-animation-duration-base: 1s;
+  --tnk-animation-duration-slow: 2s;
+}
+
 /* Minimal BEM classes for custom styling needs */
 .tnk-extension {
   /* Extension-specific styles can go here */
