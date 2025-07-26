@@ -1,49 +1,71 @@
-.tnk-playground-card {
-  display: block;
-  background: var(--tnk-bg-primary);
-  border: var(--tnk-border-width-thick) solid var(--tnk-border-primary);
-  border-radius: var(--tnk-radius-lg);
-  padding: var(--tnk-space-xl);
+// Reset styles for Link and button wrappers
+.tnk-card__link,
+.tnk-card__button {
   text-decoration: none;
-  color: var(--tnk-text-primary);
-  transition: all var(--tnk-transition-base);
+  color: inherit;
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  font: inherit;
   cursor: pointer;
-  position: relative;
 
-  &:hover {
-    border-color: var(--tnk-primary);
+  &:focus-visible {
+    outline: 2px solid var(--tnk-primary);
+    outline-offset: 2px;
+    border-radius: var(--tnk-radius-lg);
+  }
+}
+
+// Card styling enhancements
+.tnk-card {
+  transition: all var(--tnk-transition-base);
+
+  // Hover effects for clickable cards
+  .tnk-card__link &:hover,
+  .tnk-card__button &:hover {
     transform: translateY(var(--tnk-translate-hover-y));
-    box-shadow: var(--tnk-shadow-lg);
+    box-shadow: var(--tnk-shadow-xl);
+    border-color: var(--tnk-primary);
+
+    .tnk-card__icon {
+      transform: scale(1.05);
+    }
+
+    .tnk-card__title {
+      color: var(--tnk-primary);
+    }
   }
 
-  &:active {
-    transform: translateY(var(--tnk-space-none));
+  // Active state
+  .tnk-card__link &:active,
+  .tnk-card__button &:active {
+    transform: translateY(0);
   }
 }
 
-.tnk-playground-card__header {
-  display: flex;
-  align-items: center;
-  gap: var(--tnk-space-lg);
-  margin-bottom: var(--tnk-space-md);
-}
-
-.tnk-playground-card__icon {
+// Icon styling
+.tnk-card__icon {
   color: var(--tnk-primary);
   opacity: var(--tnk-opacity-high);
   transition: all var(--tnk-transition-fast);
+  flex-shrink: 0;
 }
 
-.tnk-playground-card__title {
-  margin: 0;
-  font-size: var(--tnk-text-xl);
-  font-weight: var(--tnk-font-weight-semibold);
-  color: var(--tnk-text-primary);
+// Title styling
+.tnk-card__title {
+  transition: color var(--tnk-transition-fast);
 }
 
-.tnk-playground-card__description {
-  margin: 0;
-  font-size: var(--tnk-text-md);
-  line-height: var(--tnk-line-height-relaxed);
-  color: var(--tnk-text-secondary);
+// Ensure proper display for subtitle span
+.tnk-card__subtitle {
+  display: block;
+  margin-top: var(--tnk-space-2xs);
+}
+
+// Description spacing
+.tnk-card__description {
+  margin-top: var(--tnk-space-xs);
 }

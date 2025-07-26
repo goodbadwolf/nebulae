@@ -4,7 +4,7 @@ import "./home.scss";
 import { MantineProvider, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
-import { Card } from "../../components/card";
+import { Card } from "../../components/Card";
 import { Icon } from "../../components/icon";
 import { PageShell } from "../../components/page-shell";
 import { ResponsiveGrid } from "../../components/responsive-grid";
@@ -23,8 +23,9 @@ const ExtensionPages = () => {
               <RocketLaunchIcon />
             </Icon>
           }
-          title="Welcome Page"
-          description="First-run setup experience with step-by-step guidance for device and server configuration."
+          title="Welcome"
+          subtitle="First-run setup"
+          description="Step-by-step guidance for device and server configuration to get you started with Tanaka."
         />
         <Card
           href="settings"
@@ -33,8 +34,9 @@ const ExtensionPages = () => {
               <GearIcon />
             </Icon>
           }
-          title="Settings Page"
-          description="Extension configuration including server connection, device naming, and sync preferences."
+          title="Settings"
+          subtitle="Extension configuration"
+          description="Configure server connection, device naming, sync preferences, and other extension options."
         />
         <Card
           href="popup"
@@ -43,8 +45,9 @@ const ExtensionPages = () => {
               <AppWindowIcon />
             </Icon>
           }
-          title="Popup Interface"
-          description="Main extension popup with workspace management, search functionality, and real-time sync status."
+          title="Popup"
+          subtitle="Extension popup"
+          description="Workspace management, search functionality, and real-time sync status in a compact interface."
         />
         <Card
           href="manager"
@@ -53,8 +56,9 @@ const ExtensionPages = () => {
               <KanbanIcon />
             </Icon>
           }
-          title="Manager Tab"
-          description="Full workspace manager with detailed tab lists, recently closed items, and device management."
+          title="Manager"
+          subtitle="Workspace manager"
+          description="Detailed tab lists, recently closed items, device management, and advanced workspace controls."
         />
       </ResponsiveGrid>
     </Stack>
