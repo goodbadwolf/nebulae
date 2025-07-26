@@ -1,0 +1,30 @@
+.tnk-page-shell {
+  background-color: var(--mantine-color-gray-0);
+  --app-shell-padding: var(--mantine-spacing-md);
+}
+
+.tnk-page-shell__header {
+  background-color: var(--mantine-color-gray-0);
+  border-bottom: 0;
+  --app-shell-header-height: 80px;
+}
+
+.tnk-page-shell__brand {
+  height: 100%;
+  padding-left: var(--mantine-spacing-xl);
+  padding-right: var(--mantine-spacing-xl);
+}
+
+.tnk-page-shell__brand-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--mantine-color-indigo-filled), var(--mantine-color-indigo-7));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.tnk-page-shell__main {
+  margin-top: 80px;
+}

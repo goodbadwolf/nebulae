@@ -1,7 +1,7 @@
 import { Center, MantineProvider } from "@mantine/core";
 import { useState } from "react";
 
-import { PageShell } from "../../components/page-shell";
+import { PageShell } from "../../../components/page-shell";
 import { WelcomeWizard } from "./components/welcome-wizard";
 
 export function WelcomePage() {

@@ -5,8 +5,8 @@ import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor
 
 import { Card } from "../../../components/card";
 import { Icon } from "../../../components/icon";
+import { PageShell } from "../../../components/page-shell";
 import { ResponsiveGrid } from "../../../components/responsive-grid";
-import { PageShell } from "../../components/page-shell";
 
 const ExtensionPages = () => {
   return (
