@@ -1,0 +1,16 @@
+.tnk-spin-wrapper {
+  display: inline-block;
+}
+
+.tnk-spin-wrapper--spin {
+  animation: tnk-spin-rotate var(--tnk-spin-duration, 1s) linear infinite;
+}
+
+@keyframes tnk-spin-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

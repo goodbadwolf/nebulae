@@ -14,9 +14,7 @@ interface StepCompletionProps {
 export function StepCompletion({ data, onComplete }: StepCompletionProps) {
   return (
     <Stack className="tnk-step-completion" align="center">
-      <Icon size="4xl" className="tnk-step-completion__icon">
-        <CheckCircle weight="fill" />
-      </Icon>
+      <Icon icon={CheckCircle} size="4xl" weight="fill" className="tnk-step-completion__icon" />
 
       <Title order={1} className="tnk-step-completion__title">
         All Set!

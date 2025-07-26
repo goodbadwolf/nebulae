@@ -133,7 +133,7 @@ export function StepServerConfig({ serverUrl, authToken, onChange, onNext, onBac
 
         {testStatus !== "idle" && (
           <div className={`tnk-step-server-config__test-result tnk-step-server-config__test-result--${testStatus}`}>
-            <Icon size="md">{testStatus === "success" ? <CheckCircle /> : <Warning />}</Icon>
+            <Icon icon={testStatus === "success" ? CheckCircle : Warning} size="md" />
             <Text size="sm">{testMessage}</Text>
           </div>
         )}
