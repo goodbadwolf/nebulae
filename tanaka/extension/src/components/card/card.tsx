@@ -63,7 +63,6 @@ export function Card(props: DeepPartial<CardProps> = {}) {
     </MantineCard>
   );
 
-  // If href is provided, wrap in Link
   if (href) {
     return (
       <Link to={href} className="tnk-card__link">
@@ -72,7 +71,6 @@ export function Card(props: DeepPartial<CardProps> = {}) {
     );
   }
 
-  // If onClick is provided, wrap in button
   if (onClick) {
     return (
       <button onClick={onClick} className="tnk-card__button">
@@ -81,6 +79,5 @@ export function Card(props: DeepPartial<CardProps> = {}) {
     );
   }
 
-  // Otherwise, return just the card
   return cardContent;
 }
