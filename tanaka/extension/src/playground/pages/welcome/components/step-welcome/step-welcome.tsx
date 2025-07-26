@@ -12,9 +12,7 @@ interface StepWelcomeProps {
 export function StepWelcome({ onNext }: StepWelcomeProps) {
   return (
     <Stack className="tnk-step-welcome" align="center">
-      <Icon size="4xl" className="tnk-step-welcome__icon">
-        <RocketLaunchIcon />
-      </Icon>
+      <Icon icon={RocketLaunchIcon} size="4xl" className="tnk-step-welcome__icon" />
       <Title order={1} className="tnk-step-welcome__title">
         Welcome to Tanaka
       </Title>

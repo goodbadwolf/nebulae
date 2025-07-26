@@ -45,17 +45,4 @@
     width: 64px;
     height: 64px;
   }
-
-  &--spinning {
-    animation: tnk-spin var(--tnk-icon-spin-duration, 1s) linear infinite;
-  }
-}
-
-@keyframes tnk-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
