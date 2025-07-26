@@ -1,18 +1,17 @@
 import "../../styles/globals.scss";
 
-import { Container, MantineProvider, Stack, Title } from "@mantine/core";
+import { Container, MantineProvider, SimpleGrid, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
 import { Card } from "../../../components/card";
 import { Icon } from "../../../components/icon";
 import { PageShell } from "../../../components/page-shell";
-import { ResponsiveGrid } from "../../../components/responsive-grid";
 
 const ExtensionPages = () => {
   return (
     <Stack gap="xl">
       <Title order={2}>Extension Pages</Title>
-      <ResponsiveGrid gridItemProps={{ minWidth: "240px", maxWidth: "320px" }}>
+      <SimpleGrid cols={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing="lg">
         <Card
           href="welcome"
           icon={
@@ -57,7 +56,7 @@ const ExtensionPages = () => {
           subtitle="Workspace manager"
           description="Detailed tab lists, recently closed items, device management, and advanced workspace controls."
         />
-      </ResponsiveGrid>
+      </SimpleGrid>
     </Stack>
   );
 };
