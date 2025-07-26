@@ -1,16 +1,12 @@
-// Card base styles and hover effects
 .tnk-action-card {
   transition: all 0.3s ease;
-  cursor: pointer;
 
-  // When Card is rendered as a link (modifier)
   &.tnk-action-card--link {
     text-decoration: none;
     color: inherit;
     display: block;
   }
 
-  // When Card is rendered as a button (modifier)
   &.tnk-action-card--button {
     background: none;
     border: none;
@@ -21,7 +17,6 @@
     cursor: pointer;
   }
 
-  // Hover effects for clickable cards
   &.tnk-action-card--link:hover,
   &.tnk-action-card--button:hover {
     transform: translateY(-4px);
@@ -37,13 +32,11 @@
     }
   }
 
-  // Active state
   &.tnk-action-card--link:active,
   &.tnk-action-card--button:active {
     transform: translateY(0);
   }
 
-  // Focus state
   &.tnk-action-card--link:focus-visible,
   &.tnk-action-card--button:focus-visible {
     outline: 2px solid var(--mantine-color-indigo-filled);
@@ -51,7 +44,6 @@
   }
 }
 
-// Icon styling
 .tnk-action-card__icon {
   color: var(--mantine-color-indigo-filled);
   opacity: 0.8;
@@ -59,18 +51,15 @@
   flex-shrink: 0;
 }
 
-// Title styling
 .tnk-action-card__title {
   transition: color 0.2s ease;
 }
 
-// Ensure proper display for subtitle span
 .tnk-action-card__subtitle {
   display: block;
   margin-top: 2px;
 }
 
-// Description spacing
 .tnk-action-card__description {
-  margin-top: var(--mantine-spacing-xs);
+  margin: 0;
 }
