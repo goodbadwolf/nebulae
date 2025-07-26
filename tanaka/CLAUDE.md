@@ -174,8 +174,9 @@ class SyncManager {
 - **NO custom CSS variable systems** - Removed 926 lines of unnecessary CSS variables
 - **Use Mantine props directly** - `size`, `color`, `variant`, `radius`, etc.
 - **Minimal custom CSS** - Only for specific component needs
-- **ThemeProvider HOC** - Centralized minimal theme customization
+- **ThemeProvider Component** - Centralized minimal theme customization in `src/components/theme-provider.tsx`
 - **No over-engineering** - If Mantine provides it, use it
+- **BEM classes** - Keep minimal `.tnk-*` classes for extension-specific styling
 
 ### Memory Management
 

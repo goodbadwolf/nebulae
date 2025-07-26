@@ -1,9 +1,10 @@
-# Playground Migration Plan
+# Extension Migration Plan
 
 ## Overview
 
 This document outlines the step-by-step plan to establish extension-wide patterns using the playground as the proving
-ground. Each phase benefits the entire extension, not just the playground.
+ground. Each phase benefits the entire extension, not just the playground. AI agents should read @../../CLAUDE.md for
+guidelines.
 
 ## Migration Philosophy
 
@@ -35,20 +36,20 @@ validation and learning.
 
 #### MVP Scope
 
-- Remove custom CSS variable files
-- Create basic ThemeProvider
+- [x] Remove custom CSS variable files (_tanaka_vars.scss and _mantine_vars.scss)
+- [x] Create basic ThemeProvider
 
 #### Full Implementation
 
-- [ ] Create ThemeProvider component in src/components/theme-provider.tsx
-- [ ] Update globals.scss to minimal version with BEM classes (.tnk-*)
-- [ ] Replace extensive CSS variables with Mantine props
-- [ ] Update all components to use Mantine defaults
-- [ ] Keep minimal BEM classes for custom styling needs
-- [ ] Test that everything still looks good
-- [ ] Update documentation:
-  - [ ] Remove extensive CSS design system references
-  - [ ] Update CLAUDE.md with new patterns
+- [x] Create ThemeProvider component in src/components/theme-provider.tsx
+- [x] Update globals.scss to minimal version with BEM classes (.tnk-*)
+- [x] Replace extensive CSS variables with Mantine props
+- [x] Update all components to use Mantine defaults
+- [x] Keep minimal BEM classes for custom styling needs
+- [x] Test that everything still looks good
+- [x] Update documentation:
+  - [x] Remove extensive CSS design system references
+  - [x] Update CLAUDE.md with new patterns
   - [ ] Update component usage examples
 
 ### Phase component-reorganization
