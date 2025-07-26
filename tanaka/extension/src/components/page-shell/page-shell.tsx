@@ -1,12 +1,11 @@
 import "./page-shell.scss";
 
-import { applyDefaults, type DeepPartial, type WithDefaults } from "@kiku/core";
 import { AppShell, Group, Title } from "@mantine/core";
 import type { ReactNode } from "react";
 
-import { AppLogo } from "../../../components/app-logo";
+import { AppLogo } from "../app-logo";
 
-type PageShellPropsBase = {
+export interface PageShellProps {
   children?: ReactNode;
   header?: {
     brand?: string;
@@ -16,27 +15,12 @@ type PageShellPropsBase = {
     };
     align?: "left" | "center" | "right";
   };
-};
+}
 
-const defaultProps = {
-  header: {
-    brand: "Tanaka",
-    logo: { size: "md" },
-    align: "center",
-  },
-} as const;
+export function PageShell({ children, header = {} }: PageShellProps = {}) {
+  const { brand = "Tanaka", logo = {}, align = "center" } = header;
 
-export type PageShellProps = WithDefaults<PageShellPropsBase, typeof defaultProps>;
-
-export function PageShell(props: DeepPartial<PageShellProps> = {}) {
-  const {
-    children,
-    header: {
-      brand,
-      logo: { size: logoSize, icon: logoIcon },
-      align,
-    },
-  } = applyDefaults(defaultProps, props);
+  const { size: logoSize = "md", icon: logoIcon } = logo;
 
   const logoElement = logoIcon ?? <AppLogo size={logoSize} />;
 
