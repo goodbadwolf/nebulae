@@ -13,29 +13,29 @@
   cursor: pointer;
 
   &:focus-visible {
-    outline: 2px solid var(--tnk-primary);
+    outline: 2px solid var(--mantine-color-indigo-filled);
     outline-offset: 2px;
-    border-radius: var(--tnk-radius-lg);
+    border-radius: var(--mantine-radius-lg);
   }
 }
 
 // Card styling enhancements
 .tnk-card {
-  transition: all var(--tnk-transition-base);
+  transition: all 0.3s ease;
 
   // Hover effects for clickable cards
   .tnk-card__link &:hover,
   .tnk-card__button &:hover {
-    transform: translateY(var(--tnk-translate-hover-y));
-    box-shadow: var(--tnk-shadow-xl);
-    border-color: var(--tnk-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--mantine-shadow-xl);
+    border-color: var(--mantine-color-indigo-filled);
 
     .tnk-card__icon {
       transform: scale(1.05);
     }
 
     .tnk-card__title {
-      color: var(--tnk-primary);
+      color: var(--mantine-color-indigo-filled);
     }
   }
 
@@ -48,24 +48,24 @@
 
 // Icon styling
 .tnk-card__icon {
-  color: var(--tnk-primary);
-  opacity: var(--tnk-opacity-high);
-  transition: all var(--tnk-transition-fast);
+  color: var(--mantine-color-indigo-filled);
+  opacity: 0.8;
+  transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
 // Title styling
 .tnk-card__title {
-  transition: color var(--tnk-transition-fast);
+  transition: color 0.2s ease;
 }
 
 // Ensure proper display for subtitle span
 .tnk-card__subtitle {
   display: block;
-  margin-top: var(--tnk-space-2xs);
+  margin-top: 2px;
 }
 
 // Description spacing
 .tnk-card__description {
-  margin-top: var(--tnk-space-xs);
+  margin-top: var(--mantine-spacing-xs);
 }
