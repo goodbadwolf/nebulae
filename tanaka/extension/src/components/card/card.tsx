@@ -14,55 +14,68 @@ export interface CardProps {
 }
 
 export function Card({ href, icon, title = "", subtitle = "", description = "", onClick }: CardProps = {}) {
-  const isClickable = Boolean(href || onClick);
-
-  const cardContent = (
-    <MantineCard
-      className="tnk-card"
-      shadow="sm"
-      padding="xl"
-      radius="lg"
-      withBorder
-      component={isClickable ? "div" : "article"}
-    >
-      <Group gap="lg" align="flex-start">
-        {icon && <div className="tnk-card__icon">{icon}</div>}
-        <Stack gap="xs" flex={1}>
-          <div>
-            <Text component="h3" size="lg" fw={600} className="tnk-card__title">
-              {title}
-            </Text>
-            {subtitle && (
-              <Text component="span" size="sm" c="dimmed" className="tnk-card__subtitle">
-                {subtitle}
-              </Text>
-            )}
-          </div>
-          {description && (
-            <Text component="p" size="sm" c="dimmed" className="tnk-card__description">
-              {description}
-            </Text>
-          )}
-        </Stack>
-      </Group>
-    </MantineCard>
-  );
-
+  // Use Mantine's polymorphic component feature
   if (href) {
     return (
-      <Link to={href} className="tnk-card__link">
-        {cardContent}
-      </Link>
+      <MantineCard
+        component={Link}
+        to={href}
+        className="tnk-card tnk-card__link"
+        shadow="sm"
+        padding="xl"
+        radius="lg"
+        withBorder
+      >
+        <CardContent icon={icon} title={title} subtitle={subtitle} description={description} />
+      </MantineCard>
     );
   }
 
   if (onClick) {
     return (
-      <button onClick={onClick} className="tnk-card__button">
-        {cardContent}
-      </button>
+      <MantineCard
+        component="button"
+        onClick={onClick}
+        className="tnk-card tnk-card__button"
+        shadow="sm"
+        padding="xl"
+        radius="lg"
+        withBorder
+      >
+        <CardContent icon={icon} title={title} subtitle={subtitle} description={description} />
+      </MantineCard>
     );
   }
 
-  return cardContent;
+  return (
+    <MantineCard className="tnk-card" shadow="sm" padding="xl" radius="lg" withBorder>
+      <CardContent icon={icon} title={title} subtitle={subtitle} description={description} />
+    </MantineCard>
+  );
+}
+
+// Extract the content to avoid duplication
+function CardContent({ icon, title, subtitle, description }: Omit<CardProps, "href" | "onClick">) {
+  return (
+    <Group gap="lg" align="flex-start">
+      {icon && <div className="tnk-card__icon">{icon}</div>}
+      <Stack gap="xs" flex={1}>
+        <div>
+          <Text component="h3" size="lg" fw={600} className="tnk-card__title">
+            {title}
+          </Text>
+          {subtitle && (
+            <Text component="span" size="sm" c="dimmed" className="tnk-card__subtitle">
+              {subtitle}
+            </Text>
+          )}
+        </div>
+        {description && (
+          <Text component="p" size="sm" c="dimmed" className="tnk-card__description">
+            {description}
+          </Text>
+        )}
+      </Stack>
+    </Group>
+  );
 }
