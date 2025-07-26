@@ -50,7 +50,7 @@ validation and learning.
 - [x] Update documentation:
   - [x] Remove extensive CSS design system references
   - [x] Update CLAUDE.md with new patterns
-  - [ ] Update component usage examples
+  - [x] Update component usage examples
 
 ### Phase component-reorganization
 
@@ -63,16 +63,16 @@ validation and learning.
 
 - [x] Audit existing components for removal candidates
 - [x] Move generic components to src/components/
-  - [ ] page-shell (MVP)
-  - [ ] icon (MVP)
+  - [x] page-shell (MVP)
+  - [x] icon (MVP)
   - [x] app-logo
-  - [ ] responsive-grid
+  - [x] responsive-grid
   - [x] card
 - [x] Update all import paths
 - [x] Test build and functionality
 - [ ] Update documentation:
-  - [ ] Document new component locations
-  - [ ] Update import examples in docs
+  - [x] Document new component locations
+  - [x] Update import examples in docs
 
 ### Phase dependency-injection
 
