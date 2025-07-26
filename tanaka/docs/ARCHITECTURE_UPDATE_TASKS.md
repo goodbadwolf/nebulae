@@ -165,25 +165,25 @@ making changes
 
 ### Documentation Organization
 
-- [ ] DESIGN-SYSTEM-GUIDE.md references old CSS system that's being removed
-- [ ] REACT-MIGRATION-PLAN.md conflicts with new architecture plan (CSS variables vs Mantine defaults)
+- [x] DESIGN-SYSTEM-GUIDE.md references old CSS system that's being removed
+- [x] REACT-MIGRATION-PLAN.md conflicts with new architecture plan (CSS variables vs Mantine defaults)
 
 ### Outdated Information
 
-- [ ] DESIGN-SYSTEM-GUIDE.md needs complete rewrite after CSS simplification
-- [ ] REACT-MIGRATION-PLAN.md references _tanaka_vars.scss and _mantine_vars.scss that will be removed
-- [ ] UI-DESIGN.md doesn't mention playground at all - needs extension architecture context
+- [x] DESIGN-SYSTEM-GUIDE.md needs complete rewrite after CSS simplification
+- [x] REACT-MIGRATION-PLAN.md references _tanaka_vars.scss and _mantine_vars.scss that will be removed
+- [x] UI-DESIGN.md doesn't mention playground at all - needs extension architecture context
 
 ### Missing Documentation
 
-- [ ] No documentation for new ServicesProvider/DI system
-- [ ] No documentation for playground's role in extension development
+- [x] No documentation for new ServicesProvider/DI system
+- [x] No documentation for playground's role in extension development
 
 ### Architecture Conflicts
 
-- [ ] ARCHITECTURE.md focuses on Yjs CRDT but code uses different implementation
-- [ ] Multiple references to extensive CSS design system (should mention minimal BEM classes)
-- [ ] Playground structure differs from what's documented
+- [x] ARCHITECTURE.md focuses on Yjs CRDT but code uses different implementation
+- [x] Multiple references to extensive CSS design system (should mention minimal BEM classes)
+- [x] Playground structure differs from what's documented
 
 ### Navigation Updates Needed
 
@@ -194,7 +194,7 @@ making changes
 
 ### After Phase css-simplification
 
-- [ ] Remove DESIGN-SYSTEM-GUIDE.md or rewrite completely
+- [x] Remove DESIGN-SYSTEM-GUIDE.md or rewrite completely
 - [ ] Update all component examples to use Mantine props
 - [ ] Document new ThemeProvider usage
 - [ ] Update CLAUDE.md CSS architecture section
