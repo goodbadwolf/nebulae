@@ -4,7 +4,7 @@ import "./home.scss";
 import { MantineProvider, Stack, Title } from "@mantine/core";
 import { AppWindowIcon, GearIcon, KanbanIcon, RocketLaunchIcon } from "@phosphor-icons/react";
 
-import { Card } from "../../components/Card";
+import { Card } from "../../components/card";
 import { Icon } from "../../components/icon";
 import { PageShell } from "../../components/page-shell";
 import { ResponsiveGrid } from "../../components/responsive-grid";
