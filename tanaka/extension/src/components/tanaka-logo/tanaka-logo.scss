@@ -1,0 +1,14 @@
+.tnk-logo {
+  box-shadow: var(--mantine-shadow-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &__initial {
+    font-size: 1.6em;
+    color: var(--mantine-color-white);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--mantine-shadow-lg);
+  }
+}
