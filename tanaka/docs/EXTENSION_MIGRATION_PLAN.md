@@ -65,12 +65,15 @@ validation and learning.
 - [x] Move generic components to src/components/
   - [x] page-shell (MVP)
   - [x] icon (MVP)
-  - [x] app-logo
-  - [x] responsive-grid
-  - [x] card
+  - [x] app-logo (renamed to tanaka-logo)
+  - [x] responsive-grid (removed in favor of Mantine SimpleGrid)
+  - [x] card (renamed to action-card)
 - [x] Update all import paths
 - [x] Test build and functionality
-- [ ] Update documentation:
+- [x] Additional components created:
+  - [x] spin (extracted from icon component)
+  - [x] theme-provider (part of css-simplification)
+- [x] Update documentation:
   - [x] Document new component locations
   - [x] Update import examples in docs
 
