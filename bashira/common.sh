@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # get_script_dir: Get absolute directory of the current script
 # Usage: script_dir=$(get_script_dir)
