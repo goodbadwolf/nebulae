@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # find_parent_dir: Traverse up directory tree until finding a directory containing target
 # Usage: find_parent_dir <target_name> [start_dir]

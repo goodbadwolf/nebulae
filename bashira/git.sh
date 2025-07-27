@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # find_git_root: Find the root of the current git repository
 # Usage: find_git_root [start_dir]
