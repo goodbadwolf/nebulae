@@ -27,7 +27,10 @@ Directory traversal and path manipulation utilities
 Git repository utilities for finding repo root and ensuring git context
 
 ### env_vars.sh
-Utilities for managing colon-delimited environment variables (PATH, MODULEPATH, etc.)
+Utilities for managing colon-delimited environment variables
+
+### string.sh
+String manipulation utilities (trimming, joining, etc.)
 
 ## Adding New Utilities
 

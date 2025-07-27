@@ -10,10 +10,14 @@ get_script_dir() {
     echo "$( cd "$( dirname "${BASH_SOURCE[1]}" )" && pwd )"
 }
 
-# die: Print error message and exit with code
+# die: Print error message with calling function name and exit with code
 # Usage: die "Error message" [exit_code]
+# Examples:
+#   die "File not found"
+#   die "Invalid argument" 2
+# Output format: "calling_function: Error message"
 die() {
-    echo "${1:-Error}" >&2
+    echo "${FUNCNAME[1]}: ${1:-Error}" >&2
     exit "${2:-1}"
 }
 
