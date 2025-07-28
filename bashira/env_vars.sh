@@ -114,6 +114,25 @@ pack_colon_list() {
     echo "${values[*]}"
 }
 
+is_in_colon_list() {
+    local list_value="$1"
+    local value_to_check="$2"
+    
+    if ! is_colon_list "$list_value"; then
+        return 1  # false - not a colon list
+    fi
+
+    local -a list_array
+    unpack_colon_list list_array "$list_value"
+    for value in "${list_array[@]}"; do
+        if [[ "$value" == "$value_to_check" ]]; then
+            return 0  # true - value found
+        fi
+    done
+
+    return 1  # false - value not found
+}
+
 # remove_from_colon_list: Remove a value from a colon-delimited list
 # Usage: new_list=$(remove_from_colon_list "$PATH" "/path/to/remove")
 # Returns: The modified list (prints to stdout)
