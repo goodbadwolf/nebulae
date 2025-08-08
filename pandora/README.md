@@ -5,6 +5,8 @@ AI agents and automation tools - artificial beings that serve and assist.
 ## Structure
 
 - `slash-commands/` - Custom slash commands for AI code assistants
+  - Claude-specific commands for thinking, discussion, and git workflows
+  - Extensible framework for other AI assistants
 
 ## Etymology
 
