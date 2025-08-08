@@ -9,6 +9,14 @@ Start a structured design discussion about $ARGUMENTS.
 
 When I receive this command, I will:
 
+**IMPORTANT CONSTRAINTS:**
+- During discussions, only provide answers and suggestions
+- NEVER create files unless explicitly requested (e.g., "create", "make", "implement")
+- If suggesting a structure, describe it - don't implement it
+- Common mistake: Creating example files when user asks "what do you think?"
+
+0. **READ PROJECT GUIDELINES**. First, carefully read @CLAUDE.md to understand project conventions and requirements. Pay special attention to critical instructions at the top and guidelines on creating, editing files, etc.
+
 1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log file named `<TOPIC>_LOG.md` (uppercase version of the topic)
 
 2. **Ask questions one at a time** with:
