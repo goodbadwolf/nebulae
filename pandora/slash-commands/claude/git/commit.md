@@ -1,7 +1,7 @@
 ---
 description: Smart git commit workflow with context-aware staging and message generation
-argument-hint: "[--quick|--full|--retry] [--type=<type>] [--scope=<scope>] [--profile=<name>]"
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Read(*), Edit(*), MultiEdit(*)
+argument-hint: "[--quick|--full|--retry] [--no-edit] [--type=<type>] [--scope=<scope>] [--profile=<name>]"
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Read(*), Edit(*), MultiEdit(*), Write(*)
 ---
 
 # Smart Git Commit Workflow
@@ -80,10 +80,32 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    \! pre-commit run --files <staged-files>
    ```
 
-6. **Execute Commit**
-   Create the commit with generated message:
+6. **Commit Message Finalization**
+
+   **Interactive Mode (default for full mode, optional for others)**:
+   - Generate draft message based on analysis
+   - Create temporary file `.git/COMMIT_EDITMSG_DRAFT.md`
+   - Write draft message to file
+   - Open in IDE for user editing:
+     ```bash
+     \! echo "<generated-message>" > .git/COMMIT_EDITMSG_DRAFT.md
+     ```
+   - Display: "Please review and edit the commit message in your IDE"
+   - Wait for user to save and confirm
+   - Read final message from file
+
+   **Quick Mode (--no-edit flag)**:
+   - Use generated message directly without editing
+   - Suitable for simple, obvious changes
+
+   **Execute Commit**:
    ```bash
-   \! git commit -m "<generated-message>"
+   \! git commit -m "<final-message>"
+   ```
+
+   Or for interactive editing:
+   ```bash
+   \! git commit -F .git/COMMIT_EDITMSG_DRAFT.md
    ```
 
    Then verify success:
@@ -105,12 +127,14 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 - Fast staging of obvious groups
 - Simple commit message
 - Skip detailed analysis
+- No interactive editing by default (use --edit to enable)
 
 **Full Mode** (--full or complex changes):
 - Detailed change analysis
 - Careful file grouping
 - Comprehensive message generation
 - Full pre-commit checks
+- Interactive message editing by default (use --no-edit to skip)
 
 **Smart Mode** (default):
 - Automatically choose based on:
@@ -118,6 +142,12 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
   - Presence of test files
   - Mix of file types
   - Recent failure patterns
+- Interactive editing for complex changes (>5 files)
+
+**Message Editing Control**:
+- `--edit`: Force interactive message editing (opens in IDE)
+- `--no-edit`: Skip interactive editing, use generated message
+- Default: Quick mode skips, Full mode enables editing
 
 ## User Preferences
 
@@ -127,6 +157,8 @@ Track and learn from user behavior:
 - Common file groupings
 - Frequent commit types
 - Message style preferences
+- Interactive editing preference (always/never/smart)
+- IDE integration preferences
 
 ## Safety Rules
 
@@ -167,12 +199,19 @@ MANDATORY requirements from CLAUDE.md:
 /git:commit --quick --type=chore
 /git:commit --full --type=feat --scope=client
 
+# Interactive message editing control
+/git:commit --edit                         # Force interactive editing
+/git:commit --no-edit                      # Skip interactive editing
+/git:commit --quick --edit                 # Quick mode with editing
+/git:commit --full --no-edit               # Full mode without editing
+
 # More examples with different scenarios
 /git:commit --type=docs                    # Documentation changes
 /git:commit --type=test --scope=unit       # Test additions
 /git:commit --type=refactor --quick        # Quick refactoring
 /git:commit --type=chore --scope=deps      # Dependency updates
 /git:commit --profile=hotfix --quick       # Quick hotfix using profile
+/git:commit --no-edit --type=fix           # Quick fix without editing
 ```
 
 ## Pre-commit Workflow
