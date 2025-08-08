@@ -1,7 +1,7 @@
 ---
 description: Smart git commit workflow with context-aware staging and message generation
 argument-hint: "[--quick|--full|--retry] [--no-edit] [--type=<type>] [--scope=<scope>] [--profile=<name>]"
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Read(*), Edit(*), MultiEdit(*), Write(*)
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Bash(echo:*), Read(*), Edit(*), MultiEdit(*), Write(*)
 ---
 
 # Smart Git Commit Workflow
