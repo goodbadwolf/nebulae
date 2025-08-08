@@ -18,9 +18,11 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    \! git status && git diff HEAD && git log -n 3 --oneline
    ```
 
-2. **Analyze Changes**
-   - Determine complexity: If <5 files changed, use quick mode; otherwise full mode
+2. **Analyze Changes & Arguments**
    - Parse arguments: `$ARGUMENTS`
+   - Handle natural language requests (e.g., "unstage the docs/" → `git restore --staged docs/`)
+   - Process flags: --quick, --full, --type, --scope, etc.
+   - Determine complexity: If <5 files changed, use quick mode; otherwise full mode
    - Override mode if --quick or --full specified
 
 3. **Smart File Staging**
@@ -65,9 +67,10 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 
    **Known Failure Patterns & Fixes**:
    - Markdown line length in decision logs → Exclude from linting
-   - Import sorting issues → Auto-fix with `ruff --fix`
+   - Import sorting issues → Auto-fix with `uv run ruff --fix`
    - Trailing whitespace → Auto-fix
    - YAML formatting → Auto-fix with taplo
+   - Deprecated linter rules → Remove from config before commit
 
    **Smart Retry Logic**:
    - If pre-commit fails, analyze error
@@ -292,8 +295,9 @@ When staging would conflict with existing staged files:
 
 3. **Smart conflict resolution**:
    - If files are related → Suggest combining
-   - If files are unrelated → Suggest separate commits
+   - If files are unrelated → Suggest separate commits (use `git restore --staged` to unstage)
    - If unsure → Ask for user preference
+   - Respect user's separation of concerns (e.g., config vs docs)
 
 ## Message Templates
 
@@ -344,6 +348,12 @@ Updates stored in CLAUDE.md after:
 - 3 similar failures → New known issue pattern
 - User override of suggestion → Preference update
 - Repeated commit types in directory → Path-type association
+- User requests (e.g., unstaging) → Learn separation preferences
+
+**Important**: When discovering significant patterns or preferences through user interactions,
+update this command file (~/.claude/commands/git/commit.md) with the new insights. This ensures
+the command evolves and improves based on actual usage patterns rather than keeping learnings
+isolated to individual sessions.
 
 ## Edge Cases
 
@@ -429,4 +439,3 @@ When processing this command:
 7. Provide clear, concise output
 8. Focus on efficiency without compromising safety
 9. Break loops and ask for help when stuck
-EOF < /dev/null
