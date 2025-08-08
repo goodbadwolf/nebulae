@@ -9,7 +9,7 @@ Start a structured design discussion about $ARGUMENTS.
 
 When I receive this command, I will:
 
-1. **Confirm the topic** and ask if you want to create a decision log file named `<TOPIC>_LOG.md` (uppercase version of the topic)
+1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log file named `<TOPIC>_LOG.md` (uppercase version of the topic)
 
 2. **Ask questions one at a time** with:
    - Clear options (a, b, c, etc.)
@@ -24,7 +24,7 @@ When I receive this command, I will:
    - Each decision documented with: Status, Context, Options Considered, Decision, Consequences
    - Session markers when resuming discussions
    - Sub-decisions for important clarifications
-   - Dual save approach: immediate raw logging + clean summary
+   - **Dual save approach: immediate raw logging + clean summary**
 
 4. **Handle discussion flow**:
    - Start broad, then narrow down with iterative refinement
