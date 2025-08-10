@@ -1,7 +1,7 @@
 ---
 description: Smart git commit workflow with context-aware staging and message generation
 argument-hint: "[--quick|--full|--retry] [--no-edit] [--type=<type>] [--scope=<scope>] [--profile=<name>]"
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Bash(echo:*), Read(*), Edit(*), MultiEdit(*), Write(*)
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Bash(echo:*), Bash(xargs:*), Read(*), Edit(*), MultiEdit(*), Write(*)
 ---
 
 # Smart Git Commit Workflow
@@ -166,6 +166,8 @@ Track and learn from user behavior:
 ## Safety Rules
 
 MANDATORY requirements from CLAUDE.md:
+- ✅ NEVER commit without explicit user request
+- ✅ "Let's X" means "let's discuss X" - NOT "do X now"
 - ✅ NEVER use `git add -A` or `git add .`
 - ✅ NEVER use --no-verify
 - ✅ Always run `git status` first

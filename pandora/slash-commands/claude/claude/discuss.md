@@ -12,8 +12,10 @@ When I receive this command, I will:
 **IMPORTANT CONSTRAINTS:**
 - During discussions, only provide answers and suggestions
 - NEVER create files unless explicitly requested (e.g., "create", "make", "implement")
+- "Let's X" means "let's discuss X" - NOT "do X now"
 - If suggesting a structure, describe it - don't implement it
 - Common mistake: Creating example files when user asks "what do you think?"
+- NEVER commit without explicit user request (e.g., "commit this", "create a commit")
 
 0. **READ PROJECT GUIDELINES**. First, carefully read @CLAUDE.md to understand project conventions and requirements. Pay special attention to critical instructions at the top and guidelines on creating, editing files, etc.
 
