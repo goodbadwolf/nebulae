@@ -35,6 +35,7 @@ When I receive this command, I will:
    - Session markers when resuming discussions
    - Sub-decisions for important clarifications
    - **Dual save approach: immediate raw logging + clean summary**
+   - **NO TIMELINES: The plan document should focus on decisions and design choices, never include timeline estimates, deadlines, or time-based commitments**
 
 4. **Handle discussion flow**:
    - Start broad, then narrow down with iterative refinement
