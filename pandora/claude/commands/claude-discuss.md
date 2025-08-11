@@ -1,13 +1,31 @@
 ---
 description: Structured design discussion with decision logging
 argument-hint: <topic>
+allowed-tools: Read, Write, Edit, MultiEdit, LS, Grep, Glob, Bash(git status:*)
 ---
 
-Start a structured design discussion about $ARGUMENTS.
+# Start a structured design discussion about $ARGUMENTS
+
+## Safety and Constraint Checks
+
+### 0. **SAFETY CHECK**: Verify @CLAUDE.md exists and read it
+
+- Verify @CLAUDE.md exists at project root
+- Read and internalize all critical rules
+- Pay special attention to:
+  - "Let's X" means "let's discuss X" - NOT "do X now"
+  - NEVER create files unless explicitly requested
+  - NO unnecessary file creation or commits
+
+### 1. **CONSTRAINT CHECK**: Confirm safe workspace state
+
+- Run `git status` to verify no uncommitted work in progress
+- Ensure no files being edited without user awareness
+- Confirm discussion mode constraints are active
 
 ## Discussion Protocol
 
-When I receive this command, I will:
+After safety checks pass, I will proceed with:
 
 **IMPORTANT CONSTRAINTS:**
 
@@ -17,9 +35,6 @@ When I receive this command, I will:
 - If suggesting a structure, describe it - don't implement it
 - Common mistake: Creating example files when user asks "what do you think?"
 - NEVER commit without explicit user request (e.g., "commit this", "create a commit")
-
-0. **READ PROJECT GUIDELINES**. First, carefully read @CLAUDE.md to understand project conventions and requirements.
-Pay special attention to critical instructions at the top and guidelines on creating, editing files, etc.
 
 1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log
 file named `<TOPIC>_DISCUSSION.md` (uppercase version of the topic) in the project's scratchpad directory. If such a
@@ -32,6 +47,7 @@ directory does not exist then encourage the user to make one called `.scratchpad
      - Creative topics: user experience, workflows
      - Business topics: impact, effort, risks
    - Wait for your confirmation before proceeding
+   - For complex architectural decisions, I may think deeply to provide thorough analysis
 
 3. **Maintain a decision log** in ADR (Architecture Decision Record) format with:
    - Hybrid overview at top (summary + key decisions + open questions + stats)
