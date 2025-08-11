@@ -222,16 +222,22 @@ explicit user requests.
 
 ### Git Commit Preferences
 
-- (Add user-specific commit preferences here as they emerge)
-- Example: User prefers concise commit messages without details
-- Example: User groups markdown files with related code changes
+- Prefer editing existing files over creating new ones
+- Make incremental changes, not big-bang commits
+- Never assume backward compatibility - always ask explicitly
+- Don't create files/folders until they are needed
 
-### Discussion Preferences  
+### Discussion Preferences
 
-- (Add user-specific discussion preferences here as they emerge)
-- Example: User prefers technical depth over business considerations
+- **Incremental Development**: Edit existing files with scope limits, create new files only for distinctly different functionality
+- **Refactoring**: Make small, focused refactoring commits before implementing new features
+- **Backward Compatibility**: NEVER assume backward compatibility is needed - always ASK explicitly
+- **Documentation**: Update existing docs only when incorrect or for critical changes, NEVER create new docs unless asked
+- **Planning Approach**: Discuss the approach first, then implement incrementally
 
 ### General Command Preferences
 
-- (Add cross-command preferences here as they emerge)
-- Example: User prefers minimal output over detailed explanations
+- User prefers incremental development - no premature file/folder creation
+- Always prefer editing existing files over creating new ones
+- Update existing documentation only, never create new docs unless explicitly requested
+- No backward compatibility by default - must be explicitly requested

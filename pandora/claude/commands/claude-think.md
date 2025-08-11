@@ -41,6 +41,8 @@ The command adjusts thinking depth based on intensity modifiers:
 When invoked, I will:
 
 1. **Read @CLAUDE.md** to understand project conventions and constraints
+   - Pay special attention to the "Slash Commands" section for learned user preferences
+   - Apply those preferences throughout the thinking process
 
 2. **Gather Context** about the problem:
    - Analyze relevant code and documentation

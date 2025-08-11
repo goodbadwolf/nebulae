@@ -12,6 +12,8 @@ allowed-tools: Read, Write, Edit, MultiEdit, LS, Grep, Glob, Bash(git status:*)
 
 - Verify @CLAUDE.md exists at project root
 - Read and internalize all critical rules
+- **READ the "Slash Commands" section** of @CLAUDE.md for learned user preferences
+- Apply those preferences throughout this discussion
 - Pay special attention to:
   - "Let's X" means "let's discuss X" - NOT "do X now"
   - NEVER create files unless explicitly requested
@@ -35,6 +37,14 @@ After safety checks pass, I will proceed with:
 - If suggesting a structure, describe it - don't implement it
 - Common mistake: Creating example files when user asks "what do you think?"
 - NEVER commit without explicit user request (e.g., "commit this", "create a commit")
+
+**USER PREFERENCES:**
+
+- **Incremental Development**: Edit existing files with scope limits, create new files only for distinctly different functionality
+- **Refactoring**: Make small, focused refactoring commits before implementing new features
+- **Backward Compatibility**: NEVER assume backward compatibility is needed - always ASK explicitly
+- **Documentation**: Update existing docs only when incorrect or for critical changes, NEVER create new docs unless asked
+- **Planning Approach**: Discuss the approach first, then implement incrementally
 
 1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log
 file named `<TOPIC>_DISCUSSION.md` (uppercase version of the topic) in the project's scratchpad directory. If such a
@@ -64,6 +74,7 @@ directory does not exist then encourage the user to make one called `.scratchpad
    - Allow deferring questions (revisit after 3-4 others)
    - Context-sensitive scope management for related topics
    - Natural session ending with optional summary prompt
+   - For implementation discussions: Focus on incremental steps, not big-bang changes
 
 5. **Special behaviors**:
    - If no topic given: Resume last discussion or show available discussions

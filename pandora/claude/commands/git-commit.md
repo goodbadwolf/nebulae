@@ -6,7 +6,7 @@ allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git a
 
 # Smart Git Commit Workflow
 
-Execute an intelligent git commit workflow that follows all safety rules from CLAUDE.md while streamlining the commit process.
+Execute an intelligent git commit workflow that follows all safety rules from @CLAUDE.md while streamlining the commit process.
 
 ## Command: `/git:commit $ARGUMENTS`
 
@@ -19,6 +19,8 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
      - NEVER use `git add -A` or `git add .`
      - NEVER use --no-verify
      - Always run appropriate linters before committing
+   - **READ the "Slash Commands" section** of @CLAUDE.md for learned user preferences
+   - Apply those preferences throughout this command execution
 
 1. **CONSTRAINT CHECK**: Verify safe commit state
    - Confirm this is an explicit commit request (not "let's commit")
@@ -148,9 +150,16 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 
 Track and learn from user behavior: file groupings, commit types, message styles, and editing preferences.
 
+**Known Preferences:**
+
+- Prefer editing existing files over creating new ones
+- Make incremental changes, not big-bang commits
+- Never assume backward compatibility - always ask explicitly
+- Don't create files/folders until they are needed
+
 ## Safety Rules
 
-MANDATORY requirements from CLAUDE.md:
+MANDATORY requirements from @CLAUDE.md:
 
 - [x] NEVER commit without explicit user request
 - [x] "Let's X" means "let's discuss X" - NOT "do X now"
@@ -250,7 +259,8 @@ Follow conventional commit format:
 
 ## Pattern Learning
 
-**Learning** means capturing user preferences from repeated actions or explicit requests (things they asked you to do or not do).
+**Learning** means capturing user preferences from repeated actions or explicit requests (things they asked you to do or
+not do).
 
 The command learns from:
 
@@ -259,14 +269,14 @@ The command learns from:
 3. **Repeated patterns**: Same action taken 3+ times indicates preference
 4. **Rejected suggestions**: When user consistently avoids certain approaches
 
-Save learnings to CLAUDE.md's "Slash Commands" section when you identify:
+Save learnings to @CLAUDE.md's "Slash Commands" section when you identify:
 
 - Repeated user corrections to the same type of suggestion
 - Explicit "always" or "never" instructions from the user
 - Consistent file grouping preferences across multiple commits
 - Specific commit message styles the user prefers
 
-**Important**: Update or clarify existing patterns in CLAUDE.md's "Slash Commands" section rather than duplicating. Focus on user preferences, not general patterns.
+**Important**: Update @CLAUDE.md's "Slash Commands" section with user preferences from explicit requests or repeated actions.
 
 ## Edge Cases
 
@@ -312,7 +322,7 @@ Works seamlessly with other slash commands:
 
 When processing this command:
 
-1. Read CLAUDE.md for project-specific rules
+1. Read @CLAUDE.md for project-specific rules
 2. Check git status before any operations
 3. Run pre-commit iteratively until success
 4. Learn from git history for patterns
