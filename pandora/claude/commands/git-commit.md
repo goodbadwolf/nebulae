@@ -12,21 +12,34 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 
 ### Workflow Implementation
 
-1. **Initial Status Check**
-   First, gather comprehensive information about the current state:
+0. **SAFETY CHECK**: Verify @CLAUDE.md exists and read it
+   - Verify @CLAUDE.md exists at project root
+   - Read and internalize commit safety rules:
+     - NEVER commit without explicit user request
+     - NEVER use `git add -A` or `git add .`
+     - NEVER use --no-verify
+     - Always run appropriate linters before committing
+
+1. **CONSTRAINT CHECK**: Verify safe commit state
+   - Confirm this is an explicit commit request (not "let's commit")
+   - Check no merge/rebase in progress
+   - Verify user is aware of all changes being committed
+
+2. **Initial Status Check**
+   After safety checks, gather comprehensive information about the current state:
 
    ```bash
    \! git status && git diff HEAD && git log -n 3 --oneline
    ```
 
-2. **Analyze Changes & Arguments**
+3. **Analyze Changes & Arguments**
    - Parse arguments: `$ARGUMENTS`
-   - Handle natural language requests (e.g., "unstage the docs/" → `git restore --staged docs/`)
+   - Handle natural language requests (e.g., "unstage the docs/" -> `git restore --staged docs/`)
    - Process flags: --quick, --full, --type, --scope, etc.
    - Determine complexity: If <5 files changed, use quick mode; otherwise full mode
    - Override mode if --quick or --full specified
 
-3. **Smart File Staging**
+4. **Smart File Staging**
    Based on git history patterns, intelligently group and stage related files:
 
    **File Grouping Patterns** (learned from project):
@@ -35,20 +48,14 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    - Config files together: `*.yaml`, `*.yml`, `*.toml`, `*.json`
    - Frontend components: `*.tsx` + `*.css` + tests
 
-   **Path-based Type Inference**:
-   - `src/nl2sciviz/server/` → feat
-   - `src/nl2sciviz/client/` → feat
-   - `tests/` → test
-   - `docs/` → docs
-   - `.github/`, `scripts/` → chore
-   - `*.md` files → docs (unless with code changes)
+   **Path-based Type Inference**: Automatically infer type from file paths (tests -> test, docs -> docs, etc.)
 
    **CRITICAL**: NEVER use `git add -A` or `git add .`
    Always stage specific files or patterns only.
 
    Show files to be staged and get confirmation before proceeding.
 
-4. **Generate Commit Message**
+5. **Generate Commit Message**
    Analyze changes to create appropriate commit message:
 
    **Message Generation Strategy**:
@@ -64,14 +71,14 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    3. Diff content analysis
    4. Default to most significant change
 
-5. **Pre-commit Check Handling**
+6. **Pre-commit Check Handling**
 
    **Known Failure Patterns & Fixes**:
-   - Markdown line length in decision logs → Exclude from linting
-   - Import sorting issues → Auto-fix with `uv run ruff --fix`
-   - Trailing whitespace → Auto-fix
-   - YAML formatting → Auto-fix with taplo
-   - Deprecated linter rules → Remove from config before commit
+   - Markdown line length in decision logs -> Exclude from linting
+   - Import sorting issues -> Auto-fix with `uv run ruff --fix`
+   - Trailing whitespace -> Auto-fix
+   - YAML formatting -> Auto-fix with taplo
+   - Deprecated linter rules -> Remove from config before commit
 
    **Smart Retry Logic**:
    - If pre-commit fails, analyze error
@@ -85,7 +92,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    \! pre-commit run --files <staged-files>
    ```
 
-6. **Commit Message Finalization**
+7. **Commit Message Finalization**
 
    **Interactive Mode (default for full mode, optional for others)**:
    - Generate draft message based on analysis
@@ -123,7 +130,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    \! git status
    ```
 
-7. **Error Recovery**
+8. **Error Recovery**
    If commit fails:
    - Save state for --retry option
    - Analyze failure reason
@@ -132,104 +139,51 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 
 ## Mode Selection
 
-**Quick Mode** (--quick or <5 files):
-
-- Minimal output
-- Fast staging of obvious groups
-- Simple commit message
-- Skip detailed analysis
-- No interactive editing by default (use --edit to enable)
-
-**Full Mode** (--full or complex changes):
-
-- Detailed change analysis
-- Careful file grouping
-- Comprehensive message generation
-- Full pre-commit checks
-- Interactive message editing by default (use --no-edit to skip)
-
-**Smart Mode** (default):
-
-- Automatically choose based on:
-  - Number of files changed
-  - Presence of test files
-  - Mix of file types
-  - Recent failure patterns
-- Interactive editing for complex changes (>5 files)
-
-**Message Editing Control**:
-
-- `--edit`: Force interactive message editing (opens in IDE)
-- `--no-edit`: Skip interactive editing, use generated message
-- Default: Quick mode skips, Full mode enables editing
+- **Quick Mode** (--quick or <5 files): Minimal output, fast staging, no interactive editing by default
+- **Full Mode** (--full or complex): Detailed analysis, full pre-commit, interactive editing by default  
+- **Smart Mode** (default): Auto-selects based on complexity
+- **Editing**: Use --edit to force or --no-edit to skip interactive message editing
 
 ## User Preferences
 
-Track and learn from user behavior:
-
-- Verbosity level (minimal/normal/verbose)
-- Auto-fix preference
-- Common file groupings
-- Frequent commit types
-- Message style preferences
-- Interactive editing preference (always/never/smart)
-- IDE integration preferences
+Track and learn from user behavior: file groupings, commit types, message styles, and editing preferences.
 
 ## Safety Rules
 
 MANDATORY requirements from CLAUDE.md:
 
-- ✅ NEVER commit without explicit user request
-- ✅ "Let's X" means "let's discuss X" - NOT "do X now"
-- ✅ NEVER use `git add -A` or `git add .`
-- ✅ NEVER use --no-verify
-- ✅ Always run `git status` first
-- ✅ Propose draft message, don't ask for it
-- ✅ Keep messages concise
-- ✅ No emojis in commits
-- ✅ No AI attribution in messages
-- ✅ Fix issues instead of bypassing
+- [x] NEVER commit without explicit user request
+- [x] "Let's X" means "let's discuss X" - NOT "do X now"
+- [x] NEVER use `git add -A` or `git add .`
+- [x] NEVER use --no-verify
+- [x] Always run `git status` first
+- [x] Propose draft message, don't ask for it
+- [x] Keep messages concise
+- [x] No emojis in commits
+- [x] No AI attribution in messages
+- [x] Fix issues instead of bypassing
 
 ## Examples
 
 ```bash
-# Smart mode (auto-detect based on complexity)
+# Auto-detect mode based on complexity
 /git:commit
 
-# Quick mode for simple changes
-/git:commit --quick
+# Mode control
+/git:commit --quick                        # Simple changes
+/git:commit --full                         # Complex changes
 
-# Full analysis for complex changes
-/git:commit --full
+# Specify commit type and scope
+/git:commit --type=feat --scope=server
+/git:commit --type=fix
 
-# Specify commit type
-/git:commit --type=feat
-/git:commit --type=fix --scope=server
-
-# Retry after fixing pre-commit issues
-/git:commit --retry
-
-# Use saved profile for common patterns
-/git:commit --profile=docs
-/git:commit --profile=refactor
-
-# Combine options
-/git:commit --quick --type=chore
-/git:commit --full --type=feat --scope=client
-
-# Interactive message editing control
+# Message editing control
 /git:commit --edit                         # Force interactive editing
 /git:commit --no-edit                      # Skip interactive editing
-/git:commit --quick --edit                 # Quick mode with editing
-/git:commit --full --no-edit               # Full mode without editing
 
-# More examples with different scenarios
-/git:commit --type=docs                    # Documentation changes
-/git:commit --type=test --scope=unit       # Test additions
-/git:commit --type=refactor --quick        # Quick refactoring
-/git:commit --type=chore --scope=deps      # Dependency updates
-/git:commit --profile=hotfix --quick       # Quick hotfix using profile
-/git:commit --no-edit --type=fix           # Quick fix without editing
+# Common combinations
+/git:commit --quick --type=chore
+/git:commit --retry                        # After fixing pre-commit issues
 ```
 
 ## Pre-commit Workflow
@@ -245,65 +199,27 @@ After staging files, ALWAYS follow this iterative validation process:
    ```
 
 2. **Handle results**:
-   - If passes → Proceed to commit
-   - If auto-fixes files → Stage the fixed files and return to step 1
-   - If fails with errors → Attempt known fixes and return to step 1
+   - If passes -> Proceed to commit
+   - If auto-fixes files -> Stage the fixed files and return to step 1
+   - If fails with errors -> Attempt known fixes and return to step 1
 
 3. **Iterative fixing**:
-   - Continue the cycle: stage → pre-commit → fix → stage
+   - Continue the cycle: stage -> pre-commit -> fix -> stage
    - Each iteration should make progress toward passing
    - Maximum 5 iterations to prevent infinite loops
 
 4. **Loop detection**:
-   - If the same error occurs 3 times → Request user intervention
+   - If the same error occurs 3 times -> Request user intervention
    - Track error patterns to detect cycles
    - Break loop and explain the blocking issue clearly
 
 **IMPORTANT**: Never proceed to commit until pre-commit passes completely. This ensures code quality and prevents commit
 failures.
 
-## Common Pre-commit Failures & Fixes
+## Common Pre-commit Fixes
 
-### Automated Fixes
-
-These issues can be auto-fixed before retry:
-
-- **Trailing whitespace**: Auto-fix with pre-commit
-- **Import sorting (Python)**: `ruff --fix`
-- **YAML formatting**: `taplo format`
-- **JSON formatting**: Auto-fix with pre-commit
-- **End of file**: Auto-fix with pre-commit
-- **Line endings**: Auto-fix to LF
-
-### Manual Intervention Required
-
-These need user attention:
-
-- **Type errors (mypy)**: Review and fix type annotations
-- **Test failures**: Fix broken tests before committing
-- **Large files (>1MB)**: Consider using Git LFS or excluding
-- **Merge conflicts**: Resolve before committing
-- **Markdown line length in decision logs**: May need exclusion
-
-## Project-Specific Patterns (NL2SciViz)
-
-### File Groupings
-
-- Server changes: `src/nl2sciviz/server/*.py` + corresponding tests + configs
-- Client changes: `src/nl2sciviz/client/*.py` + interfaces
-- Agent changes: `agents/*/` + `agents/common/` utilities
-- Benchmark changes: Query examples + evaluation metrics + scoring
-- Documentation: `*.md` + related implementation files
-- Config updates: All `*.yaml`, `*.toml`, `*.json` together
-
-### Common Commit Patterns
-
-- Adding queries: `feat: add <difficulty> queries for <technique>`
-- Metrics update: `feat: implement <metric> for <mode> evaluation`
-- Agent improvements: `feat(agent): enhance <agent> <capability>`
-- Benchmark fixes: `fix: correct scoring for <scenario>`
-- Documentation: `docs: update <component> documentation`
-- POC implementation: `feat: implement POC V2 <component>`
+- **Auto-fixable**: Trailing whitespace, import sorting, YAML/JSON formatting, line endings
+- **Manual fixes**: Type errors, test failures, large files, merge conflicts
 
 ## Handling Conflicts
 
@@ -317,105 +233,47 @@ When staging would conflict with existing staged files:
    - Abort and request manual resolution
 
 3. **Smart conflict resolution**:
-   - If files are related → Suggest combining
-   - If files are unrelated → Suggest separate commits (use `git restore --staged` to unstage)
-   - If unsure → Ask for user preference
+   - If files are related -> Suggest combining
+   - If files are unrelated -> Suggest separate commits (use `git restore --staged` to unstage)
+   - If unsure -> Ask for user preference
    - Respect user's separation of concerns (e.g., config vs docs)
 
 ## Message Templates
 
-### Feature Addition
+Follow conventional commit format:
 
-```text
-feat(<scope>): add <what>
-
-Implements <functionality> to enable <benefit>
-```
-
-### Bug Fix
-
-```text
-fix(<scope>): prevent <issue>
-
-Resolves <problem> by <solution>
-```
-
-### Documentation
-
-```text
-docs: update <what> for <why>
-```
-
-### Refactoring
-
-```text
-refactor(<scope>): extract <what> into <where>
-
-Improves <metric> by <approach>
-```
-
-### Chore/Maintenance
-
-```text
-chore: <action> <target>
-
-<Optional details if non-obvious>
-```
+- `feat(<scope>): add <what>` - New features
+- `fix(<scope>): prevent <issue>` - Bug fixes  
+- `docs: update <what>` - Documentation
+- `refactor(<scope>): <what>` - Code restructuring
+- `chore: <action> <target>` - Maintenance
 
 ## Pattern Learning
 
+**Learning** means capturing user preferences from repeated actions or explicit requests (things they asked you to do or not do).
+
 The command learns from:
 
-1. **Successful commits**: File groupings that consistently work
-2. **Failed attempts**: Pre-commit patterns to proactively handle
-3. **User corrections**: Modified staging or messages indicate preferences
-4. **Frequency analysis**: Common commit types per directory
+1. **User corrections**: When user modifies your suggestions, that's a preference
+2. **Explicit requests**: "Always do X" or "Never do Y"
+3. **Repeated patterns**: Same action taken 3+ times indicates preference
+4. **Rejected suggestions**: When user consistently avoids certain approaches
 
-Updates stored in CLAUDE.md after:
+Save learnings to CLAUDE.md's "Slash Commands" section when you identify:
 
-- 5 similar successful groupings → New file pattern
-- 3 similar failures → New known issue pattern
-- User override of suggestion → Preference update
-- Repeated commit types in directory → Path-type association
-- User requests (e.g., unstaging) → Learn separation preferences
+- Repeated user corrections to the same type of suggestion
+- Explicit "always" or "never" instructions from the user
+- Consistent file grouping preferences across multiple commits
+- Specific commit message styles the user prefers
 
-**Important**: When discovering significant patterns or preferences through user interactions,
-update this command file (~/.claude/commands/git/commit.md) with the new insights. This ensures
-the command evolves and improves based on actual usage patterns rather than keeping learnings
-isolated to individual sessions.
+**Important**: Update or clarify existing patterns in CLAUDE.md's "Slash Commands" section rather than duplicating. Focus on user preferences, not general patterns.
 
 ## Edge Cases
 
-### Empty Repository
-
-- Initialize with sensible defaults
-- Suggest `feat: initial commit` or similar
-- Stage foundational files (README, .gitignore, etc.)
-
-### No Changes
-
-- Inform user nothing to commit
-- Run `git status` to show current state
-- Suggest checking unstaged changes
-
-### Binary Files
-
-- Warn about large binaries (>1MB)
-- Suggest .gitignore additions if appropriate
-- Recommend Git LFS for media/data files
-- Never auto-stage without confirmation
-
-### Submodules
-
-- Handle submodule changes separately
-- Warn about uncommitted submodule changes
-- Suggest updating submodules first if needed
-
-### Merge in Progress
-
-- Detect merge/rebase state
-- Guide through conflict resolution
-- Ensure merge completion before new commits
+- **Empty repository**: Suggest `feat: initial commit`
+- **Binary files**: Warn about large files (>1MB), suggest Git LFS
+- **Merge in progress**: Detect and guide through resolution
+- **No changes**: Show status and suggest next steps
 
 ## Command Integration
 
@@ -425,46 +283,30 @@ Works seamlessly with other slash commands:
 
 ```bash
 # After design discussion
-/claude:discuss feature-design
+/claude-discuss feature-design
 # ... discussion completes ...
-/git:commit --type=docs --scope=decisions
+/git-commit --type=docs --scope=decisions
 
 # After implementation
-/claude:think  # Review guidelines
-/git:commit --type=feat --scope=server
+/claude-think  # Review guidelines
+/git-commit --type=feat --scope=server
 
 # Quick fixes
-/git:commit --quick --type=fix
+/git-commit --quick --type=fix
 ```
 
 ### Chain Operations
 
-- Post-discussion → Commit decision logs
-- Pre-PR → Ensure clean commit history
-- Post-refactor → Organized commits
+- Post-discussion -> Commit decision logs
+- Pre-PR -> Ensure clean commit history
+- Post-refactor -> Organized commits
 
 ## Performance Optimizations
 
-### Large Repositories
-
 - Use `git status --porcelain` for faster parsing
-- Cache recent commit analysis (5 minute TTL)
-- Limit history scan to last 20 commits
-- Batch file operations when possible
-
-### Many Files (>20)
-
-- Group by directory first for overview
-- Show summary before detailed staging
-- Use glob patterns over individual files
-- Offer "stage all in directory" option
-
-### Slow Operations
-
-- Show progress indicators for long operations
-- Run analysis in parallel where possible
-- Skip expensive checks in quick mode
-- Cache learned patterns in memory
+- Cache recent patterns and batch operations
+- Show progress for long operations
+- Use glob patterns for many files
 
 ## Implementation Notes
 

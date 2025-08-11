@@ -214,3 +214,24 @@ Before suggesting code changes:
 - Documentation is updated if needed
 - Changes are focused and minimal
 - Appropriate linters/formatters run locally
+
+## Slash Commands
+
+This section captures learned user preferences from slash command usage. Update these based on repeated patterns or
+explicit user requests.
+
+### Git Commit Preferences
+
+- (Add user-specific commit preferences here as they emerge)
+- Example: User prefers concise commit messages without details
+- Example: User groups markdown files with related code changes
+
+### Discussion Preferences  
+
+- (Add user-specific discussion preferences here as they emerge)
+- Example: User prefers technical depth over business considerations
+
+### General Command Preferences
+
+- (Add cross-command preferences here as they emerge)
+- Example: User prefers minimal output over detailed explanations
