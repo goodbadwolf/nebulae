@@ -81,3 +81,7 @@ GEMINI.md
 
 # Claude Code
 .claude/
+
+# Scratchpad for notes and other project-specific files that do not need to
+# be committed to the repository.
+.scratchpad/

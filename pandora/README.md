@@ -4,9 +4,21 @@ AI agents and automation tools - artificial beings that serve and assist.
 
 ## Structure
 
-- `slash-commands/` - Custom slash commands for AI code assistants
-  - Claude-specific commands for thinking, discussion, and git workflows
-  - Extensible framework for other AI assistants
+```text
+pandora/
+└── claude/              # Claude AI agent resources
+    └── commands/        # Slash commands for Claude Code
+        ├── claude-discuss.md    # /claude-discuss - Structured design discussions
+        ├── claude-think.md       # /claude-think - Extended thinking mode
+        └── git-commit.md         # /git-commit - Intelligent git commits
+```
+
+## Purpose
+
+Pandora serves as a centralized repository for all AI agent-related resources, including:
+
+- Custom slash commands for AI code assistants
+- Agent-specific configurations and tools
 
 ## Etymology
 

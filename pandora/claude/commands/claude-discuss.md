@@ -10,6 +10,7 @@ Start a structured design discussion about $ARGUMENTS.
 When I receive this command, I will:
 
 **IMPORTANT CONSTRAINTS:**
+
 - During discussions, only provide answers and suggestions
 - NEVER create files unless explicitly requested (e.g., "create", "make", "implement")
 - "Let's X" means "let's discuss X" - NOT "do X now"
@@ -17,9 +18,12 @@ When I receive this command, I will:
 - Common mistake: Creating example files when user asks "what do you think?"
 - NEVER commit without explicit user request (e.g., "commit this", "create a commit")
 
-0. **READ PROJECT GUIDELINES**. First, carefully read @CLAUDE.md to understand project conventions and requirements. Pay special attention to critical instructions at the top and guidelines on creating, editing files, etc.
+0. **READ PROJECT GUIDELINES**. First, carefully read @CLAUDE.md to understand project conventions and requirements.
+Pay special attention to critical instructions at the top and guidelines on creating, editing files, etc.
 
-1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log file named `<TOPIC>_LOG.md` (uppercase version of the topic)
+1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log
+file named `<TOPIC>_DISCUSSION.md` (uppercase version of the topic) in the project's scratchpad directory. If such a
+directory does not exist then encourage the user to make one called `.scratchpad` at the project's root directory.
 
 2. **Ask questions one at a time** with:
    - Clear options (a, b, c, etc.)
@@ -35,7 +39,8 @@ When I receive this command, I will:
    - Session markers when resuming discussions
    - Sub-decisions for important clarifications
    - **Dual save approach: immediate raw logging + clean summary**
-   - **NO TIMELINES: The plan document should focus on decisions and design choices, never include timeline estimates, deadlines, or time-based commitments**
+   - **NO TIMELINES: The plan document should focus on decisions and design choices, never include timeline estimates,
+   deadlines, or time-based commitments**
 
 4. **Handle discussion flow**:
    - Start broad, then narrow down with iterative refinement
@@ -51,6 +56,7 @@ When I receive this command, I will:
    - If earlier decisions need revision: Handle context-sensitively
 
 ## State Management
+
 - Parse existing log file to understand current state
 - Add session markers when resuming
 - Track deferred questions with context notes

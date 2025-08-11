@@ -14,6 +14,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 
 1. **Initial Status Check**
    First, gather comprehensive information about the current state:
+
    ```bash
    \! git status && git diff HEAD && git log -n 3 --oneline
    ```
@@ -79,6 +80,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    - NEVER use --no-verify
 
    Run pre-commit proactively when risky patterns detected:
+
    ```bash
    \! pre-commit run --files <staged-files>
    ```
@@ -90,9 +92,11 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    - Create temporary file `.git/COMMIT_EDITMSG_DRAFT.md`
    - Write draft message to file
    - Open in IDE for user editing:
+
      ```bash
      \! echo "<generated-message>" > .git/COMMIT_EDITMSG_DRAFT.md
      ```
+
    - Display: "Please review and edit the commit message in your IDE"
    - Wait for user to save and confirm
    - Read final message from file
@@ -102,16 +106,19 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
    - Suitable for simple, obvious changes
 
    **Execute Commit**:
+
    ```bash
    \! git commit -m "<final-message>"
    ```
 
    Or for interactive editing:
+
    ```bash
    \! git commit -F .git/COMMIT_EDITMSG_DRAFT.md
    ```
 
    Then verify success:
+
    ```bash
    \! git status
    ```
@@ -126,6 +133,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 ## Mode Selection
 
 **Quick Mode** (--quick or <5 files):
+
 - Minimal output
 - Fast staging of obvious groups
 - Simple commit message
@@ -133,6 +141,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 - No interactive editing by default (use --edit to enable)
 
 **Full Mode** (--full or complex changes):
+
 - Detailed change analysis
 - Careful file grouping
 - Comprehensive message generation
@@ -140,6 +149,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 - Interactive message editing by default (use --no-edit to skip)
 
 **Smart Mode** (default):
+
 - Automatically choose based on:
   - Number of files changed
   - Presence of test files
@@ -148,6 +158,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 - Interactive editing for complex changes (>5 files)
 
 **Message Editing Control**:
+
 - `--edit`: Force interactive message editing (opens in IDE)
 - `--no-edit`: Skip interactive editing, use generated message
 - Default: Quick mode skips, Full mode enables editing
@@ -155,6 +166,7 @@ Execute an intelligent git commit workflow that follows all safety rules from CL
 ## User Preferences
 
 Track and learn from user behavior:
+
 - Verbosity level (minimal/normal/verbose)
 - Auto-fix preference
 - Common file groupings
@@ -166,6 +178,7 @@ Track and learn from user behavior:
 ## Safety Rules
 
 MANDATORY requirements from CLAUDE.md:
+
 - ✅ NEVER commit without explicit user request
 - ✅ "Let's X" means "let's discuss X" - NOT "do X now"
 - ✅ NEVER use `git add -A` or `git add .`
@@ -226,6 +239,7 @@ MANDATORY requirements from CLAUDE.md:
 After staging files, ALWAYS follow this iterative validation process:
 
 1. **Run pre-commit checks** on staged files:
+
    ```bash
    ! pre-commit run --files <staged-files>
    ```
@@ -245,12 +259,15 @@ After staging files, ALWAYS follow this iterative validation process:
    - Track error patterns to detect cycles
    - Break loop and explain the blocking issue clearly
 
-**IMPORTANT**: Never proceed to commit until pre-commit passes completely. This ensures code quality and prevents commit failures.
+**IMPORTANT**: Never proceed to commit until pre-commit passes completely. This ensures code quality and prevents commit
+failures.
 
 ## Common Pre-commit Failures & Fixes
 
 ### Automated Fixes
+
 These issues can be auto-fixed before retry:
+
 - **Trailing whitespace**: Auto-fix with pre-commit
 - **Import sorting (Python)**: `ruff --fix`
 - **YAML formatting**: `taplo format`
@@ -259,7 +276,9 @@ These issues can be auto-fixed before retry:
 - **Line endings**: Auto-fix to LF
 
 ### Manual Intervention Required
+
 These need user attention:
+
 - **Type errors (mypy)**: Review and fix type annotations
 - **Test failures**: Fix broken tests before committing
 - **Large files (>1MB)**: Consider using Git LFS or excluding
@@ -269,6 +288,7 @@ These need user attention:
 ## Project-Specific Patterns (NL2SciViz)
 
 ### File Groupings
+
 - Server changes: `src/nl2sciviz/server/*.py` + corresponding tests + configs
 - Client changes: `src/nl2sciviz/client/*.py` + interfaces
 - Agent changes: `agents/*/` + `agents/common/` utilities
@@ -277,6 +297,7 @@ These need user attention:
 - Config updates: All `*.yaml`, `*.toml`, `*.json` together
 
 ### Common Commit Patterns
+
 - Adding queries: `feat: add <difficulty> queries for <technique>`
 - Metrics update: `feat: implement <metric> for <mode> evaluation`
 - Agent improvements: `feat(agent): enhance <agent> <capability>`
@@ -304,33 +325,38 @@ When staging would conflict with existing staged files:
 ## Message Templates
 
 ### Feature Addition
-```
+
+```text
 feat(<scope>): add <what>
 
 Implements <functionality> to enable <benefit>
 ```
 
 ### Bug Fix
-```
+
+```text
 fix(<scope>): prevent <issue>
 
 Resolves <problem> by <solution>
 ```
 
 ### Documentation
-```
+
+```text
 docs: update <what> for <why>
 ```
 
 ### Refactoring
-```
+
+```text
 refactor(<scope>): extract <what> into <where>
 
 Improves <metric> by <approach>
 ```
 
 ### Chore/Maintenance
-```
+
+```text
 chore: <action> <target>
 
 <Optional details if non-obvious>
@@ -346,6 +372,7 @@ The command learns from:
 4. **Frequency analysis**: Common commit types per directory
 
 Updates stored in CLAUDE.md after:
+
 - 5 similar successful groupings → New file pattern
 - 3 similar failures → New known issue pattern
 - User override of suggestion → Preference update
@@ -360,27 +387,32 @@ isolated to individual sessions.
 ## Edge Cases
 
 ### Empty Repository
+
 - Initialize with sensible defaults
 - Suggest `feat: initial commit` or similar
 - Stage foundational files (README, .gitignore, etc.)
 
 ### No Changes
+
 - Inform user nothing to commit
 - Run `git status` to show current state
 - Suggest checking unstaged changes
 
 ### Binary Files
+
 - Warn about large binaries (>1MB)
 - Suggest .gitignore additions if appropriate
 - Recommend Git LFS for media/data files
 - Never auto-stage without confirmation
 
 ### Submodules
+
 - Handle submodule changes separately
 - Warn about uncommitted submodule changes
 - Suggest updating submodules first if needed
 
 ### Merge in Progress
+
 - Detect merge/rebase state
 - Guide through conflict resolution
 - Ensure merge completion before new commits
@@ -390,6 +422,7 @@ isolated to individual sessions.
 Works seamlessly with other slash commands:
 
 ### Workflow Examples
+
 ```bash
 # After design discussion
 /claude:discuss feature-design
@@ -405,6 +438,7 @@ Works seamlessly with other slash commands:
 ```
 
 ### Chain Operations
+
 - Post-discussion → Commit decision logs
 - Pre-PR → Ensure clean commit history
 - Post-refactor → Organized commits
@@ -412,18 +446,21 @@ Works seamlessly with other slash commands:
 ## Performance Optimizations
 
 ### Large Repositories
+
 - Use `git status --porcelain` for faster parsing
 - Cache recent commit analysis (5 minute TTL)
 - Limit history scan to last 20 commits
 - Batch file operations when possible
 
 ### Many Files (>20)
+
 - Group by directory first for overview
 - Show summary before detailed staging
 - Use glob patterns over individual files
 - Offer "stage all in directory" option
 
 ### Slow Operations
+
 - Show progress indicators for long operations
 - Run analysis in parallel where possible
 - Skip expensive checks in quick mode
@@ -432,6 +469,7 @@ Works seamlessly with other slash commands:
 ## Implementation Notes
 
 When processing this command:
+
 1. Read CLAUDE.md for project-specific rules
 2. Check git status before any operations
 3. Run pre-commit iteratively until success
