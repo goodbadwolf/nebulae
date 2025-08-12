@@ -48,7 +48,7 @@ After safety checks pass, I will proceed with:
 
 1. **CONFIRM THE TOPIC**. After confirmation **IMMEDIATELY** use the user specified log file or create a decision log
 file named `<TOPIC>_DISCUSSION.md` (uppercase version of the topic) in the project's scratchpad directory. If such a
-directory does not exist then encourage the user to make one called `.scratchpad` at the project's root directory.
+directory does not exist then encourage the user to make one called `_scratchpad` at the project's root directory.
 
 2. **Ask questions one at a time** with:
    - Clear options (a, b, c, etc.)
