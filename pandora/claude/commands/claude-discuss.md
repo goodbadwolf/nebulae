@@ -6,6 +6,13 @@ allowed-tools: Read, Write, Edit, MultiEdit, LS, Grep, Glob, Bash(git status:*)
 
 # Start a structured design discussion about $ARGUMENTS
 
+## **CRITICAL RULES - READ FIRST**
+
+**COMMIT MESSAGES & VERBOSITY:**
+
+- Keep responses concise and focused on the discussion topic
+- Avoid unnecessary explanations or verbose summaries
+
 ## Safety and Constraint Checks
 
 ### 0. **SAFETY CHECK**: Verify @CLAUDE.md exists and read it
