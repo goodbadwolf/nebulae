@@ -1,7 +1,7 @@
 ---
 description: Smart git commit workflow with context-aware staging and message generation
 argument-hint: "[--quick|--full|--retry] [--no-edit] [--type=<type>] [--scope=<scope>] [--profile=<name>]"
-allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(pre-commit:*), Bash(echo:*), Bash(xargs:*), Read(*), Edit(*), MultiEdit(*), Write(*)
+allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(pre-commit:*), Bash(echo:*), Bash(xargs:*), Read(*)
 ---
 
 # Smart Git Commit Workflow
@@ -64,8 +64,17 @@ Execute an intelligent git commit workflow that follows all safety rules from @C
    - Analyze diff for primary change type
    - Check file paths for conventional scope
    - Review recent commits for style consistency
-   - Keep message concise (under 72 chars)
+   - **Subject line: under 50 chars** (shows in git logs, PR titles)
+   - **Body lines: wrap at 72 chars** (for additional context only)
+   - **CRITICAL: Limit body to 1-3 bullet points max** - only important context
    - Use present tense, no period
+
+   **Body Content Guidelines** (signal vs noise):
+   - **Include**: Why a particular approach was chosen, important business context, breaking changes, non-obvious
+   technical decisions
+   - **Exclude**: Routine linting fixes (unless main change), minor formatting, obvious implementation details,
+   standard patterns
+   - **Example**: Skip "fixed linting" unless the commit IS about linting
 
    **Type Selection Priority**:
    1. Explicit --type argument
@@ -167,7 +176,7 @@ MANDATORY requirements from @CLAUDE.md:
 - [x] NEVER use --no-verify
 - [x] Always run `git status` first
 - [x] Propose draft message, don't ask for it
-- [x] Keep messages concise
+- [x] Subject under 50 chars, body 1-3 bullets max
 - [x] No emojis in commits
 - [x] No AI attribution in messages
 - [x] Fix issues instead of bypassing
