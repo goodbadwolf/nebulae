@@ -7,6 +7,39 @@ An interactive guide for exploring project names through conversation with AI as
 This document provides conversation templates and workflows for discovering the perfect name for your project.
 Unlike ALIAS.md (the comprehensive reference), this is designed for iterative exploration and refinement.
 
+## Template Variables
+
+When using the structured prompts below, replace these placeholders with your specific information:
+
+### Basic Variables
+
+- `{{PROJECT_DESCRIPTION}}` - Comprehensive description of your project and what it does
+- `{{BRIEF_DESCRIPTION}}` - Short, focused description of core functionality
+- `{{PROJECT_FUNCTION}}` - Primary function like "code formatting" or "data analysis"
+
+### Exploration Variables
+
+- `{{SPECIFIC_CULTURE_OR_LANGUAGE}}` - Japanese, Arabic, Norse mythology, etc.
+- `{{WHAT_I_LIKED_ABOUT_INITIAL_SUGGESTIONS}}` - What appealed to you in previous suggestions
+- `{{LIST_OF_NAMES_I_LIKE}}` - Comma-separated list of names you're considering
+- `{{WHAT_I_LIKE_ABOUT_THESE_NAMES}}` - Common qualities that appeal to you
+- `{{SPECIFIC_CONCERNS_OR_IMPROVEMENTS_NEEDED}}` - What needs to be different/better
+
+### Thematic Variables
+
+- `{{THEME_OR_CONCEPT}}` - Abstract theme like "transformation", "flow", "precision"
+- `{{PREFERRED_CULTURES_OR_ALL}}` - Specific cultures to focus on or "all cultures"
+- `{{WHERE_IM_STUCK_OR_WHAT_ISNT_WORKING}}` - Description of your naming challenges
+
+### Example Values
+
+```text
+PROJECT_DESCRIPTION: "A command-line tool that automatically organizes project files based on intelligent categorization rules"
+SPECIFIC_CULTURE_OR_LANGUAGE: "Sanskrit and ancient Indian philosophy"
+WHAT_I_LIKED_ABOUT_INITIAL_SUGGESTIONS: "the connection to wisdom and order, plus the beautiful sound patterns"
+THEME_OR_CONCEPT: "bringing order from chaos"
+```
+
 ## Basic Exploration Workflow
 
 ### Step 1: Project Introduction
@@ -16,9 +49,9 @@ Start your conversation with:
 ```text
 I'm working on a hobby project and need help finding a name. Here's what it does:
 
-[DESCRIBE YOUR PROJECT - functionality, goals, personality]
+{{PROJECT_DESCRIPTION}}
 
-I follow a multicultural naming philosophy that draws from global languages, mythologies, and pop culture. Think "baby registry for code projects" - whimsical but meaningful.
+I follow a multicultural naming philosophy that draws from global languages, mythologies, and pop culture. Style: Creative and personal, not corporate or generic.
 
 Can you ask me some questions to understand what kind of name would fit best?
 ```text
@@ -71,9 +104,9 @@ If you find a cultural source you like:
 
 ```
 
-I'm really drawn to [SPECIFIC_CULTURE/LANGUAGE] from your suggestions. Can you explore that tradition more deeply?
+I'm really drawn to {{SPECIFIC_CULTURE_OR_LANGUAGE}} from your suggestions. Can you explore that tradition more deeply?
 
-Generate 5-7 additional names from [CHOSEN_SOURCE], including:
+Generate 5-7 additional names from {{SPECIFIC_CULTURE_OR_LANGUAGE}}, including:
 
 - Both common and lesser-known terms
 - Different aspects of the culture (mythology, daily life, philosophy)
@@ -89,7 +122,7 @@ If you want names more connected to function:
 
 ```
 
-I like the cultural richness of your suggestions, but I'd like options more directly connected to [SPECIFIC_FUNCTION].
+I like the cultural richness of your suggestions, but I'd like options more directly connected to {{PROJECT_FUNCTION}}.
 
 Can you generate names that:
 
@@ -106,7 +139,8 @@ If you're drawn to certain sounds:
 
 ```
 
-I really like the sound of [SPECIFIC_NAMES] from your suggestions. Can you generate more names with similar phonetic qualities?
+I really like the sound of {{LIST_OF_NAMES_I_LIKE}} from your suggestions. Can you generate more names with similar
+phonetic qualities?
 
 Focus on:
 
@@ -122,7 +156,7 @@ For discovering unexpected connections:
 
 ```
 
-Let's explore [THEME] (e.g., "water," "light," "transformation") across different cultures.
+Let's explore {{THEME_OR_CONCEPT}} (e.g., "water," "light," "transformation") across different cultures.
 
 Generate names related to this theme from:
 
@@ -140,7 +174,7 @@ Show how each culture interprets this theme differently and how it might connect
 
 ```
 
-Take the name [CHOSEN_NAME] and explore its linguistic family. What are:
+Take the name {{LIST_OF_NAMES_I_LIKE}} and explore its linguistic family. What are:
 
 - Related words in the same language?
 - Cognates in related languages?
@@ -155,7 +189,7 @@ This can reveal variations that might fit even better.
 
 ```
 
-If [MYTHOLOGICAL_FIGURE/CONCEPT] resonates with my project, what are:
+If {{THEME_OR_CONCEPT}} resonates with my project, what are:
 
 - Related figures from the same tradition?
 - Similar concepts from other mythologies?
@@ -168,7 +202,7 @@ If [MYTHOLOGICAL_FIGURE/CONCEPT] resonates with my project, what are:
 
 ```
 
-My project [DOES_X]. What are different cultural metaphors for this concept?
+My project {{PROJECT_FUNCTION}}. What are different cultural metaphors for this concept?
 
 For example, if it's about "organizing," explore:
 
@@ -183,7 +217,7 @@ For example, if it's about "organizing," explore:
 
 ```
 
-Take [FUNCTIONAL_WORD] and explore creative linguistic approaches:
+Take {{PROJECT_FUNCTION}} and explore creative linguistic approaches:
 
 - Translations into multiple languages
 - Poetic or archaic versions
@@ -199,7 +233,7 @@ Take [FUNCTIONAL_WORD] and explore creative linguistic approaches:
 
 ```
 
-I'm building [PROJECT] but feeling stuck on naming. Can you help me approach this differently?
+I'm building {{PROJECT_DESCRIPTION}} but feeling stuck on naming. Can you help me approach this differently?
 
 Maybe start by asking me what I DON'T want in a name, or help me explore unexpected cultural connections I haven't considered.
 
@@ -209,7 +243,7 @@ Maybe start by asking me what I DON'T want in a name, or help me explore unexpec
 
 ```
 
-I have these [NUMBER] names I like: [LIST_NAMES].
+I have these names I like: {{LIST_OF_NAMES_I_LIKE}}.
 
 Can you help me:
 
@@ -223,7 +257,7 @@ Can you help me:
 
 ```
 
-Surprise me! My project [DESCRIPTION] - but instead of obvious naming approaches, what are some unexpected cultural
+Surprise me! My project {{PROJECT_DESCRIPTION}} - but instead of obvious naming approaches, what are some unexpected cultural
  connections or creative interpretations you can explore?
 
 Think lateral connections, false etymologies that work poetically, or creative misappropriations that are respectful but
@@ -235,7 +269,7 @@ Think lateral connections, false etymologies that work poetically, or creative m
 
 ```
 
-I'm close! I like [ALMOST_RIGHT_NAME] but it's not quite perfect because [SPECIFIC_ISSUE].
+I'm close! I like {{LIST_OF_NAMES_I_LIKE}} but it's not quite perfect because {{SPECIFIC_CONCERNS_OR_IMPROVEMENTS_NEEDED}}.
 
 Can you:
 
@@ -256,7 +290,7 @@ You are a creative naming consultant helping me find the perfect name for my pro
 {{PROJECT_DESCRIPTION}}
 </project_overview>
 
-I follow a multicultural naming philosophy that draws from global languages, mythologies, and pop culture. Think "baby registry for code projects" - whimsical but meaningful.
+I follow a multicultural naming philosophy that draws from global languages, mythologies, and pop culture. Style: Creative and personal, not corporate or generic.
 
 Please ask me 3-4 targeted questions to understand:
 1. The project's core function and personality

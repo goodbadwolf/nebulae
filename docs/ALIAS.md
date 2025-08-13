@@ -61,12 +61,41 @@ When evaluating name suggestions, consider:
 4. **Uniqueness** - Does it stand out in the tech ecosystem?
 5. **Accessibility** - Can it be reasonably pronounced by others?
 
+## Template Variables
+
+When using the prompts below, replace these placeholders with your specific information:
+
+### Basic Variables
+
+- `{{PROJECT_TYPE}}` - web app, CLI tool, library, extension, etc.
+- `{{BRIEF_DESCRIPTION}}` - 1-2 sentence description of what it does
+- `{{DETAILED_PROJECT_DESCRIPTION}}` - Comprehensive explanation including purpose, features, and context
+- `{{SPECIFIC_QUALITIES_DESIRED}}` - elegant, powerful, minimalist, playful, etc.
+- `{{PROJECT_DESCRIPTION}}` - Detailed description of the project and its functionality
+- `{{PROJECT_FUNCTION}}` - Core function like "file synchronization" or "data visualization"
+
+### Cultural/Thematic Variables
+
+- `{{SPECIFIC_THEME_CULTURE}}` - Japanese mythology, Norse traditions, Arabic poetry, etc.
+- `{{CHOSEN_CULTURAL_SOURCE}}` - The specific culture you want to explore
+- `{{PREFERRED_CULTURE_OR_ANY}}` - Your cultural preference or "any" for diverse options
+
+### Example Values
+
+```text
+PROJECT_TYPE: "TypeScript utility library"
+BRIEF_DESCRIPTION: "provides type-safe object manipulation functions"
+DETAILED_PROJECT_DESCRIPTION: "A TypeScript library that offers runtime-safe object operations with full type inference, helping developers avoid common pitfalls when working with dynamic data structures"
+SPECIFIC_QUALITIES_DESIRED: "reliable, elegant, developer-friendly"
+SPECIFIC_THEME_CULTURE: "Japanese craftsmanship and precision"
+```
+
 ## Template Prompts
 
 ### Quick Generation Prompt
 
 ```text
-I need a name for my [PROJECT_TYPE] that [BRIEF_DESCRIPTION].
+I need a name for my {{PROJECT_TYPE}} that {{BRIEF_DESCRIPTION}}.
 
 Generate 5 diverse name suggestions drawing from:
 - Multiple languages (Hindi, Arabic, Japanese, Latin, etc.)
@@ -79,7 +108,7 @@ For each suggestion, provide:
 3. Meaning/connection to function
 4. Why it fits the project
 
-Style: Whimsical but meaningful, like naming a beloved hobby project. Think "baby registry for code projects."
+Style: Whimsical but meaningful, like naming a personal creative project.
 
 Examples from my other projects: Tanaka (Japanese, tab sync), Kiku (Japanese perfection, TypeScript utils), Pixel Heal Thyself (wordplay on healing phrase).
 ```
@@ -87,7 +116,7 @@ Examples from my other projects: Tanaka (Japanese, tab sync), Kiku (Japanese per
 ### Detailed Exploration Prompt
 
 ```text
-I'm working on [DETAILED_PROJECT_DESCRIPTION] and need a name that captures [SPECIFIC_QUALITIES_DESIRED].
+I'm working on {{DETAILED_PROJECT_DESCRIPTION}} and need a name that captures {{SPECIFIC_QUALITIES_DESIRED}}.
 
 My naming philosophy embraces:
 - Cultural depth from global traditions
@@ -114,11 +143,11 @@ Generate 8-10 diverse options, then we can refine based on what resonates.
 ### Themed Generation Prompt
 
 ```text
-I need a name for [PROJECT_DESCRIPTION] and I'm drawn to [SPECIFIC_THEME/CULTURE].
+I need a name for {{PROJECT_DESCRIPTION}} and I'm drawn to {{SPECIFIC_THEME_CULTURE}}.
 
 Based on my existing projects (Tanaka, Kiku, Bashira, Pandora), generate names that:
-1. Draw specifically from [CHOSEN_CULTURAL_SOURCE]
-2. Connect meaningfully to [PROJECT_FUNCTION]
+1. Draw specifically from {{CHOSEN_CULTURAL_SOURCE}}
+2. Connect meaningfully to {{PROJECT_FUNCTION}}
 3. Maintain the whimsical-but-purposeful tone
 4. Offer both obvious and unexpected connections
 
@@ -152,7 +181,7 @@ For each name suggestion, provide the following details:
 3. The meaning of the name and its connection to the project's function
 4. A brief explanation of why this name fits the project
 
-Remember to keep the style whimsical but meaningful, as if you're naming a beloved hobby project. Think of it as creating a "baby registry for code projects."
+Remember to keep the style whimsical but meaningful, like naming a personal creative project.
 
 Here are some examples to guide your style:
 - Tanaka (Japanese, for a tab sync project)
@@ -260,7 +289,7 @@ Follow these guidelines to generate the names:
 
 1. Draw specifically from the chosen cultural source ({{SPECIFIC_THEME_CULTURE}}).
 2. Ensure each name connects meaningfully to the project's function ({{PROJECT_FUNCTION}}).
-3. Maintain a whimsical-but-purposeful tone, similar to existing project names like Tanaka, Kiku, Bashira, and Pandora.
+3. Maintain a creative and personal tone, not corporate or generic, similar to existing project names like Tanaka, Kiku, Bashira, and Pandora.
 4. Offer both obvious and unexpected connections to the project's description and function.
 
 Generate the following set of names:
