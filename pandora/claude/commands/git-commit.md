@@ -57,7 +57,16 @@ Execute an intelligent git commit workflow that follows all safety rules from @C
 
    Show files to be staged and get confirmation before proceeding.
 
-5. **Generate Commit Message**
+5. **Show Understanding of Changes**
+   Before generating the commit message, show the user your understanding of the code changes:
+   - Summarize what changes were made and why
+   - Explain the impact and scope of the changes
+   - Identify the primary purpose (feature, fix, refactor, etc.)
+   - Ask if they want to add or remove any detail from your understanding
+   - Wait for user confirmation before proceeding to commit message generation.
+   - **DO NOT PROCEED WITHOUT USER CONFIRMATION**
+
+6. **Generate Commit Message**
    Analyze changes to create appropriate commit message:
 
    **Message Generation Strategy**:
@@ -82,7 +91,7 @@ Execute an intelligent git commit workflow that follows all safety rules from @C
    3. Diff content analysis
    4. Default to most significant change
 
-6. **Pre-commit Check Handling**
+7. **Pre-commit Check Handling**
 
    **Known Failure Patterns & Fixes**:
    - Markdown line length in decision logs -> Exclude from linting
@@ -103,7 +112,7 @@ Execute an intelligent git commit workflow that follows all safety rules from @C
    \! pre-commit run --files <staged-files>
    ```
 
-7. **Commit Message Finalization**
+8. **Commit Message Finalization**
 
    **Interactive Mode (default for full mode, optional for others)**:
    - Generate draft message based on analysis
@@ -141,7 +150,7 @@ Execute an intelligent git commit workflow that follows all safety rules from @C
    \! git status
    ```
 
-8. **Error Recovery**
+9. **Error Recovery**
    If commit fails:
    - Save state for --retry option
    - Analyze failure reason
