@@ -32,6 +32,10 @@ allowed-tools: Read, Write, Edit, MultiEdit, LS, Grep, Glob, Bash(git status:*)
 - Ensure no files being edited without user awareness
 - Confirm discussion mode constraints are active
 
+### 2. **Read Development Guidelines** if they exist:
+- Check for @docs/DEV*.md files to understand project coding and development guidelines
+- Follow those guidelines throughout the discussion and any suggestions
+
 ## Discussion Protocol
 
 After safety checks pass, I will proceed with:

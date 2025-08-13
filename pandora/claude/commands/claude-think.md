@@ -44,19 +44,23 @@ When invoked, I will:
    - Pay special attention to the "Slash Commands" section for learned user preferences
    - Apply those preferences throughout the thinking process
 
-2. **Gather Context** about the problem:
+2. **Read Development Guidelines** if they exist:
+   - Check for @docs/DEV*.md files to understand project coding and development guidelines
+   - Follow those guidelines throughout the thinking and solution process
+
+3. **Gather Context** about the problem:
    - Analyze relevant code and documentation
    - Check current system state if needed
    - Identify constraints and requirements
 
-3. **Think Deeply** about $ARGUMENTS:
+4. **Think Deeply** about $ARGUMENTS:
    - Consider multiple approaches
    - Evaluate tradeoffs
    - Work through the problem step-by-step
    - Try different methods if first approach doesn't work
    - Verify solutions mentally before proposing
 
-4. **Provide Solution** with:
+5. **Provide Solution** with:
    - Clear reasoning and rationale
    - Identified risks and mitigations
    - Implementation recommendations
