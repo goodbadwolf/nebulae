@@ -8,7 +8,7 @@ allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git a
 
 Execute an intelligent git commit workflow that follows all safety rules from @CLAUDE.md while streamlining the commit process.
 
-## Command: `/git:commit $ARGUMENTS`
+## Command: `/git-commit $ARGUMENTS`
 
 ### Workflow Implementation
 
@@ -185,23 +185,23 @@ MANDATORY requirements from @CLAUDE.md:
 
 ```bash
 # Auto-detect mode based on complexity
-/git:commit
+/git-commit
 
 # Mode control
-/git:commit --quick                        # Simple changes
-/git:commit --full                         # Complex changes
+/git-commit --quick                        # Simple changes
+/git-commit --full                         # Complex changes
 
 # Specify commit type and scope
-/git:commit --type=feat --scope=server
-/git:commit --type=fix
+/git-commit --type=feat --scope=server
+/git-commit --type=fix
 
 # Message editing control
-/git:commit --edit                         # Force interactive editing
-/git:commit --no-edit                      # Skip interactive editing
+/git-commit --edit                         # Force interactive editing
+/git-commit --no-edit                      # Skip interactive editing
 
 # Common combinations
-/git:commit --quick --type=chore
-/git:commit --retry                        # After fixing pre-commit issues
+/git-commit --quick --type=chore
+/git-commit --retry                        # After fixing pre-commit issues
 ```
 
 ## Pre-commit Workflow
